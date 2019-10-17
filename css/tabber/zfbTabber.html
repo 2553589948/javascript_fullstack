@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a:link {
+    color: #a2a2a2;
+}
+a:vistied{
+    color: #a2a2a2;
+}
+a:hover {
+    color: #509ff1;
+}
+a:active {
+    color: #509ff1;
+}
+
+.zfbui-tabbar {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 500;
+    background-color: #ffffff;
+    border-top: 1px solid #dddddd;
+}
+.zfbui-tabbar__item {
+    flex: 1;                         /*子元素flex设置为等比例1:1:1*/
+    text-align: center;             /*快速让水平内容居中*/
+    padding: 8.5px 6px 6px ;               /*顺时针，上右下左，缺少一个即 上 左右 下*/
+    font-size: 0;
+    color: #a2a2a2;
+    text-decoration: none;
+}
+.zfbui-tabbar__item > span {
+    display: inline-block;
+    position: relative;                        /*方便badge进行绝对定位*/
+}
+.zfbui-tabbar__icon {
+    display: inline-block;                    /*行内元素是不能设置宽高 设置为inline-block以便设置宽高*/
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    overflow: hidden;
+    margin-bottom: 3.5px;
+}
+.zfbui-badge {
+    position: absolute;
+    top: -2px;
+    right: -13px;
+    min-width: 8px;
+    display: inline-block;
+    padding: .15em .4em;                        /* 上下.15  左右.4*/
+    font-size: 12px;
+    line-height: 12px;
+    background-color: #F43539;
+    border-radius: 18px;                        /*盒子圆角，超出盒子长宽的的话，就会变成圆形*/
+    color: white;
+}
+.zfbui-tabbar__label {
+    font-size: 10px;
+    text-align: center;
+    line-height: 10px;                          
+    
+}
+
+    </style>
+</head>
+<body>
+       <!-- BEM命名规范 -->
+    <!-- tabbar模块 Block 
+      tabbar__item子元素两个下划线  -->
+      <div class="zfbui-tabbar">
+        <a href="#" class="zfbui-tabbar__item zfbui-tabbar__item_on">
+            <span>
+                    <svg class="zfbui-tabbar__icon" aria-hidden="true">
+                            <use xlink:href="#icon-rectangle390"></use>
+                          </svg>
+                <span class="zfbui-badge">8</span>
+            </span>
+            <p class="zfbui-tabbar__label">首页</p>
+        </a>
+        <a href="#" class="zfbui-tabbar__item">
+            <span>
+                    <svg class="zfbui-tabbar__icon" aria-hidden="true">
+                            <use xlink:href="#icon-yiban"></use>
+                          </svg>
+                <span class="zfbui-badge">-</span>
+            </span>
+            <p class="zfbui-tabbar__label">财富</p>
+        </a>
+        <a href="#" class="zfbui-tabbar__item">
+            <span>
+                    <svg class="zfbui-tabbar__icon" aria-hidden="true">
+                            <use xlink:href="#icon-tansuoa"></use>
+                          </svg>
+                <span class="zfbui-badge">-</span>
+            </span>
+            <p class="zfbui-tabbar__label">口碑</p>
+        </a>
+        <a href="#" class="zfbui-tabbar__item">
+            <span>
+                    <svg class="zfbui-tabbar__icon" aria-hidden="true">
+                            <use xlink:href="#icon-shejiao"></use>
+                          </svg>
+                <span class="zfbui-badge">-</span>
+            </span>
+            <p class="zfbui-tabbar__label">朋友</p>
+        </a>
+        <a href="#" class="zfbui-tabbar__item">
+            <span>
+                    <svg class="zfbui-tabbar__icon" aria-hidden="true">
+                            <use xlink:href="#icon-wode"></use>
+                          </svg>
+                <span class="zfbui-badge">-</span>
+            </span>
+            <p class="zfbui-tabbar__label">我的</p>
+        </a>
+    </div>
+    
+    
+</body>
+</html>

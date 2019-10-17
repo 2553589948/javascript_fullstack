@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document(es6)</title>
+</head>
+<body>
+    <script>
+        // function和prototype基于原型的面向对象
+        var Person = {  //对象模板json
+            name:"noname",
+            age:0,
+            greet:function(){
+                console.log(`hello,${this.name+this.age}`)
+            }
+        }
+        //  es6中新增了create方法
+        var tom = Object.create(Person);
+        console.log(tom);
+        tom.name = 'tom';
+        tom.age = 24;
+        tom.greet();
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dataset</title>
+</head>
+<body>
+    <button class="a" data-vid="123" data-bid="456">dataset</button>
+    <script>
+        const btn = document.querySelector('button');
+        console.log(btn.getAttribute('data-vid'));
+        console.log(btn.dataset.vid);
+        console.log(btn.dataset.bid);
+        // dataset是一个集合，所有以data开头的属性都在dataset里
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* pages/stories/index.wxss */
+.card image{
+    position: relative;
+    width: 100%;
+}
+.card .label{
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    color: white;
+    background-color: black;
+}
+.card video {
+    width: 100%;
+}
+.card .content {
+    height: 33vh;
+    margin-left: 20px;
+    margin-right: 20px;    
+}
+.content .header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 3px solid #333;
+}
+.content .description {
+    font-size: 16px;
+}   

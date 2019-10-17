@@ -1,0 +1,10 @@
+
+swiper{
+  height: 100vh
+}
+.content view{
+  text-align: center;
+}
+image{
+  width: 100%;
+}

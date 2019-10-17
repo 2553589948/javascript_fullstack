@@ -1,0 +1,14 @@
+<!--pages/carDetail/index.wxml-->
+<!--MVVM  view 视图  Model 模型层提供数据的(data里提供)-->
+<view>
+    <view class="cover">
+        <image src="{{car.image}}" mode="aspectFill" />
+        <view class="content">
+            <view class="header">{{car.header}}</view>
+            <view class="meta">{{car.meta.price}}</view>
+        </view>
+    </view>
+    <view class="spec"></view>
+    <view class="action"></view>
+</view>
+

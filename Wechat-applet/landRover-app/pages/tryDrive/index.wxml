@@ -1,0 +1,11 @@
+<!--pages/tryDrive/index.wxml-->
+<view>
+  <text>{{id}}</text>
+  <swiper indicator-dots="{{false}}">
+    <block wx:for="{{driver.meta.exterior_design}}">
+      <swiper-item class="" item-id="">
+        <image src="{{item.image}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
