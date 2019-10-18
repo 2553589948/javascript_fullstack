@@ -14,12 +14,12 @@ Page({
     })
   },
   
-  // gotoDriveDetail(event){
-  //   const id = event.target.dataset.id;
-  //   wx.navigateTo({
-  //     url:'/pages/tryDrive/index' + '?id=' + id
-  //   })
-  // },
+  gotoDriveDetail(event){
+    const id = event.target.dataset.id;
+    wx.navigateTo({
+      url:'/pages/tryDrive/index' + '?id=' + id
+    })
+  },
 
   //事件处理函数
   bindViewTap: function() {
