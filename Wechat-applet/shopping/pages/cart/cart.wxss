@@ -38,7 +38,7 @@ height: 180rpx;
   overflow: hidden;
 }
 .cart-list .cart-pro-price{
-  display: inline-block;
+  /* display: inline-block; */
   float: right;
   height: 105rpx;
   line-height: 50rpx;
