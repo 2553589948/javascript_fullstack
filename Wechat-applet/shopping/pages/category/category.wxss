@@ -17,7 +17,7 @@
 }
 .cate-list.on{
     color: #ab956d;
-    border-color: #ab956d;
+    border-color: #ab9b6d;
 }
 .category-right{
     float: right;

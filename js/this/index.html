@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var a = 123
+        var obj = {   //隐式绑定
+            a: 2,
+            foo
+        }
+        function foo() {
+            console.log(this.a)
+        }
+        var b = obj.foo     /* 有()是调用 没有是引用 */
+        b()  //隐士绑定丢失
+    </script>
+</body>
+</html>

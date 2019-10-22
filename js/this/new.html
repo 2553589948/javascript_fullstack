@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>new绑定</title>
+</head>
+<body>
+    <script>
+        //new 绑定
+        function objectFactory() {
+            // new的过程实现原理
+            // 1.创建一个空对象
+            // 2.执行[[prototype]]连接 __proto__
+            // 3.让this指向新对象
+            // prototype显式原型链  __proto__隐式原型链 
+            //    [[prototype]]就是__proto__
+            const obj = {}
+            const Constructor = [].shift.call(arguments)
+            obj.__proto__ = Constructor.prototype
+            const ret = Constructor.apply(obj, arguments)
+            return typeof ret === 'object' ? ret : obj
+        }
+        function People(name, age) {
+            this.name = name
+            this.age = age
+        }
+        console.log(new People('haha', 12))
+        console.log(objectFactory(People, 'haha', 18))
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call apply bind统称显式绑定</title>
+</head>
+<body>
+    <!-- <script>
+        var a = {
+            user: 'haha',
+            fn: function(a, b) {
+                console.log(this.user)
+                console.log(a + b)
+            }
+        }
+        a.fn()
+        var b = a.fn
+        b()
+        b.call(a)    //call方法改变了this指向
+        b.call(a, 1, 3)   //第一个参数是this需要指向的作用域,必须要的
+    </script> -->
+
+    <!-- <script>
+            var a = {
+                user: 'haha',
+                fn: function(a, b) {
+                    console.log(this.user)
+                    console.log(a + b)
+                }
+            }
+            var b = a.fn
+            b.apply(a)
+            b.apply(a, [1, 2])  //与call传参方式不一样
+            b.apply(null)          
+            //apply,call方法如果将this指向null,默认指向window
+    </script> -->
+
+    <!-- <script>
+            var a = {
+                user: 'haha',
+                fn: function(a, b) {
+                    console.log(this.user)
+                    console.log(a + b)
+                }
+            }
+            var b = a.fn
+            b.bind(a)
+            var c = b.bind(a)  
+            //bind与apply,call方法不同,bind方法返回的是一个函数,没有被调用
+            c() 
+            c(1, 2)      //bind方法与call方法传参方式一样
+    </script> -->
+
+    <script>
+            //new 绑定
+            function Foo(a) {
+                this.a = a
+            }
+            new Foo(2)
+    </script>
+</body>
+</html>

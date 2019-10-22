@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header"></view>
+  <view class="game">
+    <view bind:touchstart="touchstart" bind:touchmove="touchmove" bind:touchend="touchend">
+      <view class="row" wx:for="{{num}}" wx:for-item="row">
+        <view class="cell" wx:for="{{row}}">
+          <view class="cell-con cell-con-{{item}}">{{item}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
