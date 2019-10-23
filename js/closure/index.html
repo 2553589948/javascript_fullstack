@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // function f1() {
+        //     n = 999
+        // }
+        // f1()
+        // console.log(n)
+
+        // 把一个函数的内部函数拿出来调用，还能访问内部函数父类的作用域
+        function f1() {
+            var n = 999
+            function f2(){
+                console.log(n)
+            }
+            return f2
+        }
+        var result = f1()
+        result()
+    </script>
+</body>
+</html>

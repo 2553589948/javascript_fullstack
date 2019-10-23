@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>posts</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .card img{
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-1 my-5">POSTS</h1>
+        <div class="row justify-content-center" id="cards">
+            <div class="col-md-6">
+                <div class="card my-3">
+                    <a href="/detail.html">
+                        <image class="" src="https://resources.ninghao.net/images/candy-shop.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title">Candy Shop</h5>
+                            <div class="card-subtitle mb-2 text-black-50">
+                                    Mohamed Chahin
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+    <script>
+        //请求资源　fetch默认发出GET请求　http请求其实就是文件传输，二进制流
+            fetch('http://localhost:1314/posts')
+            .then(data => data.json())
+            .then(data => {
+                // 数据数组 -> html数组  map将遍历数组中的每一项，将一个数组变成另外一个数组
+                // console.log(data)
+                const htmlArr = data.map((item) => {
+                    return `<div class="col-md-6">
+                                <div class="card my-3">
+                                    <a href="/detail.html">
+                                        <image class="" src="${item.imageUrl}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${item.title}</h5>
+                                            <div class="card-subtitle mb-2 text-black-50">
+                                                    ${item.author}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            `
+                })
+                console.log(htmlArr);
+                document.getElementById('cards')
+                .innerHTML = htmlArr.join('')
+            })
+
+    </script>
+</body>
+</html>

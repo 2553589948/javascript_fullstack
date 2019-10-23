@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var count = 0;
+        // function add(){
+        //     count++
+        //     console.log(count)
+        // }
+        // add()   
+        
+        // function add() {
+        //     var count = 0
+        //     function a() {
+        //         console.log(++count)
+        //     }
+        //     return a
+        // }
+        // var myAdd = add()
+        // myAdd()
+
+        function test() {
+            var food = 'apple'
+            var obj = {
+                eatFood: function(){
+                    if(food != ''){
+                        console.log('i am eating' + food)
+                        food = ''
+                    }else{
+                        console.log('nothing!')
+                    }
+                },
+                pushFood: function(myFood){
+                    food = myFood
+                    console.log(food)
+                }
+            }
+            // function a() {
+            //     food = banana
+            // }
+            // function b() {
+            //     console.log(food)
+            // }
+            return obj
+        }
+        var person = test()
+        person.eatFood()
+        person.eatFood()
+        person.pushFood('pear')
+    </script>
+</body>
+</html>
