@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>precompile预编译</title>
+</head>
+<body>
+    <script>
+        //变量  声明提升
+        console.log(a)
+        var a = 123
+
+        //函数声明  整体变量提升
+        test()
+        function test() {
+            console.log('hello world')
+        }
+
+        //任何变量如果未经过声明就赋值，此变量就会成为全局变量
+        //一切声明的全局变量，都归window所有
+    </script>
+
+    <script>
+        // function fn(a) {
+        //     console.log(a)
+        //     var a = 123
+        //     console.log(a)
+        //     function a() {}
+        //     console.log(a)
+        //     var b = function(){}
+        //     console.log(b)
+        //     function d() {}
+        // }
+        // fn(1)
+
+        function test(a, b) {
+                console.log(a)
+                c = 0;
+                var c;
+                a = 3
+                b = 2
+                console.log(b)
+                function b() { }
+                function d() { }
+                console.log(b)
+            }
+            // AO {
+                // a: 3,
+                // b: 2,
+                // c: 0,
+                // d: function () { }
+            // }
+            test(1)
+
+            //-------------------------
+
+            //GO global Object
+            // GO{
+            //     global: 100,
+            //     fn: function(){...}
+            // }
+
+            // var global = 100
+            // function fn() {
+            //     console.log(global)
+            // }
+
+            // AO {
+            //     在GO执行后AO执行了啥也没有
+            // }
+            // fn()
+
+    </script>
+</body>
+</html>

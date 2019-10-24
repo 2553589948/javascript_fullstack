@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>recursion递归</title>
+</head>
+<body>
+    <script>
+        //n!  一般做法
+        // function recursion(n) {
+        //     var num = 1
+        //     for(var i=1;i<=n;i++){
+        //         num = num * i
+        //     }
+        //     return num
+        // }
+        // console.log(recursion(5))
+        
+        //递归  recursion(5) -> 5 * recursion(4)
+        //能用递归实现就一定能找到一个合适的数学公式和一个终止条件,递归耗时很长,空间复杂度高
+        function recursion(n) {
+            if (n == 1 || n == 0){
+                return 1
+            }
+            return n * recursion(n-1)
+        }
+        console.log(recursion(10))
+    </script>
+
+    <script>
+    //斐波那契数列
+    //  fb(n) = fb(n-1) + fb(n-2)
+        function fb(n) {
+            if (n == 2 || n == 1){
+                return 1
+            }
+            return fb(n-1) + fb(n-2)
+        }
+        console.log(fb(5))
+    </script>
+</body>
+</html>

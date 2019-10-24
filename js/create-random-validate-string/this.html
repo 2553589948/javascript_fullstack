@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this指向</title>
+</head>
+<body>
+    <div id="box">this123</div>
+    <script>
+        const box = document.getElementById('box')
+        //普通函数 this 调用的时候决定，定义的时候不算
+        //箭头函数 定义的时候就决定了this就指向它的外面一层，后续无法改变
+        box.addEventListener('click', () => {
+            console.log(this === window)
+        })
+
+        var obj = {
+            a: 1,
+            es5Function: function() {
+                console.log(this === obj)
+            }
+        }
+        obj.es5Function()
+
+        var obj1 = {
+            a: 1,
+            es6Function: () => {
+                console.log(this === window)
+            }
+        }
+        obj1.es6Function()
+        obj1.es6Function.call()
+    </script>
+</body>
+</html>
