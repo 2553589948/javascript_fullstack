@@ -1,29 +1,18 @@
-// pages/carDetail/index.js
-const cars = require('../../assets/detail.js')
+// miniprogram/pages/group/group.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: null,
-    car: {}
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const id = options.id;
-    this.setData({
-      id
-    })
-    let car = cars.find(function(item){
-      return item.id == id
-    })
-    this.setData({
-      car
-    })
+
   },
 
   /**
