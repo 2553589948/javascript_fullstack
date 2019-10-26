@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var name = ''
+        // promise函数内必须返回一个resolve,  .then后面才能执行,能执行.then方法前一个函数必须有承诺promise
+        function test() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('猛哥')
+                    name = '猛哥'
+                    resolve('ok')
+                    // reject('err')
+                },500)
+            })
+        }
+        function test2() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(name + '相亲')
+                    resolve('相亲很顺利')
+                },1000)
+            })
+            
+        }
+        function marry() {
+            console.log(name + '结婚了')
+        }
+
+        // Promise.all方法  前面两项如何执行不管，能得到数据即可
+        // Promise.all([test(), test2()]).then((value) => {
+        //     console.log(value, '.....')
+        //     marry()
+        // })
+
+        // Promise.race方法  如果在test()、test2()中都有marry()想要的一项数据，它会在test()、test2()中选择耗时少的那个
+        // Promise.race([test(), test2()]).then((value) => {
+        //     console.log(value, '.....')
+        //     marry()
+        // })
+
+        test().then((res) => {  //得到resolve执行then
+            console.log(res) //ok得到上一个函数的返回值
+            test2()
+            .then((res) => {
+                marry()
+            })
+        }).catch((err) => {   //得到reject执行catch
+            console.log(err)
+        })
+
+        // 简写方式
+        // test()
+        //     .then(test2)
+        //     .then(marry)
+         
+    </script>
+</body>
+</html>
