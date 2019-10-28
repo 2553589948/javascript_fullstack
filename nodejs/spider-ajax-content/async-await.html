@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async-await</title>
+</head>
+<body>
+    <script>
+        //异步
+        //回调
+        //promise
+        // fetch('http://neteasecloudmusicapi.zhaoboy.com/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA')
+        // .then(res => res.json())
+        // .then(data => {
+        //     console.log(data)
+        // })
+        fetch('./id.json')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            return fetch('./detail.json')
+        })
+        .then(detail => detail.json())
+        .then(data => {
+            console.log('detail', data)
+        })
+
+        //异步的终极解决方式，用async标明
+        //await后面接promise,fetch是js语言自带的promise方法
+        //fetch是异步的,转为json的过程也是异步的
+        async function getDetail() {
+            let id = await fetch('./id.json')
+            id = await id.json()
+            let detail = await fetch('./detail.json')
+            detail = await detail.json()
+            console.log('await', detail)
+        }
+        getDetail()
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Map遍历键值对</title>
+</head>
+<body>
+    <button id="btn"></button>
+    <script>
+        const btn = document.getElementById('btn')
+        var map = {
+            name: 'lihua',
+            [btn]: 'dom node'
+        }
+        map['0'] = 'b val';
+        map['3'] = 'a val';
+        map['2'] = 'c val';
+        map['1'] = 'd val';
+
+        let map1 = new Map([
+            ['key', 'value']
+        ])
+        map1.set('key1', 'value1')  /* 添加属性(键值对) */
+        map1.get('key')   /* 获取 */
+        map1.set(() => {}, 'function')
+        for(let entey of map1) {
+            // 遍历数组Map
+            console.log(entey)
+        }
+        console.log(btn)
+        console.log(Object.keys(map))
+        console.log(map1)
+        // Map 有啥用 为什么es6要增加一个Map 
+        //1.以前的key只支持字符串 
+        //2. 以前的key 无序的
+        
+        var NameMap = {
+            lihua: 'sing',
+            lilei: 'dance',
+            lizhi: 'rap'
+        }
+        function doSomething(name) {
+            // name == lihua 输出 sing
+            // name == lilei 输出 dance
+            // name == lizhi 输出 rap   以上相当于键值对
+            //加中括号代表取值,不加是取键(变量名)
+            console.log(NameMap[name])
+        }
+        doSomething('lihua')
+        
+        // map1.entries() 获取[key,value]
+        // map1.keys()    获取key
+        // map1.values()  获取value
+
+        //扩展运算符...  把数组的每一项分离出来
+        console.log(...[1,2,4])
+
+        console.log(Math.max(3,8,5))   /* 求最大数 */
+        console.log(Math.max(...[3,8,5]))
+        
+        let a = [1,2,3]
+        let b = [4,5,6]
+        a.push(...b)
+        console.log(a)
+    </script>
+</body>
+</html>
