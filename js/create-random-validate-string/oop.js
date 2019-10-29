@@ -54,5 +54,6 @@ class Gcode {
 }
 //实例
 let obj = new Gcode('screen')
+console.log(obj)
 let obj1 = new Gcode('screen1')
 let obj2 = new Gcode('screen2')

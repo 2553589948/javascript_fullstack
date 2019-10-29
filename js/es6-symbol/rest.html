@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>rest</title>
+</head>
+<body>
+    <script>    
+        //... 扩展运算符、rest参数(发生在函数上的,参数长度随意)
+        var obj = {
+            a: 1,
+            b: 2
+        }
+        //浅复制  防止对象(键值对)覆盖
+        function copy(obj) {
+            let newObj = {}
+            for( let key in obj) {
+                newObj[key] = obj[key]
+            }
+            return newObj
+        }
+        var obj1 = copy(obj)
+        obj1.c = 3
+        //浅复制的另一种快捷方式
+        var obj2 = {
+            ...obj
+        }
+
+        function foo(...args) {
+            console.log(args)
+            return Math.max(...args)
+        }
+        foo('a','b','c',1,2,3)  
+    </script>
+</body>
+</html>
