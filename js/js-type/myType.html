@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isType(type, value) {
+            return Object.prototype.toString.call(value) === `[object ${type}]`
+        }
+        console.log(isType('String', '123'))
+        console.log(isType('Function', () => {}))
+
+        // 函数式编程  过程抽象
+        // 面向对象    数据抽象
+        // function isString(value) {
+        //     return isType('String', value)
+        // }
+        // function isFunction(value){
+        //     return isType('Function', value)
+        // }
+        // function isNumber(value) {
+        //     return isType('Number', value)
+        // }
+
+        //有没有什么方法能把所有函数的第一个参数固定住?用bind
+        const isString = isType.bind(null, 'String')
+        const isFunction = isType.bind(null, 'Function')
+        const isNumber = isType.bind(null, 'Number')
+        console.log(isString('123'))
+        console.log(isNumber(123))
+        console.log(isFunction(() => {}))
+
+        
+        
+    </script>
+</body>
+</html>

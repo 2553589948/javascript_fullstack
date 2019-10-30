@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>toString</title>
+</head>
+<body>
+    <script>
+        console.log(Object.prototype.toString.call(''))
+        console.log(Object.prototype.toString.call(null))
+        console.log(Object.prototype.toString.call(undefined))
+        console.log(Object.prototype.toString.call({}))
+        console.log(Object.prototype.toString.call(new Date()))
+        console.log(Object.prototype.toString.call(/[0-9]/))  //正则
+        
+        class A {
+            toString1() {
+
+            }
+        }
+        class B extends A {
+
+        }
+        var b = new B()
+        console.log(b)
+        var f = [1,3]
+        var func = function() {}
+        console.log(f)
+        // f.__proto__  第一层 的toString方法只能把数据类型转化成字符串
+        // f.__proto__.__proto__  === Object.prototype  第二层 的toString是做类型判断的
+        console.log(f.toString())
+        console.log(Object.prototype.toString.call(f))
+        console.log(func.toString())
+        console.log(Object.prototype.toString.call(func))
+        var num = 123
+        console.log(num.toString())
+        var obj = {}  /* 对象自变量,离对象最近的一个数据类型 */
+        console.log(obj.toString())
+        //万物皆对象(object)
+        //数据类型都继承自对象
+        //对象上面有个 toString
+        //各数据类型上面也有个 toString
+
+        function Bar() {
+            this.abc = 10
+        }
+        Bar.prototype.toFoo = function() {
+            return this.abc * 100
+        }
+        var bar = new Bar()
+        console.log(bar.toFoo())
+        console.log(
+            Bar.prototype.toFoo.call({abc: 100})
+        )
+    </script>
+</body>
+</html>

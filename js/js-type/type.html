@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>typeof</title>
+</head>
+<body>
+    <script>
+        // typeof 基本数据类型中除了null都能判断出来 复杂数据类型中除了function都不能判断出来
+        console.log(typeof null)  //object
+        console.log(typeof [])      //object
+        console.log(typeof function() {})
+        console.log(typeof Symbol())    
+    </script>
+</body>
+</html>
