@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <script>
+    // 点击li 输出li里的内容
+    // const lis = document.getElementsByTagName('li')
+    // for(let el of lis) {
+    //   el.addEventListener('click', () => {
+    //     console.log(el.innerHTML)
+    //   })
+    // }
+    // 事件委托  事件代理
+    const ul = document.querySelector('ul')
+    ul.addEventListener('click', (e) => {
+      // console.log(e.target)  事件触发的节点
+      // console.log(e.currentTarget)  事件绑定的节点
+      if(e.target.nodeName == "LI") {
+        console.log(e.target.innerHTML)
+      }
+    })
+  </script>
+</body>
+</html>

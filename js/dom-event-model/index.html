@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .out {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+    .in {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <a href="./README.md" id="md">MD</a>
+  <div class="out">
+    <div class="in">in</div>
+  </div>
+  <script>
+    const inNode = document.querySelector('.in')
+    const outNode = document.querySelector('.out')
+    window.addEventListener('click', function() {
+      console.log('window')
+    }, false)
+    document.addEventListener('click', function() {
+      console.log('document')
+    }, false)
+    // documentElement就是html
+    document.documentElement.addEventListener('click', function() {
+      console.log('html')
+    }, false)
+    document.body.addEventListener('click', function() {
+      console.log('body')
+    }, false)
+    outNode.addEventListener('click', function() {
+      console.log('out')
+    }, false)
+    inNode.addEventListener('click', function(event) {
+      event.stopPropagation();   //阻止冒泡   
+      console.log('in')
+    }, false)
+    document.getElementById('md').addEventListener('click', (e) => {
+      e.preventDefault()   //阻止默认事件 如a input
+    })
+  </script>
+</body>
+</html>
