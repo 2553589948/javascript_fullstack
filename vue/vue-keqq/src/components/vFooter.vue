@@ -2,19 +2,19 @@
   <div id="wrapper">
     <mt-tabbar v-model="selected">
       <mt-tab-item id="index">
-        <img slot="icon" :src="this.tabs[0]">
+        <img slot="icon" class="icon-font">
         首页
       </mt-tab-item>
-      <mt-tab-item id="category" v-bind:src="this.tabs[1]">
-        <img slot="icon">
+      <mt-tab-item id="category">
+        <img slot="icon" class="icon-font">
         分类
       </mt-tab-item>
-      <mt-tab-item id="classtable" v-bind:src="this.tabs[2]">
-        <img slot="icon">
+      <mt-tab-item id="classtable">
+        <img slot="icon" class="icon-font">
         课程表
       </mt-tab-item>
-      <mt-tab-item id="mine" v-bind:src="this.tabs[3]">
-        <img slot="icon">
+      <mt-tab-item id="mine">
+        <img slot="icon" class="icon-font">
         我的
       </mt-tab-item>
     </mt-tabbar>
@@ -28,10 +28,7 @@ export default {
   },
   data () {
     return {
-      selected: this.current,
-      tabs: [
-        require('../assets/images/icon/home.gif'), require('../assets/images/icon/category.gif'), require('../assets/images/icon/classtable.gif'), require('../assets/images/icon/mine.gif')
-      ]
+      selected: this.current
     }
   },
   watch: {
