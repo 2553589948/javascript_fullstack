@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Videos</title>
+</head>
+<body>
+  <ul class="videos">
+    <li data-time="5:43">
+      Video 1
+    </li>
+    <li data-time="2:33">
+      Video 2
+    </li>
+    <li data-time="3:45">
+      Video 3
+    </li>
+    <li data-time="0:47">
+      Video 4
+    </li>
+    <li data-time="5:21">
+      Video 5
+    </li>
+    <li data-time="6:56">
+      Video 6
+    </li>
+    <li data-time="3:46">
+      Video 7
+    </li>
+    <li data-time="5:25">
+      Video 8
+    </li>
+    <li data-time="3:14">
+      Video 9
+    </li>
+    <li data-time="3:31">
+      Video 10
+    </li>
+    <li data-time="5:59">
+      Video 11
+    </li>
+    <li data-time="3:07">
+      Video 12
+    </li>
+    <li data-time="11:29">
+      Video 13
+    </li>
+    <li data-time="8:57">
+      Video 14
+    </li>
+    <li data-time="5:49">
+      Video 15
+    </li>
+    <li data-time="5:52">
+      Video 16
+    </li>
+    <li data-time="5:50">
+      Video 17
+    </li>
+    <li data-time="9:13">
+      Video 18
+    </li>
+    <li data-time="11:51">
+      Video 19
+    </li>
+    <li data-time="7:58">
+      Video 20
+    </li>
+    <li data-time="4:40">
+      Video 21
+    </li>
+    <li data-time="4:45">
+      Video 22
+    </li>
+    <li data-time="6:46">
+      Video 23
+    </li>
+    <li data-time="7:24">
+      Video 24
+    </li>
+    <li data-time="7:12">
+      Video 25
+    </li>
+    <li data-time="5:23">
+      Video 26
+    </li>
+    <li data-time="3:34">
+      Video 27
+    </li>
+    <li data-time="8:22">
+      Video 28
+    </li>
+    <li data-time="5:17">
+      Video 29
+    </li>
+    <li data-time="3:10">
+      Video 30
+    </li>
+    <li data-time="4:43">
+      Video 31
+    </li>
+    <li data-time="19:43">
+      Video 32
+    </li>
+    <li data-time="0:47">
+      Video 33
+    </li>
+    <li data-time="0:47">
+      Video 34
+    </li>
+    <li data-time="3:14">
+      Video 35
+    </li>
+    <li data-time="3:59">
+      Video 36
+    </li>
+    <li data-time="2:43">
+      Video 37
+    </li>
+    <li data-time="4:17">
+      Video 38
+    </li>
+    <li data-time="6:56">
+      Video 39
+    </li>
+    <li data-time="3:05">
+      Video 40
+    </li>
+    <li data-time="2:06">
+      Video 41
+    </li>
+    <li data-time="1:59">
+      Video 42
+    </li>
+    <li data-time="1:49">
+      Video 43
+    </li>
+    <li data-time="3:36">
+      Video 44
+    </li>
+    <li data-time="7:10">
+      Video 45
+    </li>
+    <li data-time="3:44">
+      Video 46
+    </li>
+    <li data-time="3:44">
+      Video 47
+    </li>
+    <li data-time="4:36">
+      Video 48
+    </li>
+    <li data-time="3:16">
+      Video 49
+    </li>
+    <li data-time="1:10">
+      Video 50
+    </li>
+    <li data-time="6:10">
+      Video 51
+    </li>
+    <li data-time="2:14">
+      Video 52
+    </li>
+    <li data-time="3:44">
+      Video 53
+    </li>
+    <li data-time="5:05">
+      Video 54
+    </li>
+    <li data-time="6:03">
+      Video 55
+    </li>
+    <li data-time="12:39">
+      Video 56
+    </li>
+    <li data-time="1:56">
+      Video 57
+    </li>
+    <li data-time="4:04">
+      Video 58
+    </li>
+  </ul>
+  <script>
+    function foo(a, b, c, d) {
+      console.log(arguments, Array.isArray(arguments), arguments[0], arguments.length)
+    }
+    foo(1, 2, 3, 4)
+    //计算所有视频的总秒数
+    //类数组 通过数组索引获取值有length长度，但没有数组的方法
+    //Array.isArray()判断是不是数组方法
+  const lis = document.querySelectorAll('li')  //类数组
+  console.log(lis, Array.isArray(lis))
+  let a = [0, 1, 2, 3]  //数组
+  console.log(a, Array.isArray(a))
+  let total = 0
+  for (let item of lis) {
+    let timeStr = item.dataset.time
+    console.log(timeStr)
+    let timeArr = timeStr.split(':')
+    let [minute, secodes] = timeArr  //解构
+    minute = parseInt(minute)
+    secodes = parseFloat(secodes)
+    total += minute * 60 + secodes
+  }
+  console.log(total)
+
+  // 声明式   Array.from()将类数组转换为数组，让它拥有数组的方法map()
+  let timeHourSecond = Array.from(lis).map(node => {
+    let timeStr = node.dataset.time
+    let timeArr = timeStr.split(':')
+    let [minute, secodes] = timeArr  //解构
+    minute = parseInt(minute)
+    secodes = parseFloat(secodes)
+    return minute * 60 + secodes
+  })
+  // console.log(timeHourSecond)
+  // let total1 = 0
+  // for (let second of timeHourSecond) {
+  //   total1 += second
+  // }
+  // console.log(total1)
+
+  //累加器
+  const tatalSeconds = timeHourSecond.reduce((a, b) => a + b)
+  console.log(tatalSeconds)
+
+  let arr1 = [3, 4, 5, 6]
+  arr1.reduce((pre, next) => {
+    console.log(pre, next)
+    return pre + next
+  })
+
+  let arr2 = [{key: 3}, {key: 4}, {key: 5}]
+  // {key: 12}
+
+  let arr2res = arr2.reduce((a, b) => {
+    console.log(a, b)
+    return ({
+      key: a.key + b.key
+    })
+  })
+  console.log(arr2res)
+  </script>
+</body>
+</html>
