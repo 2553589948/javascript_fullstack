@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数式编程</title>
+</head>
+<body>
+  <script>
+    // 过程抽象 无参化
+    function add(a, b, c) {
+      console.log(a, b, c)
+    }
+    add(1, 2, 3)
+    let arr = [1, 2, 3]
+
+    arr.forEach(add)
+    // 上下是一样的
+    arr.forEach((item, i, arr) => {
+      add(item, i, arr)
+    })
+
+    //js中函数是一等公民，函数和其它变量一样有同等地位
+    arr.forEach((item, i, arr) => {
+      console.log(item, i, arr)
+    })
+
+    console.log([1, 2, 3].map(parseInt))
+
+    [1, 2, 3].map(parseInt)
+    // 上下是一样的
+    [1, 2, 3].map((item, index, arr) => {
+      parseInt(1, 0, [1, 2, 3])  //第二个参数是进制,0进制代表10进制
+      parseInt(2, 1, [1, 2, 3])
+      parseInt(3, 2, [1, 2, 3])
+      //把多少进制的xx转为10进制的xx
+    })
+    console.log(parseInt('1', 2))  //把2进制的1转为10进制
+    // 结果为1
+  </script>
+</body>
+</html>

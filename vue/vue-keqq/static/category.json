@@ -1,0 +1,65 @@
+{
+  "categoryName": "编程语言",
+  "categoryId": "programing",
+  "type": -1,
+  "liveLists": [
+    {
+      "livePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLC6NWptRHpHicuSfgaKm2YMDD1RPEYTPRWhoHheDCnGlGYoWwH1GDjgoUe8xZjWH2XI/356?tp=webp",
+      "liveTitle": "Python爬虫进阶破解-12306验证码",
+      "liveTeacher": "六星教育~穆洲",
+      "liveInfo": "直播时间：14:30"
+    },
+    {
+      "livePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLChibXXhJeHNDp3SVLnOHKu3pLvfVml92f28NEcuaWFHheBHRUmWRiaicrYVC9VJEhrK0/356?tp=webp",
+      "liveTitle": "PHP亿级网站流量优化策略",
+      "liveTeacher": "六星教育-Allen老师",
+      "liveInfo": "直播时间：15:00"
+    },
+    {
+      "livePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDDa6iaBHu8lZUAYmYFOX3ibqh6pOv6iaCibL68ialsW6mNsHricv7ibAE1x8yVwHMp5ibQfiaM/356?tp=webp",
+      "liveTitle": "PHP实战案例--动态修改配置文件",
+      "liveTeacher": "六星教育-Luke老师",
+      "liveInfo": "直播时间：15:30"
+    },
+    {
+      "livePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDEQ0C1ibiaL8cjoavcbnic15D8tblOKJATSEzuJGiaMj8apmgyuEOjfTIPuXthB4Gppu8/356?tp=webp",
+      "liveTitle": "地表最强“三高缓存系统，必备架构功臣",
+      "liveTeacher": "云析学院-无双老师",
+      "liveInfo": "直播时间：19:30"
+    },
+    {
+      "livePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp",
+      "liveTitle": "不懂Tomcat原理 怎能成为架构师",
+      "liveTeacher": "咕泡学院-seven",
+      "liveInfo": "直播时间：20:00"
+    }
+  ],
+  "specImage": "https://p.qpic.cn/qqconadmin/0/8b2a0f7c0702473ab6c51e2db90559f2/0?tp=webp",
+  "center__mods": [
+    {
+      "commonTitle": "本周最受欢迎好课",
+      "courses": [
+        {
+          "courseTitle": "Java架构师系统提升课",
+          "coursePrice": "免费",
+          "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp"
+        },
+        {
+          "courseTitle": "java/AI/python金牌特训营",
+          "coursePrice": "免费",
+          "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCeu9hlszic9bKgX1FqU9nzbNbPGuThOt4icPKvmyMH2bXBMFW89geygmS5nHEVQgPIY/356?tp=webp"
+        },
+        {
+          "courseTitle": "PHP7进阶到架构",
+          "coursePrice": "免费",
+          "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLChibXXhJeHNDp3SVLnOHKu3pLvfVml92f28NEcuaWFHheBHRUmWRiaicrYVC9VJEhrK0/356?tp=webp"
+        },
+        {
+          "courseTitle": "java零基础到年薪30万",
+          "coursePrice": "免费",
+          "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBibuicxOJjshU6gDyUxH3icQknudcjJwTf1Veuyta3E0ce74T2wFVzHgLsykUMlJKQfI/356?tp=webp"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
+import CateDetail from '@/components/CateDetail'
 import Category from '@/components/Category'
 import Classtable from '@/components/Classtable'
 import Mine from '@/components/Mine'
@@ -12,7 +13,14 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
+      children: [
+        {
+          path: '',
+          name: 'CateDetail',
+          component: CateDetail
+        }
+      ]
     },
     {
       path: '/category',

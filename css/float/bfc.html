@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box-wrapper {
+        width: 100%;
+        overflow: hidden; /* auto也行 float: left; display: table-cell; 将一个容器变成bfc容器，能清除浮动带来的影响*/
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        line-height: 100px;
+        text-align: center;
+        float: left;
+      }
+    </style>
+</head>
+<body>
+    <!-- bfc -->
+    <!-- block formating context 块级格式化上下文-->
+    <!-- margin-top: 20px;
+        margin-bottom: 30px;
+      这样会造成margin重叠  取最大值 -->
+    <div class="box-wrapper">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+    </div>
+    <div class="text">hello world</div>
+</body>
+</html>
