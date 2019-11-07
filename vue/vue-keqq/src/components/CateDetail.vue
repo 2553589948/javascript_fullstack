@@ -1,18 +1,18 @@
 <template>
   <div class="category-detail-wrapper">
-    {{$route.query.id}}
-    <div class="custom" v-if="curid === categoryCourses.categoryId">
+    <!-- {{curid}} -->
+    <div class="custom" v-if="categoryCourses[curid]">
       <div class="custom__mod"
-      v-for="(item, index) in categoryCourses.customMods" :key="index">
+      v-for="(item, index) in categoryCourses[curid].customMods" :key="index">
         <h2 class="common-title">{{item.commonTitle}}</h2>
         <ul class="common__course-list">
-          <li class="common__course-item">
+          <li class="common__course-item" v-for="(list, index) in item.courses" :key="index">
             <router-link to="" class="common__course-link">
               <div class="common__course-pic-wrap">
-                <img class="common__course-pic" src="https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp" alt="">
+                <img class="common__course-pic" :src="list.coursePic" alt="">
               </div>
-              <h3 class="common__course-title">互联网高级Java架构课程</h3>
-              <p class="common__course-price">免费</p>
+              <h3 class="common__course-title">{{list.courseTitle}}</h3>
+              <p class="common__course-price">{{list.coursePrice}}</p>
             </router-link>
           </li>
         </ul>
@@ -25,8 +25,12 @@
 export default {
   data () {
     return {
-      categoryCourses: [1, 2],
-      curid: ''
+      categoryCourses: {}
+    }
+  },
+  computed: {
+    curid () {
+      return this.$route.query.id
     }
   },
   created () {
@@ -38,8 +42,6 @@ export default {
           console.log(res.data.data)
         }
       })
-    console.log(this.$route.query.id)
-    this.curid = this.$route.query.id
   }
 }
 </script>

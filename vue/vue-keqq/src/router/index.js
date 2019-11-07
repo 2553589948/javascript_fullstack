@@ -16,7 +16,7 @@ export default new Router({
       component: Index,
       children: [
         {
-          path: '',
+          path: '/',
           name: 'CateDetail',
           component: CateDetail
         }

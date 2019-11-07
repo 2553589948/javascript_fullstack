@@ -115,7 +115,7 @@ export default {
     showDetail (index, curid) {
       console.log(index)
       console.log(curid)
-      this.$router.push({path: '/', query: {id: curid}})
+      this.$router.push({path: '/', query: {id: index}})
       this.activeIndex = index
     }
   },

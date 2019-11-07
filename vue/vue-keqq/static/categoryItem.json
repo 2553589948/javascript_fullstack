@@ -2,147 +2,176 @@
   "errno": 0,
   "data": [
       {
-        "categoryName": "精选推荐",
-        "categoryId": "specSelected",
+        "cateTitle-short": "IT",
+        "cateTitle-more": "IT互联网",
+        "cateId": "it",
         "type": 1,
-        "customMods": [
+        "cateInfo": [
           {
-            "commonTitle": "IT互联网热门课程",
-            "courses": [
+            "subCateTitle": "互联网产品",
+            "subCateId": "itProduct",
+            "subCates": [
               {
-                "courseTitle": "互联网高级Java架构课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp"
+                "subName": "产品策划",
+                "subId": "1001"
               },
               {
-                "courseTitle": "PHP7进阶到架构实战",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLChibXXhJeHNDp3SVLnOHKu3pLvfVml92f28NEcuaWFHheBHRUmWRiaicrYVC9VJEhrK0/356?tp=webp"
+                "subName": "产品运营",
+                "subId": "1002"
               },
               {
-                "courseTitle": "JAVA高级开发架构师课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCeu9hlszic9bKgX1FqU9nzbNbPGuThOt4icPKvmyMH2bXBMFW89geygmS5nHEVQgPIY/356?tp=webp"
+                "subName": "游戏策划",
+                "subId": "1003"
               },
               {
-                "courseTitle": "软件测试自学免费课——从入门到精通",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCx31vPjTpp0ibIL4yDQibtV2MNsPzfA4pxUkNVzWnh5j9xsEVyXjQhK7y1z2Y0GeB3I/356?tp=webp"
+                "subName": "游戏运营",
+                "subId": "1004"
               },
               {
-                "courseTitle": "U3D 游戏开发第一季",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBGOS47DsaYA9MlKW9pZRYTy92Ric1ZowUHNPDzlyyhNEyrmWBcqjyAicu00ALqsD2FM/356?tp=webp"
+                "subName": "新媒体营销",
+                "subId": "1005"
               },
               {
-                "courseTitle": "思科工程师速成班",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAz2X5AynPIjNZOYN0MdlKq7iagomFKsO8qjPmxcpMibcgPQbmOrD0sJic2ib3eUujzabE/356?tp=webp"
+                "subName": "网络营销理论",
+                "subId": "1006"
+              },
+              {
+                "subName": "SEO",
+                "subId": "1007"
+              },
+              {
+                "subName": "SEM",
+                "subId": "1008"
               }
             ]
           },
           {
-            "commonTitle": "电商营销热门课程",
-            "courses": [
+            "subCateTitle": "编程语言",
+            "subCateId": "programl",
+            "subCates": [
               {
-                "courseTitle": "互联网高级Java架构课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp"
+                "subName": "C",
+                "subId": "1101"
               },
               {
-                "courseTitle": "PHP7进阶到架构实战",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLChibXXhJeHNDp3SVLnOHKu3pLvfVml92f28NEcuaWFHheBHRUmWRiaicrYVC9VJEhrK0/356?tp=webp"
+                "subName": "C++",
+                "subId": "1102"
               },
               {
-                "courseTitle": "JAVA高级开发架构师课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCeu9hlszic9bKgX1FqU9nzbNbPGuThOt4icPKvmyMH2bXBMFW89geygmS5nHEVQgPIY/356?tp=webp"
+                "subName": "Java",
+                "subId": "1103"
               },
               {
-                "courseTitle": "软件测试自学免费课——从入门到精通",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCx31vPjTpp0ibIL4yDQibtV2MNsPzfA4pxUkNVzWnh5j9xsEVyXjQhK7y1z2Y0GeB3I/356?tp=webp"
+                "subName": "PHP",
+                "subId": "1104"
               },
               {
-                "courseTitle": "U3D 游戏开发第一季",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBGOS47DsaYA9MlKW9pZRYTy92Ric1ZowUHNPDzlyyhNEyrmWBcqjyAicu00ALqsD2FM/356?tp=webp"
+                "subName": "C#/.Net",
+                "subId": "1105"
               },
               {
-                "courseTitle": "思科工程师速成班",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAz2X5AynPIjNZOYN0MdlKq7iagomFKsO8qjPmxcpMibcgPQbmOrD0sJic2ib3eUujzabE/356?tp=webp"
+                "subName": "Python",
+                "subId": "1106"
+              },
+              {
+                "subName": "Ruby",
+                "subId": "1107"
+              },
+              {
+                "subName": "Javascript",
+                "subId": "1108"
+              },
+              {
+                "subName": "Perl",
+                "subId": "1109"
+              },
+              {
+                "subName": "SQL",
+                "subId": "1110"
+              },
+              {
+                "subName": "Object-C",
+                "subId": "1111"
+              },
+              {
+                "subName": "Lua",
+                "subId": "1112"
+              },
+              {
+                "subName": "Flash AS3.0",
+                "subId": "1113"
+              },
+              {
+                "subName": "Swift",
+                "subId": "1114"
+              },
+              {
+                "subName": "VB.NET",
+                "subId": "1115"
+              },
+              {
+                "subName": "其他",
+                "subId": "1116"
               }
             ]
           },
           {
-            "commonTitle": "设计创作热门课程",
-            "courses": [
+            "subCateTitle": "前端开发",
+            "subCateId": "web",
+            "subCates": [
               {
-                "courseTitle": "互联网高级Java架构课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp"
+                "subName": "腾讯自研课",
+                "subId": "1301"
               },
               {
-                "courseTitle": "PHP7进阶到架构实战",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLChibXXhJeHNDp3SVLnOHKu3pLvfVml92f28NEcuaWFHheBHRUmWRiaicrYVC9VJEhrK0/356?tp=webp"
+                "subName": "基础就业课",
+                "subId": "1302"
               },
               {
-                "courseTitle": "JAVA高级开发架构师课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCeu9hlszic9bKgX1FqU9nzbNbPGuThOt4icPKvmyMH2bXBMFW89geygmS5nHEVQgPIY/356?tp=webp"
+                "subName": "实战进阶课",
+                "subId": "1303"
               },
               {
-                "courseTitle": "软件测试自学免费课——从入门到精通",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCx31vPjTpp0ibIL4yDQibtV2MNsPzfA4pxUkNVzWnh5j9xsEVyXjQhK7y1z2Y0GeB3I/356?tp=webp"
-              },
-              {
-                "courseTitle": "U3D 游戏开发第一季",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBGOS47DsaYA9MlKW9pZRYTy92Ric1ZowUHNPDzlyyhNEyrmWBcqjyAicu00ALqsD2FM/356?tp=webp"
-              },
-              {
-                "courseTitle": "思科工程师速成班",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAz2X5AynPIjNZOYN0MdlKq7iagomFKsO8qjPmxcpMibcgPQbmOrD0sJic2ib3eUujzabE/356?tp=webp"
+                "subName": "技术专题课",
+                "subId": "1304"
               }
             ]
           },
           {
-            "commonTitle": "近30天最多人在学",
-            "courses": [
+            "subCateTitle": "互联网产品",
+            "subCateId": "itProduct",
+            "subCates": [
               {
-                "courseTitle": "互联网高级Java架构课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB7rekliaAA0ljJrt2yX84MykcLiafAEh6YQM2Mo1HlV6brYfFwIicdyPI4lhXBYkNT8g/356?tp=webp"
+                "subName": "产品策划",
+                "subId": "1001"
               },
               {
-                "courseTitle": "PHP7进阶到架构实战",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLChibXXhJeHNDp3SVLnOHKu3pLvfVml92f28NEcuaWFHheBHRUmWRiaicrYVC9VJEhrK0/356?tp=webp"
+                "subName": "产品运营",
+                "subId": "1002"
               },
               {
-                "courseTitle": "JAVA高级开发架构师课程",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCeu9hlszic9bKgX1FqU9nzbNbPGuThOt4icPKvmyMH2bXBMFW89geygmS5nHEVQgPIY/356?tp=webp"
+                "subName": "游戏策划",
+                "subId": "1003"
               },
               {
-                "courseTitle": "软件测试自学免费课——从入门到精通",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCx31vPjTpp0ibIL4yDQibtV2MNsPzfA4pxUkNVzWnh5j9xsEVyXjQhK7y1z2Y0GeB3I/356?tp=webp"
+                "subName": "游戏运营",
+                "subId": "1004"
               },
               {
-                "courseTitle": "U3D 游戏开发第一季",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBGOS47DsaYA9MlKW9pZRYTy92Ric1ZowUHNPDzlyyhNEyrmWBcqjyAicu00ALqsD2FM/356?tp=webp"
+                "subName": "新媒体营销",
+                "subId": "1005"
               },
               {
-                "courseTitle": "思科工程师速成班",
-                "coursePrice": "免费",
-                "coursePic": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAz2X5AynPIjNZOYN0MdlKq7iagomFKsO8qjPmxcpMibcgPQbmOrD0sJic2ib3eUujzabE/356?tp=webp"
+                "subName": "网络营销理论",
+                "subId": "1006"
+              },
+              {
+                "subName": "SEO",
+                "subId": "1007"
+              },
+              {
+                "subName": "SEM",
+                "subId": "1008"
               }
             ]
           },
