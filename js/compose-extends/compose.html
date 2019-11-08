@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数式编程</title>
+</head>
+<body>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore.js"></script>
+  <script>
+    //函数式编程 函数是一等公民
+    // function req(err, success) {
+    //   setTimeout(() => {
+    //     let rmd = Math.random()
+    //     if (rmd < 0.5) {
+    //       success({code: 200})
+    //     } else {
+    //       err({code: 500})
+    //     }
+    //   }, 3000);
+    // }  
+    // req((res) => {
+    //   console.log(res)
+    // }, (res) => {
+    //   console.log(res)
+    // })
+
+    // 函数式编程提倡单独的功能拆为函数
+    // 函数式编程通过什么组合单一的功能？
+    function setRedColor(btn) {
+      btn.style.color = 'red'
+      return btn
+    }
+    function setInnerHtml(btn) {
+      btn.innerHTML = '立即购买'
+      return btn
+    }
+    function append(btn) {
+      document.body.appendChild(btn)
+      return btn
+    }
+    // let btn = document.createElement('button')
+    // setRedColor(btn)
+    // setInnerHtml(btn)
+    // append(btn)
+
+    //引入外部_.compose()方法
+    // let fn1 = str => str += '123'
+    // let fn2 = str => str += '456'
+    // let fn3 = _.compose(fn1, fn2)  //注意插入顺序
+    // console.log(fn3('---'))
+
+    let nFn = _.compose(append, setInnerHtml, setRedColor)
+    let btn1 = document.createElement('button')
+    nFn(btn1)
+
+    // 自定义compose函数
+    function compose1(fn1, fn2, fn3) {
+      //1
+      return function (params) {
+        //2
+        fn1(fn2(fn3(params)))
+      }
+    }
+
+    function myCompose(...fns) {
+      console.log(fns)
+      return function(arg) {
+        let res = fns.pop()(arg)
+        while (fns.length) {
+          let fn = fns.pop()
+          res = fn(res)
+        }
+        return res
+      }
+    }
+    var ffff = myCompose(append, setRedColor, setInnerHtml)
+    ffff(document.createElement('div'))
+  </script>
+</body>
+</html>

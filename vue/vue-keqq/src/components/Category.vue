@@ -18,16 +18,18 @@
       </div>
       <nav class="cate-list">
         <div class="cate-item-wrap">
-          <div class="cate-item current">
+          <div class="cate-item" v-for="(item, index) in cateItems" :key="index"
+          @click="gotoDetail(index)" :class="{'active': activeIdx === index}">
             <div class="cate-icon"></div>
             <div class="cate-title">
-              <span class="cate-title-short">IT</span>
+              <span class="cate-title-short">{{item.cateTitle_short}}</span>
               <span class="cate-title-more" style="font-size: 0">互联网</span>
             </div>
           </div>
         </div>
       </nav>
     </div>
+    <div class="content">{{activeIdx}}</div>
     <v-footer :current="current"></v-footer>
   </div>
 </template>
@@ -37,7 +39,21 @@ import vFooter from './vFooter.vue'
 export default {
   data () {
     return {
-      current: 'category'
+      current: 'category',
+      cateItems: [],
+      activeIdx: 0
+    }
+  },
+  created () {
+    this.$http.get('http://localhost:8080/static/categoryItem.json')
+      .then(res => {
+        console.log(res)
+        this.cateItems = res.data.data
+      })
+  },
+  methods: {
+    gotoDetail (idx) {
+      this.activeIdx = idx
     }
   },
   components: {
@@ -46,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css" scoped>
 .category__global-wrapper {
   width: 100%;
   min-height: 100%;
@@ -126,7 +142,7 @@ export default {
   line-height: 16px;
   white-space: nowrap;
 }
-.cate-list .cate-item.current:after {
+.cate-list .cate-item.active:after {
   content: '';
   display: block;
   width: 100%;
