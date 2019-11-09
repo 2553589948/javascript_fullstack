@@ -29,7 +29,28 @@
         </div>
       </nav>
     </div>
-    <div class="content">{{activeIdx}}</div>
+    <div class="sub-cate-wrap" v-if="cateItems[activeIdx]">
+      <ul class="sub-cate-list"
+      v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
+        <li class="sub-cate">
+          <div class="left">
+            <router-link to="">
+              <div class="sub-cate-title">
+                <i class="cate-icon"></i>
+                {{item.subCateTitle}}
+              </div>
+            </router-link>
+          </div>
+          <div class="right">
+            <div class="sub-cate-item-wrap" v-for="(subcate, index) in item.subCates" :key="index">
+              <router-link to="">
+                <div class="sub-cate-item">{{subcate.subName}}</div>
+              </router-link>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
     <v-footer :current="current"></v-footer>
   </div>
 </template>
@@ -45,7 +66,7 @@ export default {
     }
   },
   created () {
-    this.$http.get('http://localhost:8080/static/categoryItem.json')
+    this.$http.get('http://localhost:8081/static/categoryItem.json')
       .then(res => {
         console.log(res)
         this.cateItems = res.data.data
@@ -150,5 +171,61 @@ export default {
   left: 0;
   bottom: 2px;
   border-bottom: 2px solid #fff;
+}
+.sub-cate-wrap {
+  width: 100%;
+  padding: 130px 0 55px;
+}
+.sub-cate {
+  display: flex;
+  padding: 20px 0 8px;
+  border-bottom: .5px solid #ddd;
+}
+.sub-cate .left {
+  width: 100px;
+  min-width: 100px;
+  height: auto;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sub-cate .left .sub-cate-title {
+  font-size: 12px;
+  color: #777;
+}
+.sub-cate .cate-icon {
+  margin: 0 auto 8px;
+  color: #23b8ff;
+}
+.sub-cate .right {
+  width: auto;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.sub-cate .right .sub-cate-item-wrap {
+  margin-left: -1px;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding-right: 16px;
+}
+.sub-cate .right .sub-cate-item {
+  flex-grow: 0;
+  -webkit-flex-grow: 0;
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 15px 12px;
+  color: #000;
+}
+.sub-cate .right .sub-cate-item:before {
+  content: '';
+  position: absolute;
+  border-left: 1px solid #ddd;
+  top: 2px;
+  left: 0;
+  height: 16px;
 }
 </style>
