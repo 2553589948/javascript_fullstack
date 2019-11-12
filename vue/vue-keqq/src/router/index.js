@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import CateDetail from '@/components/CateDetail'
 import Category from '@/components/Category'
+import Detail from '@/components/Detail'
 import Classtable from '@/components/Classtable'
 import Mine from '@/components/Mine'
 
@@ -26,6 +27,11 @@ export default new Router({
       path: '/category',
       name: 'Category',
       component: Category
+    },
+    {
+      path: '/detail',
+      name: 'Detail',
+      component: Detail
     },
     {
       path: '/classtable',

@@ -71,7 +71,7 @@ export default {
     'cart-control': cartcontrol
   },
   created () {
-    this.$http.get('http://localhost:8080/static/goods.json')
+    this.$http.get('http://localhost:8081/static/goods.json')
       .then((res) => {
         console.log(res)
         if (res.data.errno === 0) {

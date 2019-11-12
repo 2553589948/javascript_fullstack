@@ -39,7 +39,7 @@ export default {
         console.log(res)
         if (res.data.errno === 0) {
           this.categoryCourses = res.data.data
-          console.log(res.data.data)
+          // console.log(res.data.data)
         }
       })
   }

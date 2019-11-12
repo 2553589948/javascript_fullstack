@@ -29,12 +29,11 @@
         </div>
       </nav>
     </div>
-    <div class="sub-cate-wrap" v-if="cateItems[activeIdx]">
-      <ul class="sub-cate-list"
-      v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
-        <li class="sub-cate">
+    <div class="sub-cate-wrap">
+      <ul class="sub-cate-list" v-if="cateItems[activeIdx]">
+        <li class="sub-cate" v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
           <div class="left">
-            <router-link to="">
+            <router-link :to="{path: 'detail', query: {targetId: item.subCateId}}">
               <div class="sub-cate-title">
                 <i class="cate-icon"></i>
                 {{item.subCateTitle}}
@@ -42,11 +41,11 @@
             </router-link>
           </div>
           <div class="right">
-            <div class="sub-cate-item-wrap" v-for="(subcate, index) in item.subCates" :key="index">
-              <router-link to="">
-                <div class="sub-cate-item">{{subcate.subName}}</div>
+            <ul class="sub-cate-item-wrap">
+              <router-link v-for="(subcate, index) in item.subCates" :key="index" :to="{path: 'detail', query: {targetId: subcate.subId}}">
+                <li class="sub-cate-item">{{subcate.subName}}</li>
               </router-link>
-            </div>
+            </ul>
           </div>
         </li>
       </ul>
@@ -66,10 +65,12 @@ export default {
     }
   },
   created () {
-    this.$http.get('http://localhost:8081/static/categoryItem.json')
+    this.$http.get('http://localhost:8080/static/categoryItem.json')
       .then(res => {
         console.log(res)
-        this.cateItems = res.data.data
+        if (res.data.errno === 0) {
+          this.cateItems = res.data.data
+        }
       })
   },
   methods: {
@@ -181,6 +182,9 @@ export default {
   padding: 20px 0 8px;
   border-bottom: .5px solid #ddd;
 }
+.sub-cate:last-child {
+  border-bottom: 0;
+}
 .sub-cate .left {
   width: 100px;
   min-width: 100px;
@@ -206,14 +210,13 @@ export default {
 .sub-cate .right .sub-cate-item-wrap {
   margin-left: -1px;
   display: flex;
-  display: -webkit-flex;
   flex-wrap: wrap;
   align-items: flex-start;
   padding-right: 16px;
 }
 .sub-cate .right .sub-cate-item {
   flex-grow: 0;
-  -webkit-flex-grow: 0;
+  display: inline-block;
   position: relative;
   font-size: 14px;
   line-height: 20px;
