@@ -42,9 +42,8 @@
             <span>{{item.categoryName}}</span>
           </div>
         </div>
-        <router-view/>
-        <div class="course-category-wrapper">
-          <!-- <category-detail></category-detail> -->
+        <div class="course-category-content">
+          <router-view/>
         </div>
         <div class="all-course"></div>
         <div class="hot-train-course topic-seo"></div>
@@ -56,7 +55,6 @@
 
 <script>
 import vFooter from './vFooter.vue'
-// import categoryDetail from './CateDetail.vue'
 export default {
   data () {
     return {
@@ -121,7 +119,6 @@ export default {
   },
   components: {
     'v-footer': vFooter
-    // 'category-detail': categoryDetail
   }
 }
 </script>

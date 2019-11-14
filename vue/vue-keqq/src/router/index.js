@@ -13,12 +13,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
+      // name: 'Index',
       component: Index,
       children: [
         {
           path: '/',
-          name: 'CateDetail',
           component: CateDetail
         }
       ]

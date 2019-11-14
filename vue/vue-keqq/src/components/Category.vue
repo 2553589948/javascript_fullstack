@@ -33,7 +33,7 @@
       <ul class="sub-cate-list" v-if="cateItems[activeIdx]">
         <li class="sub-cate" v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
           <div class="left">
-            <router-link :to="{path: 'detail', query: {targetId: item.subCateId}}">
+            <router-link :to="{path: 'detail', query: {targetId: item.subCateId, targetName: item.subCateTitle}}">
               <div class="sub-cate-title">
                 <i class="cate-icon"></i>
                 {{item.subCateTitle}}
@@ -42,7 +42,7 @@
           </div>
           <div class="right">
             <ul class="sub-cate-item-wrap">
-              <router-link v-for="(subcate, index) in item.subCates" :key="index" :to="{path: 'detail', query: {targetId: subcate.subId}}">
+              <router-link v-for="(subcate, index) in item.subCates" :key="index" :to="{path: 'detail', query: {targetId: subcate.subId, targetName: subcate.subName}}">
                 <li class="sub-cate-item">{{subcate.subName}}</li>
               </router-link>
             </ul>

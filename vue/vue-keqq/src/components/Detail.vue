@@ -24,7 +24,7 @@
         </div>
         <div class="nav__tab-item" @click="showCate()"
         :class="{'selected': showDetail1 === true}">
-          <p class="nav__tab-item__title">产品策划</p>
+          <p class="nav__tab-item__title">{{categoryName}}</p>
         </div>
         <div class="nav__tab-item" @click="showFilter()"
         :class="{'selected': showDetail2 === true}">
@@ -46,7 +46,7 @@
           <router-link to="">
             <li class="nav__menu__item"
             v-for="(item, index) in cateItems" :key="index"
-            @click="goCate(index)"
+            @click.stop.prevent="goCate(index)"
             :class="{'selected': activeIdx === index}">
               <img src="" alt="" class="nav__menu__item-icon">
               {{item.cateTitle_short}}
@@ -58,18 +58,21 @@
           <router-link to="">
             <li class="nav__menu__item"
             v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index"
-            @click="goSubCate(index, item.subCateId)"
+            @click.stop.prevent="goSubCate(index, item.subCateId)"
             :class="{'selected': activeSubIdx === index}">
             {{item.subCateTitle}}</li>
           </router-link>
         </ul>
         <ul class="nav__menu can-scroll nav__panel-cate__tt"
         v-if="cateItems[activeIdx]">
-          <router-link to=""
-          v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index" v-show="subCateId == item.subCateId">
-            <li class="nav__menu__item" v-for="(list, index) in item.subCates" :key="index">
+          <div v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index" v-show="subCateId == item.subCateId">
+          <router-link v-for="(list, index) in item.subCates" :key="index"
+          :to="{path: '/detail', query: {targetId: list.subId, targetName: list.subName}}" replace>
+            <li class="nav__menu__item"
+            :class="{'selected': categoryName == list.subName}" @click="cateselected">
             {{list.subName}}</li>
           </router-link>
+          </div>
         </ul>
       </div>
       <!-- 遮层3 -->
@@ -95,9 +98,9 @@
       <div class="content-list">
         <div class="search-result-wrapper">
           <div class="search-result-toast">
-            在“
-            <span class="search-result-word">产品策划</span>
-            ”分类下，找到
+            在"
+            <span class="search-result-word">{{categoryName}}</span>
+            "分类下，找到
             <span class="search-result-num">245</span>
             门课程
           </div>
@@ -137,8 +140,8 @@ export default {
   data () {
     return {
       cateItems: [],
-      activeIdx: 0,
-      activeSubIdx: 0,
+      activeIdx: Number,
+      activeSubIdx: Number,
       subCateId: String,
       showDetail1: false,
       showDetail0: false,
@@ -306,13 +309,16 @@ export default {
     },
     hideMask () {
       this.showDetail1 = false
+    },
+    cateselected () {
+      this.showDetail1 = false
     }
   },
-  // computed: {
-  //   showDetail () {
-  //     return
-  //   }
-  // },
+  computed: {
+    categoryName () {
+      return this.$route.query.targetName
+    }
+  },
   created () {
     this.$http.get('http://localhost:8080/static/categoryItem.json')
       .then(res => {
@@ -321,7 +327,7 @@ export default {
           this.cateItems = res.data.data
         }
       })
-    console.log(this.$route.query.targetId)
+    // console.log(this.$route.query.targetId)
   }
 }
 </script>
@@ -564,7 +570,7 @@ body, html {
   opacity: 1;
 }
 .nav__mask.fade-enter-active, .nav__mask.fade-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 .nav__mask.fade-enter, .nav__mask.fade-leave-active {
   opacity: 0;
