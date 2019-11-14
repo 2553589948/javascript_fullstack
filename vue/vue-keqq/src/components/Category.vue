@@ -19,7 +19,7 @@
       <nav class="cate-list">
         <div class="cate-item-wrap">
           <div class="cate-item" v-for="(item, index) in cateItems" :key="index"
-          @click="gotoDetail(index)" :class="{'active': activeIdx === index}">
+          @click="gotoDetail(index, item.cateId)" :class="{'active': activeIdx === index}">
             <div class="cate-icon"></div>
             <div class="cate-title">
               <span class="cate-title-short">{{item.cateTitle_short}}</span>
@@ -33,7 +33,7 @@
       <ul class="sub-cate-list" v-if="cateItems[activeIdx]">
         <li class="sub-cate" v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
           <div class="left">
-            <router-link :to="{path: 'detail', query: {targetId: item.subCateId, targetName: item.subCateTitle}}">
+            <router-link :to="{path: 'detail', query: {mt: cateId, st: item.subCateId, Name: item.subCateTitle}}">
               <div class="sub-cate-title">
                 <i class="cate-icon"></i>
                 {{item.subCateTitle}}
@@ -42,8 +42,8 @@
           </div>
           <div class="right">
             <ul class="sub-cate-item-wrap">
-              <router-link v-for="(subcate, index) in item.subCates" :key="index" :to="{path: 'detail', query: {targetId: subcate.subId, targetName: subcate.subName}}">
-                <li class="sub-cate-item">{{subcate.subName}}</li>
+              <router-link v-for="(list, index) in item.subCates" :key="index" :to="{path: 'detail', query: {mt: cateId, st: item.subCateId, tt: list.subId, Name: list.subName}}">
+                <li class="sub-cate-item">{{list.subName}}</li>
               </router-link>
             </ul>
           </div>
@@ -61,7 +61,8 @@ export default {
     return {
       current: 'category',
       cateItems: [],
-      activeIdx: 0
+      activeIdx: 0,
+      cateId: 'it'
     }
   },
   created () {
@@ -74,8 +75,9 @@ export default {
       })
   },
   methods: {
-    gotoDetail (idx) {
+    gotoDetail (idx, cateId) {
       this.activeIdx = idx
+      this.cateId = cateId
     }
   },
   components: {

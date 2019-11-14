@@ -43,7 +43,7 @@
       </div>
     </div>
     <!-- 购物车 -->
-    <shop-cart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-cart>
+    <shop-cart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shop-cart>
   </div>
 </template>
 
@@ -147,8 +147,15 @@ export default {
       }
       console.log(this.listHeight)
     },
-    addFood () {
-
+    addFood (target) {
+      // console.log(target)
+      this._drop(target)
+    },
+    _drop (target) {
+      //体验优化，异步执行下落动画
+      this.$nextTick(() => {
+        this.$refs.shopcart.drop(target)//父组件调用子组件内部的方法
+      })
     }
   }
 }

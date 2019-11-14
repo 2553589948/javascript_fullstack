@@ -1,9 +1,9 @@
 <template>
   <div class="category-detail-wrapper">
     <!-- {{curid}} -->
-    <div class="custom" v-if="categoryCourses[curid]">
+    <div class="custom" v-if="categoryCourses[curid || 0]">
       <div class="custom__mod"
-      v-for="(item, index) in test" :key="index">
+      v-for="(item, index) in categoryCourses[curid || 0].customMods" :key="index">
         <h2 class="common-title">{{item.commonTitle}}</h2>
         <ul class="common__course-list">
           <li class="common__course-item" v-for="(list, index) in item.courses" :key="index">
@@ -31,10 +31,12 @@ export default {
   computed: {
     curid () {
       return this.$route.query.id
-    },
-    test () {
-      return this.curid ? this.categoryCourses[this.curid].customMods : this.categoryCourses[0].customMods
     }
+    // test () {
+    //   return this.curid
+    //     ? this.categoryCourses[this.curid].customMods
+    //     : this.categoryCourses[0].customMods
+    // }
   },
   created () {
     this.$http.get('http://localhost:8080/static/courseCategory.json')

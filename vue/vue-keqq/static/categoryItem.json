@@ -13,11 +13,57 @@
             "subCates": [
               {
                 "subName": "产品策划",
-                "subId": "1001"
+                "subId": "1001",
+                "courseList": [
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDcMf3R7Eh1zCwF3krNItceOM39iaWj2ncPUvbFsQ1MznqljEEWTaMWLmCB1nSCdOrQ/356?",
+                    "courseName": "技术转产品，技术思维是阻力还是助力？",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1001-1001"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCFGdSE6PvjJuA8GnRSoB9sdETW3SbwnAzPyzwaFldCibzHzic7FibXoHEfXRq1ibeic5CQ/356?",
+                    "courseName": "PS试听课 淘宝美工/LOGO设计/网页设计/设计思路/色彩设计",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1001-1002"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAch56YI5dmAXPTqO92ln8MD166GvQpDp1ic1R5YFvQ5T4iaz8c1HRQ4c9CDBd7ctfvE/356?",
+                    "courseName": "我要学产品-90天产品经理实战班",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1001-1003"
+                  }                 
+                ]
               },
               {
                 "subName": "产品运营",
-                "subId": "1002"
+                "subId": "1002",
+                "courseList": [
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBQwxkvhB5KRQ2LfKw77SQy7cYlLvtkNBciblvQ9zIzz0yyhAcc787GmcarfaSRrbOQ/356?",
+                    "courseName": "90天运营实战班-0基础体验学习营",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1002-1001"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAFUFiaib0EbibZkg3qPgibq2rr1mIQG73iaFf3wA2ic4bghbRiboYMQeqNutibzgicEq5IUmfE/356?",
+                    "courseName": "抖音vlog|抖音电商|短视频运营|淘宝客引流|网络兼职推广赚钱",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1002-1002"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDLYMwlcqQNDvdLpwXLHoU5UianDht9C9r92PSf63jssPqBaS1FXzkyaRt7Om21iaTUs/356?",
+                    "courseName": "4000+同学学过的Axure实战班——3天体验营",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1002-1003"
+                  }                 
+                ]
               },
               {
                 "subName": "游戏策划",
@@ -51,11 +97,57 @@
             "subCates": [
               {
                 "subName": "C",
-                "subId": "1101"
+                "subId": "1101",
+                "courseList": [
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDsicVtJKlgogRHIjIXS2d9Y5XJVDP7wusbic26nicJUnjrp8fpDWia1turU4ds28icesSU/356?",
+                    "courseName": "C/C++ 零基础到大神精讲(C++17最新标准/游戏编程/项目实战)",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1101-1001"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCgGzyZ539mSWrjxws9QribicSrMSqKcL56TZgaBhvE0xEptjWEAqDkTuMCibD0EaXZv8/356?",
+                    "courseName": "Rock带你-零基础学习C语言/C++语言【奇牛学院】",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1101-1002"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCJcQrI47eT8MrXf5xHwFhb7Baic6CVfq13HQ7dmqSRYamfez0KUHicibia8XSK5gko3a4/356?",
+                    "courseName": "C/C++零基础到精通项目实战",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1101-1003"
+                  }                 
+                ]
               },
               {
                 "subName": "C++",
-                "subId": "1102"
+                "subId": "1102",
+                "courseList": [
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDatospadicKIV7I06MwdRXAcvxtA0T2KLj7bJ5QYXJ4dEhnHwnTwsrDfg1ibXBrTm8E/356?",
+                    "courseName": "C/C++Linux服务器开发/后台架构师【零声学院】",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1102-1001"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDSHWeIwPSdaKw85ZwX60TK8mQ9z9v5a3Rkxy5TI2q0lwibveWy1vXDwhz3eQK13Lg4/356?",
+                    "courseName": "C语言/C++语言/数据结构算法/MFC/QT【六星教育】",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1102-1002"
+                  },
+                  {
+                    "courseCover": "https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLAEpTFibqXLgF8tHbBiczOSTQnZNOuHd9Z9ickLu7Fhdklzl3YM0DRgQvNnHPERZvQQs0/356?",
+                    "courseName": "C/C++入门到精通企业级项目实战",
+                    "courseType": "资料",
+                    "coursePrice": "免费",
+                    "courseId": "1102-1003"
+                  }                 
+                ]
               },
               {
                 "subName": "Java",

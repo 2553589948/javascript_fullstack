@@ -65,11 +65,12 @@
         </ul>
         <ul class="nav__menu can-scroll nav__panel-cate__tt"
         v-if="cateItems[activeIdx]">
-          <div v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index" v-show="subCateId == item.subCateId">
+          <div v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index" v-show="cursubCateId == item.subCateId">
           <router-link v-for="(list, index) in item.subCates" :key="index"
-          :to="{path: '/detail', query: {targetId: list.subId, targetName: list.subName}}" replace>
+          :to="{path: '/detail', query: {st:item.subCateId, tt: list.subId, Name: list.subName}}" replace>
             <li class="nav__menu__item"
-            :class="{'selected': categoryName == list.subName}" @click="cateselected">
+            :class="{'selected': categoryName == list.subName}"
+            @click="cateSelected(list.subId)">
             {{list.subName}}</li>
           </router-link>
           </div>
@@ -105,20 +106,24 @@
             门课程
           </div>
         </div>
-        <ul class="course-list">
-          <li class="course-list__item border-bottom">
-            <router-link to="">
-              <div class="course-card-wrapper">
+        <ul class="course-list" v-if="cateItems[activeIdx]">
+          <li class="course-list__item border-bottom"
+          v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
+            <router-link v-for="(list, index) in item.subCates" :key="index"
+            v-show="cursubId == list.subId"
+            to="">
+              <div class="course-card-wrapper"
+              v-for="(course, index) in list.courseList" :key="index">
                 <div class="course-card-cover">
-                  <img src="https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDcMf3R7Eh1zCwF3krNItceOM39iaWj2ncPUvbFsQ1MznqljEEWTaMWLmCB1nSCdOrQ/356?" alt="">
+                  <img :src="course.courseCover" alt="">
                 </div>
                 <div class="course-card-content">
-                  <h3 class="course-card-name">技术转产品，技术思维是阻力还是助力？</h3>
+                  <h3 class="course-card-name">{{course.courseName}}</h3>
                   <div class="course-type-list">
-                    <span class="icon-mark">资料</span>
+                    <span class="icon-mark">{{course.courseType}}</span>
                   </div>
                   <div class="course-card-price">
-                    <span class="price" style="color:#5fb41b">免费</span>
+                    <span class="price" style="color:#5fb41b">{{course.coursePrice}}</span>
                   </div>
                 </div>
               </div>
@@ -139,10 +144,11 @@ export default {
   // },
   data () {
     return {
-      cateItems: [],
+      cateItems: {},
       activeIdx: Number,
       activeSubIdx: Number,
-      subCateId: String,
+      cursubCateId: String,
+      cursubId: String,
       showDetail1: false,
       showDetail0: false,
       showDetail2: false,
@@ -294,7 +300,7 @@ export default {
     },
     goSubCate (idx, subCateId) {
       this.activeSubIdx = idx
-      this.subCateId = subCateId
+      this.cursubCateId = subCateId
     },
     showSort () {
       // let el = this.$refs.tabs
@@ -310,13 +316,17 @@ export default {
     hideMask () {
       this.showDetail1 = false
     },
-    cateselected () {
+    cateSelected (subId) {
       this.showDetail1 = false
+      this.cursubId = subId
     }
   },
   computed: {
     categoryName () {
-      return this.$route.query.targetName
+      return this.$route.query.Name
+    },
+    categoryId () {
+      return this.$route.query.st
     }
   },
   created () {
@@ -327,7 +337,6 @@ export default {
           this.cateItems = res.data.data
         }
       })
-    // console.log(this.$route.query.targetId)
   }
 }
 </script>
