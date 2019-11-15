@@ -42,7 +42,8 @@
           </div>
           <div class="right">
             <ul class="sub-cate-item-wrap">
-              <router-link v-for="(list, index) in item.subCates" :key="index" :to="{path: 'detail', query: {mt: cateId, st: item.subCateId, tt: list.subId, Name: list.subName}}">
+              <router-link v-for="(list, index) in item.subCates" :key="index"
+              :to="{path: 'detail', query: {mt: cateId, st: item.subCateId, tt: list.subId, Name: list.subName}}">
                 <li class="sub-cate-item">{{list.subName}}</li>
               </router-link>
             </ul>

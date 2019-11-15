@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     curid () {
-      return this.$route.query.id
+      return this.$route.query.id ? this.$route.query.id : 0
     }
     // test () {
     //   return this.curid
@@ -47,6 +47,7 @@ export default {
           // console.log(res.data.data)
         }
       })
+    this.$emit('selectedIdx', this.curid)
   }
 }
 </script>

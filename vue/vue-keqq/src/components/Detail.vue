@@ -43,7 +43,7 @@
       <!-- 遮层2 -->
       <div class="nav__panel nav__panel-cate" v-show="showDetail1">
         <ul class="nav__menu can-scroll nav__panel-cate__mt">
-          <router-link to="">
+          <!-- <router-link to=""> -->
             <li class="nav__menu__item"
             v-for="(item, index) in cateItems" :key="index"
             @click.stop.prevent="goCate(index)"
@@ -51,17 +51,18 @@
               <img src="" alt="" class="nav__menu__item-icon">
               {{item.cateTitle_short}}
             </li>
-          </router-link>
+          <!-- </router-link> -->
         </ul>
         <ul class="nav__menu can-scroll nav__panel-cate__st"
         v-if="cateItems[activeIdx]">
-          <router-link to="">
+          <!-- <router-link to=""> -->
             <li class="nav__menu__item"
             v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index"
-            @click.stop.prevent="goSubCate(index, item.subCateId)"
-            :class="{'selected': activeSubIdx === index}">
-            {{item.subCateTitle}}</li>
-          </router-link>
+            @click.stop.prevent="goSubCate(item.subCateId)"
+            :class="{'selected': cursubCateId === item.subCateId}">
+              {{item.subCateTitle}}
+            </li>
+          <!-- </router-link> -->
         </ul>
         <ul class="nav__menu can-scroll nav__panel-cate__tt"
         v-if="cateItems[activeIdx]">
@@ -71,7 +72,8 @@
             <li class="nav__menu__item"
             :class="{'selected': categoryName == list.subName}"
             @click="cateSelected(list.subId)">
-            {{list.subName}}</li>
+              {{list.subName}}
+            </li>
           </router-link>
           </div>
         </ul>
@@ -102,12 +104,38 @@
             在"
             <span class="search-result-word">{{categoryName}}</span>
             "分类下，找到
-            <span class="search-result-num">245</span>
+            <span class="search-result-num">{{courseCount}}</span>
             门课程
           </div>
         </div>
-        <ul class="course-list" v-if="cateItems[activeIdx]">
-          <li class="course-list__item border-bottom"
+        <ul class="course-list">
+          <div v-for="(item, index) in cateItems" :key="index">
+            <div v-for="(list, index) in item.cateInfo" :key="index"
+            v-show="categoryId == list.subCateId">
+              <div v-for="(list1, index) in list.subCates" :key="index"
+              v-show="categorysubId ? categorysubId == list1.subId : true">
+                <li v-for="(course, index) in list1.courseList" :key="index" class="course-list__item border-bottom" ref="courseItem">
+                  <router-link to="">
+                    <div class="course-card-wrapper">
+                      <div class="course-card-cover">
+                        <img :src="course.courseCover" alt="">
+                      </div>
+                      <div class="course-card-content">
+                        <h3 class="course-card-name">{{course.courseName}}</h3>
+                        <div class="course-type-list">
+                          <span class="icon-mark">{{course.courseType}}</span>
+                        </div>
+                        <div class="course-card-price">
+                          <span class="price" style="color:#5fb41b">{{course.coursePrice}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </li>
+              </div>
+            </div>
+          </div>
+          <!-- <li class="course-list__item border-bottom"
           v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index">
             <router-link v-for="(list, index) in item.subCates" :key="index"
             v-show="cursubId == list.subId"
@@ -128,8 +156,9 @@
                 </div>
               </div>
             </router-link>
-          </li>
+          </li> -->
         </ul>
+        {{courseCount}}
       </div>
     </div>
   </div>
@@ -146,7 +175,6 @@ export default {
     return {
       cateItems: {},
       activeIdx: Number,
-      activeSubIdx: Number,
       cursubCateId: String,
       cursubId: String,
       showDetail1: false,
@@ -298,8 +326,7 @@ export default {
     goCate (idx) {
       this.activeIdx = idx
     },
-    goSubCate (idx, subCateId) {
-      this.activeSubIdx = idx
+    goSubCate (subCateId) {
       this.cursubCateId = subCateId
     },
     showSort () {
@@ -327,6 +354,21 @@ export default {
     },
     categoryId () {
       return this.$route.query.st
+    },
+    categorysubId () {
+      return this.$route.query.tt
+    },
+    courseCount () {
+      // let count = 0
+      // this.$nextTick(() => {
+      //   if (this.$refs.courseItem) {
+      //     count = this.$refs.courseItem.length
+      //   }
+      // })
+      // return count
+      if (this.$refs.courseItem) {
+        return this.$refs.courseItem.length
+      }
     }
   },
   created () {

@@ -36,14 +36,16 @@
             </div>
           </div>
         </div>
-        <div class="course-category tab">
-          <div class="tab-item" v-for="(item, index) in coursecategory" :key="index" @click="showDetail(index, item.categoryId)"
-          :class="{'active': activeIndex === index}">
+        <ul class="course-category tab">
+          <li class="tab-item" v-for="(item, index) in coursecategory" :key="index" @click="showDetail(index)"
+          :class="{'active': activeIndex == index}">
+          <router-link :to="{path: '/', query: {id: index}}" replace>
             <span>{{item.categoryName}}</span>
-          </div>
-        </div>
+          </router-link>
+          </li>
+        </ul>
         <div class="course-category-content">
-          <router-view/>
+          <router-view @selectedIdx="selectedIndex" />
         </div>
         <div class="all-course"></div>
         <div class="hot-train-course topic-seo"></div>
@@ -59,7 +61,7 @@ export default {
   data () {
     return {
       current: 'index',
-      activeIndex: 0,
+      activeIndex: Number,
       banner: [
         {'id': 1, 'src': 'https://p.qpic.cn/qqconadmin/0/86b4a9b7a8194af1b16acfacdda27f8d/0'},
         {'id': 2, 'src': 'https://p.qpic.cn/qqconadmin/0/6c57409ddab7465ba266fd19c952cce0/0'},
@@ -110,11 +112,13 @@ export default {
     }
   },
   methods: {
-    showDetail (index, curid) {
+    showDetail (index) {
       console.log(index)
-      console.log(curid)
-      this.$router.push({path: '/', query: {id: index}})
+      // this.$router.push({path: '/', query: {id: index}})
       this.activeIndex = index
+    },
+    selectedIndex (curIdx) {
+      this.activeIndex = curIdx
     }
   },
   components: {
