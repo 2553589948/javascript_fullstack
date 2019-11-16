@@ -158,7 +158,6 @@
             </router-link>
           </li> -->
         </ul>
-        {{courseCount}}
       </div>
     </div>
   </div>
@@ -359,16 +358,16 @@ export default {
       return this.$route.query.tt
     },
     courseCount () {
-      // let count = 0
-      // this.$nextTick(() => {
-      //   if (this.$refs.courseItem) {
-      //     count = this.$refs.courseItem.length
-      //   }
-      // })
-      // return count
-      if (this.$refs.courseItem) {
-        return this.$refs.courseItem.length
-      }
+      let count = 0
+      this.$nextTick(() => {
+        if (this.$refs.courseItem) {
+          count = this.$refs.courseItem.length
+        }
+      })
+      return count
+      // if (this.$refs.courseItem) {
+      //   return this.$refs.courseItem.length
+      // }
     }
   },
   created () {
