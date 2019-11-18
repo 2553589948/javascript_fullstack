@@ -17,22 +17,26 @@
       </form>
     </header>
     <div class="d-nav" style="top: 52px;">
-      <nav class="nav__tab" ref="tabs">
-        <div class="nav__tab-item" @click="showSort()"
+      <nav class="nav__tab">
+        <li v-for="(item, index) in tabs" :key="index" class="nav__tab-item" @click="showSort(index)"
+        :class="{'selected': tabIdx == index}">
+          <p class="nav__tab-item__title">{{item.tabText}}</p>
+        </li>
+        <!-- <li class="nav__tab-item" @click="showSort"
         :class="{'selected': showDetail0 === true}">
           <p class="nav__tab-item__title">综合排序</p>
-        </div>
-        <div class="nav__tab-item" @click="showCate()"
+        </li>
+        <li class="nav__tab-item" @click="showCate"
         :class="{'selected': showDetail1 === true}">
           <p class="nav__tab-item__title">{{categoryName}}</p>
-        </div>
-        <div class="nav__tab-item" @click="showFilter()"
+        </li>
+        <li class="nav__tab-item" @click="showFilter"
         :class="{'selected': showDetail2 === true}">
           <p class="nav__tab-item__title">筛选</p>
-        </div>
+        </li> -->
       </nav>
       <!-- 遮层1 -->
-      <div class="nav__panel nav__panel-sort" v-show="showDetail0">
+      <div class="nav__panel nav__panel-sort" v-show="tabIdx == 0">
         <ul class="nav__menu can-scroll nav__panel-sort__menu">
           <li class="nav__menu__item border-bottom selected">综合排序</li>
           <li class="nav__menu__item border-bottom">人气排序</li>
@@ -41,7 +45,7 @@
         </ul>
       </div>
       <!-- 遮层2 -->
-      <div class="nav__panel nav__panel-cate" v-show="showDetail1">
+      <div class="nav__panel nav__panel-cate" v-show="tabIdx == 1">
         <ul class="nav__menu can-scroll nav__panel-cate__mt">
           <!-- <router-link to=""> -->
             <li class="nav__menu__item"
@@ -79,7 +83,7 @@
         </ul>
       </div>
       <!-- 遮层3 -->
-      <div class="nav__panel nav__panel-filter" v-show="showDetail2">
+      <div class="nav__panel nav__panel-filter" v-show="tabIdx == 2">
         <div class="nav__panel-filter__wrapper">
           <div class="nav__panel-filter__content can-scroll">
             <section class="nav__panel-filter__menu border-top"
@@ -94,7 +98,7 @@
       </div>
       <!-- mask -->
       <transition name="fade">
-        <div class="nav__mask" v-show="showDetail1" @click="hideMask"></div>
+        <div class="nav__mask" v-show="showDetail0" @click="hideMask"></div>
       </transition>
     </div>
     <div class="d-content">
@@ -165,20 +169,24 @@
 
 <script>
 export default {
-  // props: {
-  //   cateItems: {
-  //     type: Object
-  //   }
-  // },
+  props: {
+    // cateItems: {
+    //   type: Object,
+    //   default: function () {
+    //     return {}
+    //   }
+    // }
+  },
   data () {
     return {
-      cateItems: {},
+      cateItems: [],
       activeIdx: Number,
       cursubCateId: String,
       cursubId: String,
-      showDetail1: false,
+      tabIdx: Number,
+      // showDetail1: false,
       showDetail0: false,
-      showDetail2: false,
+      // showDetail2: false,
       filters: [
         {
           menuTitle: '活动',
@@ -318,7 +326,9 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      tabs: [{tabText: '综合排序'}, {tabText: this.$route.query.Name}, {tabText: '筛选'}],
+      courseCount: ''
     }
   },
   methods: {
@@ -328,19 +338,21 @@ export default {
     goSubCate (subCateId) {
       this.cursubCateId = subCateId
     },
-    showSort () {
-      // let el = this.$refs.tabs
-      // console.log(el)
+    showSort (idx) {
+      // const chars = e.target.innerText
+      // console.log(chars)
+      console.log(idx)
+      this.tabIdx = idx
       this.showDetail0 = !this.showDetail0
     },
-    showFilter () {
-      this.showDetail2 = !this.showDetail2
-    },
-    showCate () {
-      this.showDetail1 = !this.showDetail1
-    },
+    // showFilter () {
+    //   this.showDetail2 = !this.showDetail2
+    // },
+    // showCate () {
+    //   this.showDetail1 = !this.showDetail1
+    // },
     hideMask () {
-      this.showDetail1 = false
+      this.showDetail0 = false
     },
     cateSelected (subId) {
       this.showDetail1 = false
@@ -356,19 +368,16 @@ export default {
     },
     categorysubId () {
       return this.$route.query.tt
-    },
-    courseCount () {
-      let count = 0
-      this.$nextTick(() => {
-        if (this.$refs.courseItem) {
-          count = this.$refs.courseItem.length
-        }
-      })
-      return count
-      // if (this.$refs.courseItem) {
-      //   return this.$refs.courseItem.length
-      // }
     }
+    // courseCount () {
+    //   let count = 0
+    //   this.$nextTick(() => {
+    //     if (this.$refs.courseItem) {
+    //       count = this.$refs.courseItem.length
+    //     }
+    //   })
+    //   return count
+    // }
   },
   created () {
     this.$http.get('http://localhost:8080/static/categoryItem.json')
@@ -378,6 +387,11 @@ export default {
           this.cateItems = res.data.data
         }
       })
+  },
+  updated () {
+    // console.log(this.$refs.courseItem)
+    // console.log(this.$refs.courseItem.length)
+    this.courseCount = this.$refs.courseItem.length
   }
 }
 </script>
