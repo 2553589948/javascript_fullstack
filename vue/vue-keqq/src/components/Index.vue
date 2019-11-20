@@ -7,7 +7,7 @@
       <div class="search-cancel" style="display: none">取消</div>
       <form action="" class="header-search">
         <div class="search-tips">
-          <i class="icon-font search-icon"></i>
+          <i class="icon-font i-search2 search-icon"></i>
           <span class="search-input-text">搜索老师、机构、课程</span>
         </div>
         <input type="search" class="search-input">

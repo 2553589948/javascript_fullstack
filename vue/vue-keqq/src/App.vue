@@ -30,4 +30,17 @@ a, div {
 ul, li {
   list-style: none;
 }
+.icon-font {
+  font-family: "mfont"!important;
+  position: relative;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  vertical-align: -2px;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 5px;
+}
 </style>

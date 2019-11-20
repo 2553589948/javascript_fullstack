@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>单例模式</title>
+</head>
+<body>
+  <script>
+    function Foo() {
+      this.a = 1
+      this.b = 2
+      return {c: 3}
+      return false
+    }
+    let f1 = new Foo()
+    console.log(f1) // 如果构造函数有返回值且返回值是一个对象,new完的实例指向那个对象
+
+  // new过程 生成一个对象返回一个对象(三部曲)
+  // 1.创建实例化对象
+  // 2.往对象上添加属性
+  // 3.如果函数有返回值且返回值是一个对象,则实例化完成后返回的是这个对象,否则返回的是添加了属性的对象
+  let globalInt
+  function Notifi() {
+    if (globalInt) {
+      return globalInt
+    }
+    globalInt = this
+  }
+  let noti1 = new Notifi()
+  let noti2 = new Notifi()
+  // 单例模式:无论new多少次有且只有一个实例
+  console.log(noti1 === noti2)
+
+  </script>
+</body>
+</html>
