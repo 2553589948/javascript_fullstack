@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <i class="icon icon-search">&#xe638;</i>
-    <input type="text" v-model="query" class="box" :placeholder="placeholder">
+    <input class="box" type="text" v-model="query" :placeholder="placeholder">
     <i class="icon icon-dismiss"></i>
   </div>
 </template>
@@ -50,7 +50,7 @@ export default {
     color #fff
     font-size 14px
     outline 0
-    &:placeholder 
+    &:placeholder
       color hsla(0, 0%, 100%, 0.3)
   .icon-dismiss 
     font-size 20px

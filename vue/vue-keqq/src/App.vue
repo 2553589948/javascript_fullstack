@@ -24,6 +24,9 @@ a {
   text-decoration: none;
   color: #000;
 }
+i {
+  font-style: normal;
+}
 a, div {
   -webkit-tap-highlight-color: transparent;
 }

@@ -20,7 +20,7 @@
         <div class="cate-item-wrap">
           <div class="cate-item" v-for="(item, index) in cateItems" :key="index"
           @click="gotoDetail(index, item.cateId)" :class="{'active': activeIdx === index}">
-            <div class="cate-icon"></div>
+            <div class="cate-icon" :class="item.cateId"></div>
             <div class="cate-title">
               <span class="cate-title-short">{{item.cateTitle_short}}</span>
               <span class="cate-title-more" style="font-size: 0">互联网</span>
@@ -35,7 +35,7 @@
           <div class="left">
             <router-link :to="{path: 'detail', query: {mt: cateId, st: item.subCateId, Name: item.subCateTitle}}">
               <div class="sub-cate-title">
-                <i class="cate-icon"></i>
+                <i class="cate-icon">&#xe77f;</i>
                 {{item.subCateTitle}}
               </div>
             </router-link>
@@ -156,6 +156,7 @@ export default {
   text-align: center;
 }
 .cate-icon {
+  font-family: "cateicon";
   display: block;
   width: 24px;
   height: 24px;
@@ -182,7 +183,7 @@ export default {
 }
 .sub-cate {
   display: flex;
-  padding: 20px 0 8px;
+  padding: 20px 0;
   border-bottom: .5px solid #ddd;
 }
 .sub-cate:last-child {
