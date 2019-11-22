@@ -6,6 +6,7 @@ import Category from '@/components/Category'
 import Detail from '@/components/Detail'
 import Classtable from '@/components/Classtable'
 import Mine from '@/components/Mine'
+import CourseDetail from '@/components/CourseDetail'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/detail',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/courseDetail',
+      name: 'CourseDetail',
+      component: CourseDetail
     },
     {
       path: '/classtable',

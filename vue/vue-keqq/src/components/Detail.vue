@@ -108,7 +108,7 @@
       <div class="content-list">
         <div class="search-result-wrapper">
           <div class="search-result-toast">
-            在"
+            <span class="text">在"</span>
             <span class="search-result-word">{{categoryName}}</span>
             "分类下，找到
             <span class="search-result-num">{{courseCount}}</span>
@@ -118,11 +118,11 @@
         <ul class="course-list">
           <div v-for="(item, index) in cateItems" :key="index">
             <div v-for="(list, index) in item.cateInfo" :key="index"
-            v-show="categoryId == list.subCateId">
+            v-if="categoryId == list.subCateId">
               <div v-for="(list1, index) in list.subCates" :key="index"
-              v-show="categorysubId ? categorysubId == list1.subId : true">
+              v-if="categorysubId ? categorysubId == list1.subId : true">
                 <li v-for="(course, index) in list1.courseList" :key="index" class="course-list__item border-bottom" ref="courseItem">
-                  <router-link to="">
+                  <router-link :to="{path: '/courseDetail', query: {courseId: course.courseId}}">
                     <div class="course-card-wrapper">
                       <div class="course-card-cover">
                         <img :src="course.courseCover" alt="">
@@ -364,21 +364,15 @@ export default {
     categoryName () {
       return this.$route.query.Name
     },
+    mainId () {
+      return this.$route.query.mt
+    },
     categoryId () {
       return this.$route.query.st
     },
     categorysubId () {
       return this.$route.query.tt
     }
-    // courseCount () {
-    //   let count = 0
-    //   this.$nextTick(() => {
-    //     if (this.$refs.courseItem) {
-    //       count = this.$refs.courseItem.length
-    //     }
-    //   })
-    //   return count
-    // }
   },
   created () {
     this.$http.get('http://localhost:8080/static/categoryItem.json')
@@ -391,7 +385,11 @@ export default {
   },
   updated () {
     // console.log(this.$refs.courseItem.length)
-    this.courseCount = this.$refs.courseItem.length
+    if (this.$refs.courseItem) {
+      this.courseCount = this.$refs.courseItem.length
+    } else {
+      this.courseCount = 0
+    }
   }
 }
 </script>
