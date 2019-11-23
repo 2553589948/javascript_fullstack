@@ -4,7 +4,7 @@
       <v-search-box @query="onQueryChange" ref="searchBox"></v-search-box>
     </div>
     <!-- 热门搜索 搜索历史 -->
-    <div class="shortcut-wrapper">
+    <div class="shortcut-wrapper" v-show="!query">
       <v-scroll class="shortcut" :data="shortcut" ref="shortcut">
         <div>
           <!-- 热门搜索 -->
@@ -31,8 +31,8 @@
       </v-scroll>
     </div>
     <!-- 搜索结果 -->
-    <div class="search-result">
-      <v-suggest :query="query"></v-suggest>
+    <div class="search-result" v-show="query">
+      <v-suggest :query="query" @select="saveSearch" @listScroll="blurInput" ref="suggest"></v-suggest>
     </div>
   </div>
 </template>
@@ -64,7 +64,7 @@ export default {
     'v-search-list': searchList,
     'v-suggest': suggest
   },
-  mixins: [searchMixin], // 合并data()
+  mixins: [searchMixin], // mixins合并data()
   methods: {
     // onQueryChange (e) {
     //   console.log(e)
