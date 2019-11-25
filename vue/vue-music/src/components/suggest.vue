@@ -129,7 +129,7 @@ export default {
         white-space nowrap
         overflow hidden
         text-overflow ellipsis
-    .loading-wraper 
+    .loading-wrapper 
       height px2rem(80px)
   .no-result-wrapper 
     position absolute
