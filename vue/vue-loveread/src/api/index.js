@@ -5,7 +5,9 @@ const vue = new Vue()
 
 // axios配置
 axios.defaults.timeout = 10000 //请求时长,超时切断
-axios.defaults.baseURL = 'http://localhost:3000'
+// axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.defaults.withCredentials = true
 
 // 判断返回状态,响应拦截
 axios.interceptors.response.use((res) => {
@@ -15,7 +17,7 @@ axios.interceptors.response.use((res) => {
   }
   return res
 }, (error) => {
-  alert('网络异常') // 请求发不出去
+  alert('网络异常!!') // 请求发不出去
   return Promise.reject(error)
 })
 
@@ -43,5 +45,13 @@ export default {
   // 书单
   BookLists (params) {
     return fetchGet('/top/playlist', params)
+  },
+  // 小说
+  getNovel (params) {
+    return fetchGet('/api/Joke/NewstJoke', params)
+  },
+  // 新闻
+  neteasyNews (params) {
+    return fetchGet('/api/getWangYiNews', params)
   }
 }
