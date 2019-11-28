@@ -18,11 +18,11 @@ export default {
 <style lang="stylus">
 @font-face {
   font-family 'iconfont'  /* project id 1519920 */
-  src url('//at.alicdn.com/t/font_1519920_nbpwfaa9y7p.eot');
-  src url('//at.alicdn.com/t/font_1519920_nbpwfaa9y7p.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1519920_nbpwfaa9y7p.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1519920_nbpwfaa9y7p.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1519920_nbpwfaa9y7p.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1519920_nbpwfaa9y7p.svg#iconfont') format('svg')
+  src url('//at.alicdn.com/t/font_1519920_dls1yahgtil.eot')
+  src url('//at.alicdn.com/t/font_1519920_dls1yahgtil.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1519920_dls1yahgtil.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1519920_dls1yahgtil.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1519920_dls1yahgtil.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1519920_dls1yahgtil.svg#iconfont') format('svg')
 }
 </style>

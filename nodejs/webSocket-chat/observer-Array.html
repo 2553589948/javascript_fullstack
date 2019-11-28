@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>监测数组</title>
+</head>
+<body>
+  <ul id="list"></ul>
+  <script>
+    let msgList = [{msg: '1'}, {msg: '1212'}]
+    function h () {
+      document.getElementById('list').innerHTML = msgList.map((item) => {
+        return `<li>${item.msg}</li>`
+      }).join('')
+    }
+    h()
+    
+    const originPush = Array.prototype.push //原生push(在数组的原型对象上)
+    Array.prototype.push = function (...arguments) {
+      // 1.监听数组的改变
+      console.log('我知道数组改变了')
+      // 2.恢复push方法的功能
+      originPush.apply(this, arguments)
+      // originPush(arguments)
+      h()
+    }
+    msgList.push({msg: 2})
+
+    // function Person() {
+    // }
+    // Person.prototype.say = function() {
+    //   console.log(this.name) // this指向a
+    // }
+    // let a = new Person()
+    // a.say()
+
+    // function foo() {
+    // }
+    // foo.call()
+  </script>
+</body>
+</html>

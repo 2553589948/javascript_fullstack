@@ -1,41 +1,94 @@
 <template>
-  <div class="header">
-    <div class="search-top">
-      <i class="icon">&#xe600;</i>
-      <span>微信读书</span>
-    </div>
-    <div class="search-box">
-      <input type="text" class="search-input" placeholder="请输入你要搜索的关键词" />
-    </div>
+  <div class="discover-wrapper">
+    <!-- 头部 -->
+    <v-header class="newsHeader">
+      <i class="icon" slot="left-icon">&#xe623;</i>
+      <span slot="content">新闻速递</span>
+      <router-link to="" slot="right-icon">
+        <i class="icon">&#xe624;</i>
+      </router-link>
+    </v-header>
+    <v-scroll
+    class="discover"
+    ref="discover"
+    :pullup="pullup"
+    :data="result"
+    :beforeScroll="beforeScroll"
+    @scrollToEnd="searchMore"
+    @beforeScroll="listScroll">
+      <ul class="news-list">
+        <li class="news-item"
+        v-for="(item, index) in result" :key="index"
+        @click="goNewsInfo(item.path)">
+          <div class="news-content" v-if="item.title">
+            <div class="info">
+              <h3 class="title">{{item.title}}</h3>
+              <div class="detail">
+                <span class="pubTime">{{item.passtime}}</span>
+              </div>
+            </div>
+            <div class="pic">
+              <img :src="item.image" alt="">
+            </div>
+          </div>
+        </li>
+      </ul>
+      <v-load class="load-wrapper" v-show="showLoad"></v-load>
+    </v-scroll>
+    <!-- loading -->
+    <v-loading v-show="showLoading"></v-loading>
   </div>
 </template>
 
 <script>
+import vheader from '@/components/vheader'
 import api from '@/api'
+import loading from '@/components/loading'
+import load from '@/components/load'
+import scroll from '@/components/scroll'
 
-// const rows = 20
 export default {
   data () {
     return {
       result: [],
       page: 1,
-      // display: true,
-      // listenScroll: true,
-      // beforeScroll: true,
-      // show: true
+      showLoading: true,
+      showLoad: true,
+      pullup: true, // 放开下拉加载更多
+      beforeScroll: true
     }
+  },
+  components: {
+    'v-loading': loading,
+    'v-load': load,
+    'v-scroll': scroll,
+    'v-header': vheader
   },
   methods: {
     _getNews () {
       const params = {
         page: this.page,
-        count: 30
-
+        count: 10
       }
       api.neteasyNews(params)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
+        if (res.code === 200) {
+          this.result = [...this.result, ...res.result]
+          console.log(this.result)
+          this.showLoading = false
+          // this.showLoad = false
+        }
       })
+    },
+    searchMore () {
+      this.showLoad = true
+      this.page++
+      this._getNews()
+    },
+    listScroll () {},
+    goNewsInfo (url) {
+      window.location.href = url
     }
   },
   mounted () {
@@ -45,44 +98,50 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.icon
-  font-family "iconfont" !important
-  font-size 40px
-  font-style normal
-  vertical-align middle
-  // color #ffffff
-html, body
-  // line-height 1
-  font-family PingFang SC, STHeitiSC-Light, Helvetica-Light, arial, sans-serif
-  // user-select none
-  -webkit-tap-highlight-color transparent
-  background rgba(8, 5, 58, 0.9)
-  // min-height 100vh
-  color #fff
-.search-top
-  text-align center
-  height 90px
-  line-height 90px
-  font-size 0
-  span
-    vertical-align middle
-    font-size 24px
-    margin-left 10px
-.search-box
-  margin 0 20px
-  .search-input
-    height 30px
-    line-height 30px
-    border 1px solid rgba(34,43,95,.79)
-    background rgba(21,24,68,.5)
-    display inline-block
+@import '../../assets/css/function.styl'
+.discover-wrapper
+  background-color var(--bg_color)
+  .news-list
+    position fixed
+    top px2rem(88px)
+    // bottom 0
+    // height 100%
     width 100%
-    color #fff
-    box-sizing border-box
-    border-radius 40px
-    text-align center
-    font-size 14px!important
-    // transition all .4s
-    &:focus
-      outline none
+    z-index -1
+    padding-top px2rem(10px)
+    bgc(#fff)
+    .news-item
+      .news-content
+        padding px2rem(25px) px2rem(15px)
+        borderbtm-1px(#f5f7f9)
+        display flex
+        justify-content space-between
+        .pic
+          flex 0 0 px2rem(280px)
+          img
+            display block
+            height px2rem(170px)
+            width 100%
+        .info
+          flex 1
+          .title
+            padding-right px2rem(15px)
+            color #333333
+            font-weight normal
+            max-height px2rem(120px)
+            line-height px2rem(60px)
+            font-size 18px
+            overflow hidden
+            text-overflow ellipsis
+            white-space normal
+          .detail
+            color #b4b4b4
+            line-height px2rem(40px)
+            height px2rem(40px)
+            margin-top px2rem(20px)
+            font-size 14px
+            letter-spacing 0
+            overflow hidden
+  .load-wrapper
+    height px2rem(80px)
 </style>
