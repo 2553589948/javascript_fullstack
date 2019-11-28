@@ -98,8 +98,6 @@ export default {
       // 派发上拉加载更多
       if (this.pullup) {
         this.scroll.on('scrollEnd', () => {
-          console.log(this.scroll.y)
-          console.log(this.scroll.maxScrollY)
           if (this.scroll.y <= (this.scroll.maxScrollY + 50)) { // 上拉超过一定距离才加载更多
             this.$emit('scrollToEnd')
           }

@@ -32,8 +32,8 @@
             </div>
           </div>
         </li>
+        <v-load class="load-wrapper" v-show="showLoad"></v-load>
       </ul>
-      <v-load class="load-wrapper" v-show="showLoad"></v-load>
     </v-scroll>
     <!-- loading -->
     <v-loading v-show="showLoading"></v-loading>
@@ -53,7 +53,7 @@ export default {
       result: [],
       page: 1,
       showLoading: true,
-      showLoad: true,
+      showLoad: false,
       pullup: true, // 放开下拉加载更多
       beforeScroll: true
     }
@@ -77,7 +77,6 @@ export default {
           this.result = [...this.result, ...res.result]
           console.log(this.result)
           this.showLoading = false
-          // this.showLoad = false
         }
       })
     },
@@ -101,47 +100,49 @@ export default {
 @import '../../assets/css/function.styl'
 .discover-wrapper
   background-color var(--bg_color)
-  .news-list
+  // bgc(#f5f7f9)
+  .discover
+    height 100%
+    overflow hidden
     position fixed
     top px2rem(88px)
-    // bottom 0
-    // height 100%
+    bottom px2rem(130px)
     width 100%
-    z-index -1
-    padding-top px2rem(10px)
-    bgc(#fff)
-    .news-item
-      .news-content
-        padding px2rem(25px) px2rem(15px)
-        borderbtm-1px(#f5f7f9)
-        display flex
-        justify-content space-between
-        .pic
-          flex 0 0 px2rem(280px)
-          img
-            display block
-            height px2rem(170px)
-            width 100%
-        .info
-          flex 1
-          .title
-            padding-right px2rem(15px)
-            color #333333
-            font-weight normal
-            max-height px2rem(120px)
-            line-height px2rem(60px)
-            font-size 18px
-            overflow hidden
-            text-overflow ellipsis
-            white-space normal
-          .detail
-            color #b4b4b4
-            line-height px2rem(40px)
-            height px2rem(40px)
-            margin-top px2rem(20px)
-            font-size 14px
-            letter-spacing 0
-            overflow hidden
-  .load-wrapper
-    height px2rem(80px)
+    .news-list
+      padding-top px2rem(10px)
+      bgc(#fff)
+      .news-item
+        .news-content
+          padding px2rem(25px) px2rem(15px)
+          borderbtm-1px(#f5f7f9)
+          display flex
+          justify-content space-between
+          .pic
+            flex 0 0 px2rem(280px)
+            img
+              display block
+              height px2rem(170px)
+              width 100%
+          .info
+            flex 1
+            .title
+              padding-right px2rem(15px)
+              color #333333
+              font-weight normal
+              max-height px2rem(120px)
+              line-height px2rem(60px)
+              font-size 18px
+              overflow hidden
+              text-overflow ellipsis
+              white-space normal
+            .detail
+              color #b4b4b4
+              line-height px2rem(40px)
+              height px2rem(40px)
+              margin-top px2rem(20px)
+              font-size 14px
+              letter-spacing 0
+              overflow hidden
+      .load-wrapper
+        height px2rem(80px)
 </style>

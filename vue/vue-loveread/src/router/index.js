@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Mine from '@/components/page/Mine'
 import Discover from '@/components/page/Discover'
 import Story from '@/components/page/Story'
+import Bookshelf from '@/components/page/Bookshelf'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/discover',
       name: 'Discover',
       component: Discover
+    },
+    {
+      path: '/bookshelf',
+      name: 'Bookshelf',
+      component: Bookshelf
     },
     {
       path: '/story',
