@@ -8,6 +8,7 @@
         <i class="icon">&#xe624;</i>
       </router-link>
     </v-header>
+    <!-- content -->
     <v-scroll
     class="discover"
     ref="discover"

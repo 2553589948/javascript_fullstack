@@ -6,8 +6,8 @@ const vue = new Vue()
 // axios配置
 axios.defaults.timeout = 10000 //请求时长,超时切断
 // axios.defaults.baseURL = 'http://localhost:3000'
-axios.defaults.headers.post['Content-Type'] = 'application/json'
-axios.defaults.withCredentials = true
+// axios.defaults.headers.post['Content-Type'] = 'application/json'
+// axios.defaults.withCredentials = true
 
 // 判断返回状态,响应拦截
 axios.interceptors.response.use((res) => {

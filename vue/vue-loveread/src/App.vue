@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <v-tab></v-tab>
+    <!-- <v-banner></v-banner> -->
     <router-view/>
   </div>
 </template>
 
 <script>
 import tab from '@/components/tab'
+import vbanner from '@/components/vbanner'
 export default {
   name: 'App',
   components: {
-    'v-tab': tab
+    'v-tab': tab,
+    'v-banner': vbanner
   }
 }
 </script>

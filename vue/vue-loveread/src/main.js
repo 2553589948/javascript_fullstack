@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 import '../static/css/reset.styl'
+import {Swipe, SwipeItem, Icon, Field, ActionSheet, Toast, Panel, Uploader} from 'vant'
+import 'vant/lib/index.css'
+// import 'amfe-flexible'
+
+Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).use(Panel).use(Uploader)
 
 Vue.config.productionTip = false
 
