@@ -8,6 +8,10 @@ import '../static/css/reset.styl'
 import {Swipe, SwipeItem, Icon, Field, ActionSheet, Toast, Panel, Uploader} from 'vant'
 import 'vant/lib/index.css'
 // import 'amfe-flexible'
+import 'element-ui/lib/theme-chalk/index.css'
+import {Dropdown, DropdownMenu, DropdownItem} from 'element-ui'
+
+Vue.use(Dropdown).use(DropdownMenu).use(DropdownItem)
 
 Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).use(Panel).use(Uploader)
 

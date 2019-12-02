@@ -100,7 +100,7 @@ export default {
 <style lang="stylus" scoped>
 @import '../../assets/css/function.styl'
 .discover-wrapper
-  background-color var(--bg_color)
+  background-color $bg_color
   // bgc(#f5f7f9)
   .discover
     height 100%
