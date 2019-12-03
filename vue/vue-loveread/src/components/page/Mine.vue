@@ -7,9 +7,10 @@
         <el-dropdown class="colorBtn" trigger="click" @command="changeColor" disabled="true">
           <span class="el-dropdown-link">换肤</span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="a">中国红</el-dropdown-item>
+            <el-dropdown-item command="a">天空蓝</el-dropdown-item>
             <el-dropdown-item command="b">热力橙</el-dropdown-item>
             <el-dropdown-item command="c">幻夜黑</el-dropdown-item>
+            <el-dropdown-item command="d">梦幻紫</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -24,7 +25,7 @@
           <img src="../../assets/images/raw_1512446063.jpeg" alt="" />
         </div>
         <h2 class="login-username">游客</h2>
-        <div class="login-btn">
+        <div class="login-btn" @click="login">
           <span class="text">点击登录</span>
           <i class="icon">&#xe606;</i>
         </div>
@@ -140,6 +141,9 @@ export default {
     changeColor (command) {
       // console.log(command)
       document.getElementById('mine').className ='theme' + command
+    },
+    login () {
+      this.$router.push({path: '/login'})
     }
   }
 }

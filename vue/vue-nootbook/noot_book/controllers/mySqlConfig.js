@@ -11,7 +11,7 @@ var pool = mysql.createPool({
 })
 // 统一连接数据库的方法
 let allServices = {
-  query: function (sql, values) {
+  query: function (sql, values) { //query()线程池自带的方法
     return new Promise((resolve, reject) => {
       pool.getConnection(function (err, connection) {
         if (err) {
@@ -24,7 +24,7 @@ let allServices = {
               resolve(rows)
             }
             connection.release()
-          }) //query()线程池自带的方法
+          })
         }
       })
     })
@@ -35,6 +35,14 @@ let getAllusers = function () {
   let _sql = `select * from users;`
   return allServices.query(_sql)
 }
+
+// 用户登录
+let userLogin = function (username, userpwd) {
+  let _sql = `select * from users where username="${username}" and userpwd="${userpwd}";`
+  return allServices.query(_sql)
+}
+
 module.exports = {
-  getAllusers
+  getAllusers,
+  userLogin
 }

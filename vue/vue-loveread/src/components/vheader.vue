@@ -1,12 +1,12 @@
 <template>
-  <div class="header">
-    <div class="header-icon">
+  <div class="vheader">
+    <div class="vheader-icon">
       <slot name="left-icon"></slot>
     </div>
-    <div class="header-cont">
+    <div class="vheader-cont">
       <slot name="content"></slot>
     </div>
-    <div class="header-icon">
+    <div class="vheader-icon">
       <slot name="right-icon"></slot>
     </div>
   </div>
@@ -23,7 +23,7 @@ export default {
 
 <style lang="stylus">
 @import "../assets/css/function"
-.header
+.vheader
   height px2rem(88px)
   line-height px2rem(88px)
   text-align center

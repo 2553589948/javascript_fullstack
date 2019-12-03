@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  var arr = [1, [2, [3, 4]]] // 立体化 数组
+  // 转换成扁平化数组
+
+  var arr = [1, [2]]
+  var farr = [].concat(arr[0]).concat(arr[1])
+  console.log(farr)
+  // 1 [2, [3, 4]] -> 1, 2, [3, 4]
+  // 1, 2, [3, 4] -> 1, 2, 3, 4
+  function flattenArr(arr) {
+    let result = []
+    for(let i = 0; i < arr.length; i++) {
+      if (Array.isArray(arr[i])) {
+        // result = result.concat(arr[i])
+        result = result.concat(flattenArr(arr[i]))
+      } else {
+        result.push(arr[i])
+      }
+    }
+    return result
+  }
+  console.log(flattenArr([1, [2, [3, 6, [4, 5]]]]))
+// reduce map filter 函数式编程
+  function flattenArr1(arr) {
+    return arr.reduce((pre, next) => {
+      console.log(pre, next)
+      if (Array.isArray(next)) {
+        return pre.concat(flattenArr1(next)) // 每一次回调拿一个空数组用来push
+      } else {
+        pre.push(next)
+        return pre
+      }
+    }, [])
+  }
+  console.log(flattenArr1([1, [2, [3, 6, [4, 5]]]]))
+
+  // 数组求和
+  var arr2 = [0, 3, 5, 7]
+  function sum (arr) {
+    return arr.reduce((pre, next) => pre + next, 0)
+  }
+  console.log(sum(arr2))
+  </script>
+</body>
+</html>

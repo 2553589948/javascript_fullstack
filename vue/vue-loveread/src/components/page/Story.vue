@@ -1,12 +1,15 @@
 <template>
-  <div class="header">
-    <div class="search-top">
-      <i class="icon">&#xe600;</i>
-      <span>微信读书</span>
+  <div class="story-wrapper">
+    <div class="novels-header">
+      <div class="search-top">
+        <i class="icon">&#xe600;</i>
+        <span>爱阅读</span>
+      </div>
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="请输入你要搜索的关键词" />
+      </div>
     </div>
-    <div class="search-box">
-      <input type="text" class="search-input" placeholder="请输入你要搜索的关键词" />
-    </div>
+    <div class="novels-container"></div>
   </div>
 </template>
 
@@ -43,44 +46,57 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.icon
-  font-family "iconfont" !important
-  font-size 40px
-  font-style normal
-  vertical-align middle
-  // color #ffffff
-html, body
-  // line-height 1
-  font-family PingFang SC, STHeitiSC-Light, Helvetica-Light, arial, sans-serif
-  // user-select none
-  -webkit-tap-highlight-color transparent
+.story-wrapper
+  font-family PingFang SC, sans-serif, STHeitiSC-Light, Helvetica-Light, arial
   background rgba(8, 5, 58, 0.9)
-  // min-height 100vh
   color #fff
-.search-top
-  text-align center
-  height 90px
-  line-height 90px
-  font-size 0
-  span
-    vertical-align middle
-    font-size 24px
-    margin-left 10px
-.search-box
-  margin 0 20px
-  .search-input
-    height 30px
-    line-height 30px
-    border 1px solid rgba(34,43,95,.79)
-    background rgba(21,24,68,.5)
-    display inline-block
+  .novels-header
     width 100%
-    color #fff
-    box-sizing border-box
-    border-radius 40px
-    text-align center
-    font-size 14px!important
-    // transition all .4s
-    &:focus
-      outline none
+    padding-bottom 80px
+    .search-top
+      text-align center
+      width 100%
+      height 90px
+      line-height 90px
+      font-size 0
+      span
+        vertical-align middle
+        font-size 24px
+        margin-left 10px
+        font-weight 600
+      .icon
+        font-family "iconfont" !important
+        font-size 40px
+        font-style normal
+        vertical-align middle
+    .search-box
+      position relative
+      width 80%
+      max-width 840px
+      margin 0 auto
+      @media screen and (max-width: 460px)
+        padding 0 20px
+        width auto
+      .search-input
+        height 50px
+        line-height 50px
+        padding 0 52px
+        @media screen and (max-width: 460px)
+          height 30px
+          line-height 30px
+          padding 0 34px
+        border 1px solid rgba(34,43,95,.79)
+        background rgba(21,24,68,.5)
+        display inline-block
+        width 100%
+        color #fff
+        box-sizing border-box
+        border-radius 40px
+        text-align center
+        font-size 14px
+        &:focus
+          outline none
+  .novels-container
+    max-width 1332px
+    margin 0 auto
 </style>
