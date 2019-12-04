@@ -31,7 +31,7 @@ export default {
   display flex
   align-items center
   justify-content space-between
-  color #746ca8
+  // color #746ca8
   font-size px2rem(30px)
   &-icon
     flex 0 0 px2rem(88px)
@@ -45,7 +45,7 @@ export default {
     flex 1
     text-align center
     font-size 18px
-    color #333
+    // color #333
     font-weight 500
     overflow hidden
     text-overflow ellipsis

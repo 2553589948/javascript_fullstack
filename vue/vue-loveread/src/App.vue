@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="defThemeColor">
     <v-tab></v-tab>
     <!-- <v-banner></v-banner> -->
     <router-view/>
@@ -18,7 +18,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="stylus">
+@import './assets/css/themeColor.styl'
 @font-face {
   font-family: 'iconfont';  /* project id 1519920 */
   src: url('//at.alicdn.com/t/font_1519920_giqyhu0takm.eot');

@@ -4,7 +4,7 @@
     <v-header class="newsHeader">
       <i class="icon" slot="left-icon">&#xe623;</i>
       <span slot="content">新闻速递</span>
-      <router-link to="" slot="right-icon">
+      <router-link to="" slot="right-icon" tag="div">
         <i class="icon">&#xe624;</i>
       </router-link>
     </v-header>
@@ -101,6 +101,7 @@ export default {
 @import '../../assets/css/function.styl'
 .discover-wrapper
   background-color $bg_color
+  color #111
   // bgc(#f5f7f9)
   .discover
     height 100%

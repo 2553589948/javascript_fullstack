@@ -1,20 +1,22 @@
 <template>
-  <div id="mine" class="defThemeColor" ref="mine">
+  <div id="mine" ref="mine">
     <!-- 头部 -->
     <v-header class="mineHeader">
       <i class="icon" slot="left-icon">&#xe608;</i>
       <div slot="content">
-        <el-dropdown class="colorBtn" trigger="click" @command="changeColor" disabled="true">
+        <el-dropdown class="colorBtn" id="colorBtn" trigger="click" @command="changeColor" disabled="true">
           <span class="el-dropdown-link">换肤</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="a">天空蓝</el-dropdown-item>
             <el-dropdown-item command="b">热力橙</el-dropdown-item>
             <el-dropdown-item command="c">幻夜黑</el-dropdown-item>
             <el-dropdown-item command="d">梦幻紫</el-dropdown-item>
+            <el-dropdown-item command="e">鸢尾青</el-dropdown-item>
+            <el-dropdown-item command="f">雾霾灰</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-      <router-link to="" slot="right-icon">
+      <router-link to="" slot="right-icon" tag="div">
         <i class="icon">&#xe632;</i>
       </router-link>
     </v-header>
@@ -140,7 +142,8 @@ export default {
   methods: {
     changeColor (command) {
       // console.log(command)
-      document.getElementById('mine').className ='theme' + command
+      document.getElementById('app').className = 'theme' + command
+      // document.getElementById('colorBtn').className = 'theme' + command
     },
     login () {
       this.$router.push({path: '/login'})
@@ -151,7 +154,9 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../../assets/css/function.styl'
-@import '../../assets/css/themeColor.styl'
+// @import '../../assets/css/themeColor.styl'
+.colorBtn
+  color #fff
 .mine-content
   width 100%
   margin-bottom px2rem(130px)

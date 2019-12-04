@@ -19,7 +19,54 @@
             </div>
           </div>
           <div class="ranking-block-body">
-            <div class="left">
+            <!-- 横向排行 -->
+            <div class="book-wrap-item row-ranking">
+              <div class="ranking-block-book">
+                <div class="ranking-block-book-container">
+                  <div class="ranking-block-book-cover">
+                    <img src="" alt="">
+                  </div>
+                  <div class="ranking-block-book-info">
+                    <p class="ranking-block-book-title">
+                      <span class="ranking-block-book-index">1</span>三体（全集）
+                    </p>
+                    <div class="ranking-block-book-author">刘慈欣</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="book-wrap-item row-ranking">
+              <div class="ranking-block-book">
+                <div class="ranking-block-book-container">
+                  <div class="ranking-block-book-cover">
+                    <img src="" alt="">
+                  </div>
+                  <div class="ranking-block-book-info">
+                    <p class="ranking-block-book-title">
+                      <span class="ranking-block-book-index">1</span>三体（全集）
+                    </p>
+                    <div class="ranking-block-book-author">刘慈欣</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="book-wrap-item row-ranking">
+              <div class="ranking-block-book">
+                <div class="ranking-block-book-container">
+                  <div class="ranking-block-book-cover">
+                    <img src="" alt="">
+                  </div>
+                  <div class="ranking-block-book-info">
+                    <p class="ranking-block-book-title">
+                      <span class="ranking-block-book-index">1</span>三体（全集）
+                    </p>
+                    <div class="ranking-block-book-author">刘慈欣</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 纵向排行 -->
+            <!-- <div class="left">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
@@ -108,7 +155,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="ranking-block-footer">
             <div class="ranking-block-footer-link">
@@ -124,7 +171,8 @@
             </div>
           </div>
           <div class="ranking-block-body">
-            <div class="left">
+            <!-- 横向排行 -->
+            <div class="book-wrap-item row-ranking">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
@@ -139,22 +187,7 @@
                 </div>
               </div>
             </div>
-            <div class="right">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体(全集)
-                    </p>
-                    <div class="ranking-block-book-author"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="left">
+            <div class="book-wrap-item row-ranking">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
@@ -169,22 +202,7 @@
                 </div>
               </div>
             </div>
-            <div class="right">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体(全集)
-                    </p>
-                    <div class="ranking-block-book-author"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="left">
+            <div class="book-wrap-item row-ranking">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
@@ -195,21 +213,6 @@
                       <span class="ranking-block-book-index">1</span>三体（全集）
                     </p>
                     <div class="ranking-block-book-author">刘慈欣</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="right">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体(全集)
-                    </p>
-                    <div class="ranking-block-book-author"></div>
                   </div>
                 </div>
               </div>
@@ -264,8 +267,8 @@ export default {
 <style lang="stylus" scoped>
 .story-wrapper
   font-family PingFang SC, sans-serif, STHeitiSC-Light, Helvetica-Light, arial
-  background rgba(8, 5, 58, 0.9)
-  color #fff
+  // background rgba(8, 5, 58, 0.9)
+  // color #fff
   padding-bottom 57px
   .novels-header
     width 100%
@@ -304,8 +307,8 @@ export default {
           height 30px
           line-height 30px
           padding 0 34px
-        border 1px solid rgba(34,43,95,.79)
-        background rgba(21,24,68,.5)
+        // border 1px solid rgba(34,43,95,.79)
+        background rgba(238,240,244,.1)
         display inline-block
         width 100%
         color #fff
@@ -343,7 +346,69 @@ export default {
               width 176px
               vertical-align bottom
         &-body
-          .left
+          display flex
+          flex-wrap wrap
+          justify-content space-between
+          .book-wrap-item
+            width 48%
+            @media screen and (max-width: 560px)
+              width 100%
+            .ranking-block-book
+              position relative
+              border solid hsla(0, 0%, 100%, .05)
+              border-width 0 0 1px
+              @media screen and (max-width: 460px)
+                position relative
+                border none
+              &-container
+                padding 16px 0 16px 16px
+                margin-left -16px
+                overflow hidden
+                .ranking-block-book-cover
+                  float left
+                  display block
+                  width 64px
+                  height 92px
+                  box-shadow 0 2px 16px rgba(0,0,0,.08)
+                  background #d8d8d8
+                  position relative
+                  img
+                    vertical-align top
+                    width 100%
+                    height 100%
+                    background-color #d8d8d8
+                .ranking-block-book-info
+                  padding 0 10px 0 82px
+                  margin-top 20px
+                  .ranking-block-book-title
+                    font-size 15px
+                    font-weight 500
+                    color #eef0f4
+                    overflow hidden
+                    white-space nowrap
+                    text-overflow ellipsis
+                    word-break break-all
+                    word-wrap normal
+                    .ranking-block-book-index
+                      width 18px
+                      display inline-block
+                      font-family DIN-Medium,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+                      font-size 16px
+                  .ranking-block-book-author
+                    position relative
+                    display inline-block
+                    margin-top 16px
+                    margin-left 18px
+                    font-size 12px
+                    z-index 2
+                    color #8a8c90
+                    overflow hidden
+                    white-space nowrap
+                    text-overflow ellipsis
+                    word-break break-all
+                    word-wrap normal
+          /* 纵向排行样式 */
+          /* .left
             width 48%
             float left
             @media screen and (max-width: 560px)
@@ -411,7 +476,7 @@ export default {
                     white-space nowrap
                     text-overflow ellipsis
                     word-break break-all
-                    word-wrap normal
+                    word-wrap normal */
         &-body::after
           content ""
           display block

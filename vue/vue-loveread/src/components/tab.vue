@@ -38,6 +38,7 @@ export default {
   background-color #fff
   bordertop-1px(#e3e3e3)
   font-size 14px
+  color #000
   &-item
     flex 1
     text-align center
