@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this指向(进阶)</title>
+</head>
+<body>
+  <iframe src="www.jianshu.com" frameborder="0"></iframe>
+  <iframe src="" frameborder="0"></iframe>
+  <script>
+    function fn() {
+      console.log(this.length)
+    }
+
+    fn() // window.length 指iframe(标签：把其他的网页加载到自己的页面)节点的个数
+
+    var bar = {
+      length: 5,
+      fn1: function() {
+        console.log(this === bar1) // true
+        fn() // this还是指向window
+        // arguments每一个普通函数(箭头函数没有)都可以用的一个变量，是一个对象，对象包含了传进来的所有参数
+        arguments[0]()
+      }
+    }
+    var bar1 = {length: 6}
+    const res = bar.fn1.bind(bar1) // bind只是绑定this指向 没有调用 返回函数
+    res(fn, 123456) // 输出值2
+    // this绑定优先级顺序obj.fn < call/apply/bind < new
+
+
+    // arguments
+    foo(1, 2, 3)
+    function foo() {
+      // 类数组对象(1.key为数组下标,通过key取value值 2.像数组一样有length属性 3.没有数组的map方法)
+      // arguments, document.querySelectorAll('iframe')
+      console.log(arguments)
+      console.log(document.querySelectorAll('iframe'))
+      // 把所有的参数都放大2倍 用数组map方法需提前将类数组转为数组(Array.from()方法es6)
+      console.log(typeof arguments.map)
+      // 以下三种方法都可以将类数组转为数组
+      let arr1 = Array.from(arguments)
+       // 借数组的截取slice方法 返回数组
+      let arr2 = Array.prototype.slice.call(arguments)
+      console.log(arr2)
+      // 解构
+      let arr3 = [...arguments]
+      console.log(arr3)
+    }
+    // 为什么用call
+    function Person(age) {
+      this.age = age
+    }
+    Person.prototype.reduceAge = function() {
+      return this.age - 10
+    }
+    var p = new Person(20)
+    console.log(p.reduceAge())
+    var p2 = {age: 30}
+    console.log(Person.prototype.reduceAge.call(p2)) // 借用别人的reduceAge方法绑定this指向p2
+  </script>
+</body>
+</html>

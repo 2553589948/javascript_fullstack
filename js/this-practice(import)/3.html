@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this指向与原型链</title>
+</head>
+<body>
+  <script>
+    this.a = 20
+    function Go () {
+      // new的过程四部曲
+      // 1.创建空对象{}
+      // 2. 继承 {}.__proto__ = Go.prototype
+      // Go.prototype.__proto__ = Object.prototype
+      // 3. 赋值 将Go()的属性挂到对象上
+      console.log(this.a)
+      this.a = 30
+      // 4. 返回对象return {
+        //   a: 30, 
+        //   __proto__: {
+        //     a: 40
+        //   }
+        // }
+    }
+    Go.prototype.a = 40
+    var test = {
+      a: 50,
+      init: function(fn) {
+        fn() // 20
+        console.log(this.a) // 50
+        return fn
+      }
+    }
+    // 第一道
+    console.log(new Go().a) // 40 30
+    // 第二道
+    test.init(Go) // 20 50
+    // 第三道
+    var p = test.init(Go) // 30  50
+    // 第四道
+    p() // 30
+  </script>
+</body>
+</html>

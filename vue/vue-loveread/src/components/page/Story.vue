@@ -176,7 +176,7 @@
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
-                    <img src="" alt="">
+                    <img src="https://wfqqreader-1252317822.image.myqcloud.com/cover/201/24965201/t6_24965201.jpg" alt="">
                   </div>
                   <div class="ranking-block-book-info">
                     <p class="ranking-block-book-title">
@@ -191,7 +191,7 @@
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
-                    <img src="" alt="">
+                    <img src="https://wfqqreader-1252317822.image.myqcloud.com/cover/201/24965201/t6_24965201.jpg" alt="">
                   </div>
                   <div class="ranking-block-book-info">
                     <p class="ranking-block-book-title">
@@ -227,7 +227,19 @@
         </div>
       </div>
       <!-- 全部分类 -->
-      <div class="allCategory"></div>
+      <div class="allCategory">
+        <div class="allCategory-header">
+          <h2 class="allCategory-header-title">榜单推荐</h2>
+        </div>
+        <div class="allCategory-list">
+          <div class="allCategory-item"
+          v-for="(item, index) in categoryLists"
+          :key="index">
+            <span class="allCategory-item-title">
+              {{item.cateTitle}}·{{item.cateCount}}本</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -244,7 +256,69 @@ export default {
       // display: true,
       // listenScroll: true,
       // beforeScroll: true,
-      // show: true
+      // show: true,
+      categoryLists: [
+        {
+          cateId: '01',
+          cateTitle: '文学艺术榜',
+          cateCount: 13391
+        },
+        {
+          cateId: '02',
+          cateTitle: '名著经典榜',
+          cateCount: 2476
+        },
+        {
+          cateId: '03',
+          cateTitle: '青春言情榜',
+          cateCount: 49811
+        },
+        {
+          cateId: '04',
+          cateTitle: '推理悬疑榜',
+          cateCount: 6981
+        },
+        {
+          cateId: '05',
+          cateTitle: '影视原著榜',
+          cateCount: 633
+        },
+        {
+          cateId: '06',
+          cateTitle: '科幻武侠榜',
+          cateCount: 22790
+        },
+        {
+          cateId: '07',
+          cateTitle: '励志治愈榜',
+          cateCount: 7790
+        },
+        {
+          cateId: '08',
+          cateTitle: '经济管理榜',
+          cateCount: 15298
+        },
+        {
+          cateId: '09',
+          cateTitle: '都市小说榜',
+          cateCount: 21780
+        },
+        {
+          cateId: '10',
+          cateTitle: '职场榜',
+          cateCount: 3500
+        },
+        {
+          cateId: '11',
+          cateTitle: '心里课堂榜',
+          cateCount: 1973
+        },
+        {
+          cateId: '12',
+          cateTitle: '玄幻奇幻榜',
+          cateCount: 36101
+        }
+      ]
     }
   },
   methods: {
@@ -269,7 +343,7 @@ export default {
   font-family PingFang SC, sans-serif, STHeitiSC-Light, Helvetica-Light, arial
   // background rgba(8, 5, 58, 0.9)
   // color #fff
-  padding-bottom 57px
+  padding-bottom 100px
   .novels-header
     width 100%
     padding-bottom 80px
@@ -504,4 +578,45 @@ export default {
               vertical-align middle
               @media screen and (max-width: 460px)
                 display none
+    .allCategory
+      padding 0 40px
+      @media screen and (max-width: 1120px)
+        padding 0 40px
+      @media screen and (max-width: 960px)
+        padding 0 30px
+      @media screen and (max-width: 460px)
+        padding 0 20px
+      &-header
+        padding 20px 0
+        border solid hsla(0,0%,100%,.05)
+        border-width 0 0 1px
+        &-title
+          font-size 20px
+          font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+          color #eef0f4
+      &-list
+        display flex
+        flex-wrap wrap
+        justify-content space-between
+        .allCategory-item
+          width 24%
+          border solid hsla(0, 0%, 100%, .05)
+          border-width 0 0 1px
+          @media screen and (max-width: 1120px)
+            width 31%
+          @media screen and (max-width: 960px)
+            width 47%
+          @media screen and (max-width: 320px)
+            width 100%
+          &-title
+            display inline-block
+            width 100%
+            padding 18px 0 18px 12px
+            margin-left -12px
+            font-family DIN-Regular,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+            font-size 16px
+            @media screen and (max-width: 460px)
+              font-size 14px
+              line-height 1.5
+            color #eef0f4
 </style>
