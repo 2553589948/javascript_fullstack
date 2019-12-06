@@ -39,8 +39,6 @@ export default {
     cursor pointer
     .icon
       font-size px2rem(48px)
-      font-family "iconfont"
-      font-style normal
   &-cont
     flex 1
     text-align center

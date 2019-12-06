@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>new过程</title>
+</head>
+<body>
+  <script>
+    function Person(name) {
+      this.age = 30
+      this.name = name
+      return {a: 1, b: 2}
+    }
+    Person.prototype.say = () => {
+      console.log('say')
+    }
+    var p = new Person()
+    console.log(p)
+
+// 模拟new的过程
+    function myNew(constructor, ...args) {
+      // 1
+      let obj = {}
+      // 2
+      // constructor.apply(obj, args) // apply()第二个参数可以是数组
+      let ret = constructor.apply(obj, args)
+      // 3
+      obj.__proto__ = constructor.prototype
+      // 4 注意构造函数是否有返回值,返回值为对象则返回对象,没有则返回构造函数
+      // return obj
+      return typeof ret === 'object' ? ret : obj
+    }
+    var p1 = myNew(Person, 4)
+    console.log(p1)
+
+
+    // call实现原理
+    function myCall(fn, obj) {
+      obj.__fn__ = fn // 添加任意一个属性到obj
+      // 注意返回值 原本函数该返回什么就返回什么
+      let ret = obj.__fn__() // 执行
+      delete obj.__fn__ // 删除
+      return ret
+    }
+    var obj = {abc: 50}
+    function fn() { // 函数的调用必定有返回值的
+      console.log(this.abc)
+      return {ee: 1, ff: 2}
+    }
+    // fn.call(obj)
+    // myCall(fn, obj)
+    console.log(myCall(fn, obj))
+  </script> 
+</body>
+</html>

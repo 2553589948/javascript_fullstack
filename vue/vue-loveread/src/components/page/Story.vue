@@ -6,7 +6,8 @@
         <span>爱阅读</span>
       </div>
       <div class="search-box">
-        <input type="text" class="search-input" placeholder="请输入你要搜索的关键词" />
+        <i class="icon">&#xe61f;</i>
+        <input type="text" class="search-input" placeholder="搜索" />
       </div>
     </div>
     <div class="novels-container">
@@ -361,9 +362,7 @@ export default {
         margin-left 10px
         font-weight 600
       .icon
-        font-family "iconfont" !important
         font-size 40px
-        font-style normal
         vertical-align middle
     .search-box
       position relative
@@ -373,6 +372,15 @@ export default {
       @media screen and (max-width: 460px)
         padding 0 20px
         width auto
+      .icon
+        position absolute
+        display block
+        width 20px
+        height 20px
+        top 18px
+        left 32px
+        @media screen and (max-width: 460px)
+          top 6px
       .search-input
         height 50px
         line-height 50px
@@ -381,6 +389,7 @@ export default {
           height 30px
           line-height 30px
           padding 0 34px
+          font-size 14px
         // border 1px solid rgba(34,43,95,.79)
         background rgba(238,240,244,.1)
         display inline-block
@@ -388,8 +397,8 @@ export default {
         color #fff
         box-sizing border-box
         border-radius 40px
-        text-align center
-        font-size 14px
+        text-align left 
+        font-size 16px
         &:focus
           outline none
   .novels-container
@@ -573,8 +582,6 @@ export default {
               vertical-align middle
               margin-right 5px
             .icon
-              font-family "iconfont"
-              font-style normal
               vertical-align middle
               @media screen and (max-width: 460px)
                 display none

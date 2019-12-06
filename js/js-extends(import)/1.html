@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>类 原型对象 实例</title>
+</head>
+<body>
+  <script>
+    function Person() {
+      this.age = 30
+    }
+    Person.prototype.say = function() {}
+    var p = new Person()
+    console.log(p)
+
+    // console.log(p.__proto__ === Person.prototype)
+
+    // console.log(Person.prototype.constructor === Person)
+    console.log(p.__proto__ === Person.prototype) // 沿着原型链一直找
+    console.log(Person.prototype.__proto__ === Object.prototype) // 找到顶端
+    console.log(Object.prototype.__proto__ === null)
+
+    function Student() {
+    }
+    // 实现继承的第一种方法
+    // Student.prototype.__proto__ = Person.prototype
+    Student.prototype = new Person()
+
+    // 第二种Object.create() 类似复制
+    Student.prototype = Object.create(Person.prototype)
+    // Student.prototype = myCreate(Person.prototype) 不会引起Person的调用
+
+    // 第三种 es6 extends的方法
+    function Student1 () {
+      // 继承属性
+      Person.call(this) // new完以后this === s1
+    }
+      // 继承方法
+    Student1.prototype = Object.create(Person.prototype)
+      // 修正constructor
+    Student1.prototype.constructor = Student1
+    var s1 = new Student1()
+
+    var s = new Student()
+    // console.log(s.say)
+
+    // Object.create()实现原理
+    function myCreate(obj) {
+      var F = function() {}
+      F.prototype = obj
+      return new F()
+    }
+
+    // this指向绑定
+    function addProps() {
+      this.abcd = 40
+    }
+    var aaa = new addProps()
+    // console.log(aaa)
+    var obj = {}
+    addProps.call(obj)
+    // console.log(obj)
+  </script>
+</body>
+</html>

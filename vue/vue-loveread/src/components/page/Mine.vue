@@ -206,8 +206,6 @@ export default {
               font-size 18px
               vertical-align middle
             .icon
-              font-family "iconfont"
-              font-style normal
               font-size px2rem(60px)
               vertical-align middle
               color #1e90ff
