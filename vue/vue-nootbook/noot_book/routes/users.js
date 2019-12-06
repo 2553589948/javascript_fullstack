@@ -135,13 +135,42 @@ router.post('/findNoteListBytype', async(ctx, next) => {
       ctx.body = {
         code: '404',
         data: r,
-        mess: '查到失败'
+        mess: '查询失败'
       }
     }
   }).catch((err) => {
     ctx.body = {
       code: '500',
       data: err
+    }
+  })
+})
+
+// 根据id查找对应的笔记详情
+router.post('/findNoteDetailById', async(ctx, next) => {
+  let id = ctx.request.body.id
+  await userServies.findNoteDetailById(id)
+  .then(async (res) => {
+    let r = ''
+    if (res.length) {
+      r = 'ok',
+      ctx.body = {
+        code: '200',
+        data: res[0],
+        mess: '查找成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '404',
+        data: r,
+        mess: '查询失败'
+      }
+    }
+  }).catch((error) => {
+    ctx.body = {
+      code: '80008',
+      data: error
     }
   })
 })

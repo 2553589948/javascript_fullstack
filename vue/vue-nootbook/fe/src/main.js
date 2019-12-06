@@ -8,6 +8,7 @@ import {Swipe, SwipeItem, Icon, Field, ActionSheet, Toast, Panel, Uploader} from
 import 'vant/lib/index.css'
 import 'amfe-flexible'
 
+
 Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).use(Panel).use(Uploader).use(axios)
 
 Vue.prototype.$http = axios

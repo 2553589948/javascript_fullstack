@@ -42,6 +42,7 @@ Page({
     const cur = e.currentTarget.dataset.current
     let text = this.data.navData
     var singleNavWidth = this.data.windowWidth / 6
+    // console.log(singleNavWidth)
     this.setData({
       cart,
       currentTab: cur,
