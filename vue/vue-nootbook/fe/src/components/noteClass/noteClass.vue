@@ -6,7 +6,7 @@
           <van-icon name="wap-nav" size="20px"></van-icon>
         </div>
         <div>
-          <van-icon name="like" size="20px"></van-icon>
+          <van-icon name="like" size="20px" @click="gotoPublishNote"></van-icon>
           <van-icon name="search" size="20px"></van-icon>
         </div>
       </header>
@@ -103,6 +103,9 @@ export default {
     },
     noteList (title) {
       this.$router.push({path:'/noteList', query: {'title': title}})
+    },
+    gotoPublishNote () {
+      this.$router.push({path: '/publishNote'})
     }
   }
 };

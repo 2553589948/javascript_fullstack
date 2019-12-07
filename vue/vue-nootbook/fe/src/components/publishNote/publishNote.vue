@@ -28,7 +28,7 @@
         <span class="note-type" @click="selectType">选择分类 &gt;{{selectCon}}</span>
         <van-action-sheet v-model="show" :actions="actions" @select="onSelect" cancel-text="取消" @cancel="onCancel" />
       </div>
-      <div class="publish-btn">发布笔记</div>
+      <div class="publish-btn" @click="publish">发布笔记</div>
     </div>
   </div>
 </template>
@@ -95,7 +95,10 @@ export default {
     onEditorBlur () {},
     onEditorFocus () {},
     onEditorChange () {},
-    onRead () {},
+    onRead (file) {
+      console.log(file)
+      this.preImg = file.content
+    },
     onSelect (item) {
       console.log(item)
       this.selectCon = item.subname
@@ -106,6 +109,37 @@ export default {
     },
     selectType () {
       this.show = true
+    },
+    publish () {
+      let note_content = this.content
+      let head_img = this.preImg
+      let title = this.title
+      let note_type = this.selectCon
+      let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
+      let nickname = JSON.parse(sessionStorage.getItem('userInfo')).nickname
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/insertNote',
+        data: {
+          note_content: note_content,
+          head_img: head_img,
+          title: title,
+          note_type: note_type,
+          useId: userId,
+          nickname: nickname
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        if (res.data.code === '200') {
+          this.$toast(res.data.mess)
+          setTimeout(() => {
+            this.$router.push({path: '/noteClass'})
+          }, 1000);
+        } else {
+          this.$toast(res.data.mess)
+        }
+      })
     }
   },
   components: {
