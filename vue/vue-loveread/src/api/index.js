@@ -11,7 +11,7 @@ axios.defaults.timeout = 10000 //请求时长,超时切断
 
 // 判断返回状态,响应拦截
 axios.interceptors.response.use((res) => {
-  if (res.data.code !== 200) {
+  if ((res.data.code && res.data.code !== 200) || (res.data.ok && res.data.ok !== true)) {
     alert('网络异常') // 请求回来的数据异常
     return Promise.reject(res)
   }
@@ -42,13 +42,13 @@ export default {
   Login (params) {
     return fetchGet('/login', params)
   },
-  // 书单
-  BookLists (params) {
-    return fetchGet('/top/playlist', params)
+  // 获取排行榜类型
+  bookRanking (params) {
+    return fetchGet('/novelapi/ranking/gender', params)
   },
-  // 小说
+  // 获取小说所有分类
   getNovel (params) {
-    return fetchGet('/api/Joke/NewstJoke', params)
+    return fetchGet('/novelapi/cats/lv2/statistics', params)
   },
   // 新闻
   neteasyNews (params) {

@@ -325,16 +325,25 @@ export default {
   methods: {
     _getNovels () {
       const params = {
-        key: '991792145f62460bac35b1c92ee50cdb'
+        // key: '991792145f62460bac35b1c92ee50cdb'
       }
       api.getNovel(params)
+      .then((res) => {
+        console.log(res)
+      })
+    },
+    _bookRanking () {
+      const params = {
+      }
+      api.bookRanking(params)
       .then((res) => {
         console.log(res)
       })
     }
   },
   mounted () {
-    // this._getNovels()
+    this._getNovels()
+    this._bookRanking()
   }
 }
 </script>

@@ -10,28 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {
-        // target: 'http://api.avatardata.cn',
-        target: 'https://api.apiopen.top',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }      
-      },
-      '/novelapi': {
-        target: 'http://api.zhuishushenqi.com',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/novelapi': ''
-        }      
-      },
-      // '/chapter': {
-      //   target: 'http://chapter2.zhuishushenqi.com/',
-      //   pathRewrite: {'^/chapter' : '/chapter'},
-      //   changeOrigin: true
-      // }  
-    },
+    proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
