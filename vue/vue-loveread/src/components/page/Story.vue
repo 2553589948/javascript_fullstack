@@ -13,55 +13,29 @@
     <div class="novels-container">
       <!-- 排行榜 -->
       <div class="topCategory">
-        <div class="ranking-block">
+        <div class="ranking-block"
+        v-for="(item, index) in booksCate" :key="index"
+        v-show="item.books.length > 0">
           <div class="ranking-block-header">
             <div class="ranking-block-header-link">
-              <img src="https://rescdn.qqmail.com/weread/cover/ranklist.all.chart_title.NB681FwUw1.png" alt="">
+              <img src="http://statics.zhuishushenqi.com/ranking-cover/142319144267827" alt="">
+              <h2 class="topCategory-header-title">{{item.title}}</h2>
             </div>
           </div>
           <div class="ranking-block-body">
             <!-- 横向排行 -->
-            <div class="book-wrap-item row-ranking">
+            <div class="book-wrap-item row-ranking" v-for="(list, index) in item.books" :key="index">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
-                    <img src="" alt="">
+                    <img :src="'http://statics.zhuishushenqi.com' + list.cover" alt="">
                   </div>
                   <div class="ranking-block-book-info">
                     <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体（全集）
+                      <span class="ranking-block-book-index">{{index + 1}}</span>
+                      {{list.title}}
                     </p>
-                    <div class="ranking-block-book-author">刘慈欣</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="book-wrap-item row-ranking">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体（全集）
-                    </p>
-                    <div class="ranking-block-book-author">刘慈欣</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="book-wrap-item row-ranking">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体（全集）
-                    </p>
-                    <div class="ranking-block-book-author">刘慈欣</div>
+                    <div class="ranking-block-book-author">{{list.author}}</div>
                   </div>
                 </div>
               </div>
@@ -165,67 +139,6 @@
             </div>
           </div>
         </div>
-        <div class="ranking-block">
-          <div class="ranking-block-header">
-            <div class="ranking-block-header-link">
-              <img src="https://rescdn.qqmail.com/weread/cover/ranklist.all.chart_title.NB681FwUw1.png" alt="">
-            </div>
-          </div>
-          <div class="ranking-block-body">
-            <!-- 横向排行 -->
-            <div class="book-wrap-item row-ranking">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="https://wfqqreader-1252317822.image.myqcloud.com/cover/201/24965201/t6_24965201.jpg" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体（全集）
-                    </p>
-                    <div class="ranking-block-book-author">刘慈欣</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="book-wrap-item row-ranking">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="https://wfqqreader-1252317822.image.myqcloud.com/cover/201/24965201/t6_24965201.jpg" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体（全集）
-                    </p>
-                    <div class="ranking-block-book-author">刘慈欣</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="book-wrap-item row-ranking">
-              <div class="ranking-block-book">
-                <div class="ranking-block-book-container">
-                  <div class="ranking-block-book-cover">
-                    <img src="" alt="">
-                  </div>
-                  <div class="ranking-block-book-info">
-                    <p class="ranking-block-book-title">
-                      <span class="ranking-block-book-index">1</span>三体（全集）
-                    </p>
-                    <div class="ranking-block-book-author">刘慈欣</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ranking-block-footer">
-            <div class="ranking-block-footer-link">
-              <span class="ranking-block-footer-link-text">查看全部</span>
-              <i class="icon">&#xe606;</i>
-            </div>
-          </div>
-        </div>
       </div>
       <!-- 全部分类 -->
       <div class="allCategory">
@@ -248,16 +161,14 @@
 <script>
 import api from '@/api'
 
-// const rows = 20
 export default {
   data () {
     return {
-      result: [],
-      page: 1,
-      // display: true,
-      // listenScroll: true,
-      // beforeScroll: true,
-      // show: true,
+      rankList: [],
+      rankListsInfo: [],
+      booksList: [],
+      booksCate: [],
+      // newRankInfo: [],
       categoryLists: [
         {
           cateId: '01',
@@ -322,28 +233,77 @@ export default {
       ]
     }
   },
+  computed: {
+    imgUrl () {
+      let bookCovers = []
+      for (let item in this.booksList) {
+        bookCovers.push('http://statics.zhuishushenqi.com' + item.cover)
+      }
+      return bookCovers
+    }
+  },
   methods: {
-    _getNovels () {
+    // 获取排行榜类型
+    _getRankingType () {
+      const params = {
+      }
+      api.getRankingType(params)
+      .then((res) => {
+        console.log(res)
+        if (res.ok === true) {
+          console.log(res.picture)
+          this.rankList = res.picture
+          this._getRankId()
+          // this._getRankingBook(res.picture[0]._id)
+          // http://statics.zhuishushenqi.com/ranking-cover/142319144267827
+        }
+      })
+    },
+    _getRankId() {
+      let rankIds = []
+      for (let item in this.rankList) {
+        // console.log(item)
+        console.log(this.rankList[item]._id)
+        this._getRankingBook(this.rankList[item]._id)
+        // rankIds.push(this.rankList[item]._id)
+      }
+      // console.log(rankIds)
+      // return rankIds
+    },
+    // 获取排行榜小说
+    _getRankingBook(rankId) {
+      const params = {
+      }
+      api.getRankingBook(params, rankId)
+      .then((res) => {
+        console.log(res)
+        if (res.ok === true) {
+          this.rankListsInfo = res.ranking
+          console.log(this.rankListsInfo)
+          this.booksList = this.rankListsInfo.books.splice(0, 6)
+          console.log(this.booksList)
+          this.booksCate = this.booksCate.concat(this.rankListsInfo)
+          console.log(this.booksCate)
+          // 首次加载6条数据
+          // this.booksList = res.ranking.books.splice(0, 6)
+          // this.booksCate = Object.assign({}, this.booksList, this.booksList)
+        }
+      })
+    },
+    // 获取小说所有分类
+    _getNovelCate () {
       const params = {
         // key: '991792145f62460bac35b1c92ee50cdb'
       }
-      api.getNovel(params)
-      .then((res) => {
-        console.log(res)
-      })
-    },
-    _bookRanking () {
-      const params = {
-      }
-      api.bookRanking(params)
+      api.getNovelCate(params)
       .then((res) => {
         console.log(res)
       })
     }
   },
   mounted () {
-    this._getNovels()
-    this._bookRanking()
+    this._getRankingType()
+    this._getNovelCate()
   }
 }
 </script>
@@ -433,10 +393,17 @@ export default {
           border-width 0 0 1px
           &-link
             display inline-block
+            display flex
             img
               display inline-block
-              width 176px
+              width 20px
+              height 20px
               vertical-align bottom
+              margin-right 10px
+            .topCategory-header-title
+              font-size 20px
+              font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+              color #e34737
         &-body
           display flex
           flex-wrap wrap
@@ -570,8 +537,8 @@ export default {
                     word-break break-all
                     word-wrap normal */
         &-body::after
-          content ""
-          display block
+          // content ""
+          // display block
           clear both
         &-footer
           padding 20px 0

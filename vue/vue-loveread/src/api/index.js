@@ -42,15 +42,23 @@ export default {
   Login (params) {
     return fetchGet('/login', params)
   },
+
   // 获取排行榜类型
-  bookRanking (params) {
+  getRankingType (params) {
     return fetchGet('/novelapi/ranking/gender', params)
   },
+
+  // 获取排行榜小说
+  getRankingBook (params, id) {
+    return fetchGet('/novelapi/ranking/' + id, params)
+  },
+
   // 获取小说所有分类
-  getNovel (params) {
+  getNovelCate (params) {
     return fetchGet('/novelapi/cats/lv2/statistics', params)
   },
-  // 新闻
+
+  // 获取新闻
   neteasyNews (params) {
     return fetchGet('/api/getWangYiNews', params)
   }

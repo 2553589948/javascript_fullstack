@@ -48,5 +48,13 @@ Page({
       currentTab: cur,
       navScrollLeft: (cur - 1) * singleNavWidth
     })
+  },
+  switchTab (e) {
+    console.log(e)
+    var singleNavWidth = this.data.windowWidth / 6
+    this.setData({
+      currentTab: e.detail.current,
+      navScrollLeft: (e.detail.current - 1) * singleNavWidth
+    })
   }
 })
