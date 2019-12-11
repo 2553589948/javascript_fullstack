@@ -131,6 +131,7 @@ export default {
 .search-input {
   display: block;
   position: relative;
+  text-align: center;
   border: 0;
   border-radius: 0;
   padding-right: 20px;

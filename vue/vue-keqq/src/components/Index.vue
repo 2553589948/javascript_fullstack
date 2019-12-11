@@ -8,9 +8,9 @@
       <form action="" class="header-search">
         <div class="search-tips">
           <i class="icon-font i-search2 search-icon"></i>
-          <span class="search-input-text">搜索老师、机构、课程</span>
+          <!-- <span class="search-input-text">搜索老师、机构、课程</span> -->
         </div>
-        <input type="search" class="search-input">
+        <input type="search" class="search-input" placeholder="搜索老师、机构、课程">
         <div class="search-reset">
           <div class="icon-close"></div>
         </div>
@@ -165,21 +165,16 @@ export default {
 }
 .search-tips {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  left: 42px;
   font-size: 14px;
-  text-align: center;
   color: #bbb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .search-input {
   display: block;
   position: relative;
   border: 0;
   border-radius: 0;
+  text-align: center;
   padding-right: 20px;
   padding-left: 2px;
   width: 95%;
