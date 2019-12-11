@@ -14,7 +14,7 @@
       <!-- 排行榜 -->
       <div class="topCategory">
         <div class="ranking-block"
-        v-for="(item, index) in booksCate" :key="index"
+        v-for="(item, index) in rankCate" :key="index"
         v-show="item.books.length > 0">
           <div class="ranking-block-header">
             <div class="ranking-block-header-link">
@@ -24,7 +24,7 @@
           </div>
           <div class="ranking-block-body">
             <!-- 横向排行 -->
-            <div class="book-wrap-item row-ranking" v-for="(list, index) in item.books" :key="index">
+            <div class="book-wrap-item row-ranking" v-for="(list, index) in item[0]" :key="index">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
@@ -147,10 +147,10 @@
         </div>
         <div class="allCategory-list">
           <div class="allCategory-item"
-          v-for="(item, index) in categoryLists"
+          v-for="(item, index) in bookCate"
           :key="index">
             <span class="allCategory-item-title">
-              {{item.cateTitle}}·{{item.cateCount}}本</span>
+              {{item.name}}·{{item.bookCount}}本</span>
           </div>
         </div>
       </div>
@@ -167,8 +167,8 @@ export default {
       rankList: [],
       rankListsInfo: [],
       booksList: [],
-      booksCate: [],
-      // newRankInfo: [],
+      rankCate: [],
+      bookCate: [],
       categoryLists: [
         {
           cateId: '01',
@@ -259,18 +259,20 @@ export default {
         }
       })
     },
+
+    // 获取周榜id
     _getRankId() {
-      let rankIds = []
+      // let rankIds = []
       for (let item in this.rankList) {
         // console.log(item)
-        console.log(this.rankList[item]._id)
+        // console.log(this.rankList[item]._id)
         this._getRankingBook(this.rankList[item]._id)
         // rankIds.push(this.rankList[item]._id)
       }
-      // console.log(rankIds)
       // return rankIds
     },
-    // 获取排行榜小说
+
+    // 根据周榜_id获取排行榜小说
     _getRankingBook(rankId) {
       const params = {
       }
@@ -280,16 +282,16 @@ export default {
         if (res.ok === true) {
           this.rankListsInfo = res.ranking
           console.log(this.rankListsInfo)
-          this.booksList = this.rankListsInfo.books.splice(0, 6)
-          console.log(this.booksList)
-          this.booksCate = this.booksCate.concat(this.rankListsInfo)
-          console.log(this.booksCate)
           // 首次加载6条数据
-          // this.booksList = res.ranking.books.splice(0, 6)
-          // this.booksCate = Object.assign({}, this.booksList, this.booksList)
+          this.booksList = res.ranking.books.splice(0, 6)
+          // 把6数据以数组塞入原对象
+          let newRankListsInfo = Object.assign({}, this.rankListsInfo, [this.booksList])
+          this.rankCate = this.rankCate.concat(newRankListsInfo)
+          // console.log(this.booksCate)
         }
       })
     },
+
     // 获取小说所有分类
     _getNovelCate () {
       const params = {
@@ -298,6 +300,10 @@ export default {
       api.getNovelCate(params)
       .then((res) => {
         console.log(res)
+        if (res.ok === true) {
+          this.bookCate = this.bookCate.concat(res.female, res.press)
+          console.log(this.bookCate)
+        }
       })
     }
   },
