@@ -15,84 +15,105 @@
         </div>
       </form>
     </header>
-    <div class="d-nav">
-      <van-dropdown-menu>
-        <!-- 遮层1 -->
-        <van-dropdown-item title="综合排序">
-          <div class="nav__panel nav__panel-sort">
-          <ul class="nav__menu can-scroll nav__panel-sort__menu">
-            <li class="nav__menu__item border-top selected">综合排序</li>
-            <li class="nav__menu__item border-top">人气排序</li>
-            <li class="nav__menu__item border-top">价格最低</li>
-            <li class="nav__menu__item border-top">价格最高</li>
-          </ul>
+    <div class="d-nav" style="top: 52px;">
+      <ul class="nav__tab">
+        <li v-for="(item, index) in tabs" :key="index" class="nav__tab-item" @click="showCont(index)"
+        :class="{'selected': tabIdx === index}">
+          <p class="nav__tab-item__title">{{item.tabText}}</p>
+        </li>
+        <!-- <li class="nav__tab-item" @click="showSort"
+        :class="{'selected': showDetail0 === true}">
+          <p class="nav__tab-item__title">综合排序</p>
+        </li>
+        <li class="nav__tab-item" @click="showCate"
+        :class="{'selected': showDetail1 === true}">
+          <p class="nav__tab-item__title">{{categoryName}}</p>
+        </li>
+        <li class="nav__tab-item" @click="showFilter"
+        :class="{'selected': showDetail2 === true}">
+          <p class="nav__tab-item__title">筛选</p>
+        </li> -->
+      </ul>
+      <!-- 遮层1 -->
+      <div class="nav__panel nav__panel-sort"
+      v-show="tabIdx === 0">
+        <ul class="nav__menu can-scroll nav__panel-sort__menu">
+          <li class="nav__menu__item border-top selected">综合排序</li>
+          <li class="nav__menu__item border-top">人气排序</li>
+          <li class="nav__menu__item border-top">价格最低</li>
+          <li class="nav__menu__item border-top">价格最高</li>
+        </ul>
+      </div>
+      <!-- 遮层2 -->
+      <div class="nav__panel nav__panel-cate" v-show="tabIdx === 1">
+        <ul class="nav__menu can-scroll nav__panel-cate__mt">
+          <!-- <router-link to=""> -->
+            <li class="nav__menu__item"
+            v-for="(item, index) in cateItems" :key="index"
+            @click.stop.prevent="goCate(index)"
+            :class="{'selected': activeIdx === index}">
+              <img src="" alt="" class="nav__menu__item-icon">
+              {{item.cateTitle_short}}
+            </li>
+          <!-- </router-link> -->
+        </ul>
+        <ul class="nav__menu can-scroll nav__panel-cate__st"
+        v-if="cateItems[activeIdx]">
+          <!-- <router-link to=""> -->
+            <li class="nav__menu__item"
+            v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index"
+            @click.stop.prevent="goSubCate(item.subCateId)"
+            :class="{'selected': cursubCateId === item.subCateId}">
+              {{item.subCateTitle}}
+            </li>
+          <!-- </router-link> -->
+        </ul>
+        <ul class="nav__menu can-scroll nav__panel-cate__tt"
+        v-if="cateItems[activeIdx]">
+          <div v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index" v-show="cursubCateId == item.subCateId">
+          <router-link v-for="(list, index) in item.subCates" :key="index"
+          :to="{path: '/detail', query: {st:item.subCateId, tt: list.subId, Name: list.subName}}" replace>
+            <li class="nav__menu__item"
+            :class="{'selected': false}"
+            @click="cateSelected(list.subId, list.subName)">
+              {{list.subName}}
+            </li>
+          </router-link>
+          </div>
+        </ul>
+      </div>
+      <!-- 遮层3 -->
+      <div class="nav__panel nav__panel-filter" v-show="tabIdx === 2">
+        <div class="nav__panel-filter__wrapper">
+          <div class="nav__panel-filter__content can-scroll">
+            <section class="nav__panel-filter__menu border-top"
+            v-for="(item, index) in filters" :key="index">
+              <h1 class="menu-title">{{item.menuTitle}}</h1>
+              <div class="menu-btn" v-for="(list, index) in item.menuItems" :key="index">
+                <button>{{list.menuBtn}}</button>
+              </div>
+            </section>
+          </div>
+          <div class="nav__panel-filter__bottom border-top">
+            <span class="filter-reset">清空筛选</span>
+            <span class="filter-submit">确定</span>
+          </div>
         </div>
-        </van-dropdown-item>
-        <!-- 遮层2 -->
-        <van-dropdown-item :title="categoryName" ref="item">
-          <div class="nav__panel nav__panel-cate">
-            <ul class="nav__menu can-scroll nav__panel-cate__mt">
-                <li class="nav__menu__item"
-                v-for="(item, index) in cateItems" :key="index"
-                @click.stop.prevent="goCate(index)"
-                :class="{'selected': activeIdx === index}">
-                  <img src="" alt="" class="nav__menu__item-icon">
-                  {{item.cateTitle_short}}
-                </li>
-            </ul>
-            <ul class="nav__menu can-scroll nav__panel-cate__st"
-            v-if="cateItems[activeIdx]">
-                <li class="nav__menu__item"
-                v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index"
-                @click.stop.prevent="goSubCate(item.subCateId)"
-                :class="{'selected': cursubCateId === item.subCateId}">
-                  {{item.subCateTitle}}
-                </li>
-            </ul>
-            <ul class="nav__menu can-scroll nav__panel-cate__tt"
-            v-if="cateItems[activeIdx]">
-              <div v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index" v-show="cursubCateId == item.subCateId">
-              <router-link v-for="(list, index) in item.subCates" :key="index"
-              :to="{path: '/detail', query: {st:item.subCateId, tt: list.subId, Name: list.subName}}" replace>
-                <li class="nav__menu__item"
-                :class="{'selected': categoryName == list.subName}"
-                @click="cateSelected(list.subId)">
-                  {{list.subName}}
-                </li>
-              </router-link>
-              </div>
-            </ul>
-          </div>
-        </van-dropdown-item>
-        <!-- 遮层3 -->
-        <van-dropdown-item title="筛选">
-          <div class="nav__panel nav__panel-filter">
-            <div class="nav__panel-filter__wrapper">
-              <div class="nav__panel-filter__content can-scroll">
-                <section class="nav__panel-filter__menu border-top"
-                v-for="(item, index) in filters" :key="index">
-                  <h1 class="menu-title">{{item.menuTitle}}</h1>
-                  <div class="menu-btn" v-for="(list, index) in item.menuItems" :key="index">
-                    <button>{{list.menuBtn}}</button>
-                  </div>
-                </section>
-              </div>
-              <div class="nav__panel-filter__bottom border-top">
-                <span class="filter-reset">清空筛选</span>
-                <span class="filter-submit">确定</span>
-              </div>
-              <!-- <van-button class="confirmBtn" block type="info" @click="onConfirm">确定</van-button> -->
-            </div>
-          </div>
-        </van-dropdown-item>
-      </van-dropdown-menu>
+      </div>
+      <!-- mask -->
+      <transition name="fade">
+        <div class="nav__mask"
+        v-show="showMask"
+        @click="hideMask">
+        </div>
+      </transition>
     </div>
     <div class="d-content">
       <div class="content-list">
         <div class="search-result-wrapper">
           <div class="search-result-toast">
             <span class="text">在"</span>
-            <span class="search-result-word">{{categoryName}}</span>
+            <span class="search-result-word">{{this.$route.query.Name}}</span>
             "分类下，找到
             <span class="search-result-num">{{courseCount}}</span>
             门课程
@@ -169,6 +190,11 @@ export default {
       activeIdx: Number,
       cursubCateId: String,
       cursubId: String,
+      tabIdx: Number,
+      showMask: false,
+      showDetail1: false,
+      showDetail0: false,
+      showDetail2: false,
       filters: [
         {
           menuTitle: '活动',
@@ -309,6 +335,7 @@ export default {
           ]
         }
       ],
+      tabs: [{tabText: '综合排序'}, {tabText: this.$route.query.Name}, {tabText: '筛选'}],
       courseCount: ''
     }
   },
@@ -319,15 +346,40 @@ export default {
     goSubCate (subCateId) {
       this.cursubCateId = subCateId
     },
-    cateSelected (subId) {
-      this.$refs.item.toggle() // 切换菜单是否展示,参数为布尔值,默认false
+    showCont (idx) {
+      console.log(idx)
+      if (idx === this.tabIdx) {
+        this.tabIdx = 3
+        this.showMask = false
+      } else {
+        this.tabIdx = idx
+        this.showMask = true
+      }
+    },
+    // showSort (idx) {
+    //   this.showDetail0 = !this.showDetail0
+    // },
+    // showFilter () {
+    //   this.showDetail2 = !this.showDetail2
+    // },
+    // showCate () {
+    //   this.showDetail1 = !this.showDetail1
+    // },
+    hideMask () {
+      this.showMask = false
+      this.tabIdx = 3
+    },
+    cateSelected (subId, subName) {
       this.cursubId = subId
+      this.tabs[1].tabText = subName
+      this.showMask = false
+      this.tabIdx = 3
     }
   },
   computed: {
-    categoryName () {
-      return this.$route.query.Name
-    },
+    // categoryName () {
+    //   return (this.$route.query.Name || this.cursubName)
+    // },
     mainId () {
       return this.$route.query.mt
     },
@@ -460,7 +512,7 @@ body, html {
 .d-content {
   width: 100%;
   min-height: 100%;
-  padding-top: 102px;
+  padding-top: 92px;
 }
 .search-result-wrapper {
   background: #efeff4;
@@ -578,6 +630,41 @@ body, html {
 .course-card-wrapper .course-card-content .course-card-price .price {
   line-height: 17px;
   font-size: 17px;
+}
+/* 阴影 */
+.nav__mask {
+  display: block;
+  position: fixed;
+  top: 92px;
+  bottom: -3.57143rem;
+  z-index: -1;
+  width: 100%;
+  background-color: rgba(0,0,0,.3);
+  backdrop-filter: blur(10px);
+  opacity: 1;
+}
+.nav__mask.fade-enter-active, .nav__mask.fade-leave-active {
+  transition: all 0.3s;
+}
+.nav__mask.fade-enter, .nav__mask.fade-leave-active {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+/* 遮罩层common */
+.nav__panel {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 40px;
+  background: #fff;
+  overflow-y: auto;
+  /* transform: translate3d(0, 100%, 0) */
+}
+.nav__panel.fold-enter-active, .nav__panel.fold-leave-active {
+  transition: all 0.1s linear;
+}
+.nav__panel.fold-enter, .nav__panel.fold-leave-active {
+  transform: translate3d(0, 0, 0);
 }
 /* 遮罩层1 */
 .nav__panel-sort .nav__menu__item {
