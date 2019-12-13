@@ -16,23 +16,11 @@
       </form>
     </header>
     <div class="d-nav" style="top: 52px;">
-      <ul class="nav__tab">
+      <ul class="nav__tab border-bottom">
         <li v-for="(item, index) in tabs" :key="index" class="nav__tab-item" @click="showCont(index)"
         :class="{'selected': tabIdx === index}">
           <p class="nav__tab-item__title">{{item.tabText}}</p>
         </li>
-        <!-- <li class="nav__tab-item" @click="showSort"
-        :class="{'selected': showDetail0 === true}">
-          <p class="nav__tab-item__title">综合排序</p>
-        </li>
-        <li class="nav__tab-item" @click="showCate"
-        :class="{'selected': showDetail1 === true}">
-          <p class="nav__tab-item__title">{{categoryName}}</p>
-        </li>
-        <li class="nav__tab-item" @click="showFilter"
-        :class="{'selected': showDetail2 === true}">
-          <p class="nav__tab-item__title">筛选</p>
-        </li> -->
       </ul>
       <!-- 遮层1 -->
       <div class="nav__panel nav__panel-sort"
@@ -45,9 +33,9 @@
         </ul>
       </div>
       <!-- 遮层2 -->
-      <div class="nav__panel nav__panel-cate" v-show="tabIdx === 1">
-        <ul class="nav__menu can-scroll nav__panel-cate__mt">
-          <!-- <router-link to=""> -->
+      <div class="nav__panel nav__panel-cate"
+      v-show="tabIdx === 1">
+        <ul class="nav__menu can-scroll nav__panel-cate__mt border-top">
             <li class="nav__menu__item"
             v-for="(item, index) in cateItems" :key="index"
             @click.stop.prevent="goCate(index)"
@@ -55,18 +43,15 @@
               <img src="" alt="" class="nav__menu__item-icon">
               {{item.cateTitle_short}}
             </li>
-          <!-- </router-link> -->
         </ul>
         <ul class="nav__menu can-scroll nav__panel-cate__st"
         v-if="cateItems[activeIdx]">
-          <!-- <router-link to=""> -->
             <li class="nav__menu__item"
             v-for="(item, index) in cateItems[activeIdx].cateInfo" :key="index"
             @click.stop.prevent="goSubCate(item.subCateId)"
             :class="{'selected': cursubCateId === item.subCateId}">
               {{item.subCateTitle}}
             </li>
-          <!-- </router-link> -->
         </ul>
         <ul class="nav__menu can-scroll nav__panel-cate__tt"
         v-if="cateItems[activeIdx]">
@@ -83,7 +68,8 @@
         </ul>
       </div>
       <!-- 遮层3 -->
-      <div class="nav__panel nav__panel-filter" v-show="tabIdx === 2">
+      <div class="nav__panel nav__panel-filter"
+      v-show="tabIdx === 2">
         <div class="nav__panel-filter__wrapper">
           <div class="nav__panel-filter__content can-scroll">
             <section class="nav__panel-filter__menu border-top"
@@ -125,7 +111,8 @@
             v-if="categoryId == list.subCateId">
               <div v-for="(list1, index) in list.subCates" :key="index"
               v-if="categorysubId ? categorysubId == list1.subId : true">
-                <li v-for="(course, index) in list1.courseList" :key="index" class="course-list__item border-bottom" ref="courseItem">
+                <li class="course-list__item"
+                v-for="(course, index) in list1.courseList" :key="index" ref="courseItem">
                   <router-link :to="{path: '/courseDetail', query: {courseId: course.courseId}}">
                     <div class="course-card-wrapper">
                       <div class="course-card-cover">
@@ -192,9 +179,6 @@ export default {
       cursubId: String,
       tabIdx: Number,
       showMask: false,
-      showDetail1: false,
-      showDetail0: false,
-      showDetail2: false,
       filters: [
         {
           menuTitle: '活动',
@@ -347,33 +331,24 @@ export default {
       this.cursubCateId = subCateId
     },
     showCont (idx) {
-      console.log(idx)
+      // console.log(idx)
       if (idx === this.tabIdx) {
-        this.tabIdx = 3
+        this.tabIdx = -1
         this.showMask = false
       } else {
         this.tabIdx = idx
         this.showMask = true
       }
     },
-    // showSort (idx) {
-    //   this.showDetail0 = !this.showDetail0
-    // },
-    // showFilter () {
-    //   this.showDetail2 = !this.showDetail2
-    // },
-    // showCate () {
-    //   this.showDetail1 = !this.showDetail1
-    // },
     hideMask () {
       this.showMask = false
-      this.tabIdx = 3
+      this.tabIdx = -1
     },
     cateSelected (subId, subName) {
       this.cursubId = subId
       this.tabs[1].tabText = subName
       this.showMask = false
-      this.tabIdx = 3
+      this.tabIdx = -1
     }
   },
   computed: {
@@ -489,26 +464,70 @@ body, html {
   background-color: #fff;
 }
 .nav__tab-item {
-  -webkit-box-flex: 1;
+  position: relative;
   flex: 1;
   overflow: hidden;
-  box-sizing: border-box;
   min-width: 125px;
   height: 40px;
   line-height: 40px;
   text-align: center;
   box-shadow: 0 0 1px #ededed;
 }
+.nav__tab-item::after {
+  position: absolute;
+  top: .9rem;
+  right: .71429rem;
+  width: 7px;
+  height: 7px;
+  color: #ccc;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform: rotate(45deg);
+  content: "";
+}
 .nav__tab-item__title {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
+  max-width: 6.42857rem;
   margin: 0 auto;
+  padding-right: .71429rem;
 }
 .nav__tab-item.selected {
   color: #23b8ff;
 }
+.nav__tab-item.selected::after {
+  transform: rotate(225deg);
+  top: 1.1rem;
+  color: #8e8e8e;
+}
+/* 上下border */
+.border-bottom:after {
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  border-top: 1px solid #e1e1e1;
+  content: " ";
+  transform: scaleY(.5);
+}
+.border-bottom:after {
+  bottom: 0;
+}
+.border-top:before {
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  border-top: 1px solid #e1e1e1;
+  content: " ";
+  transform: scaleY(.5);
+}
+.border-top:before {
+  top: 0;
+}
+/* 内容 */
 .d-content {
   width: 100%;
   min-height: 100%;
@@ -536,37 +555,13 @@ body, html {
   transition: opacity .3s ease;
   background: #fff;
 }
-/* 上下border */
-.border-bottom:after {
-  display: block;
-  position: absolute;
-  right: 0;
-  left: 0;
-  border-top: 1px solid #e1e1e1;
-  content: " ";
-  transform: scaleY(.5);
-}
-/* .border-bottom:after {
-  bottom: 0;
-} */
-.border-top:before {
-  display: block;
-  position: absolute;
-  right: 0;
-  left: 0;
-  border-top: 1px solid #e1e1e1;
-  content: " ";
-  transform: scaleY(.5);
-}
-.border-top:before {
-  top: 0;
-}
 .course-list__item .course-card-wrapper {
   padding: 15px;
   clear: both;
   overflow: hidden;
   min-height: 84px;
   display: block;
+  border-bottom: 1px solid #e1e1e1;
 }
 .course-card-wrapper .course-card-cover {
   width: 140px;
@@ -648,7 +643,6 @@ body, html {
 }
 .nav__mask.fade-enter, .nav__mask.fade-leave-active {
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0);
 }
 /* 遮罩层common */
 .nav__panel {
@@ -658,10 +652,9 @@ body, html {
   top: 40px;
   background: #fff;
   overflow-y: auto;
-  /* transform: translate3d(0, 100%, 0) */
 }
 .nav__panel.fold-enter-active, .nav__panel.fold-leave-active {
-  transition: all 0.1s linear;
+  transition: all 0.3s linear;
 }
 .nav__panel.fold-enter, .nav__panel.fold-leave-active {
   transform: translate3d(0, 0, 0);
