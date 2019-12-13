@@ -8,7 +8,6 @@
       <form action="" class="header-search">
         <div class="search-tips">
           <i class="icon-font i-search2 search-icon"></i>
-          <!-- <span class="search-input-text">搜索老师、机构、课程</span> -->
         </div>
         <input type="search" class="search-input" placeholder="搜索老师、机构、课程">
         <div class="search-reset">

@@ -59,7 +59,7 @@
           <router-link v-for="(list, index) in item.subCates" :key="index"
           :to="{path: '/detail', query: {st:item.subCateId, tt: list.subId, Name: list.subName}}" replace>
             <li class="nav__menu__item"
-            :class="{'selected': false}"
+            :class="{'selected': cursubId == list.subId}"
             @click="cateSelected(list.subId, list.subName)">
               {{list.subName}}
             </li>
@@ -352,9 +352,9 @@ export default {
     }
   },
   computed: {
-    // categoryName () {
-    //   return (this.$route.query.Name || this.cursubName)
-    // },
+    categoryName () {
+      return this.$route.query.Name
+    },
     mainId () {
       return this.$route.query.mt
     },
