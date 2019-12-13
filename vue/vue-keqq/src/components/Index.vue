@@ -164,19 +164,19 @@ export default {
 }
 .search-tips {
   position: absolute;
-  left: 42px;
+  top: -2px;
+  left: 10px;
   font-size: 14px;
   color: #bbb;
 }
 .search-input {
   display: block;
   position: relative;
+  padding-left: 30px;
+  padding-right: 20px;
   border: 0;
   border-radius: 0;
-  text-align: center;
-  padding-right: 20px;
-  padding-left: 2px;
-  width: 95%;
+  width: 100%;
   height: 32px;
   font-size: 14px;
   line-height: 32px;
@@ -219,17 +219,14 @@ export default {
 .course-spec-wrapper {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 2.5%;
+  width: 95%;
   height: 100%;
-  background-size: 100% 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .course-spec-left {
-  display: inline-block;
-  position: absolute;
-  top: 8px;
-  left: 12px;
   width: 64px;
   height: 64px;
 }
@@ -238,9 +235,6 @@ export default {
   height: 100%;
 }
 .course-spec-line {
-  position: absolute;
-  left: 93px;
-  top: 22.5px;
   height: 36px;
   width: 1px;
   background-color: #c8c7cc;
@@ -248,9 +242,6 @@ export default {
   transform: scaleX(0.5);
 }
 .course-spec-right {
-  position: absolute;
-  top: 8px;
-  right: 12px;
   width: 252px;
   height: 64px;
 }

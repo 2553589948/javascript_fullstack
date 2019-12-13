@@ -429,20 +429,19 @@ body, html {
 }
 .search-tips {
   position: absolute;
-  top: 0;
-  left: 42px;
+  top: -2px;
+  left: 10px;
   font-size: 14px;
   color: #bbb;
 }
 .search-input {
   display: block;
   position: relative;
-  text-align: center;
+  padding-left: 30px;
+  padding-right: 20px;
   border: 0;
   border-radius: 0;
-  padding-right: 20px;
-  padding-left: 2px;
-  width: 95%;
+  width: 100%;
   height: 32px;
   font-size: 14px;
   line-height: 32px;
@@ -467,7 +466,6 @@ body, html {
   position: relative;
   flex: 1;
   overflow: hidden;
-  min-width: 125px;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -490,7 +488,7 @@ body, html {
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
-  max-width: 6.42857rem;
+  max-width: 5.42857rem;
   margin: 0 auto;
   padding-right: .71429rem;
 }
