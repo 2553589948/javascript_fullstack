@@ -4,6 +4,7 @@ import Mine from '@/components/page/Mine'
 import Discover from '@/components/page/Discover'
 import Story from '@/components/page/Story'
 import Bookshelf from '@/components/page/Bookshelf'
+import BookCategory from '@/components/page/BookCategory'
 import Login from '@/components/page/Login'
 import Register from '@/components/page/Register'
 
@@ -43,6 +44,14 @@ export default new Router({
       component: Story,
       meta: {
         title: '挖掘浩瀚故事'
+      }
+    },
+    {
+      path: '/bookCategory',
+      name: 'BookCategory',
+      component: BookCategory,
+      meta: {
+        title: '分类列表'
       }
     },
     {

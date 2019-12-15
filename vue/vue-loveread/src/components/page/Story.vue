@@ -133,7 +133,7 @@
             </div> -->
           </div>
           <div class="ranking-block-footer">
-            <div class="ranking-block-footer-link">
+            <div class="ranking-block-footer-link" @click="findMore(item.id)">
               <span class="ranking-block-footer-link-text">查看全部</span>
               <i class="icon">&#xe606;</i>
             </div>
@@ -305,6 +305,11 @@ export default {
           console.log(this.bookCate)
         }
       })
+    },
+
+    // 查看全部
+    findMore(rankId) {
+      this.$router.push({path: '/bookCategory', query: {'rankId': rankId}})
     }
   },
   mounted () {
@@ -372,7 +377,7 @@ export default {
         color #fff
         box-sizing border-box
         border-radius 40px
-        text-align left 
+        text-align left
         font-size 16px
         &:focus
           outline none

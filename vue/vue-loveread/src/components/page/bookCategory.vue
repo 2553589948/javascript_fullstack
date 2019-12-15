@@ -1,0 +1,230 @@
+<template>
+  <div class="bookCategory-wrapper">
+    <div class="novels-header">
+      <div class="search-box">
+        <i class="icon">&#xe61f;</i>
+        <input type="text" class="search-input" placeholder="搜索" />
+      </div>
+    </div>
+    <div class="bookCategory-content">
+      <div class="rank-page">
+        <div class="rank-page-header">
+          <div class="rank-page-header-link">
+            <img src="http://statics.zhuishushenqi.com/ranking-cover/142319144267827" alt="">
+            <h2 class="topCategory-header-title">{{rankTitle}}</h2>
+          </div>
+        </div>
+        <ul class="rank-page-bookList">
+          <li class="bookList-item"
+          v-for="(item, index) in bookList" :key="index">
+            <div class="bookList-item-container">
+              <p class="bookList-item-container-index">{{index + 1}}</p>
+              <div class="bookList-item-container-cover">
+                <img :src="'http://statics.zhuishushenqi.com' + item.cover" alt="">
+              </div>
+              <div class="bookList-item-container-info">
+                <p class="title">{{item.title}}</p>
+                <p class="author">{{item.author}}</p>
+                <p class="reading">
+                  <span class="reading-rateScore">活跃值{{item.retentionRatio}}%</span>
+                  <span class="reading-text">
+                    <span class="reading-text-num">{{item.latelyFollower}}</span>人喜欢
+                  </span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import api from '@/api'
+
+export default {
+  data () {
+    return {
+      bookList: [],
+      rankTitle: ''
+    }
+  },
+  methods: {
+    // 根据周榜_id获取排行榜小说
+    _getRankingBook() {
+      let rankId = this.$route.query.rankId
+      const params = {
+      }
+      api.getRankingBook(params, rankId)
+      .then((res) => {
+        console.log(res)
+        if (res.ok === true) {
+          this.bookList = res.ranking.books
+          this.rankTitle = res.ranking.title
+        }
+      })
+    }
+  },
+  mounted () {
+    this._getRankingBook()
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.bookCategory-wrapper
+  z-index 100
+  width 100%
+  padding-bottom 60px
+  .novels-header
+    border solid hsla(0, 0%, 100%, .05)
+    border-width 0 0 1px
+    position fixed
+    background #1f2022
+    padding-top 40px
+    z-index 102
+    width 100%
+    padding-bottom 80px
+    @media screen and (max-width: 460px)
+      padding-bottom 40px
+    .search-box
+      position relative
+      width 80%
+      max-width 840px
+      margin 0 auto
+      @media screen and (max-width: 460px)
+        padding 0 20px
+        width auto
+      .icon
+        position absolute
+        display block
+        width 20px
+        height 20px
+        top 18px
+        left 32px
+        @media screen and (max-width: 460px)
+          top 6px
+      .search-input
+        height 50px
+        line-height 50px
+        padding 0 52px
+        @media screen and (max-width: 460px)
+          height 30px
+          line-height 30px
+          padding 0 34px
+          font-size 14px
+        background rgba(238,240,244,.1)
+        display inline-block
+        width 100%
+        color #fff
+        box-sizing border-box
+        border-radius 40px
+        text-align left
+        font-size 16px
+        &:focus
+          outline none
+  
+  .bookCategory-content
+    padding-top 110px
+    padding-right 20px
+    max-width 1120px
+    margin 0 auto
+    .rank-page
+      margin 0
+      &-header
+        padding 20px 0
+        // border solid hsla(0, 0%, 100%, .05)
+        // border-width 0 0 1px
+        &-link
+          padding-left 20px
+          display inline-block
+          display flex
+          img
+            display inline-block
+            width 20px
+            height 20px
+            vertical-align bottom
+            margin-right 10px
+          .topCategory-header-title
+            font-size 20px
+            font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+            color #e34737
+      &-bookList
+        position relative
+        border 0
+        .bookList-item
+          position relative
+          &-container
+            display table
+            padding 12px 0
+            overflow hidden
+            &-index
+              width 48px
+              display table-cell
+              font-size 16px
+              font-family DIN-Medium,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+              vertical-align middle
+              text-align center
+              color #b2b4b8
+            &-cover
+              box-shadow 0 2px 16px rgba(0,0,0,.08)
+              background #d8d8d8
+              position relative
+              display table-cell
+              vertical-align middle
+              width 64px
+              height 93px
+              img
+                width 100%
+                height 100%
+            &-info
+              display table-cell
+              vertical-align middle
+              padding-left 16px
+              .title
+                padding-right 0
+                font-size 17px
+                line-height 26px
+                height 26px
+                overflow hidden
+                display -webkit-box
+                text-overflow ellipsis
+                -webkit-line-clamp 1
+                -webkit-box-orient vertical
+                height auto
+                max-height 26px
+                font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+                color #eef0f4
+              .author
+                margin-top 6px
+                font-size 14px
+                color #b2b4b8
+                line-height 21px
+                overflow hidden
+                height 21px
+                display -webkit-box
+                text-overflow ellipsis
+                -webkit-line-clamp 1
+                -webkit-box-orient vertical
+                height auto
+                max-height 21px
+              .reading
+                margin-top 6px
+                font-family DIN-Medium,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+                color #8a8c90
+                overflow hidden
+                white-space nowrap
+                text-overflow ellipsis
+                word-break break-all
+                word-wrap normal
+                &-rateScore
+                  display inline-block
+                  vertical-align middle
+                  font-size 13px
+                  padding-right 3px
+                &-text
+                  display inline-block
+                  vertical-align middle
+                  font-size 12px
+</style>

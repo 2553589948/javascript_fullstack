@@ -38,11 +38,6 @@ export function fetchGet(url, param) {
 }
 
 export default {
-  // 用户登录
-  Login (params) {
-    return fetchGet('/login', params)
-  },
-
   // 获取排行榜类型
   getRankingType (params) {
     return fetchGet('/novelapi/ranking/gender', params)
