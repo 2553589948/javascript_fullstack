@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>bind原生实现</title>
+</head>
+<body>
+  <script>
+    // Function.prototype
+    Function.prototype.myBind = function(oThis, ...aArgs) {
+      // console.log(sum === this)
+      // 先获取要绑定的函数
+      var fToBind = this
+      // fToBind有prototype
+      var fBound = function(...bArgs) {
+        // 拿到所有参数  sum函数有返回值
+        // 绑定this没有考虑优先级 如果被new调用了this指向new完的实例,否则就是第一个参数oThis
+        let isNew = this instanceof fBound
+        return fToBind.apply(isNew ? this : oThis, aArgs.concat(bArgs))
+      }
+      // fBound没有prototype.abc
+      // 解决办法 继承一下
+      fBound.prototype = Object.create(this.prototype)
+      return fBound
+    }
+    function sum(a, b, c) {
+      this.a = 789
+      return a + b + c
+    }
+    sum.prototype.abc = function() {}
+    let obj = {}
+    // 第一步调用(只是绑定this)
+    var aaa = sum.myBind(obj, 1)
+    // 第二步调用(sum的执行)
+    console.log(aaa(2, 3))
+    console.log('原型对象' + aaa.prototype.abc) // 原型对象上属性的缺失解决办法如上
+    let ccc = new aaa()
+    console.log(obj)
+  </script>
+</body>
+</html>

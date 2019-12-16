@@ -42,6 +42,7 @@
 
 <script>
 import api from '@/api'
+let male, hot
 
 export default {
   data () {
@@ -64,10 +65,27 @@ export default {
           this.rankTitle = res.ranking.title
         }
       })
+    },
+
+    // 按分类获取小说列表
+    _getBookList() {
+      let cateName = this.$route.query.cateName
+      const params = {
+        gender: male,
+        type: hot,
+        major: cateName,
+        start: 0,
+        limit: 20
+      }
+      api.getBookList(params)
+      .then((res) => {
+        console.log(res)
+      })
     }
   },
   mounted () {
-    this._getRankingBook()
+    // this._getRankingBook()
+    this._getBookList()
   }
 }
 </script>

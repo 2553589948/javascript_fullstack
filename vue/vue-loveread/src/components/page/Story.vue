@@ -148,7 +148,8 @@
         <div class="allCategory-list">
           <div class="allCategory-item"
           v-for="(item, index) in bookCate"
-          :key="index">
+          :key="index"
+          @click="findBooks(item.name)">
             <span class="allCategory-item-title">
               {{item.name}}·{{item.bookCount}}本</span>
           </div>
@@ -310,6 +311,11 @@ export default {
     // 查看全部
     findMore(rankId) {
       this.$router.push({path: '/bookCategory', query: {'rankId': rankId}})
+    },
+
+    // 按分类获取小说列表
+    findBooks(cateName) {
+      this.$router.push({path: '/bookCategory', query: {'cateName': cateName}})
     }
   },
   mounted () {
