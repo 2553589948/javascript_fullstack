@@ -143,13 +143,37 @@
       <!-- 全部分类 -->
       <div class="allCategory">
         <div class="allCategory-header">
-          <h2 class="allCategory-header-title">榜单推荐</h2>
+          <h2 class="allCategory-header-title">榜单推荐(男生)</h2>
+        </div>
+        <div class="allCategory-list">
+          <div class="allCategory-item"
+          v-for="(item, index) in maleRankList"
+          :key="index"
+          @click="findMore(item._id)">
+            <span class="allCategory-item-title">
+              {{item.shortTitle}}</span>
+          </div>
+        </div>
+        <div class="allCategory-header">
+          <h2 class="allCategory-header-title">榜单推荐(女生)</h2>
+        </div>
+        <div class="allCategory-list">
+          <div class="allCategory-item"
+          v-for="(item, index) in femaleRankList"
+          :key="index"
+          @click="findMore(item._id)">
+            <span class="allCategory-item-title">
+              {{item.shortTitle}}</span>
+          </div>
+        </div>
+        <div class="allCategory-header">
+          <h2 class="allCategory-header-title">全部分类</h2>
         </div>
         <div class="allCategory-list">
           <div class="allCategory-item"
           v-for="(item, index) in bookCate"
           :key="index"
-          @click="findBooks(item.name)">
+          @click="findCateBooks(item.name)">
             <span class="allCategory-item-title">
               {{item.name}}·{{item.bookCount}}本</span>
           </div>
@@ -231,7 +255,9 @@ export default {
           cateTitle: '玄幻奇幻榜',
           cateCount: 36101
         }
-      ]
+      ],
+      maleRankList: [],
+      femaleRankList: []
     }
   },
   computed: {
@@ -252,9 +278,13 @@ export default {
       .then((res) => {
         console.log(res)
         if (res.ok === true) {
-          console.log(res.picture)
+          // console.log(res.picture)
           this.rankList = res.picture
           this._getRankId()
+          // 获取全部排行榜分类
+          // console.log(res.male)
+          this.maleRankList = res.male
+          this.femaleRankList = res.female
           // this._getRankingBook(res.picture[0]._id)
           // http://statics.zhuishushenqi.com/ranking-cover/142319144267827
         }
@@ -282,7 +312,7 @@ export default {
         console.log(res)
         if (res.ok === true) {
           this.rankListsInfo = res.ranking
-          console.log(this.rankListsInfo)
+          // console.log(this.rankListsInfo)
           // 首次加载6条数据
           this.booksList = res.ranking.books.splice(0, 6)
           // 把6数据以数组塞入原对象
@@ -302,7 +332,8 @@ export default {
       .then((res) => {
         console.log(res)
         if (res.ok === true) {
-          this.bookCate = this.bookCate.concat(res.female, res.press)
+          this.bookCate = res.male
+          // this.bookCate = Object.assign([res.male], {'gender': 'female'})
           console.log(this.bookCate)
         }
       })
@@ -314,7 +345,7 @@ export default {
     },
 
     // 按分类获取小说列表
-    findBooks(cateName) {
+    findCateBooks(cateName, gender) {
       this.$router.push({path: '/bookCategory', query: {'cateName': cateName}})
     }
   },

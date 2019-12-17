@@ -16,7 +16,8 @@
         </div>
         <ul class="rank-page-bookList">
           <li class="bookList-item"
-          v-for="(item, index) in bookList" :key="index">
+          v-for="(item, index) in bookList" :key="index"
+          @click="findBookInfo(item._id)">
             <div class="bookList-item-container">
               <p class="bookList-item-container-index">{{index + 1}}</p>
               <div class="bookList-item-container-cover">
@@ -31,6 +32,7 @@
                     <span class="reading-text-num">{{item.latelyFollower}}</span>人喜欢
                   </span>
                 </p>
+                <p class="desc">{{item.shortIntro}}</p>
               </div>
             </div>
           </li>
@@ -42,7 +44,6 @@
 
 <script>
 import api from '@/api'
-let male, hot
 
 export default {
   data () {
@@ -70,22 +71,38 @@ export default {
     // 按分类获取小说列表
     _getBookList() {
       let cateName = this.$route.query.cateName
+      let gender = this.$route.query.gender
       const params = {
-        gender: male,
-        type: hot,
+        // gender: 'male',
+        // type: month,
         major: cateName,
         start: 0,
-        limit: 20
+        limit: 10
       }
       api.getBookList(params)
       .then((res) => {
         console.log(res)
+        if (res.ok === true && res.books.length > 0) {
+          this.bookList = res.books
+          this.rankTitle = this.$route.query.cateName
+        } else {
+          this.rankTitle = this.$route.query.cateName
+          this.$toast('抱歉，暂无此分类内容！敬请期待')
+        }
       })
+    },
+
+    // 根据bookId查找小说详情
+    findBookInfo(bookId) {
+      this.$router.push({path: '/reader', query: {'bookId': bookId}})
     }
   },
   mounted () {
-    // this._getRankingBook()
-    this._getBookList()
+    if (this.$route.query.rankId) {
+      this._getRankingBook()
+    } else if (this.$route.query.cateName) {
+      this._getBookList()
+    }
   }
 }
 </script>
@@ -94,18 +111,19 @@ export default {
 .bookCategory-wrapper
   z-index 100
   width 100%
+  min-height 100vh
   padding-bottom 60px
   .novels-header
     border solid hsla(0, 0%, 100%, .05)
     border-width 0 0 1px
     position fixed
     background #1f2022
-    padding-top 40px
+    padding-top 20px
     z-index 102
     width 100%
-    padding-bottom 80px
+    padding-bottom 40px
     @media screen and (max-width: 460px)
-      padding-bottom 40px
+      padding-bottom 20px
     .search-box
       position relative
       width 80%
@@ -142,12 +160,16 @@ export default {
         font-size 16px
         &:focus
           outline none
-  
   .bookCategory-content
     padding-top 110px
-    padding-right 20px
     max-width 1120px
     margin 0 auto
+    padding-right 40px
+    @media screen and (max-width: 960px)
+      padding-right 30px
+    @media screen and (max-width: 460px)
+      padding-right 20px
+      padding-top 70px
     .rank-page
       margin 0
       &-header
@@ -187,12 +209,14 @@ export default {
               color #b2b4b8
             &-cover
               box-shadow 0 2px 16px rgba(0,0,0,.08)
-              background #d8d8d8
               position relative
               display table-cell
               vertical-align middle
-              width 64px
-              height 93px
+              width 108px
+              height 156px
+              @media screen and (max-width: 460px)
+                width 64px
+                height 93px
               img
                 width 100%
                 height 100%
@@ -245,4 +269,20 @@ export default {
                   display inline-block
                   vertical-align middle
                   font-size 12px
+              .desc
+                margin-top 8px
+                font-size 14px
+                color #8a8c90
+                line-height 22px
+                overflow hidden
+                height 44px
+                display -webkit-box
+                text-overflow ellipsis
+                -webkit-line-clamp 2
+                line-clamp 2
+                -webkit-box-orient vertical
+                height auto
+                max-height 44px
+                @media screen and (max-width: 460px)
+                  display none
 </style>

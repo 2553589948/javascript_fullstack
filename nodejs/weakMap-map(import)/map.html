@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1 1 2 3 5 8  递归时会重复计算,所以优化时要做缓存(使用map)
+    let map = new Map()
+    function fb(n) {
+      if (n === 1 || n === 2) {
+        return 1
+      }
+      // return fb(n - 1) + fb(n - 2)
+      if (map.get(n)) return map.get(n)
+      let res = fb(n - 1) + fb(n - 2)
+      map.set(n, res)
+      return res
+    }
+    // fb(34) fb(33)
+    console.time('fb') // 加个时间戳
+    let res = fb(35)
+    console.timeEnd('fb')
+    console.log(res)
+  </script>
+</body>
+</html>

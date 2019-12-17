@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>柯里化</title>
+</head>
+<body>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.min.js"></script>
+  <script>
+    function sum(a, b, c) {
+      return a + b + c
+    }  
+    // 如何获取参数的长度  方法名.length或者args.length
+
+    const sumCurry = _.curry(sum)
+    const add10 = sumCurry(10)
+    const add30 = add10(20)
+    const sumRes = add30(30)
+    console.log(sumRes)
+    console.log(sumCurry(30)(40)(50))
+
+    // 如果函数参数数量 === 已经接收到的参数数量 求值 否则返回一个函数 继续接收参数
+
+    // 对谁柯里化
+    function myCurry(func) {
+      let len = func.length
+      const _curry = function(...args) {
+        // debugger
+        //  >= 多传的参数丢弃
+        if (args.length >= len) {
+          return func(...args)
+        }
+        return function(...parms) {
+          let _args = [...args, ...parms]
+          if (_args.length === len) {
+            return func(..._args)
+          } else {
+            return _curry(..._args)
+          }
+        }
+      }
+      return _curry
+    }
+    const sum1 = myCurry(sum)
+    console.log(sum1(10)(20)(30))
+    console.log(sum1(10, 20, 30))
+    console.log(sum1(10, 20, 30, 40))
+
+  </script>
+</body>
+</html>

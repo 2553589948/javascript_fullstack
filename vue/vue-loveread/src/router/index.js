@@ -4,7 +4,8 @@ import Mine from '@/components/page/Mine'
 import Discover from '@/components/page/Discover'
 import Story from '@/components/page/Story'
 import Bookshelf from '@/components/page/Bookshelf'
-import BookCategory from '@/components/page/BookCategory'
+import BookCategory from '@/components/page/bookCategory'
+import Reader from '@/components/page/reader'
 import Login from '@/components/page/Login'
 import Register from '@/components/page/Register'
 
@@ -52,6 +53,14 @@ export default new Router({
       component: BookCategory,
       meta: {
         title: '分类列表'
+      }
+    },
+    {
+      path: '/reader',
+      name: 'Reader',
+      component: Reader,
+      meta: {
+        title: '详情'
       }
     },
     {
