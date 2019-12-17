@@ -58,6 +58,11 @@ export default {
     return fetchGet('/novelapi/book/by-categories', params)
   },
 
+  // 根据小说Id获取小说详情
+  getBookInfo (params, id) {
+    return fetchGet('/novelapi/book/' + id, params)
+  },
+
   // 获取新闻
   neteasyNews (params) {
     return fetchGet('/api/getWangYiNews', params)
