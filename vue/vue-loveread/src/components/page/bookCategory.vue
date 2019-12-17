@@ -61,9 +61,12 @@ export default {
       api.getRankingBook(params, rankId)
       .then((res) => {
         console.log(res)
-        if (res.ok === true) {
+        if (res.ok === true && res.ranking.books.length > 0) {
           this.bookList = res.ranking.books
           this.rankTitle = res.ranking.title
+        } else {
+          this.rankTitle = res.ranking.title
+          this.$toast('抱歉，暂无内容！敬请期待')
         }
       })
     },

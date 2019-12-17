@@ -24,7 +24,8 @@
           </div>
           <div class="ranking-block-body">
             <!-- 横向排行 -->
-            <div class="book-wrap-item row-ranking" v-for="(list, index) in item[0]" :key="index">
+            <div class="book-wrap-item row-ranking" v-for="(list, index) in item[0]" :key="index"
+            @click="findBookInfo(list._id)">
               <div class="ranking-block-book">
                 <div class="ranking-block-book-container">
                   <div class="ranking-block-book-cover">
@@ -337,6 +338,11 @@ export default {
           console.log(this.bookCate)
         }
       })
+    },
+
+    // 根据bookId查找小说详情
+    findBookInfo(bookId) {
+      this.$router.push({path: '/reader', query: {'bookId': bookId}})
     },
 
     // 查看全部
