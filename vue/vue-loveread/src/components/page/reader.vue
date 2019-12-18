@@ -63,13 +63,22 @@
           </div>
         </div>
       </div>
-      <div class="readerChapter"></div>
+      <div class="readerChapterContent">
+        <div class="chapterTitle"></div>
+        <div class="renderTargetContainer">
+          <div class="renderTargetContent"
+          style="width: 327px; height: 1591px;">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import api from '@/api'
+let chapters
+
 export default {
   data () {
     return {
@@ -106,10 +115,23 @@ export default {
     },
     hideMask() {
       this.showContent = false
+    },
+
+    // 根据小说id获取小说章节
+    _getBookChapters() {
+      let bookId = this.$route.query.bookId
+      let params = {
+        view: chapters
+      }
+      api.getBookChapters(params, bookId)
+      .then((res) => {
+        console.log(res)
+      })
     }
   },
   mounted () {
     this._getBookInfo()
+    this._getBookChapters()
   }
 }
 </script>
@@ -313,4 +335,17 @@ export default {
                 margin-bottom 12px
               &-title
                 color #8a8c90
+    .readerChapterContent
+      margin 0 24px
+      color #d0d3d8
+      font-size 19px
+      text-align justify
+      .chapterTitle
+        font-size 20px
+        font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+        margin-bottom 18px
+        color #eef0f4
+        font-weight 700
+      .renderTargetContainer
+        position relative
 </style>

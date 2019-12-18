@@ -36,11 +36,16 @@ for(let item of set2.values()) {
   // console.log(item)
 }
 
+// console.log(Set.prototype[Symbol.iterator] === Set.prototype.values)
+
+for(let item of set2) {
+  // console.log(item)
+}
+
 for(let item of set2.entries()) {
   // console.log(item)
 }
 
-// console.log(Set.prototype[Symbol.iterator] === Set.prototype.values)
 
 set2.forEach((value, key) => { // 类数组也可以用forEach
   console.log(key + ':' + value)
