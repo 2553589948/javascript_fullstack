@@ -73,9 +73,19 @@ export default {
     return fetchGet('/novelapi/btoc', params)
   },
 
+  // 根据小说id获取小说正版源于盗版源(混合)
+  getBookAtoc (params) {
+    return fetchGet('/novelapi/atoc', params)
+  },
+
+  // 根据小说源id获取小说章节
+  getBookChaptersSource (params, sId) {
+    return fetchGet('/novelapi/atoc/' + sId, params)
+  },
+
   //根据章节地址link获取小说章节内容
   getBookChapterCont (params, link) {
-    return fetchGet('/chapterapi/' + link, params)
+    return fetchGet('/chapter/' + link, params)
   },
 
   // 获取新闻

@@ -26,20 +26,20 @@ module.exports = {
           '^/novelapi': ''
         }      
       },
-      '/chapterapi': {
-        target: 'http://chapterup.zhuishushenqi.com/chapter',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/chapterapi' : ''
-        }
-      }
-      // '/chapterapi': {
-      //   target: 'http://chapter2.zhuishushenqi.com/chapter',
+      // '/chapter': {
+      //   target: 'http://chapterup.zhuishushenqi.com',
       //   changeOrigin: true,
       //   pathRewrite: {
-      //     '^/chapterapi' : ''
+      //     '^/chapter': '/chapter'
       //   }
-      // }  
+      // }
+      '/chapter': {
+        target: 'http://chapter2.zhuishushenqi.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/chapter': '/chapter'
+        }
+      }
     },
 
     // Various Dev Server settings

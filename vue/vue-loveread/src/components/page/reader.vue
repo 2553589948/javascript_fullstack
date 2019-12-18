@@ -66,9 +66,8 @@
       <div class="readerChapterContent">
         <div class="chapterTitle">{{chapterContent.title}}</div>
         <div class="renderTargetContainer">
-          <div class="renderTargetContent"
-          style="width: 327px; height: 1591px;">
-            {{chapterContent.body}}
+          <div class="renderTargetContent">
+            {{chapterContent.cpContent}}
           </div>
         </div>
       </div>
@@ -88,7 +87,6 @@ export default {
       updateTime: '',
       wordCount: '',
       showContent: false,
-      // chapterLink: ''
       chapterContent: []
     }
   },
@@ -128,16 +126,18 @@ export default {
       }
       api.getBookChapters(params, bookId)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.ok === true) {
-          let chapterLink = res.mixToc.chapters[2].link
-          console.log(chapterLink)
-          this._getBookChapterCont(chapterLink)
+          let chapterLink = res.mixToc.chapters[0].link
+          let id = res.mixToc._id
+          // this._getBookChaptersSource(id)
+          // console.log(chapterLink)
+          // this._getBookChapterCont(chapterLink)
         }
       })
     },
 
-    // 根据小说id获取小说正版源
+    // 根据小说id获取小说正版源和源id
     _getBookBtoc() {
       let bookId = this.$route.query.bookId
       let params = {
@@ -146,10 +146,40 @@ export default {
       }
       api.getBookBtoc(params)
       .then((res) => {
+        // console.log(res)
+        // let bSourceId = res[0]._id
+        // console.log(bSourceId)
+        // this._getBookChaptersSource(bSourceId)
+      })
+    },
+
+    // 根据小说id获取小说正版源于盗版源(混合)和源id
+    _getBookAtoc() {
+      let bookId = this.$route.query.bookId
+      let params = {
+        view: 'summary',
+        book: bookId
+      }
+      api.getBookAtoc(params)
+      .then((res) => {
         console.log(res)
-        let chapterBtocLink = res[0].link
-        console.log(chapterBtocLink)
-        // this._getBookChapterCont(chapterBtocLink)
+        let sourceId = res[0]._id
+        // console.log(sourceId)
+        this._getBookChaptersSource(sourceId)
+      })
+    },
+
+    // 根据小说源id获取小说章节
+    _getBookChaptersSource(sourceId) {
+      let params = {
+        view: 'chapters'
+      }
+      api.getBookChaptersSource(params, sourceId)
+      .then((res) => {
+        console.log(res)
+        let chapterAtocLink = res.chapters[0].link
+        console.log(chapterAtocLink)
+        this._getBookChapterCont(chapterAtocLink)
       })
     },
 
@@ -170,6 +200,7 @@ export default {
     this._getBookInfo()
     this._getBookChapters()
     this._getBookBtoc()
+    this._getBookAtoc()
   }
 }
 </script>
@@ -177,6 +208,7 @@ export default {
 <style lang="stylus" scoped>
 .reader-wrapper
   height 100%
+  padding-bottom 100px
   .reader-content
     max-width 1120px
     min-height 100%
@@ -378,12 +410,13 @@ export default {
       color #d0d3d8
       font-size 19px
       text-align justify
+      line-height 1.8
       .chapterTitle
         font-size 20px
         font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
         margin-bottom 18px
         color #eef0f4
-        font-weight 700
+        font-weight 600
       .renderTargetContainer
         position relative
 </style>
