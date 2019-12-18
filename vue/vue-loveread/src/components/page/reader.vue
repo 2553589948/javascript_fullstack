@@ -57,17 +57,18 @@
               </div>
               <div class="pub">
                 <span class="pub-title">分类</span>
-                <span>{{bookInfo.majorCate}}-{{bookInfo.minorCate}}</span>
+                <span>{{bookInfo.majorCate}}-{{bookInfo.minorCateV2}}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="readerChapterContent">
-        <div class="chapterTitle"></div>
+        <div class="chapterTitle">{{chapterContent.title}}</div>
         <div class="renderTargetContainer">
           <div class="renderTargetContent"
           style="width: 327px; height: 1591px;">
+            {{chapterContent.body}}
           </div>
         </div>
       </div>
@@ -77,7 +78,7 @@
 
 <script>
 import api from '@/api'
-let chapters
+let chapters, summary
 
 export default {
   data () {
@@ -86,7 +87,9 @@ export default {
       rating: [],
       updateTime: '',
       wordCount: '',
-      showContent: false
+      showContent: false,
+      // chapterLink: ''
+      chapterContent: []
     }
   },
   methods: {
@@ -121,17 +124,52 @@ export default {
     _getBookChapters() {
       let bookId = this.$route.query.bookId
       let params = {
-        view: chapters
+        view: 'chapters'
       }
       api.getBookChapters(params, bookId)
       .then((res) => {
         console.log(res)
+        if (res.ok === true) {
+          let chapterLink = res.mixToc.chapters[2].link
+          console.log(chapterLink)
+          this._getBookChapterCont(chapterLink)
+        }
+      })
+    },
+
+    // 根据小说id获取小说正版源
+    _getBookBtoc() {
+      let bookId = this.$route.query.bookId
+      let params = {
+        view: 'summary',
+        book: bookId
+      }
+      api.getBookBtoc(params)
+      .then((res) => {
+        console.log(res)
+        let chapterBtocLink = res[0].link
+        console.log(chapterBtocLink)
+        // this._getBookChapterCont(chapterBtocLink)
+      })
+    },
+
+    //根据章节地址link获取小说章节内容
+    _getBookChapterCont(link) {
+      let params = {
+      }
+      api.getBookChapterCont(params, link)
+      .then((res) => {
+        console.log(res)
+        if (res.ok === true) {
+          this.chapterContent = res.chapter
+        }
       })
     }
   },
   mounted () {
     this._getBookInfo()
     this._getBookChapters()
+    this._getBookBtoc()
   }
 }
 </script>
