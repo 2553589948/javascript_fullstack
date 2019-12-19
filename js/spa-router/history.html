@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  history.pushState({}, '', '/url1')
+  history.pushState({}, '', '/url2')
+  history.pushState({}, '', '/url3')
+  history.go(-2)
+  setTimeout(() => {
+    history.pushState({}, '', '/url4')
+  }, 3000);
+
+  history.forward()
+  history.back()
+  // 替换url地址 应用场景：登录的重定向
+  history.replaceState({}, '', '/url0')
+
+
+  // 1 劫持
+  const backup = history.pushState
+  // 2
+  history.pushState = function(...args) {
+    console.log('url变了')
+    // 3
+    backup.call(this, ...args)
+  }
+
+  const backPush = Array.prototype.push
+  Array.prototype.push = function() {
+    console.log('array change')
+    backPush()
+  }
+  </script>
+</body>
+</html>

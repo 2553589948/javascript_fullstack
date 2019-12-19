@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body{
+    scroll-behavior: smooth; /* 滚动行为：平滑 */
+  }
+  .box {
+    height: 5000px;
+    background-color: orangered;
+  }
+  </style>
+</head>
+<body>
+  <!-- #hash 哈希锚点 -->
+  <a id="top"></a>
+  <div class="box pink"></div>
+  <a href="#top">回到顶部</a>
+  <a href="#/home">home</a>
+  <a href="#/detail">detail</a>
+  <script>
+  window.onhashchange = function() {
+    console.log('render')
+  }
+  </script>
+</body>
+</html>

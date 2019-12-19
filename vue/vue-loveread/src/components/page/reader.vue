@@ -71,6 +71,31 @@
           </div>
         </div>
       </div>
+      <div class="readerFooter">
+        <div>
+          <div class="footer-btn nextChapter"
+          @click="toNextChapter(chapterContent.order)">下一章</div>
+          <div class="footer-btn blue">敬请期待</div>
+        </div>
+      </div>
+    </div>
+    <div class="readerBar">
+      <div class="bar-item home">
+        <span class="icon">&#xe67d;</span>
+        <span class="txt">书城</span>
+      </div>
+      <div class="bar-item entries">
+        <span class="icon">&#xe6ae;</span>
+        <span class="txt">目录</span>
+      </div>
+      <div class="bar-item setting">
+        <span class="icon">&#xe632;</span>
+        <span class="txt">设置</span>
+      </div>
+      <div class="addShelf">
+        <span class="icon shelf">&#xe603;</span>
+        <span class="txt">加入书架</span>
+      </div>
     </div>
   </div>
 </template>
@@ -87,6 +112,7 @@ export default {
       updateTime: '',
       wordCount: '',
       showContent: false,
+      allChapters: [],
       chapterContent: []
     }
   },
@@ -177,6 +203,7 @@ export default {
       api.getBookChaptersSource(params, sourceId)
       .then((res) => {
         console.log(res)
+        this.allChapters = res.chapters
         let chapterAtocLink = res.chapters[0].link
         console.log(chapterAtocLink)
         this._getBookChapterCont(chapterAtocLink)
@@ -194,12 +221,21 @@ export default {
           this.chapterContent = res.chapter
         }
       })
+    },
+
+    toNextChapter(orderIdx) {
+      this._getBookChapterCont(this.allChapters[orderIdx].link)
+      let bookInfoEle = document.querySelector('.readerBookInfo')
+      if (bookInfoEle) {
+        bookInfoEle.style.display = 'none'
+      }
+      // this.$router.push({path: '/reader', query: {'bookId': this.$route.query.bookId, 'order': orderIdx + 1}})
     }
   },
   mounted () {
     this._getBookInfo()
-    this._getBookChapters()
-    this._getBookBtoc()
+    // this._getBookChapters()
+    // this._getBookBtoc()
     this._getBookAtoc()
   }
 }
@@ -208,14 +244,13 @@ export default {
 <style lang="stylus" scoped>
 .reader-wrapper
   height 100%
-  padding-bottom 100px
   .reader-content
     max-width 1120px
     min-height 100%
     margin-left auto
     margin-right auto
     .readerBookInfo
-      margin 0 24px 24px
+      margin 0 24px
       padding-bottom 28px
       position relative
       &::after
@@ -347,10 +382,10 @@ export default {
                 -webkit-box-orient vertical
       .dialog
         position fixed  
-        z-index 100
+        z-index 110
         .dialog-mask
           position fixed  
-          z-index 102
+          z-index 112
           top 0
           bottom 0
           left 0
@@ -359,7 +394,7 @@ export default {
           height 100%
           background rgba(0,0,0,.4)
         .dialog-container
-          z-index 110
+          z-index 120
           width 80%
           max-width 500px
           max-height 80%
@@ -407,6 +442,7 @@ export default {
                 color #8a8c90
     .readerChapterContent
       margin 0 24px
+      padding-top 24px
       color #d0d3d8
       font-size 19px
       text-align justify
@@ -419,4 +455,76 @@ export default {
         font-weight 600
       .renderTargetContainer
         position relative
+    .readerFooter
+      text-align center
+      padding 80px 36px
+      .footer-btn
+        display block
+        max-width 400px
+        height 60px
+        line-height 60px
+        margin 0 auto 24px
+        border-radius 6px
+        text-align center
+        font-size 16px
+        font-weight 500
+        background-color hsla(0,0%,100%,.1)
+        color #eef0f4
+        transition background-color .2s ease-in-out
+        @media screen and (max-width: 767px)
+          max-width 100%
+          height 50px
+          line-height 50px
+        &.blue
+          background linear-gradient(90deg,#0087fc,#00a3f5)
+          color #fff
+  .readerBar
+    position fixed
+    z-index 102
+    bottom 0
+    width 100%
+    height 58px
+    display flex
+    align-items center
+    justify-content space-between
+    background-color #101418
+    .bar-item
+      flex 1
+      display flex
+      flex-direction column
+      justify-content center
+      align-items center
+      text-align center
+      height 100%
+      .icon
+        // width 24px
+        // height 24px
+        font-size 18px
+      .txt
+        margin-top 6px
+        font-size 10px
+        color #b2b4b8
+    .addShelf
+      margin 0 16px
+      display inline-block
+      height 40px
+      line-height 40px
+      font-size 15px
+      border-radius 20px
+      padding 0 28px
+      position relative
+      min-width 34px
+      font-weight 500
+      text-align center
+      background linear-gradient(90deg,#0087fc,#28b7ff)
+      color #fff!important
+      user-select none
+      .icon
+        // width 24px
+        // height 24px
+        font-size 18px
+        vertical-align middle
+        margin-right 6px
+      .txt
+        vertical-align middle
 </style>
