@@ -80,10 +80,10 @@
       </div>
     </div>
     <div class="readerBar">
-      <div class="bar-item home">
+      <router-link :to="{path: '/Story'}" class="bar-item home" tag="div">
         <span class="icon">&#xe67d;</span>
         <span class="txt">书城</span>
-      </div>
+      </router-link>
       <div class="bar-item entries" @click="showEntry">
         <span class="icon">&#xe605;</span>
         <span class="txt">目录</span>
@@ -103,7 +103,7 @@
       <div class="readerEntries" v-show="showEntries">
         <div class="readerEntries-bookInfo">
           <div class="bookInfo">
-            <h2 class="title">
+            <h2 class="title" @click="toNextChapter(0)">
               <span class="title-txt">{{bookInfo.title}}</span>
               <span class="title-arrow icon">&#xe606;</span>
             </h2>
@@ -111,12 +111,13 @@
           </div>
         </div>
         <div class="readerEntries-sort">
-          <div class="sort-inner">
-            <span class="sort-icon"></span>
+          <div class="sort-inner" @click="chapterSort">
+            <span id="sort"></span>
           </div>
         </div>
         <ul class="readerEntries-list">
-          <li class="chapterItem" v-for="(item, index) in allChapters" :key="index">
+          <li class="chapterItem" v-for="(item, index) in allChapters" :key="index"
+          @click="toNextChapter(item.order - 1)">
             <div class="chapterItem-link">
               <span class="chapterItem-txt" :class="{'current': chapterContent.order === item.order}">{{item.title}}</span>
             </div>
@@ -255,13 +256,31 @@ export default {
       })
     },
 
+    // 阅读每章小说内容
     toNextChapter(orderIdx) {
       this._getBookChapterCont(this.allChapters[orderIdx].link)
+      this.showEntries = false
       let bookInfoEle = document.querySelector('.readerBookInfo')
-      if (bookInfoEle) {
+      if (orderIdx > 0) {
         bookInfoEle.style.display = 'none'
+      } else if (orderIdx === 0) {
+        bookInfoEle.style.display = ''
       }
       // this.$router.push({path: '/reader', query: {'bookId': this.$route.query.bookId, 'order': orderIdx + 1}})
+    },
+
+    // 章节倒序
+    chapterSort() {
+      let sortClassName = document.getElementById('sort').className
+      let ele = document.querySelector('.readerEntries-list')
+      const t = document.querySelector('.readerEntries-list').scrollHeight
+      if (sortClassName === 'active') {
+        document.getElementById('sort').className = ''
+        ele.scrollTo({top: 0, left: 0, behavior: 'auto'})
+      } else {
+        document.getElementById('sort').className = 'active'
+        ele.scrollTo({top: t, left: 0, behavior: 'auto'})
+      }
     }
   },
   mounted () {
@@ -626,21 +645,24 @@ export default {
           transform scale(.5)
           transform-origin 0 0
           pointer-events none
-        .sort-icon
+        #sort
           display inline-block
           width 16px
           height 100%
           cursor pointer
           opacity .7
-          background-image url(https://wrwebnjlogic-40036.sh.gfp.tencent-cloud.com/image/reader_catalog_scroll_3x.6349030e.png)
           background url(https://wrwebnjlogic-40036.sh.gfp.tencent-cloud.com/image/reader_catalog_scroll.89206a73.png) no-repeat
           background-size 16px 13px
           background-position 50% 50%
           transition transform .3s ease-in-out
           transform rotate(0)
+          &.active
+            opacity 1
+            transform rotate(180deg)
     .readerEntries-list
       flex auto
       overflow auto
+      position relative
       .chapterItem
         height 52px
         line-height 52px
