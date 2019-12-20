@@ -85,7 +85,7 @@
         <span class="txt">书城</span>
       </div>
       <div class="bar-item entries">
-        <span class="icon">&#xe6ae;</span>
+        <span class="icon">&#xe605;</span>
         <span class="txt">目录</span>
       </div>
       <div class="bar-item setting">
@@ -95,6 +95,33 @@
       <div class="addShelf">
         <span class="icon shelf">&#xe603;</span>
         <span class="txt">加入书架</span>
+      </div>
+    </div>
+    <!-- mask -->
+    <div>
+      <div class="bar-mask"></div>
+      <div class="readerEntries" v-show="showEntries">
+        <div class="readerEntries-bookInfo">
+          <div class="bookInfo">
+            <h2 class="title">
+              <span class="title-txt">{{bookInfo.title}}</span>
+              <span class="title-arrow icon">&#xe606;</span>
+            </h2>
+            <div class="author">{{bookInfo.author}}</div>
+          </div>
+        </div>
+        <div class="readerEntries-sort">
+          <div class="sort-inner">
+            <span class="sort-icon"></span>
+          </div>
+        </div>
+        <ul class="readerEntries-list">
+          <li class="chapterItem">
+            <div class="chapterItem-link">
+              <span class="chapterItem-txt"></span>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -113,7 +140,8 @@ export default {
       wordCount: '',
       showContent: false,
       allChapters: [],
-      chapterContent: []
+      chapterContent: [],
+      showEntries: true // 目录弹层
     }
   },
   methods: {
@@ -497,8 +525,6 @@ export default {
       text-align center
       height 100%
       .icon
-        // width 24px
-        // height 24px
         font-size 18px
       .txt
         margin-top 6px
@@ -520,11 +546,101 @@ export default {
       color #fff!important
       user-select none
       .icon
-        // width 24px
-        // height 24px
         font-size 18px
         vertical-align middle
         margin-right 6px
       .txt
         vertical-align middle
+  .readerEntries
+    position fixed
+    background-color #1f2022
+    width 100%
+    margin-left 0
+    left 0
+    right 0
+    top 88px
+    bottom 56px
+    z-index 90
+    box-shadow -20px 0 20px 0 rgba(0,0,0,.1)
+    display flex
+    flex-direction column
+    &-bookInfo
+      padding 18px 20px 0
+      .bookInfo
+        padding-top 2px
+        display flex
+        flex-direction column
+        justify-content center
+        .title
+          font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+          font-size 16px
+          color #eef0f4
+          font-weight 400
+          &-txt
+            vertical-align middle
+          &-arrow
+            display inline-block
+            font-size 12px
+            vertical-align middle
+            margin-left 4px
+        .author
+          margin-top 7px
+          font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+          font-size 12px
+          color #b2b4b8
+    .readerEntries-sort
+      padding 0 20px
+      .sort-inner
+        position relative
+        border 0
+        height 40px
+        text-align right
+        border-radius 0
+        .sort-icon
+          display inline-block
+          width 16px
+          height 100%
+          cursor pointer
+          opacity .7
+          background-image url(https://wrwebnjlogic-40036.sh.gfp.tencent-cloud.com/image/reader_catalog_scroll_3x.6349030e.png)
+          background url(https://wrwebnjlogic-40036.sh.gfp.tencent-cloud.com/image/reader_catalog_scroll.89206a73.png) no-repeat
+          background-size 16px 13px
+          background-position 50% 50%
+          transition transform .3s ease-in-out
+          transform rotate(0)
+    .readerEntries-list
+      flex auto
+      overflow auto
+      .chapterItem
+        height 52px
+        line-height 52px
+        padding 0 20px
+        .chapterItem-link
+          display flex
+          justify-content space-between
+          align-items center
+          border-radius 0
+          position relative
+          border 0
+          .chapterItem-txt
+            overflow hidden
+            white-space nowrap
+            text-overflow ellipsis
+            word-break break-all
+            word-wrap normal
+            color #b2b4b8
+            font-size 15px
+          &::after
+            content ""
+            position absolute
+            top 0
+            left 0
+            width 200%
+            height 200%
+            border-radius 0
+            border solid hsla(0,0%,100%,.05)
+            border-width 0 0 1px
+            transform scale(.5)
+            transform-origin 0 0
+            pointer-events none
 </style>
