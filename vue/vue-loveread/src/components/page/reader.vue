@@ -84,7 +84,7 @@
         <span class="icon">&#xe67d;</span>
         <span class="txt">书城</span>
       </div>
-      <div class="bar-item entries">
+      <div class="bar-item entries" @click="showEntry">
         <span class="icon">&#xe605;</span>
         <span class="txt">目录</span>
       </div>
@@ -99,7 +99,7 @@
     </div>
     <!-- mask -->
     <div>
-      <div class="bar-mask"></div>
+      <div class="bar-mask" v-show="showEntries" @click="hideMask"></div>
       <div class="readerEntries" v-show="showEntries">
         <div class="readerEntries-bookInfo">
           <div class="bookInfo">
@@ -116,9 +116,9 @@
           </div>
         </div>
         <ul class="readerEntries-list">
-          <li class="chapterItem">
+          <li class="chapterItem" v-for="(item, index) in allChapters" :key="index">
             <div class="chapterItem-link">
-              <span class="chapterItem-txt"></span>
+              <span class="chapterItem-txt" :class="{'current': chapterContent.order === item.order}">{{item.title}}</span>
             </div>
           </li>
         </ul>
@@ -141,7 +141,7 @@ export default {
       showContent: false,
       allChapters: [],
       chapterContent: [],
-      showEntries: true // 目录弹层
+      showEntries: false // 目录弹层
     }
   },
   methods: {
@@ -170,6 +170,10 @@ export default {
     },
     hideMask() {
       this.showContent = false
+      this.showEntries = false
+    },
+    showEntry() {
+      this.showEntries = !this.showEntries
     },
 
     // 根据小说id获取小说章节
@@ -551,6 +555,19 @@ export default {
         margin-right 6px
       .txt
         vertical-align middle
+  .bar-mask
+    position fixed
+    left 0
+    top 0
+    right auto
+    bottom auto
+    z-index 88
+    width 100%
+    height 100%
+    background rgba(0,0,0,.4)
+    animation-duration .25s
+    animation-timing-function ease-out
+    // opacity 0
   .readerEntries
     position fixed
     background-color #1f2022
@@ -596,6 +613,19 @@ export default {
         height 40px
         text-align right
         border-radius 0
+        &::after
+          content ""
+          position absolute
+          top 0
+          left 0
+          width 200%
+          height 200%
+          border-radius 0
+          border solid hsla(0,0%,100%,.05)
+          border-width 0 0 1px
+          transform scale(.5)
+          transform-origin 0 0
+          pointer-events none
         .sort-icon
           display inline-block
           width 16px
@@ -630,6 +660,8 @@ export default {
             word-wrap normal
             color #b2b4b8
             font-size 15px
+            &.current
+              color #0097ff
           &::after
             content ""
             position absolute
