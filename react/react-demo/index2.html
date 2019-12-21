@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/react/15.6.1/react.js"></script>
+  <script src="https://cdn.bootcss.com/react/15.6.1/react-dom.js"></script>
+  <script src="http://cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
+  <title>react start</title>
+</head>
+<body>
+  <div id="reactContainer"></div>
+
+  <script type="text/babel">
+    // jsx: javascript XML 直接在js中写html需要引入babel-core
+    // state
+    let names = ['aaa', 'bbb', 'ccc']
+    var HelloComponent = React.createClass({ // 注册一个组件类
+      render: function() {
+        return <div>
+                  {names.map(function(name) {
+                    return <div key={name}>hello, {name}</div>
+                  })}
+                </div>
+      }
+    })
+
+    ReactDOM.render( // 将模板转化为html语言
+      <HelloComponent name=''/>,
+      document.getElementById('reactContainer')
+    )
+  </script>
+</body>
+</html>

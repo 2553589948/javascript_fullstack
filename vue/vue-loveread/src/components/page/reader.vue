@@ -74,7 +74,7 @@
       <div class="readerFooter">
         <div>
           <div class="footer-btn nextChapter"
-          @click="toNextChapter(chapterContent.order)">下一章</div>
+          @click="toNextChapter(chapterContent.order, chapterContent.isVip)">下一章</div>
           <div class="footer-btn blue">敬请期待</div>
         </div>
       </div>
@@ -103,7 +103,7 @@
       <div class="readerEntries" v-show="showEntries">
         <div class="readerEntries-bookInfo">
           <div class="bookInfo">
-            <h2 class="title" @click="toNextChapter(0)">
+            <h2 class="title" @click="toNextChapter(allChapters[0].order - 1)">
               <span class="title-txt">{{bookInfo.title}}</span>
               <span class="title-arrow icon">&#xe606;</span>
             </h2>
@@ -117,9 +117,10 @@
         </div>
         <ul class="readerEntries-list">
           <li class="chapterItem" v-for="(item, index) in allChapters" :key="index"
-          @click="toNextChapter(item.order - 1)">
+          @click="toNextChapter(item.order - 1, item.isVip)">
             <div class="chapterItem-link">
               <span class="chapterItem-txt" :class="{'current': chapterContent.order === item.order}">{{item.title}}</span>
+              <span class="chapterItem-lock" v-if="item.isVip"></span>
             </div>
           </li>
         </ul>
@@ -139,7 +140,7 @@ export default {
       rating: [],
       updateTime: '',
       wordCount: '',
-      showContent: false,
+      showContent: false, // 小说详情弹层
       allChapters: [],
       chapterContent: [],
       showEntries: false // 目录弹层
@@ -257,14 +258,18 @@ export default {
     },
 
     // 阅读每章小说内容
-    toNextChapter(orderIdx) {
-      this._getBookChapterCont(this.allChapters[orderIdx].link)
-      this.showEntries = false
+    toNextChapter(orderIdx, isVip) {
       let bookInfoEle = document.querySelector('.readerBookInfo')
-      if (orderIdx > 0) {
+      if (orderIdx > 0 && isVip === false) {
         bookInfoEle.style.display = 'none'
+        this._getBookChapterCont(this.allChapters[orderIdx].link)
+        this.showEntries = false
       } else if (orderIdx === 0) {
         bookInfoEle.style.display = ''
+        this._getBookChapterCont(this.allChapters[orderIdx].link)
+        this.showEntries = false
+      } else {
+        this.$toast('此内容开通vip后才能看哦')
       }
       // this.$router.push({path: '/reader', query: {'bookId': this.$route.query.bookId, 'order': orderIdx + 1}})
     },
@@ -685,7 +690,12 @@ export default {
             &.current
               color #0097ff
           .chapterItem-lock
-            
+            flex none
+            width 14px
+            height 16px
+            margin-left 16px
+            background url(https://wrwebnjlogic-40036.sh.gfp.tencent-cloud.com/image/reader_catalog_lock.ca205906.png) no-repeat
+            background-size 100%
           &::after
             content ""
             position absolute
