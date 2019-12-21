@@ -13,6 +13,22 @@ npm i postcss-loader autoprefixer --save-dev  <!-- postcss-loader给兼容性不
 # 抽取样式将css单独打包
 npm i mini-css-extract-plugin --save-dev
 
+# 压缩打包
+- 压缩css(optimize-css-assets-webpack-plugin)
+- 压缩js(uglifyjs-webpack-plugin)
+
+# 为css js文件添加hash值,防止缓存
+
+# html打包
+- html-webpack-plugin
+
+# 清理目录
+- clean-webpack-plugin
+
+# webpack处理图片和优化
+- file-loader 图片让webpack承认
+- cnpm i image-webpack-loader 优化图片体积大小
+
 # 运行
 npx webpack
 

@@ -269,7 +269,7 @@ export default {
       // this.$router.push({path: '/reader', query: {'bookId': this.$route.query.bookId, 'order': orderIdx + 1}})
     },
 
-    // 章节倒序
+    // 滑到底部
     chapterSort() {
       let sortClassName = document.getElementById('sort').className
       let ele = document.querySelector('.readerEntries-list')
@@ -684,6 +684,8 @@ export default {
             font-size 15px
             &.current
               color #0097ff
+          .chapterItem-lock
+            
           &::after
             content ""
             position absolute
