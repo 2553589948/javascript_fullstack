@@ -74,7 +74,9 @@
       <div class="readerFooter">
         <div>
           <div class="footer-btn nextChapter"
-          @click="toNextChapter(chapterContent.order, chapterContent.isVip)">下一章</div>
+          @click="toNextChapter(chapterContent.order,
+          allChapters[chapterContent.order].isVip)"
+          >下一章</div>
           <div class="footer-btn blue">敬请期待</div>
         </div>
       </div>
@@ -300,6 +302,7 @@ export default {
 <style lang="stylus" scoped>
 .reader-wrapper
   height 100%
+  min-height 100vh
   .reader-content
     max-width 1120px
     min-height 100%
@@ -591,7 +594,6 @@ export default {
     background rgba(0,0,0,.4)
     animation-duration .25s
     animation-timing-function ease-out
-    // opacity 0
   .readerEntries
     position fixed
     background-color #1f2022

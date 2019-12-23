@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let mapAdd = new Map()
+    function add(a) {
+      // 下次计算先判断一下缓存里面有没有
+      if (mapAdd.has(a)) {
+        return mapAdd.get(a)
+      }
+      let res = a + 30
+      mapAdd.set(a, res)
+      return res
+      // return a + 30
+    }
+
+    let mapReduce = new Map()
+    function reduce(c, d) {
+      let key = JSON.stringify(Array.from(arguments))
+      if (mapReduce.has(key)) {
+        return mapReduce.get(key)
+      }
+      let res = c - d
+      mapReduce.set(key, res)
+      return res
+      // return c - d
+    }
+    reduce(10, 2) // 来判断字符串是不是[10,2]
+
+    function sum(a, b, c) {
+      return a + b + c
+    }
+
+    // 过程抽象 体现在高阶函数
+    // 相同的都是缓存的过程,不同的是具体实现的需求不一样
+    // 传入的是一个普通函数,返回的是一个具有缓存功能的函数
+    function memorize(fn) {
+      let cache = new Map()
+      return (...args) => {
+        let key = JSON.stringify(args)
+        if (cache.has(key)) {
+          console.log('from cache')
+          return cache.get(key)
+        }
+        // 计算
+        let res = fn(...args)
+        cache.set(key, res)
+        return res
+      }
+    }
+    const mSum = memorize(sum)
+    mSum(1, 2, 3)
+    mSum(1, 2, 3) // 有了第一次的缓存,不用计算了
+    
+    // 传入的参数可能会有异常情况
+    let args = [1, 2, undefined] // [1,2,null]
+    let args = [1, 2, null] // [1,2,null]
+  </script>
+</body>
+</html>

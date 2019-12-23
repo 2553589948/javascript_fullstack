@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let a = 10
+    function add(b) {
+      return a + b
+    }
+    add(10) // 20
+    a = 20
+    add(10) // 30
+
+    // 文件的读写也是不纯的
+    fs.readFile('./readme.md', (err, res) => {
+    })
+
+    // 纯函数
+    const PI = 3.1415
+    function cicle(r) {
+      return 2 * PI * r
+    }
+
+    function add(a, b, c) {
+      return a + b + c
+    }
+
+    let b = 20
+    function add30() { // 会影响其他的值
+      b = b + 30
+    }
+  </script>
+</body>
+</html>
