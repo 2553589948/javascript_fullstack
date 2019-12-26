@@ -8,56 +8,102 @@
       </span>
     </v-header>
     <div class="bookShelf-content">
-      <van-swipe-cell :before-close="beforeClose" :stop-propagation="true">
-        <van-cell :border="false" value="内容">
-          <div class="title">你哈</div>
-          <div class="author">流</div>
-          <div class="time">2373hms</div>
-        </van-cell>
-        <template slot="right">
-          <van-button square type="danger" text="删除" @click="deleteBookList" />
-        </template>
-      </van-swipe-cell>
+      <li class="bookList" v-for="(item, index) in books" :key="index"
+      @click="findBookInfo(item.bookId, item.order)">
+        <van-swipe-cell :stop-propagation="true">
+          <van-cell :border="true">
+            <div class="title">{{item.title}}</div>
+            <div class="author">{{item.author}}</div>
+          </van-cell>
+          <template slot="right">
+            <van-button style="height: 100%" square type="danger" text="删除" @click="deleteBookList(index)" />
+          </template>
+        </van-swipe-cell>
+      </li>
     </div>
   </div>
 </template>
 
 <script>
+import api from '@/api'
 import vheader from '@/components/vheader'
-import { Dialog } from 'vant';
+import { Dialog } from 'vant'
+import '@vant/touch-emulator' // 兼容pc端
+import { setLocalStroageData, getLocalStroageData } from '@/common/util.js'
 export default {
   data () {
     return {
-      show: true
+      books: [],
+      bookShelfList: [
+        {
+          "title": "111",
+          "author": "你好",
+          "time": "shm"
+        },
+        {
+          "title": "112",
+          "author": "你好",
+          "time": "shm"
+        },
+        {
+          "title": "113",
+          "author": "你好",
+          "time": "shm"
+        }
+      ]
     }
   },
   methods: {
-    // position 为关闭时点击的位置
-    // instance 为对应的 SwipeCell 实例
-    beforeClose ({ position, instance }) {
-      switch (position) {
-        case 'left':
-        case 'cell':
-        case 'outside':
-          instance.close();
-          break;
-        case 'right':
-          Dialog.confirm({
-            message: '确定要删除吗？'
-          }).then(() => {
-          });
-          break;
+    // 返回添加书架的书本id
+    getBookList () {
+      let localShelf = JSON.parse(localStorage.getItem('followBookList'))
+      console.log(localShelf)
+      let bookListArray = []
+      for (let bookId in localShelf) {
+        console.log(bookId)
+        bookListArray.push(bookId)
       }
+      return bookListArray
     },
-    deleteBookList () {
+
+    _getBookUpdate () {
+      let localShelf, that = this
+      const params = {
+        view: 'updated',
+        id: this.getBookList().toString()
+      }
+      api.getBookUpdate(params)
+      .then((res) => {
+        console.log(res)
+        localShelf = JSON.parse(localStorage.getItem('followBookList'))
+        res.forEach((book) => {
+          Object.assign(book, localShelf[book._id])
+          // book.cover = util.staticPath + book.cover
+          that.books = [...that.books.push(book), ...that.books]
+          console.log(that.books)
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
+    deleteBookList (idx) {
       Dialog.confirm({
         title: '提示',
         message: '确定要删除吗？'
       }).then(() => {
+        this.books.splice(idx, 1)
+      }).catch(() => {
       })
+    },
+
+    // 根据bookId查找小说详情
+    findBookInfo(bookId, order) {
+      this.$router.push({path: '/reader', query: {'bookId': bookId, 'order': order}})
     }
   },
-  mounted () {
+  created () {
+    this._getBookUpdate()
   },
   components: {
     'v-header': vheader

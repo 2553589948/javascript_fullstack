@@ -17,6 +17,13 @@ Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).u
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) =>{ // 路由重定向路由守卫(解决登录过期问题)
+  document.title = to.meta.title
+  // console.log(from)
+  // console.log(to)
+  next()
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

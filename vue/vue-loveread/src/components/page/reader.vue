@@ -94,7 +94,7 @@
         <span class="icon">&#xe632;</span>
         <span class="txt">设置</span>
       </div>
-      <div class="addShelf">
+      <div class="addShelf" @click="addShelf">
         <span class="icon shelf">&#xe603;</span>
         <span class="txt">加入书架</span>
       </div>
@@ -133,6 +133,8 @@
 
 <script>
 import api from '@/api'
+import { Dialog } from 'vant'
+import { setLocalStroageData, getLocalStroageData } from '@/common/util.js'
 let chapters, summary
 
 export default {
@@ -240,7 +242,19 @@ export default {
       .then((res) => {
         console.log(res)
         this.allChapters = res.chapters
-        let chapterAtocLink = res.chapters[0].link
+        let chapterAtocLink
+        // 从书架进来
+        if (this.$route.query.order) {
+          chapterAtocLink = res.chapters[this.$route.query.order - 1].link
+          let bookInfoEle = document.querySelector('.readerBookInfo')
+          if (this.$route.query.order > 1) {
+            bookInfoEle.style.display = 'none'
+          } else {
+            bookInfoEle.style.display = ''
+          }
+        } else {
+          chapterAtocLink = res.chapters[0].link
+        }
         console.log(chapterAtocLink)
         this._getBookChapterCont(chapterAtocLink)
       })
@@ -287,6 +301,40 @@ export default {
       } else {
         document.getElementById('sort').className = 'active'
         ele.scrollTo({top: t, left: 0, behavior: 'auto'})
+      }
+    },
+
+    // 记录阅读历史
+    recordReadHis () {
+      let readHis = getLocalStroageData('followBookList') || {}
+      // console.log(readHis)
+      readHis[this.$route.query.bookId] = {
+        bookId: this.$route.query.bookId,
+        title: this.bookInfo.title,
+        author: this.bookInfo.author,
+        cover: this.bookInfo.cover,
+        order: this.chapterContent.order
+      }
+      // let bookShelfList = [].concat(readHis)
+      // console.log(bookShelfList)
+      localStorage.setItem('followBookList', JSON.stringify(readHis))
+    },
+
+    // 添加小说到书架
+    addShelf () {
+      let readHis = getLocalStroageData('followBookList') || {}
+      if (!readHis[this.$route.query.bookId]) {
+        Dialog.confirm({
+            title: '提示',
+            message: '是否将小说加入书架？'
+          }).then(() => {
+          this.recordReadHis()
+          this.$toast('添加成功！')
+          this.$router.push({path: '/bookshelf'})
+        }).catch(() => {
+        })
+      } else {
+        // this.recordReadHis()
       }
     }
   },

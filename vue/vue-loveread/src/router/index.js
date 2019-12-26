@@ -37,7 +37,10 @@ export default new Router({
     {
       path: '/bookshelf',
       name: 'Bookshelf',
-      component: Bookshelf
+      component: Bookshelf,
+      meta: {
+        title: '寻觅历史足迹'
+      }
     },
     {
       path: '/story',

@@ -39,6 +39,13 @@ module.exports = {
         pathRewrite: {
           '^/chapter': '/chapter'
         }
+      },
+      '/updatechapter': {
+        target: 'http://api05iye5.zhuishushenqi.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/updatechapter': ''
+        }
       }
     },
 

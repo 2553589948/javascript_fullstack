@@ -83,9 +83,14 @@ export default {
     return fetchGet('/novelapi/atoc/' + sId, params)
   },
 
-  //根据章节地址link获取小说章节内容
+  // 根据章节地址link获取小说章节内容
   getBookChapterCont (params, link) {
     return fetchGet('/chapter/' + link, params)
+  },
+
+  // 根据小说id获取小说最新章节
+  getBookUpdate (params) {
+    return fetchGet('/updatechapter/book', params)
   },
 
   // 获取新闻
