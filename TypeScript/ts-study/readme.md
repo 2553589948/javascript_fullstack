@@ -1,0 +1,3 @@
+tsc --init
+
+tsc -watch

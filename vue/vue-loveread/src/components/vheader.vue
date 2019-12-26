@@ -34,7 +34,7 @@ export default {
   // color #746ca8
   font-size px2rem(30px)
   &-icon
-    flex 0 0 px2rem(88px)
+    flex 0 0 px2rem(120px)
     margin-top px2rem(6px)
     cursor pointer
     .icon

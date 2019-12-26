@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES5", // 指定js版本为es5
+    "module": "commonjs",
+    "moduleResolution": "node", // 选择模块解析策略
+    "experimentalDecorators": true, // 开启ts装饰器
+    "allowSyntheticDefaultImports": true, // 允许从没有默认导出的模块当中默认导入
+    "sourceMap": true,
+    "strict": true, // 判断相等得三个等号
+    "noImplicitAny": true, // 不允许默认的any类型
+    "alwaysStrict": true, // 所有js文件开启严格模式
+    "declaration": true, // 生成对应的.d.ts文件(声明文件)
+    "removeComments": true, // 删除编译后的所有注释
+    "noImplicitReturns": true, // 不是函数的所有返回路径都有返回值时报错
+    "importHelpers": true,
+    "lib": ["es6", "DOM"], // 指定要包含在编译中的库文件
+    "typeRoots": ["node_modules/@types"], // 所需的声明文件位置
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [ // 必须编译的文件
+    "./src/**/*.ts"
+  ],
+  "exclude": [ // 不需要编译的文件
+    "node_modules",
+    "dist"
+  ]
+}
