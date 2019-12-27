@@ -16,7 +16,10 @@ export default new Router({
     {
       path: '/',
       name: 'Story',
-      component: Story
+      component: Story,
+      meta: {
+        title: '开启阅读之旅'
+      }
     },
     {
       path: '/mine',
