@@ -3,23 +3,24 @@
     <v-header>
       <i class="icon" slot="left-icon">&#xe603;</i>
       <span slot="content">书架</span>
-      <span slot="right-icon" style="font-size: 18px;">
-        编辑
-      </span>
+      <span slot="right-icon" style="font-size: 18px;" @click="goStory">添加</span>
     </v-header>
     <div class="bookShelf-content">
-      <ul class="bookList">
+      <ul class="bookList"  v-show="books.length > 0">
         <li class="bookList-item" v-for="(item, index) in books" :key="index"
         @click="findBookInfo(item.bookId, item.order)">
           <van-swipe-cell :stop-propagation="true">
             <van-cell :border="true" class="container">
               <div class="cover">
-                <img src="" alt="">
+                <img :src="'http://statics.zhuishushenqi.com' + item.cover" alt="">
               </div>
               <div class="info">
-                <div class="title">{{item.title}}</div>
-                <div class="author">{{item.author}}</div>
-                <div class="updated"></div>
+                <p class="title">{{item.title}}</p>
+                <p class="author">你阅读到第{{item.order}}章</p>
+                <p class="updated">
+                  <!-- <span class="updateTime">{{updatedTime}}</span> -->
+                  <span class="newChapter">最新章节：{{item.lastChapter}}</span>
+                </p>
               </div>
             </van-cell>
             <template slot="right">
@@ -28,6 +29,9 @@
           </van-swipe-cell>
         </li>
       </ul>
+      <div class="no-result-wrapper" v-show="books.length === 0">
+        <span>书架空空如也！快去书城添加吧！</span>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +46,7 @@ export default {
   data () {
     return {
       books: [],
+      updatedTime: '',
       bookShelfList: [
         {
           "title": "111",
@@ -85,6 +90,7 @@ export default {
       .then((res) => {
         console.log(res)
         localShelf = JSON.parse(localStorage.getItem('followBookList'))
+        this.updatedTime = res[0].updated.slice(0, 10)
         res.forEach((book) => {
           Object.assign(book, localShelf[book._id])
           // book.cover = util.staticPath + book.cover
@@ -96,24 +102,34 @@ export default {
       })
     },
 
-    // 删除
+    // 删除书签
     deleteBookList (idx) {
       Dialog.confirm({
         title: '提示',
         message: '确定要删除吗？'
       }).then(() => {
+        let storage = window.localStorage
+        let localShelf = JSON.parse(storage.getItem('followBookList')) ? JSON.parse(storage.getItem('followBookList')) : {}
+        // 删除该书籍在本地的缓存记录
+        delete localShelf[this.books[idx]._id]
         this.books.splice(idx, 1)
+        // 重新保存
+        storage.setItem('followBookList', JSON.stringify(localShelf))
       }).catch(() => {
       })
     },
 
     // 根据bookId查找小说详情
-    findBookInfo(bookId, order) {
+    findBookInfo (bookId, order) {
       this.$router.push({path: '/reader', query: {'bookId': bookId, 'order': order}})
+    },
+
+    goStory () {
+      this.$router.push({path: '/story'})
     }
   },
   created () {
-    this._getBookUpdate()
+    Object.keys(JSON.parse(localStorage.getItem('followBookList'))).length === 0 ?  '' : this._getBookUpdate()
   },
   components: {
     'v-header': vheader
@@ -125,76 +141,83 @@ export default {
 .bookShelf-wrapper
   .bookShelf-content
     width 100%
-    padding-right 20px
     .bookList
+      position relative
+      border 0
+      .bookList-item
         position relative
-        border 0
-        .bookList-item
-          position relative
-          .container
-            display table
-            padding 12px 0
-            overflow hidden
-            .cover
-              box-shadow 0 2px 16px rgba(0,0,0,.08)
-              position relative
-              display table-cell
-              vertical-align middle
-              width 108px
-              height 156px
-              @media screen and (max-width: 460px)
-                width 64px
-                height 93px
-              img
-                width 100%
-                height 100%
-            .info
-              display table-cell
-              vertical-align middle
-              padding-left 16px
-              .title
-                padding-right 0
-                font-size 17px
-                line-height 26px
-                height 26px
-                overflow hidden
-                display -webkit-box
-                text-overflow ellipsis
-                -webkit-line-clamp 1
-                -webkit-box-orient vertical
-                height auto
-                max-height 26px
-                font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
-                color #eef0f4
-              .author
-                margin-top 6px
-                font-size 14px
-                color #b2b4b8
-                line-height 21px
-                overflow hidden
-                height 21px
-                display -webkit-box
-                text-overflow ellipsis
-                -webkit-line-clamp 1
-                -webkit-box-orient vertical
-                height auto
-                max-height 21px
-              .updated
-                margin-top 6px
-                font-family DIN-Medium,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
-                color #8a8c90
-                overflow hidden
-                white-space nowrap
-                text-overflow ellipsis
-                word-break break-all
-                word-wrap normal
-                &-rateScore
-                  display inline-block
-                  vertical-align middle
-                  font-size 13px
-                  padding-right 3px
-                &-text
-                  display inline-block
-                  vertical-align middle
-                  font-size 12px
+        .container
+          display table
+          padding 12px 0 12px 20px
+          overflow hidden
+          .cover
+            box-shadow 0 2px 16px rgba(0,0,0,.08)
+            position relative
+            display table-cell
+            vertical-align middle
+            width 108px
+            height 156px
+            @media screen and (max-width: 460px)
+              width 64px
+              height 93px
+            img
+              width 100%
+              height 100%
+          .info
+            display table-cell
+            vertical-align middle
+            padding-left 16px
+            .title
+              padding-right 0
+              font-size 17px
+              line-height 26px
+              height 26px
+              overflow hidden
+              display -webkit-box
+              text-overflow ellipsis
+              -webkit-line-clamp 1
+              -webkit-box-orient vertical
+              height auto
+              max-height 26px
+              font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+            .author
+              margin-top 6px
+              font-size 14px
+              color #b2b4b8
+              line-height 21px
+              overflow hidden
+              height 21px
+              display -webkit-box
+              text-overflow ellipsis
+              -webkit-line-clamp 1
+              -webkit-box-orient vertical
+              height auto
+              max-height 21px
+            .updated
+              margin-top 6px
+              font-family DIN-Medium,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
+              color #8a8c90
+              overflow hidden
+              white-space nowrap
+              text-overflow ellipsis
+              word-break break-all
+              word-wrap normal
+              .updateTime
+                display inline-block
+                vertical-align middle
+                font-size 13px
+                padding-right 3px
+              .newChapter
+                display inline-block
+                vertical-align middle
+                font-size 12px
+    .no-result-wrapper 
+      position absolute
+      width 100%
+      top 50%
+      transform translateY(-50%)
+      text-align center
+      span 
+        font-size 14px
+        color #b2b4b8
 </style>
