@@ -1,7 +1,7 @@
 <template>
   <div class="bookCategory-wrapper">
     <div class="novels-header">
-      <div class="search-box">
+      <div class="search-box" @click="goSearch">
         <i class="icon">&#xe61f;</i>
         <input type="text" class="search-input" placeholder="搜索" />
       </div>
@@ -98,6 +98,11 @@ export default {
     // 根据bookId查找小说详情
     findBookInfo(bookId) {
       this.$router.push({path: '/reader', query: {'bookId': bookId}})
+    },
+
+    // 去往搜索页
+    goSearch () {
+      this.$router.push({path: '/search'})
     }
   },
   mounted () {

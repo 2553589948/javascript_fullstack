@@ -6,18 +6,19 @@
         <span>爱阅读</span>
       </div>
       <div class="search-box-wrap">
-        <v-search-box @query="onQueryChange" ref="searchBox" :placeholder="query"></v-search-box>
+        <v-search-box @query="onQueryChange" ref="searchBox" :usedQuery="query"></v-search-box>
       </div>
     </div>
     <!-- 热门搜索 搜索历史 -->
-    <div class="searchAbout-wrapper">
+    <div class="searchAbout-wrapper" v-show="!query">
       <div class="searchAbout">
         <div>
           <!-- 热门搜索 -->
           <div class="hot-key">
             <h1 class="title">热门搜索</h1>
             <ul>
-              <li class="item" v-for="(item, index) in hotKey" :key="index">
+              <li class="item" v-for="(item, index) in hotKey" :key="index"
+              @click="saveSearch(item.word)">
                 <span>{{item.word}}</span>
               </li>
             </ul>
@@ -36,6 +37,10 @@
         </div>
       </div>
     </div>
+    <!-- 搜索结果 -->
+    <div class="search-result" v-show="query">
+      <v-suggest :query="query" @select="saveSearch" ref="suggest"></v-suggest>
+    </div>
   </div>
 </template>
 
@@ -45,6 +50,7 @@ import { mapGetters } from 'vuex'
 import { searchMixin } from '@/common/mixin'
 import searchBox from '@/components/searchBox'
 import searchList from '@/components/searchList'
+import suggest from '@/components/suggest'
 
 export default {
   data () {
@@ -62,9 +68,9 @@ export default {
   },
   mixins: [searchMixin], // mixins合并data()
   methods: {
-    onQueryChange (e) {
-      console.log(e)
-    },
+    // onQueryChange (e) {
+    //   console.log(e)
+    // },
     // 获取搜索热词
     _getHotSearchKey () {
       api.getHotSearchKey()
@@ -80,7 +86,7 @@ export default {
   components: {
     'v-search-box': searchBox,
     'v-search-list': searchList,
-    // 'v-suggest': suggest
+    'v-suggest': suggest
   }
 }
 </script>
@@ -89,8 +95,12 @@ export default {
 @import '../../assets/css/function'
 .search-wrapper
   width 100%
-  height 100vh
+  min-height 100vh
   .search-header
+    position fixed
+    top 0
+    left 0
+    background-color #1f2022
     width 100%
     padding-bottom 80px
     @media screen and (max-width: 460px)
@@ -118,9 +128,13 @@ export default {
         padding 0 20px
         width auto
   .searchAbout-wrapper
-    position fixed
-    top px2rem(360px)
-    bottom 0
+    // position fixed
+    // top px2rem(360px)
+    // bottom 0
+    padding-top 220px
+    @media screen and (max-width: 460px)
+      padding-top 160px
+    padding-bottom px2rem(160px)
     width 100%
     .searchAbout
       height 100%
@@ -154,4 +168,13 @@ export default {
             .icon
               font-size 18px
               color hsla(0, 0%, 100%, 0.5)
+  .search-result
+    // position fixed
+    // top px2rem(360px)
+    // bottom 0
+    width 100%
+    padding-bottom px2rem(160px)
+    padding-top 220px
+    @media screen and (max-width: 460px)
+      padding-top 160px
 </style>

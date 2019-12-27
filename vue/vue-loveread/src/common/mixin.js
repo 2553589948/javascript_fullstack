@@ -3,7 +3,7 @@ import {mapActions, mapGetters} from 'vuex'
 export const searchMixin = {
   data () {
     return {
-      query: '' || '搜索'
+      query: ''
     }
   },
   methods: {
@@ -21,9 +21,9 @@ export const searchMixin = {
       this.query = item
       this.saveSearchHistory(this.query)
     },
-    blurInput () {
-      this.$refs.searchBox.blur()
-    }
+    // blurInput () {
+    //   this.$refs.searchBox.blur()
+    // }
   }
 }
 

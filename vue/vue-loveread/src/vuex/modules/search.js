@@ -1,7 +1,7 @@
 import * as types from '../types' // * as引入所有抛出的方法名
 
 const state = {
-  searchHistory: ['你好', '哈哈哈']
+  searchHistory: ['十宗罪', '凡人修仙传']
 }
 
 const mutations = {

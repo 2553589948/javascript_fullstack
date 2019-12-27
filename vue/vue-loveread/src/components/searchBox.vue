@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <i class="icon icon-search">&#xe61f;</i>
-    <input type="text" class="search-input" ref="query" v-model="query" :placeholder="placeholder" />
+    <input type="text" class="search-input" ref="query" v-model="query" :placeholder="usedQuery ? usedQuery : placeholder" />
     <i class="icon icon-dismiss" v-show="query" @click="clear">&#xe60d;</i>
   </div>
 </template>
@@ -10,6 +10,10 @@
 import { debounce } from '@/common/util'
 export default {
   props: {
+    usedQuery: {
+      type: String,
+      default: ''
+    },
     placeholder: {
       type: String,
       default: '搜索'
@@ -26,9 +30,12 @@ export default {
     }, 300))
   },
   methods: {
-    blur () {
-      this.$refs.query.blur() // input自带的方法blur()失去焦点
-    },
+    // blur () {
+    //   this.$refs.query.blur() // input自带的方法blur()失去焦点
+    // },
+    // focus () {
+    //   document.getElementById("searchVal").value = this.usedQuery
+    // },
     clear () {
       this.query = ''
     }

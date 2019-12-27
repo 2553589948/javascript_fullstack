@@ -98,6 +98,16 @@ export default {
     return fetchGet('/novelapi/book/search-hotwords')
   },
 
+  // 搜索自动补充
+  // novelSearch (params) {
+  //   return fetchGet('/novelapi/book/auto-complete', params)
+  // },
+
+  // 模糊搜索
+  novelSearch (params) {
+    return fetchGet('/novelapi/book/fuzzy-search', params)
+  },
+
   // 获取新闻
   neteasyNews (params) {
     return fetchGet('/api/getWangYiNews', params)

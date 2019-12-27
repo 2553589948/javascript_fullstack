@@ -305,7 +305,7 @@ export default {
 
     // 记录阅读历史
     recordReadHis () {
-      let readHis = getLocalStroageData('followBookList') || {}
+      let readHis = JSON.parse(localStorage.getItem('followBookList')) || {}
       // console.log(readHis)
       readHis[this.$route.query.bookId] = {
         bookId: this.$route.query.bookId,
@@ -314,14 +314,12 @@ export default {
         cover: this.bookInfo.cover,
         order: this.chapterContent.order
       }
-      // let bookShelfList = [].concat(readHis)
-      // console.log(bookShelfList)
       localStorage.setItem('followBookList', JSON.stringify(readHis))
     },
 
     // 添加小说到书架
     addShelf () {
-      let readHis = getLocalStroageData('followBookList') || {}
+      let readHis = JSON.parse(localStorage.getItem('followBookList')) || {}
       if (!readHis[this.$route.query.bookId]) {
         Dialog.confirm({
             title: '提示',
@@ -333,7 +331,9 @@ export default {
         }).catch(() => {
         })
       } else {
-        // this.recordReadHis()
+        this.recordReadHis()
+        this.$toast('保存成功！')
+        this.$router.push({path: '/bookshelf'})
       }
     }
   },

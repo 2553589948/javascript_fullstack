@@ -29,7 +29,7 @@
           </van-swipe-cell>
         </li>
       </ul>
-      <div class="no-result-wrapper" v-show="books.length === 0">
+      <div class="no-result-wrapper" v-show="!books.length">
         <span>书架空空如也！快去书城添加吧！</span>
       </div>
     </div>
