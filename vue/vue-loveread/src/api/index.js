@@ -93,6 +93,11 @@ export default {
     return fetchGet('/updatechapter/book', params)
   },
 
+  // 获取搜索热词
+  getHotSearchKey () {
+    return fetchGet('/novelapi/book/search-hotwords')
+  },
+
   // 获取新闻
   neteasyNews (params) {
     return fetchGet('/api/getWangYiNews', params)

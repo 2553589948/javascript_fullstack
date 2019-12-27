@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <i class="icon icon-search">&#xe61f;</i>
-    <input type="text" class="search-input" ref="query" v-model="query" placeholder="搜索" />
+    <input type="text" class="search-input" ref="query" v-model="query" :placeholder="placeholder" />
     <i class="icon icon-dismiss" v-show="query" @click="clear">&#xe60d;</i>
   </div>
 </template>
@@ -9,6 +9,12 @@
 <script>
 import { debounce } from '@/common/util'
 export default {
+  props: {
+    placeholder: {
+      type: String,
+      default: '搜索'
+    }
+  },
   data () {
     return {
       query: ''
@@ -20,12 +26,12 @@ export default {
     }, 300))
   },
   methods: {
-    // blur () {
-    //   this.$refs.query.blur() // input自带的方法blur()失去焦点
-    // },
+    blur () {
+      this.$refs.query.blur() // input自带的方法blur()失去焦点
+    },
     clear () {
       this.query = ''
-    },
+    }
     // setQuery (query) {
     //   this.query = query
     // }
@@ -58,7 +64,7 @@ export default {
       line-height 30px
       padding 0 34px
       font-size 14px
-    background rgba(238,240,244,.1)
+    background rgba(238, 240, 244, .1)
     display inline-block
     width 100%
     color #fff

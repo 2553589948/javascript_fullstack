@@ -22,12 +22,12 @@ export default {
 @import './assets/css/themeColor.styl'
 @font-face {
   font-family: 'iconfont';  /* project id 1519920 */
-  src: url('//at.alicdn.com/t/font_1519920_0sb27k8u414d.eot');
-  src: url('//at.alicdn.com/t/font_1519920_0sb27k8u414d.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1519920_0sb27k8u414d.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1519920_0sb27k8u414d.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1519920_0sb27k8u414d.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1519920_0sb27k8u414d.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1519920_bgchz3psaag.eot');
+  src: url('//at.alicdn.com/t/font_1519920_bgchz3psaag.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1519920_bgchz3psaag.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1519920_bgchz3psaag.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1519920_bgchz3psaag.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1519920_bgchz3psaag.svg#iconfont') format('svg');
 }
 .icon
   font-family "iconfont" !important
