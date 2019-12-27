@@ -134,7 +134,6 @@
 <script>
 import api from '@/api'
 import { Dialog } from 'vant'
-import { setLocalStroageData, getLocalStroageData } from '@/common/util.js'
 let chapters, summary
 
 export default {

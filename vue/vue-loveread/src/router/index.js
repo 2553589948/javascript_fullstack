@@ -8,6 +8,7 @@ import BookCategory from '@/components/page/bookCategory'
 import Reader from '@/components/page/reader'
 import Login from '@/components/page/Login'
 import Register from '@/components/page/Register'
+import Search from '@/components/page/search'
 
 Vue.use(Router)
 
@@ -51,6 +52,14 @@ export default new Router({
       component: Story,
       meta: {
         title: '挖掘浩瀚故事'
+      }
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
+      meta: {
+        title: '探索无限可能'
       }
     },
     {

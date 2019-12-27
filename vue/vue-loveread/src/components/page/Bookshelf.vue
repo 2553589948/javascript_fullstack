@@ -9,8 +9,8 @@
       <ul class="bookList"  v-show="books.length > 0">
         <li class="bookList-item" v-for="(item, index) in books" :key="index"
         @click="findBookInfo(item.bookId, item.order)">
-          <van-swipe-cell :stop-propagation="true">
-            <van-cell :border="true" class="container">
+          <van-swipe-cell>
+            <van-cell :border="true" class="container" :stop-propagation="true">
               <div class="cover">
                 <img :src="'http://statics.zhuishushenqi.com' + item.cover" alt="">
               </div>
@@ -41,7 +41,6 @@ import api from '@/api'
 import vheader from '@/components/vheader'
 import { Dialog } from 'vant'
 import '@vant/touch-emulator' // 兼容pc端
-import { setLocalStroageData, getLocalStroageData } from '@/common/util.js'
 export default {
   data () {
     return {

@@ -5,9 +5,10 @@
         <i class="icon">&#xe600;</i>
         <span>爱阅读</span>
       </div>
-      <div class="search-box">
-        <i class="icon">&#xe61f;</i>
+      <div class="search-box-wrap" @click="goSearch">
+        <i class="icon icon-search">&#xe61f;</i>
         <input type="text" class="search-input" placeholder="搜索" />
+        <!-- <i class="icon icon-dismiss" v-show="query">&#xe60d;</i> -->
       </div>
     </div>
     <div class="novels-container">
@@ -353,6 +354,11 @@ export default {
     // 按分类获取小说列表
     findCateBooks(cateName, gender) {
       this.$router.push({path: '/bookCategory', query: {'cateName': cateName}})
+    },
+
+    // 去往搜索页
+    goSearch () {
+      this.$router.push({path: '/search'})
     }
   },
   mounted () {
@@ -387,7 +393,7 @@ export default {
       .icon
         font-size 40px
         vertical-align middle
-    .search-box
+    .search-box-wrap
       position relative
       width 80%
       max-width 840px
@@ -395,13 +401,18 @@ export default {
       @media screen and (max-width: 460px)
         padding 0 20px
         width auto
-      .icon
+      .icon-search
         position absolute
         display block
-        width 20px
-        height 20px
         top 18px
         left 32px
+        @media screen and (max-width: 460px)
+          top 6px
+      .icon-dismiss
+        position absolute
+        display block
+        top 18px
+        right 32px
         @media screen and (max-width: 460px)
           top 6px
       .search-input
@@ -413,7 +424,6 @@ export default {
           line-height 30px
           padding 0 34px
           font-size 14px
-        // border 1px solid rgba(34,43,95,.79)
         background rgba(238,240,244,.1)
         display inline-block
         width 100%
