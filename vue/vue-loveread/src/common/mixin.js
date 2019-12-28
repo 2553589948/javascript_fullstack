@@ -17,24 +17,8 @@ export const searchMixin = {
     },
     // 何时触发这个事件
     saveSearch (item) {
-      // this.$refs.searchBox.setQuery(song)
       this.query = item
       this.saveSearchHistory(this.query)
-    },
-    // blurInput () {
-    //   this.$refs.searchBox.blur()
-    // }
-  }
-}
-
-export const playerMixin = {
-  computed: {
-    ...mapGetters([
-      'currentSong',
-      'playList'
-    ])
-  },
-  methods: {
-
+    }
   }
 }
