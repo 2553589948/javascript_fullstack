@@ -107,10 +107,10 @@
         </div>
         <ul class="course-list">
           <div v-for="(item, index) in cateItems" :key="index">
-            <div v-for="(list, index) in item.cateInfo" :key="index"
-            v-if="categoryId == list.subCateId">
-              <div v-for="(list1, index) in list.subCates" :key="index"
-              v-if="categorysubId ? categorysubId == list1.subId : true">
+            <div v-for="(list, index) in item.cateInfo" :key="index">
+              <div v-if="categoryId == list.subCateId">
+              <div v-for="(list1, index) in list.subCates" :key="index">
+                <div v-if="categorysubId ? categorysubId == list1.subId : true">
                 <li class="course-list__item"
                 v-for="(course, index) in list1.courseList" :key="index" ref="courseItem">
                   <router-link :to="{path: '/courseDetail', query: {courseId: course.courseId}}">
@@ -130,6 +130,8 @@
                     </div>
                   </router-link>
                 </li>
+                </div>
+              </div>
               </div>
             </div>
           </div>

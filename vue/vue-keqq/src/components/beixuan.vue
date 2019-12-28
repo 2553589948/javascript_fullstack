@@ -92,7 +92,7 @@
         <div class="search-result-wrapper">
           <div class="search-result-toast">
             <span class="text">在"</span>
-            <span class="search-result-word">{{categoryName}}</span>
+            <span class="search-result-word">{{this.$route.query.Name}}</span>
             "分类下，找到
             <span class="search-result-num">{{courseCount}}</span>
             门课程
@@ -100,11 +100,12 @@
         </div>
         <ul class="course-list">
           <div v-for="(item, index) in cateItems" :key="index">
-            <div v-for="(list, index) in item.cateInfo" :key="index"
-            v-if="categoryId == list.subCateId">
-              <div v-for="(list1, index) in list.subCates" :key="index"
-              v-if="categorysubId ? categorysubId == list1.subId : true">
-                <li v-for="(course, index) in list1.courseList" :key="index" class="course-list__item border-bottom" ref="courseItem">
+            <div v-for="(list, index) in item.cateInfo" :key="index">
+              <div v-if="categoryId == list.subCateId">
+              <div v-for="(list1, index) in list.subCates" :key="index">
+                <div v-if="categorysubId ? categorysubId == list1.subId : true">
+                <li class="course-list__item"
+                v-for="(course, index) in list1.courseList" :key="index" ref="courseItem">
                   <router-link :to="{path: '/courseDetail', query: {courseId: course.courseId}}">
                     <div class="course-card-wrapper">
                       <div class="course-card-cover">
@@ -122,6 +123,8 @@
                     </div>
                   </router-link>
                 </li>
+                </div>
+              </div>
               </div>
             </div>
           </div>
