@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>web-worker</title>
+</head>
+<body>
+  <script>
+    // let sum = 0
+    // for (let i = 0; i < 10000000; i++) { // 耗时任务,把耗时任务给web-worker处理
+    //   sum += i
+    // }
+    let worker = new Worker('work.js')
+    worker.onmessage =function(e) { // 接收消息 此两者可互通
+      console.log('接收到结果了', e.data)
+    }
+    console.log(123)  
+  </script>
+</body>
+</html>
