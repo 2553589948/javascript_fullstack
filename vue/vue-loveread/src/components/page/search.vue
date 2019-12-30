@@ -74,6 +74,7 @@ export default {
     // onQueryChange (e) {
     //   console.log(e)
     // },
+    
     // 获取搜索热词
     _getHotSearchKey () {
       api.getHotSearchKey()
@@ -131,17 +132,14 @@ export default {
         padding 0 50px 0 20px
         width auto
   .searchAbout-wrapper
-    // position fixed
-    // top px2rem(360px)
-    // bottom 0
     padding-top 220px
+    padding-bottom px2rem(160px)
     width 80%
     max-width 840px
     margin 0 auto
     @media screen and (max-width: 460px)
       padding-top 160px
-    padding-bottom px2rem(160px)
-    // width 100%
+      width 100%
     .searchAbout
       height 100%
       overflow hidden
@@ -179,12 +177,12 @@ export default {
               font-size 18px
               color hsla(0, 0%, 100%, 0.5)
   .search-result
-    // position fixed
-    // top px2rem(360px)
-    // bottom 0
-    width 100%
     padding-bottom px2rem(160px)
     padding-top 220px
+    width 80%
+    max-width 840px
+    margin 0 auto
     @media screen and (max-width: 460px)
       padding-top 160px
+      width 100%
 </style>

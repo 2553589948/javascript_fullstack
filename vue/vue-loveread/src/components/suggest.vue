@@ -47,7 +47,7 @@ export default {
       .then(res => {
         console.log(res)
         if (res.ok === true) {
-          // this.result = res.keywords // 模糊搜索
+          // this.result = res.keywords // 搜索自动补充
           this.result = res.books
           this.loading = false
         }
@@ -104,10 +104,12 @@ export default {
       height px2rem(80px)
   .no-result-wrapper 
     position absolute
-    width 100%
+    width 80%
     top 50%
     transform translateY(-50%)
     text-align center
+    @media screen and (max-width: 460px)
+      width 100%
     span 
       font-size 14px
       color hsla(0,0%,100%,.3)

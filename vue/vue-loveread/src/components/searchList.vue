@@ -23,7 +23,7 @@ export default {
   },
   data () {
     return {
-      // searches: ['你好', '哈哈哈']
+      // searches: ['你好', 'vuex']
     }
   },
   methods: {

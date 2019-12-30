@@ -35,9 +35,6 @@ export default {
     // blur () {
     //   this.$refs.query.blur() // input自带的方法blur()失去焦点
     // },
-    // focus () {
-    //   document.getElementById("searchVal").value = this.usedQuery
-    // },
     clear () {
       this.query = ''
       this.$emit('cleared')
@@ -45,9 +42,6 @@ export default {
     cancelBack () {
       this.$router.back()
     }
-    // setQuery (query) {
-    //   this.query = query
-    // }
   }
 }
 </script>
@@ -65,9 +59,10 @@ export default {
     position absolute
     display block
     top 18px
-    right 62px
+    right 32px
     @media screen and (max-width: 460px)
       top 6px
+      right 62px
   .cancel
     position absolute
     top 18px
