@@ -279,15 +279,18 @@ export default {
         console.log(res)
         if (res.ok === true) {
           this.chapterContent = res.chapter
+          if (!this.chapterContent.order) {
+            document.querySelector('.addShelf').style.display = 'none'
+          }
           this.loading = false
         }
       }).catch((err) => {
         this.loading = false
         // this.$toast('抱歉！服务器异常，未找到你想要的内容')
         this.$toast('非常抱歉！内容因版权问题暂时下架')
-        // setTimeout(() => {
-        //   this.$router.go(-1)
-        // }, 2500)
+        if (!this.chapterContent.order) {
+          document.querySelector('.addShelf').style.display = 'none'
+        }
       })
     },
 
