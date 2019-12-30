@@ -506,7 +506,8 @@ export default {
                   .ranking-block-book-title
                     font-size 15px
                     font-weight 500
-                    color #eef0f4
+                    // color #eef0f4
+                    color #b2b4b8
                     overflow hidden
                     white-space nowrap
                     text-overflow ellipsis
@@ -640,7 +641,8 @@ export default {
         &-title
           font-size 20px
           font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
-          color #eef0f4
+          // color #eef0f4
+          color #b2b4b8
       &-list
         display flex
         flex-wrap wrap
@@ -665,5 +667,6 @@ export default {
             @media screen and (max-width: 460px)
               font-size 14px
               line-height 1.5
-            color #eef0f4
+            // color #eef0f4
+            color #b2b4b8
 </style>
