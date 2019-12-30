@@ -6,7 +6,7 @@
         <span>爱阅读</span>
       </div>
       <div class="search-box-wrap">
-        <v-search-box @query="onQueryChange" ref="searchBox" :usedQuery="query"></v-search-box>
+        <v-search-box @query="onQueryChange" @cleared="clearUsedQuery" ref="searchBox" :usedQuery="query"></v-search-box>
       </div>
     </div>
     <!-- 热门搜索 搜索历史 -->
@@ -24,7 +24,7 @@
             </ul>
           </div>
           <!-- 搜索历史 -->
-          <div class="search-history">
+          <div class="search-history" v-show="searchHistory.length">
             <h1 class="title">
               <span class="text">搜索历史</span>
               <span class="clear" @click="clearSearchHistory">
@@ -68,6 +68,9 @@ export default {
   },
   mixins: [searchMixin], // mixins合并data()
   methods: {
+    clearUsedQuery () {
+      this.query = ''
+    },
     // onQueryChange (e) {
     //   console.log(e)
     // },
@@ -125,7 +128,7 @@ export default {
       max-width 840px
       margin 0 auto
       @media screen and (max-width: 460px)
-        padding 0 20px
+        padding 0 50px 0 20px
         width auto
   .searchAbout-wrapper
     // position fixed
@@ -144,7 +147,9 @@ export default {
         .title
           margin-bottom px2rem(40px)
           font-size 16px
-          color #e34737
+          color hsla(0, 0%, 100%, 0.5)
+          border-left 4px solid orangered
+          padding-left 6px
         .item
           display inline-block
           padding px2rem(16px) px2rem(30px)
@@ -164,6 +169,8 @@ export default {
           color hsla(0, 0%, 100%, 0.5)
           .text
             flex 1
+            border-left 4px solid orangered
+            padding-left 6px
           .clear
             .icon
               font-size 18px

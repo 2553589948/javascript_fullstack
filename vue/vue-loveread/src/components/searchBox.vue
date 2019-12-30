@@ -1,8 +1,10 @@
 <template>
   <div class="search-box">
     <i class="icon icon-search">&#xe61f;</i>
-    <input type="text" class="search-input" ref="query" v-model="query" :placeholder="usedQuery ? usedQuery : placeholder" />
+    <input type="text" class="search-input" ref="query"
+    v-model="query" :placeholder="usedQuery ? usedQuery : placeholder" />
     <i class="icon icon-dismiss" v-show="query || usedQuery" @click="clear">&#xe60d;</i>
+    <span class="cancel" @click="cancelBack">取消</span>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ export default {
     }
   },
   created () {
-    this.$watch('query', debounce((newQuery) => { // newQuery输入框实时内容
+    this.$watch(('query'), debounce((newQuery) => { // newQuery输入框实时内容
       this.$emit('query', newQuery)
     }, 300))
   },
@@ -38,6 +40,10 @@ export default {
     // },
     clear () {
       this.query = ''
+      this.$emit('cleared')
+    },
+    cancelBack () {
+      this.$router.back()
     }
     // setQuery (query) {
     //   this.query = query
@@ -59,9 +65,19 @@ export default {
     position absolute
     display block
     top 18px
-    right 32px
+    right 62px
     @media screen and (max-width: 460px)
       top 6px
+  .cancel
+    position absolute
+    top 18px
+    right 14px
+    color #e34737
+    display none
+    @media screen and (max-width: 460px)
+      top 9px
+      font-size 14px
+      display block
   .search-input
     height 50px
     line-height 50px
