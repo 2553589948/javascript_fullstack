@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>如何监测数组的改变</title>
+</head>
+<body>
+  <script>
+    let arr = [1, 2, 3, 4, 5]
+    arr.push(6) // 会引起页面的刷新 vue中只支持这种方式
+    // arr[5] = 6 // 不会引起页面的刷新
+    // 劫持
+    // 数组的改变：1.push shift......对数组的操作 2.arr[0] = 
+
+    // 先把原来的push方法存起来
+    let originalPush = Array.prototype.push
+    Array.prototype.push = function(...args) {
+      console.log('我知道数组改变了')
+      // push恢复
+      originalPush.apply(this, args) // 离真正的Push方法还有一个我们自己定义的push方法(代理|劫持|拦截)
+    }
+    arr.push(7)
+    console.log(arr)
+  </script>
+</body>
+</html>

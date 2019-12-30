@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>{{name}}</p>
+  <script>
+    let data = {
+      name: 123
+    }
+    this.name = 456 //this指向window
+    // vue中模板必须知道name什么时候被改的
+    data.age = 18
+
+    // defineProperty定义属性：1：value 2：get(检测属性的获取)/set(监测属性有没有被修改)
+    // 1.第三个参数：数据描述符
+    Object.defineProperty(data, 'sex', {
+      enumerable: false, // 是否可被枚举(false不可被遍历)
+      writable: false, // 是否可被写入
+      value: 'boy'
+    })
+    data.sex = 'girl' // 不能被修改
+    console.log(data.sex)
+    for (let key in data) {
+      console.log(data[key])
+    }
+    // 2.使用get set指定值
+    Object.defineProperty(data, 'prop1', {
+      get: function() {
+        return data._value1
+      },
+      set: function(newVal) {
+        console.log('我知道数据改变了,重新渲染一次')
+        data._value1 = newVal
+      }
+    })
+    data.prop1 = 'dehash'
+
+    // get set从何而来？
+    // let data1 = {
+    //   name1: 'name1'
+    // }
+    let data1 = {
+      _name1: undefined,
+      get name1() {
+        // return 'name1'
+        return this._name1
+      },
+      set name1(newVal) {
+        this._name1 = newVal
+      }
+    }
+    console.log(data1.name1)
+
+
+    let data3 = {
+      list: [1, 2, 3, 4]
+    }
+    data3.list.push(5) // 会
+    console.log(data3)
+    // 怎么检测数组的改变
+  </script>
+</body>
+</html>

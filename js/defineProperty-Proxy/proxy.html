@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let data = {
+      _sex: 'boy',
+      name: 'name'
+    }
+    let proxyData = new Proxy(data, {
+      get(target, key, receiver) {
+        if (key.startsWith('_')) {
+          throw new Error('private property!')
+        } else {
+          return Reflect.get(target, key, receiver)
+        }
+      },
+      set(target, key, value, receiver) {
+        console.log('改变了', target, key, value, receiver)
+        // 恢复set能力
+        // Reflect反射 Proxy的set方法被劫持 Reflect与之一一对应,恢复set方法
+        return Reflect.set(target, key, value, receiver)
+      },
+      deleteProperty(target, key) {
+        console.log('del', target, key)
+        return Reflect.deleteProperty(target, key)
+      },
+      has(target, key) {
+        console.log('is has')
+        return Reflect.has(target, key)
+      }
+    })
+    proxyData.name = 456
+    console.log(proxyData.name)
+    proxyData.age = 18
+    delete proxyData.age
+    console.log(proxyData.age)
+    // delete data.name
+    console.log(proxyData._sex)
+  </script>
+</body>
+</html>
