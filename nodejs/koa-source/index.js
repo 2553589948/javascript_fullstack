@@ -21,9 +21,9 @@
 //   console.log('server is running...')
 // })
 
-let Koa = require('./application')
-let app = new Koa()
-app.use((ctx) => {
+let myKoa = require('./application')
+let app = new myKoa()
+app.use((ctx, next) => {
   // console.log(ctx.req.url)
   // console.log(ctx.request.req.url)
   // console.log(ctx.response.req.url)
@@ -36,5 +36,21 @@ app.use((ctx) => {
     sex: 'boy'
   }
   console.log(ctx.body)
+  next()
 })
+
+app.use((ctx, next) => {
+  console.log(1)
+  next()
+  console.log(2)
+})
+
+app.use((ctx, next) => {
+  console.log(3)
+  ctx.body = 'hello koa!'
+  next()
+  console.log(4)
+})
+
+
 app.listen(3001)

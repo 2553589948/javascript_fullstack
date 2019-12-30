@@ -135,10 +135,13 @@ export default {
     // top px2rem(360px)
     // bottom 0
     padding-top 220px
+    width 80%
+    max-width 840px
+    margin 0 auto
     @media screen and (max-width: 460px)
       padding-top 160px
     padding-bottom px2rem(160px)
-    width 100%
+    // width 100%
     .searchAbout
       height 100%
       overflow hidden
