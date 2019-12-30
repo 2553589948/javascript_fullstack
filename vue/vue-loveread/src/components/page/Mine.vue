@@ -13,6 +13,7 @@
             <el-dropdown-item command="d">梦幻紫</el-dropdown-item>
             <el-dropdown-item command="e">鸢尾青</el-dropdown-item>
             <el-dropdown-item command="f">雾霾灰</el-dropdown-item>
+            <el-dropdown-item command="y">深海绿</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -156,7 +157,7 @@ export default {
 @import '../../assets/css/function.styl'
 // @import '../../assets/css/themeColor.styl'
 .colorBtn
-  color #fff
+  color #b2b4b8
 .mine-content
   width 100%
   margin-bottom px2rem(130px)

@@ -17,7 +17,7 @@ axios.interceptors.response.use((res) => {
   }
   return res
 }, (error) => {
-  alert('网络异常!!') // 请求发不出去
+  // alert('网络异常!!') // 请求发不出去
   return Promise.reject(error)
 })
 

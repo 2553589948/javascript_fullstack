@@ -74,6 +74,7 @@
       <div class="readerFooter">
         <div>
           <div class="footer-btn nextChapter"
+          v-if="chapterContent.order"
           @click="toNextChapter(chapterContent.order,
           allChapters[chapterContent.order].isVip)"
           >下一章</div>
@@ -90,7 +91,7 @@
         <span class="icon">&#xe605;</span>
         <span class="txt">目录</span>
       </div>
-      <div class="bar-item setting">
+      <div class="bar-item setting" @click="settingSkin">
         <span class="icon">&#xe632;</span>
         <span class="txt">设置</span>
       </div>
@@ -128,6 +129,9 @@
         </ul>
       </div>
     </div>
+    <div class="loading-mask" v-show="loading">
+      <van-loading class="loadingTips" color="#1989fa" text-size="16px" vertical>内容加载中...</van-loading>
+    </div>
   </div>
 </template>
 
@@ -146,7 +150,8 @@ export default {
       showContent: false, // 小说详情弹层
       allChapters: [],
       chapterContent: [],
-      showEntries: false // 目录弹层
+      showEntries: false, // 目录弹层
+      loading: false // 加载
     }
   },
   methods: {
@@ -242,16 +247,22 @@ export default {
         console.log(res)
         this.allChapters = res.chapters
         let chapterAtocLink
-        // 从书架进来
-        if (this.$route.query.order) {
-          chapterAtocLink = res.chapters[this.$route.query.order - 1].link
-          let bookInfoEle = document.querySelector('.readerBookInfo')
-          if (this.$route.query.order > 1) {
+        // 从书架进来(已加入书架的书籍)
+        let readHis = JSON.parse(localStorage.getItem('followBookList'))
+        let addShelfEle = document.querySelector('.addShelf')
+        let bookInfoEle = document.querySelector('.readerBookInfo')
+        if (readHis[this.$route.query.bookId]) {
+          chapterAtocLink = res.chapters[readHis[this.$route.query.bookId].order - 1].link
+          addShelfEle.style.background = 'rgba(238,240,244,0.5)'
+          addShelfEle.children[0].style.display = 'none'
+          addShelfEle.children[1].innerHTML = '已加入，保存书签'
+          if (readHis[this.$route.query.bookId].order > 1) {
             bookInfoEle.style.display = 'none'
           } else {
             bookInfoEle.style.display = ''
           }
         } else {
+          // 还未加入书架
           chapterAtocLink = res.chapters[0].link
         }
         console.log(chapterAtocLink)
@@ -268,7 +279,15 @@ export default {
         console.log(res)
         if (res.ok === true) {
           this.chapterContent = res.chapter
+          this.loading = false
         }
+      }).catch((err) => {
+        this.loading = false
+        // this.$toast('抱歉！服务器异常，未找到你想要的内容')
+        this.$toast('非常抱歉！内容因版权问题暂时下架')
+        // setTimeout(() => {
+        //   this.$router.go(-1)
+        // }, 2500)
       })
     },
 
@@ -310,8 +329,8 @@ export default {
       readHis[this.$route.query.bookId] = {
         bookId: this.$route.query.bookId,
         title: this.bookInfo.title,
-        author: this.bookInfo.author,
         cover: this.bookInfo.cover,
+        chapterTitle: this.chapterContent.title,
         order: this.chapterContent.order
       }
       localStorage.setItem('followBookList', JSON.stringify(readHis))
@@ -331,10 +350,20 @@ export default {
         }).catch(() => {
         })
       } else {
-        this.recordReadHis()
-        this.$toast('保存成功！')
-        this.$router.push({path: '/bookshelf'})
+        Dialog.confirm({
+            title: '提示',
+            message: '是否保存小说书签？'
+          }).then(() => {
+          this.recordReadHis()
+          this.$toast('保存书签成功！')
+          this.$router.push({path: '/bookshelf'})
+        }).catch(() => {
+        })
       }
+    },
+
+    settingSkin () {
+      this.$router.push({path: '/mine'})
     }
   },
   mounted () {
@@ -342,6 +371,7 @@ export default {
     // this._getBookChapters()
     // this._getBookBtoc()
     this._getBookAtoc()
+    this.loading = true
   }
 }
 </script>
@@ -549,7 +579,8 @@ export default {
     .readerChapterContent
       margin 0 24px
       padding-top 24px
-      color #d0d3d8
+      // color #d0d3d8
+      color #b2b4b8
       font-size 19px
       text-align justify
       line-height 1.8
@@ -557,7 +588,7 @@ export default {
         font-size 20px
         font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
         margin-bottom 18px
-        color #eef0f4
+        // color #eef0f4
         font-weight 600
       .renderTargetContainer
         position relative
@@ -602,12 +633,12 @@ export default {
       align-items center
       text-align center
       height 100%
+      color #b2b4b8
       .icon
         font-size 18px
       .txt
         margin-top 6px
         font-size 10px
-        color #b2b4b8
     .addShelf
       margin 0 16px
       display inline-block
@@ -641,6 +672,23 @@ export default {
     background rgba(0,0,0,.4)
     animation-duration .25s
     animation-timing-function ease-out
+  .loading-mask
+    position fixed
+    left 0
+    top 0
+    right 0
+    bottom 0
+    z-index 180
+    width 100%
+    height 100%
+    // background rgba(0,0,0,1)
+    background #1f2022
+    .loadingTips
+      position absolute
+      width 100%
+      top 50%
+      transform translateY(-50%)
+      text-align center
   .readerEntries
     position fixed
     background-color #1f2022

@@ -16,7 +16,7 @@
               </div>
               <div class="info">
                 <p class="title">{{item.title}}</p>
-                <p class="author">你阅读到第{{item.order}}章</p>
+                <p class="author">你上次看到：{{item.chapterTitle}}</p>
                 <p class="updated">
                   <!-- <span class="updateTime">{{updatedTime}}</span> -->
                   <span class="newChapter">最新章节：{{item.lastChapter}}</span>
@@ -140,31 +140,31 @@ export default {
 .bookShelf-wrapper
   .bookShelf-content
     width 100%
+    margin-bottom 57px
     .bookList
       position relative
       border 0
       .bookList-item
         position relative
         .container
-          display table
-          padding 12px 0 12px 20px
+          // display table
+          padding 12px 0 12px 16px
           overflow hidden
           .cover
+            float left
+            margin-right 16px
+            // display table-cell
+            // vertical-align middle
             box-shadow 0 2px 16px rgba(0,0,0,.08)
             position relative
-            display table-cell
-            vertical-align middle
-            width 108px
-            height 156px
-            @media screen and (max-width: 460px)
-              width 64px
-              height 93px
+            width 64px
+            height 93px
             img
               width 100%
               height 100%
           .info
-            display table-cell
-            vertical-align middle
+            // display table-cell
+            // vertical-align middle
             padding-left 16px
             .title
               padding-right 0
@@ -176,9 +176,7 @@ export default {
               text-overflow ellipsis
               -webkit-line-clamp 1
               -webkit-box-orient vertical
-              height auto
               max-height 26px
-              font-family "SourceHanSerifCN-Bold",PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
             .author
               margin-top 6px
               font-size 14px
@@ -190,11 +188,9 @@ export default {
               text-overflow ellipsis
               -webkit-line-clamp 1
               -webkit-box-orient vertical
-              height auto
               max-height 21px
             .updated
               margin-top 6px
-              font-family DIN-Medium,PingFang SC,-apple-system,SF UI Text,Lucida Grande,STheiti,Microsoft YaHei,sans-serif
               color #8a8c90
               overflow hidden
               white-space nowrap
@@ -209,7 +205,7 @@ export default {
               .newChapter
                 display inline-block
                 vertical-align middle
-                font-size 12px
+                font-size 14px
     .no-result-wrapper 
       position absolute
       width 100%
