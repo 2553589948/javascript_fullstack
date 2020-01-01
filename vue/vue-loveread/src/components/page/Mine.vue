@@ -2,7 +2,7 @@
   <div id="mine" ref="mine">
     <!-- 头部 -->
     <v-header class="mineHeader">
-      <i class="icon" slot="left-icon">&#xe608;</i>
+      <i class="icon" slot="left-icon" @click="showSideInfo">&#xe608;</i>
       <div slot="content">
         <el-dropdown class="colorBtn" id="colorBtn" trigger="click" @command="changeColor" disabled="true">
           <span class="el-dropdown-link">换肤</span>
@@ -21,6 +21,8 @@
         <i class="icon">&#xe632;</i>
       </router-link>
     </v-header>
+    <!-- 侧边栏 -->
+    <v-sidebar :showSidebar="showSidebar" @hidebar="hideSideInfo"></v-sidebar>
     <!-- content -->
     <div class="mine-content">
       <div class="login">
@@ -132,19 +134,28 @@
 
 <script>
 import vheader from '@/components/vheader'
+import Sidebar from '@/components/sidebar'
 export default {
   data () {
     return {
+      showSidebar: false
     }
   },
   components: {
-    'v-header': vheader
+    'v-header': vheader,
+    'v-sidebar': Sidebar
   },
   methods: {
     changeColor (command) {
       // console.log(command)
       document.getElementById('app').className = 'theme' + command
       // document.getElementById('colorBtn').className = 'theme' + command
+    },
+    showSideInfo () {
+      this.showSidebar = true
+    },
+    hideSideInfo () {
+      this.showSidebar = false
     },
     login () {
       this.$router.push({path: '/login'})
