@@ -383,6 +383,23 @@ export default {
 .reader-wrapper
   height 100%
   min-height 100vh
+  .loading-mask
+    position fixed
+    left 0
+    top 0
+    right 0
+    bottom 0
+    z-index 180
+    width 100%
+    height 100%
+    // background rgba(0,0,0,1)
+    background #1f2022
+    .loadingTips
+      position absolute
+      width 100%
+      top 50%
+      transform translateY(-50%)
+      text-align center
   .reader-content
     max-width 1120px
     min-height 100%
@@ -673,25 +690,6 @@ export default {
     width 100%
     height 100%
     background rgba(0,0,0,.4)
-    animation-duration .25s
-    animation-timing-function ease-out
-  .loading-mask
-    position fixed
-    left 0
-    top 0
-    right 0
-    bottom 0
-    z-index 180
-    width 100%
-    height 100%
-    // background rgba(0,0,0,1)
-    background #1f2022
-    .loadingTips
-      position absolute
-      width 100%
-      top 50%
-      transform translateY(-50%)
-      text-align center
   .readerEntries
     position fixed
     background-color #1f2022

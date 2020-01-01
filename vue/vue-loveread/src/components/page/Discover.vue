@@ -4,10 +4,12 @@
     <v-header class="newsHeader">
       <i class="icon" slot="left-icon">&#xe623;</i>
       <span slot="content">新闻速递</span>
-      <router-link to="" slot="right-icon" tag="div">
-        <i class="icon">&#xe624;</i>
-      </router-link>
+      <div slot="right-icon" @click="displayWeather">
+        <i class="icon">&#xe604;</i>
+      </div>
     </v-header>
+    <!-- 天气 -->
+    <v-weather :showWeather="showWeather" @hidebar="hideWeather" ref="weather"></v-weather>
     <!-- content -->
     <v-scroll
     class="discover"
@@ -47,6 +49,7 @@ import api from '@/api'
 import loading from '@/components/loading'
 import load from '@/components/load'
 import scroll from '@/components/scroll'
+import weather from '@/components/weather'
 
 export default {
   data () {
@@ -56,14 +59,16 @@ export default {
       showLoading: true,
       showLoad: false,
       pullup: true, // 放开下拉加载更多
-      beforeScroll: true
+      beforeScroll: true,
+      showWeather: false // 是否展示天气
     }
   },
   components: {
     'v-loading': loading,
     'v-load': load,
     'v-scroll': scroll,
-    'v-header': vheader
+    'v-header': vheader,
+    'v-weather': weather
   },
   methods: {
     _getNews () {
@@ -89,6 +94,15 @@ export default {
     listScroll () {},
     goNewsInfo (url) {
       window.location.href = url
+    },
+    // 展示天气
+    displayWeather () {
+      this.showWeather = true
+      // 地图初始化调用
+      this.$refs.weather.initMap()
+    },
+    hideWeather () {
+      this.showWeather = false
     }
   },
   mounted () {

@@ -18,7 +18,6 @@
           </li>
         </ul>
       </div>
-      
     </div>
     <div class="sidebar-mask" v-show="showSidebar" @click="_hidebar"></div>
   </div>
