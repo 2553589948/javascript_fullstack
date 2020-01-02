@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="defThemeColor">
     <v-tab></v-tab>
-    <v-banner></v-banner>
+    <!-- <v-banner></v-banner> -->
     <router-view/>
   </div>
 </template>

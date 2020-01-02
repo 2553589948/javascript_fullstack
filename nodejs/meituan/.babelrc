@@ -1,0 +1,4 @@
+{
+  "presets": ["@babel/preset-env"], // 预处理将es6,es7转为es5
+  "plugins": ["@babel/plugin-syntax-dynamic-import", "@babel/transform-runtime"]
+}

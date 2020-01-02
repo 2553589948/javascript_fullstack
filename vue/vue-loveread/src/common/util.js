@@ -1,11 +1,12 @@
-export function setLocalStroageData (item, obj) {
-  localStorage.setItem(item, JSON.stringify(obj))
+// 转换为单位万并取小数点后一位
+export function numToFixed (num) {
+  if (num / 10000 < 1) {
+    return num
+  }
+  return (Math.round(num / 1000) / 10).toFixed(1)
 }
 
-export function getLocalStroageData (item) {
-  JSON.parse(localStorage.getItem(item))
-}
-
+// 防抖
 export function debounce (func, delay) {
   let timer
   return function (...args) {

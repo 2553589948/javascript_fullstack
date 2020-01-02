@@ -1,0 +1,1 @@
+npm i @babel/cli @babel/core @babel/preset-env @babel/plugin-syntax-dynamic-import

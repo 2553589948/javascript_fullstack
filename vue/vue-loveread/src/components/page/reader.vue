@@ -17,14 +17,14 @@
                   <span class="number">{{rating.score}}</span>
                 </div>
                 <div class="rating-count">
-                  {{rating.count}}
-                  人点评
+                  {{ratingCounts}}
+                  <span v-show="rating.count >= 10000">万</span>人点评
                 </div>
               </div>
               <div class="reading">
                 <div class="reading-count">
-                  <span class="number">{{bookInfo.totalFollower}}</span>
-                  人
+                  <span class="number">{{totalFollower}}</span>
+                  <span v-show="bookInfo.totalFollower >= 10000">万</span>人
                 </div>
                 <div class="text">阅读此书</div>
               </div>
@@ -137,6 +137,7 @@
 
 <script>
 import api from '@/api'
+import { numToFixed } from '@/common/util'
 import { Dialog } from 'vant'
 let chapters, summary
 
@@ -147,6 +148,8 @@ export default {
       rating: [],
       updateTime: '',
       wordCount: '',
+      totalFollower: '',
+      ratingCounts: '',
       showContent: false, // 小说详情弹层
       allChapters: [],
       chapterContent: [],
@@ -168,6 +171,8 @@ export default {
         this.updateTime = res.updated.substr(0, 10)
         this.wordCount = res.wordCount.toString()
         .replace(/\B(?=(?:\d{3})+\b)/g, ',')
+        this.totalFollower = numToFixed(res.totalFollower)
+        this.ratingCounts = numToFixed(res.rating.count)
       })
     },
 

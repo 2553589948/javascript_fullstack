@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function pageChange() {
+      console.log(location.herf, '记录+1')
+    }
+    window.addEventListener('hashchange', pageChange)
+    
+    window.addEventListener('popstate', pageChange)
+    // history的方法
+    // popstate监控的是浏览器前进后退按钮：push/back go(1)/go(-1)
+
+    // pushState / replaceState 不能像上面那样操作
+    let hooks = ['pushState', 'replaceState']
+    hooks.forEach(hook => {
+      let method = window.history[hook]
+      window.history[hook] = function(...args) {
+        setTimeout(() => {
+          pageChange()
+        }, 0)
+        return method.call(window.history, args)
+      }
+    })
+
+    // 如何使用?
+    // import './router.js'引入即可
+
+    // let method = window.history.pushState
+    //   window.history.pushState = function(...args) {
+    //     setTimeout(() => {
+    //       pageChange()
+    //     }, 0)
+    //     return method.call(window.history, args)
+    //   }
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="people">
+    <div class="name"></div>
+    <div class="age"></div>
+  </div>
+
+  <!-- <script>
+    $.ajax({
+      url: './mock.json',
+      type: 'get',
+      dataType: 'json',
+      timeout: 5000,
+      async: true, // 默认为true
+      success: function(data) {
+        console.log(data.persons)
+        $('.name').html(data.persons.name)
+        $('.age').html(data.persons.age)
+      }
+    })
+  </script> -->
+
+  <script>
+    var xhr = null
+    xhr = new XMLHttpRequest()
+
+    xhr.open('get', './mock.json', true)
+    xhr.send()
+    // 状态变化回调
+    xhr.onreadystatechange = function() {
+      // console.log(xhr.readyState, xhr.status)
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText)
+        document.querySelector('.name').innerHTML = data.persons.name
+        document.querySelector('.age').innerHTML = data.persons.age
+      }
+    }
+  </script>
+</body>
+</html>
