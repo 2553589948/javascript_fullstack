@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="module">
+    console.log(123)
+    // setTimeout(() => {
+    //   import { add } from './math.js' // 不能够出现在任何逻辑判断里面
+    //   console.log(add(1, 2))
+    // }, 3000);
+    import { add } from './math.js'
+    console.log(add(1, 2))
+  </script>
+</body>
+</html>

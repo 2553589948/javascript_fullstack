@@ -1,0 +1,13 @@
+{
+  "presets": [],
+  "plugins": [
+    [
+      "import", // 所需插件
+      {
+        "libraryName": "lodash", // 指定库
+        "libraryDirectory": "", // lodash/includes指定目录,如果是 /dist -> lodash/dist/includes
+        "camel2DashComponentName": false  // default: true 驼峰命名是否转换为-
+      }      
+    ]
+  ]
+}
