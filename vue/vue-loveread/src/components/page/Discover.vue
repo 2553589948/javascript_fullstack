@@ -46,6 +46,7 @@
 <script>
 import vheader from '@/components/vheader'
 import api from '@/api'
+import { getDateDiff } from '@/common/util'
 import loading from '@/components/loading'
 import load from '@/components/load'
 import scroll from '@/components/scroll'
@@ -80,9 +81,14 @@ export default {
       .then((res) => {
         // console.log(res)
         if (res.code === 200) {
+          let len = this.result.length
           this.result = [...this.result, ...res.result]
           console.log(this.result)
           this.showLoading = false
+          for(let i = len; i < len + res.result.length; i++) {
+            let passtimeDiff = getDateDiff(this.result[i].passtime)
+            this.result[i].passtime = passtimeDiff
+          }
         }
       })
     },
@@ -99,7 +105,7 @@ export default {
     displayWeather () {
       this.showWeather = true
       // 地图初始化调用
-      this.$refs.weather.initMap()
+      // this.$refs.weather.initMap()
     },
     hideWeather () {
       this.showWeather = false

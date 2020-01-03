@@ -77,6 +77,8 @@ export default {
     }, 1000)
   },
   mounted () {
+    // 地图初始化调用
+    this.initMap()
   },
   methods: {
     getLocalTime () {
