@@ -188,7 +188,6 @@ export default {
       value: 0,
       option: [
         { text: '已选课程', value: 0 },
-        { text: '已选课程', value: '已选课程' },
         { text: '最新添加', value: '最新添加' },
         { text: '免费课程', value: '免费课程' }
       ]
