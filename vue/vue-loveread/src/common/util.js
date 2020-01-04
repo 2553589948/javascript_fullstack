@@ -49,7 +49,7 @@ export function getDateDiff(dateTimeStamp) {
   //     result = "" + parseInt(weekC) + "周前"
   // } 
   if (dayC > 3) {
-    return
+    return dateTimeStamp
   } else if (dayC >= 1 && dayC <= 3) {
       result = "" + parseInt(dayC) + "天前"
   } else if (hourC >= 1) {
