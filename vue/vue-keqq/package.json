@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "mint-ui": "^2.2.13",
     "vant": "^2.2.16",
     "vue": "^2.5.2",

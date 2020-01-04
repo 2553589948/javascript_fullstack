@@ -187,10 +187,10 @@ export default {
       ],
       value: 0,
       option: [
-        { text: '全部商品', value: 0 },
-        { text: '全部商品', value: '全部商品' },
-        { text: '新款商品', value: '新款商品' },
-        { text: '活动商品', value: '活动商品' }
+        { text: '已选课程', value: 0 },
+        { text: '已选课程', value: '已选课程' },
+        { text: '最新添加', value: '最新添加' },
+        { text: '免费课程', value: '免费课程' }
       ]
     }
   },

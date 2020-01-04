@@ -12,6 +12,9 @@ export default {
       current: 'mine'
     }
   },
+  mounted () {
+    this.$router.replace({path: '/login'})
+  },
   components: {
     'v-footer': vFooter
   }
