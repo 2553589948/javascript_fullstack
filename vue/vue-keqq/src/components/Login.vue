@@ -28,31 +28,31 @@ export default {
   },
   methods: {
     login () {
-      // if (this.username.trim() === '' || this.userpwd.trim() === '') {
-      //   this.$toast('账号或密码不能为空！')
-      //   return
-      // }
-      // this.$http({
-      //   method: 'post',
-      //   url: 'http://localhost:3000/users/userLogin',
-      //   data: {
-      //     username: this.username.trim(),
-      //     userpwd: this.userpwd.trim()
-      //   }
-      // })
-      // .then((res) => {
-      //   console.log(res)
-      //   if (res.data.code === '200') {
-      //     sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
-      //     this.$toast('登录成功')
-      //     this.$router.push({path: '/noteClass'})
-      //   } else {
-      //     this.$toast(res.data.mess)
-      //   }
-      // })
-      // .catch((err) => {
-      //   console.log(err)
-      // })
+      if (this.username.trim() === '' || this.userpwd.trim() === '') {
+        this.$toast('账号或密码不能为空！')
+        return
+      }
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/userLogin',
+        data: {
+          username: this.username.trim(),
+          userpwd: this.userpwd.trim()
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.data.code === '200') {
+            sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
+            this.$toast('登录成功')
+            this.$router.push({path: '/'})
+          } else {
+            this.$toast(res.data.mess)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     register () {
       this.$router.replace({path: '/register'})

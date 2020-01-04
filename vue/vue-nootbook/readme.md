@@ -69,8 +69,20 @@ module.exports = {
 }
 
 # mysql
+mysql -u root -p // 进行数据库登录
 show databases;
-create database nodesql;
-use nodesql; 
-source E:\javascript_fullstack\vue\vue-nootbook\test.sql
+create database nodesql; // 创建数据库,名为nodesql
+use nodesql;
+show tables;
+// 创建表 
+CREATE TABLE Users
+(
+userid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+username varchar(255) NOT NULL UNIQUE,
+userpwd varchar(32) NOT NULL default 'visitor',
+nickname varchar(255) NOT NULL default '123456'
+);
+desc users; // 查看表结构
+
+source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入
