@@ -7,10 +7,10 @@ import './common/css/icon.css'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import 'vant/lib/index.css'
-import { DropdownMenu, DropdownItem, Button, Toast } from 'vant'
+import { DropdownMenu, DropdownItem, Button, Toast, Swipe, SwipeItem, Field, CellGroup } from 'vant'
 import axios from 'axios'
 
-Vue.use(DropdownMenu).use(DropdownItem).use(Button).use(Toast)
+Vue.use(DropdownMenu).use(DropdownItem).use(Button).use(Toast).use(Swipe).use(SwipeItem).use(Field).use(CellGroup)
 
 Vue.use(Mint)
 Vue.prototype.$http = axios

@@ -9,6 +9,10 @@ import Mine from '@/components/Mine'
 import CourseDetail from '@/components/CourseDetail'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import Info from '@/page/Course/Info'
+import Entries from '@/page/Course/Entries'
+import RelateClass from '@/page/Course/RelateClass'
+import Comment from '@/page/Course/Comment'
 
 Vue.use(Router)
 
@@ -38,7 +42,29 @@ export default new Router({
     {
       path: '/courseDetail',
       name: 'CourseDetail',
-      component: CourseDetail
+      component: CourseDetail,
+      children: [
+        {
+          path: '/courseDetail',
+          component: Info
+        },
+        {
+          path: '/courseDetail/info',
+          component: Info
+        },
+        {
+          path: '/courseDetail/entries',
+          component: Entries
+        },
+        {
+          path: '/courseDetail/relateClass',
+          component: RelateClass
+        },
+        {
+          path: '/courseDetail/comment',
+          component: Comment
+        }
+      ]
     },
     {
       path: '/classtable',

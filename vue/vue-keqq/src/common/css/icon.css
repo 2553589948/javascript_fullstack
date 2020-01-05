@@ -87,9 +87,9 @@
 .i-course-live:before {
   content: "\f01b";
 }
-.i-course-record:before {
+/* .i-course-record:before {
   content: "\f01c";
-}
+} */
 .i-course-replay:before {
   content: "\f01d";
 }
@@ -297,12 +297,12 @@
 .i-download:before {
   content: "\f062";
 }
-.i-course-data:before {
+/* .i-course-data:before {
   content: "\f063";
-}
-.i-course-test:before {
+} */
+/* .i-course-test:before {
   content: "\f064";
-}
+} */
 @font-face {
   font-family: "cateicon"; /* project id 1522853 */
   src: url("//at.alicdn.com/t/font_1522853_uue7hyd179.eot");

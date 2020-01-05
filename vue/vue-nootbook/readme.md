@@ -82,6 +82,16 @@ username varchar(255) NOT NULL UNIQUE,
 userpwd varchar(32) NOT NULL default 'visitor',
 nickname varchar(255) NOT NULL default '123456'
 );
+CREATE TABLE Comments
+(
+cmeid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+c_time varchar(255) NOT NULL,
+m_time varchar(255) NOT NULL,
+comment varchar(255) NOT NULL,
+nickname varchar(255) NOT NULL,
+useId INT UNSIGNED NOT NULL
+);
+alter table Comments add foreign key(useId) references Users(userid); //链接2表
 desc users; // 查看表结构
 
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库

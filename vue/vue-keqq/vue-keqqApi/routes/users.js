@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 const userServies = require('../controllers/mySqlConfig')
-// const utils = require('../controllers/utils')
+const utils = require('../controllers/utils')
 router.prefix('/users')  //路由前缀 / => /users
 
 router.get('/', function (ctx, next) {
@@ -92,12 +92,13 @@ router.post('/userLogin', async(ctx, next) => {
     if (res.length) {
       r = 'ok';
       let result = {
-        nickname: res.nickname,
-        username: res.username
+        nickname: res[0].nickname,
+        username: res[0].username,
+        id: res[0].userid
       }
       ctx.body = {
         code: '200',
-        // data: result,
+        data: result,
         mess: '登录成功'
       }
     } else {
@@ -115,6 +116,48 @@ router.post('/userLogin', async(ctx, next) => {
       data: err
     }
   })
+})
+
+// 发表评论
+router.post('/insertNote', async(ctx, next) => {
+  let c_time = utils.getNowFormatDate()
+  let m_time = utils.getNowFormatDate()
+
+  let comment = ctx.request.body.note_content
+  let userId = ctx.request.body.useId
+  let nickname = ctx.request.body.nickname
+  await userServies.insertNote([c_time,m_time,comment,userId,nickname])
+  .then(async (res) => {
+    console.log(res)
+    let r = ''
+    if (res.affectedRows !== 0) {
+      r = 'ok',
+      ctx.body = {
+        code: '200',
+        data: r,
+        mess: '评论成功'
+      }
+    } else {
+      r = 'error',
+      ctx.body = {
+        code: '404',
+        data: r,
+        mess: '评论失败'
+      }
+    } 
+  }).catch((err) => {
+      ctx.body = {
+        code: '500',
+        data: err
+      }
+  })
+})
+
+// 获取评论数据
+router.post('/findComments', async(ctx, next) => {
+  await userServies.getAllcomments().then((res) => {
+    ctx.body = res
+  }) 
 })
 
 module.exports = router

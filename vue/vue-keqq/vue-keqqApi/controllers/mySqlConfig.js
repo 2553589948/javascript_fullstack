@@ -54,6 +54,12 @@ let insertUser = function (value) {
   return allServices.query(_sql, value)
 }
 
+// 读取所有comments表数据
+let getAllcomments = function () {
+  let _sql = `select * from comments;`
+  return allServices.query(_sql)
+}
+
 //根据分类名称查找对应的笔记列表
 let findNoteListByType = function(note_type) {
   let _sql = `select * from note where note_type="${note_type}";`
@@ -66,9 +72,9 @@ let findNoteDetailById = function (id) {
   return allServices.query(_sql)
 }
 
-// 发表笔记
+// 发表评论
 let insertNote = function (options) {
-  let _sql = `insert into note set c_time=?,m_time=?,note_content=?,head_img=?,title=?,note_type=?,useId=?,nickname=?;`
+  let _sql = `insert into comments set c_time=?,m_time=?,comment=?,useId=?,nickname=?;`
   return allServices.query(_sql, options)
 }
 
@@ -79,5 +85,6 @@ module.exports = {
   insertUser,
   findNoteListByType,
   findNoteDetailById,
-  insertNote
+  insertNote,
+  getAllcomments
 }
