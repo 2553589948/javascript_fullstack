@@ -7,7 +7,7 @@
         <p class="title-bar__info-static">
           <span class="title-bar__info-item u-message">报名人数<em>2万</em></span>
           <span class="title-bar__info-item u-comment">好评率<em>99%</em></span>
-          <span class="title-bar__info-item u-message"><em>{{comments.length}}</em>人评论</span>
+          <span class="title-bar__info-item u-message"><em>{{comments.length}}</em>评论</span>
         </p>
         <p class="title-bar__info-price">
           <span class="title-bar__info-item u-price">免费</span>

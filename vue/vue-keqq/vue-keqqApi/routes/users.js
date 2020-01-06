@@ -123,10 +123,11 @@ router.post('/insertNote', async(ctx, next) => {
   let c_time = utils.getNowFormatDate()
   let m_time = utils.getNowFormatDate()
 
+  let courseId = ctx.request.body.courseId
   let comment = ctx.request.body.note_content
   let userId = ctx.request.body.useId
   let nickname = ctx.request.body.nickname
-  await userServies.insertNote([c_time,m_time,comment,userId,nickname])
+  await userServies.insertNote([c_time,m_time,comment,userId,nickname,courseId])
   .then(async (res) => {
     console.log(res)
     let r = ''
@@ -155,7 +156,9 @@ router.post('/insertNote', async(ctx, next) => {
 
 // 获取评论数据
 router.post('/findComments', async(ctx, next) => {
-  await userServies.getAllcomments().then((res) => {
+  let courseId = ctx.request.body.id
+  await userServies.getAllcomments(courseId)
+  .then((res) => {
     ctx.body = res
   }) 
 })

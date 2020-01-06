@@ -1,0 +1,3 @@
+localStorage sessionStorage 只能在前端操作
+cookie能在前后端操作
+ajax axios是基于xmlhttprequest封装的 fetch是全新的请求方式

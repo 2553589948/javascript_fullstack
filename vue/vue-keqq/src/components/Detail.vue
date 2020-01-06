@@ -113,7 +113,7 @@
                 <div v-if="categorysubId ? categorysubId == list1.subId : true">
                 <li class="course-list__item"
                 v-for="(course, index) in list1.courseList" :key="index" ref="courseItem">
-                  <router-link :to="{path: '/courseDetail', params: {courseId: course.courseId}}">
+                  <router-link :to="{path: '/courseDetail', query: {courseId: course.courseId}}">
                     <div class="course-card-wrapper">
                       <div class="course-card-cover">
                         <img :src="course.courseCover" alt="">

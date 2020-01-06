@@ -55,8 +55,8 @@ let insertUser = function (value) {
 }
 
 // 读取所有comments表数据
-let getAllcomments = function () {
-  let _sql = `select * from comments;`
+let getAllcomments = function (courseId) {
+  let _sql = `select * from comments where courseId="${courseId}";`
   return allServices.query(_sql)
 }
 
@@ -74,7 +74,7 @@ let findNoteDetailById = function (id) {
 
 // 发表评论
 let insertNote = function (options) {
-  let _sql = `insert into comments set c_time=?,m_time=?,comment=?,useId=?,nickname=?;`
+  let _sql = `insert into comments set c_time=?,m_time=?,comment=?,useId=?,nickname=?,courseId=?;`
   return allServices.query(_sql, options)
 }
 

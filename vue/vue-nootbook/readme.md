@@ -92,6 +92,7 @@ nickname varchar(255) NOT NULL,
 useId INT UNSIGNED NOT NULL
 );
 alter table Comments add foreign key(useId) references Users(userid); //链接2表
+alter table comments add column courseId varchar(255) NOT NULL; // 往表中添加一列
 desc users; // 查看表结构
 
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库

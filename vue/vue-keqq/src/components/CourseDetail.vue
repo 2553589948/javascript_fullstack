@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { getDateDiff } from '@/common/js/utils'
 export default {
   data () {
     return {
@@ -55,6 +56,7 @@ export default {
   },
   created () {
     this.getComments()
+    console.log(this.$route.query.courseId)
   },
   methods: {
     getValue (e) {
@@ -72,18 +74,22 @@ export default {
     },
     // 获取评论数据
     getComments () {
-      // let _id = this.$route.query.id
+      let _id = this.$route.query.courseId
       this.$http({
         method: 'post',
-        url: 'http://localhost:3000/users/findComments'
-        // data: {
-        //   id: _id
-        // }
+        url: 'http://localhost:3000/users/findComments',
+        data: {
+          id: _id
+        }
       })
         .then((res) => {
           console.log(res)
           this.comments = res.data.reverse()
           console.log(this.comments)
+          for (let i = 0; i < this.comments.length; i++) {
+            let passtimeDiff = getDateDiff(this.comments[i].c_time)
+            this.comments[i].c_time = passtimeDiff
+          }
           // if (res.data.code === '200') {
           //   this.comments = res.data.data
           // } else {
@@ -93,6 +99,7 @@ export default {
     },
     // 发表评论
     publish () {
+      let courseId = this.$route.query.courseId
       let comment = this.message
       let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
       let nickname = JSON.parse(sessionStorage.getItem('userInfo')).nickname
@@ -102,7 +109,8 @@ export default {
         data: {
           note_content: comment,
           useId: userId,
-          nickname: nickname
+          nickname: nickname,
+          courseId: courseId
         }
       })
         .then((res) => {
@@ -110,6 +118,7 @@ export default {
           if (res.data.code === '200') {
             this.$toast(res.data.mess)
             this.message = ''
+            this.getComments() // 让最新评论排在前面
           } else {
             this.$toast(res.data.mess)
           }
