@@ -1,0 +1,16 @@
+<script>
+function foo (a, ...arr) {
+  // 让我们自定义模板字符串的拼接
+  console.log(a, arr)
+  // return 'my name is lilei'
+  return a[0] + arr[0].toUpperCase()
+}
+
+let name = 'lihua'
+// 模板字符串
+let str = `my name is ${name}`
+console.log(str)
+// 标签模板
+let str1 = foo`my name is ${name}, he is ${name}`
+console.log(str1)
+</script>

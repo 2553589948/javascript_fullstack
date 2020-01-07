@@ -35,8 +35,12 @@ alter table comments add column courseId varchar(255) NOT NULL; // 往表中添�
 desc users; // 查看表结构
 CREATE TABLE Courseinfo
 (
+courseId varchar(255) NOT NULL PRIMARY KEY,
+courseTitle varchar(255),
+followCount int(12),
+price int(12),
 
-)
+);
 
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入
