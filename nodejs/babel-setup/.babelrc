@@ -1,0 +1,9 @@
+{
+  "plugins": ["@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-runtime"
+  ],
+  "presets": [["@babel/preset-env", {
+    "useBuiltIns": "usage",
+    "corejs": 3
+  }]] // 指定js运行的环境(babel7版本)与.browserslistrc相结合使用,几乎包含所有插件
+}
