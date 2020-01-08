@@ -1,16 +1,15 @@
 <template>
   <div class="basic-info-list">
     <div class="basic-info-list__item title-bar">
-      <h1 class="title-bar__title">CD-Linux高级运维架构师课程/云计算/安全/docker/虚拟化/调优
-      </h1>
+      <h1 class="title-bar__title">{{courseInfo.courseTitle}}</h1>
       <div class="title-bar__info">
         <p class="title-bar__info-static">
-          <span class="title-bar__info-item u-message">报名人数<em>2万</em></span>
-          <span class="title-bar__info-item u-comment">好评率<em>99%</em></span>
+          <span class="title-bar__info-item u-message">报名人数<em>{{courseInfo.followCount}}</em></span>
+          <!-- <span class="title-bar__info-item u-comment">好评率<em>99%</em></span> -->
           <span class="title-bar__info-item u-message"><em>{{comments.length}}</em>评论</span>
         </p>
         <p class="title-bar__info-price">
-          <span class="title-bar__info-item u-price">免费</span>
+          <span class="title-bar__info-item u-price">{{courseInfo.courPrice}}</span>
         </p>
       </div>
       <div class="basic-info-list__item basic-info-list__item--teachers">
@@ -64,13 +63,13 @@
           <p>
             <span style="color:#ff0000;">
               <span style="font-size:20px;">
-                <strong>热烈庆祝学神IT与腾讯强强联合，共推linux高级架构师课程，已帮助上万学员实现高薪梦想，更多优秀学员进驻腾讯公司。</strong>
+                {{courseInfo.courseIntro}}
               </span>
             </span>
           </p>
-          <p>
-            <img src="https://10.url.cn/qqke_course_info/ajNVdqHZLLAicHQUQUClbYvb12KJLkoicEibIjTk9KNOxzar6sicMUuzib3pLFntCDPJ8AHj4RGL8tt8/?tp=webp" alt="">
-          </p>
+          <div>
+            <img :src="courseInfo.introPic" alt="">
+          </div>
         </div>
       </div>
       <div class="basic-info-list__item basic-info-list__item--comment">
@@ -100,9 +99,9 @@
       <div class="basic-info-list__item basic-info-list__item--agency">
         <p class="basic-info-list__item-title">机构介绍</p>
         <div class="basic-info-list__agency-hd">
-          <img src="http://p.qpic.cn/qqcourse/QFzQYCgCrxmHkd3RGCuib9RHkJA4R5g8DxW82j8IpDQL5fFQ9sDXOvtJTTJiboAy1a/" alt="" class="basic-info-list__agency-img">
+          <img :src="courseInfo.eduOrgPic" alt="" class="basic-info-list__agency-img">
           <div class="basic-info-list__agency-hd-right">
-            <p class="basic-info-list__agency-name">学神IT教育</p>
+            <p class="basic-info-list__agency-name">{{courseInfo.eduOrgName}}</p>
           </div>
           <ul class="basic-indo-list__agency-comment-list">
             <li class="basic-info-list__agency-comment-list-item">
@@ -110,16 +109,16 @@
               <span class="basic-info-list__agency-comment-list-item-hd">好评度</span>
             </li>
             <li class="basic-info-list__agency-comment-list-item">
-              <span class="basic-info-list__agency-comment-list-item-score basic-info-list__agency-comment-list-item-score--desc">83</span>
+              <span class="basic-info-list__agency-comment-list-item-score basic-info-list__agency-comment-list-item-score--desc">{{courseInfo.courseCount}}</span>
               <span class="basic-info-list__agency-comment-list-item-hd">课程数</span>
             </li>
             <li class="basic-info-list__agency-comment-list-item">
-              <span class="basic-info-list__agency-comment-list-item-score basic-info-list__agency-comment-list-item-score--teacher">36万</span>
+              <span class="basic-info-list__agency-comment-list-item-score basic-info-list__agency-comment-list-item-score--teacher">{{courseInfo.stuCount}}</span>
               <span class="basic-info-list__agency-comment-list-item-hd">学生数</span>
             </li>
           </ul>
         </div>
-        <p class="basic-info-list__agency-info">学神IT教育"是国内IT在线教育高端领导品牌，讲师授课方式深入浅出，课程内容全部采用企业实战项目案例的教学方式为主。教学项目均来自于国内外如BAT、facebook等一线知名企业真实项目，能够让处于零基础小白状态的学员毕业获得两到三年以上工作经验，也能够让处于1-3年左右的的职场新人迅速提升！</p>
+        <p class="basic-info-list__agency-info">{{courseInfo.eduOrgIntro}}</p>
       </div>
       <div style="height:100px;"></div>
     </div>
@@ -134,7 +133,11 @@ export default {
   },
   data () {
     return {
+      courseInfo: []
     }
+  },
+  created () {
+    this.getCourseInfo()
   },
   computed: {
     slicomments () {
@@ -144,6 +147,25 @@ export default {
   methods: {
     allComments () {
       this.$router.push({path: '/CourseDetail/comment'})
+    },
+    // 获取课程详情
+    getCourseInfo () {
+      let _id = this.$route.query.courseId
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/findCourseInfo',
+        data: {
+          id: _id
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.data.code === '200') {
+            this.courseInfo = res.data.data
+          } else {
+            this.$toast(res.data.mess)
+          }
+        })
     }
   }
 }
@@ -346,7 +368,6 @@ h1, h2, h3, h4, h5, h6 {
 .mod-di-content {
     overflow: hidden;
     padding-bottom: 12px;
-    max-height: 400px;
     font-size: 14px;
     line-height: 25px;
     word-break: break-word;
@@ -354,6 +375,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
 }
 .mod-di-content img {
+    padding-top: 10px;
     display: inline-block;
     min-width: 1px;
     max-width: 100%;

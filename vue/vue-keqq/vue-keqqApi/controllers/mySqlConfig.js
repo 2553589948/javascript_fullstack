@@ -54,9 +54,15 @@ let insertUser = function (value) {
   return allServices.query(_sql, value)
 }
 
-// 读取所有comments表数据
+// 根据课程id查找所有comments表数据
 let getAllcomments = function (courseId) {
   let _sql = `select * from comments where courseId="${courseId}";`
+  return allServices.query(_sql)
+}
+
+// 根据课程id查找所有comments表数据
+let getCourseInfo = function (courseId) {
+  let _sql = `select * from courseinfo where courseId="${courseId}";`
   return allServices.query(_sql)
 }
 
@@ -83,8 +89,7 @@ module.exports = {
   userLogin,
   findUser,
   insertUser,
-  findNoteListByType,
-  findNoteDetailById,
   insertNote,
-  getAllcomments
+  getAllcomments,
+  getCourseInfo
 }

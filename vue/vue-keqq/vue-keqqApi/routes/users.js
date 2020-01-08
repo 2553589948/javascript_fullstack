@@ -163,4 +163,33 @@ router.post('/findComments', async(ctx, next) => {
   }) 
 })
 
+// 获取课程详情
+router.post('/findCourseInfo', async(ctx, next) => {
+  let courseId = ctx.request.body.id
+  await userServies.getCourseInfo(courseId)
+  .then(async (res) => {
+    let r = ''
+    if (res.length) {
+      r = 'ok',
+      ctx.body = {
+        code: '200',
+        data: res[0],
+        mess: '查找成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '404',
+        // data: r,
+        mess: '查询失败'
+      }
+    }
+  }).catch((error) => {
+    ctx.body = {
+      code: '80008',
+      data: error
+    }
+  })
+})
+
 module.exports = router
