@@ -39,8 +39,15 @@ courseId varchar(255) NOT NULL PRIMARY KEY,
 courseTitle varchar(255),
 followCount int(12),
 price int(12),
-
+courseIntro varchar(255),
+introPic varchar(255),
+eduOrgName varchar(32) NOT NULL,
+eduOrgPic varchar(255) NOT NULL,
+courseCount int(12) NOT NULL,
+stuCount int(12),
+eduOrgIntro varchar(255) NOT NULL
 );
+ALTER TABLE courseinfo CHANGE price courPrice varchar(20); // 修改字段名
 
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入
