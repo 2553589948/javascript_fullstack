@@ -60,9 +60,15 @@ let getAllcomments = function (courseId) {
   return allServices.query(_sql)
 }
 
-// 根据课程id查找所有comments表数据
+// 根据课程id查找课程详情
 let getCourseInfo = function (courseId) {
   let _sql = `select * from courseinfo where courseId="${courseId}";`
+  return allServices.query(_sql)
+}
+
+// 根据课程id查找老师信息
+let getTeacherInfo = function (courseId) {
+  let _sql = `select * from teachers where courseId="${courseId}";`
   return allServices.query(_sql)
 }
 
@@ -91,5 +97,6 @@ module.exports = {
   insertUser,
   insertNote,
   getAllcomments,
-  getCourseInfo
+  getCourseInfo,
+  getTeacherInfo
 }

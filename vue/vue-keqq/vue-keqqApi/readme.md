@@ -38,7 +38,7 @@ CREATE TABLE Courseinfo
 courseId varchar(255) NOT NULL PRIMARY KEY,
 courseTitle varchar(255),
 followCount int(12),
-price int(12),
+price int(12), // 修改了
 courseIntro varchar(255),
 introPic varchar(255),
 eduOrgName varchar(32) NOT NULL,
@@ -48,14 +48,27 @@ stuCount int(12),
 eduOrgIntro varchar(255) NOT NULL
 );
 ALTER TABLE courseinfo CHANGE price courPrice varchar(20); // 修改字段名
+# varchar(16383) 最大16383
 CREATE TABLE Teachers
 (
 tid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 avatar varchar(255),
 tNickname varchar(20),
-tIntro varchar(21800),
+tIntro varchar(1600),
 courseId varchar(255) NOT NULL
 );
+老师课程关联表
+CREATE TABLE Tea_Cour
+(
+tc_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+tid INT, // 修改了
+courseId varchar(255)
+);
+为Tea_Cour表添加外键
+ALTER TABLE Tea_Cour ADD FOREIGN KEY(tid) REFERENCES Teachers(tid);
+ALTER TABLE Tea_Cour ADD FOREIGN KEY(courseId) REFERENCES Courseinfo(courseId);
+
+ALTER TABLE Tea_Cour MODIFY COLUMN tid INT UNSIGNED; // 修改字段类型
 
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入

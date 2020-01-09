@@ -25,7 +25,7 @@
         </li>
       </ul>
     </div>
-    <router-view :comments="comments" />
+    <router-view :comments="comments" :teachersInfo="teachersInfo" />
     <div class="comment-box">
       <van-cell-group>
         <van-field
@@ -51,11 +51,13 @@ export default {
     return {
       message: '',
       comments: [],
-      inputHeight: {}
+      inputHeight: {},
+      teachersInfo: []
     }
   },
   created () {
     this.getComments()
+    this.getTeacherInfo()
     console.log(this.$route.query.courseId)
   },
   methods: {
@@ -119,6 +121,25 @@ export default {
             this.$toast(res.data.mess)
             this.message = ''
             this.getComments() // 让最新评论排在前面
+          } else {
+            this.$toast(res.data.mess)
+          }
+        })
+    },
+    // 获取老师信息
+    getTeacherInfo () {
+      let _id = this.$route.query.courseId
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/findTeacherInfo',
+        data: {
+          id: _id
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.data.code === '200') {
+            this.teachersInfo = res.data.data
           } else {
             this.$toast(res.data.mess)
           }
