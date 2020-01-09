@@ -35,17 +35,6 @@
         </div>
       </van-dropdown-item>
     </van-dropdown-menu>
-    <div class="courseInfo">
-      <div class="custom-indicator" slot="indicator"
-      v-for="(item, index) in tabs" :key="index">
-        <li class="text">{{item}}</li>
-      </div>
-      <van-swipe class="courseCont" :loop="false" :show-indicators="false" @change="onChange">
-        <van-swipe-item class="courseitem">111111</van-swipe-item>
-        <van-swipe-item class="courseitem">222222</van-swipe-item>
-        <van-swipe-item class="courseitem">333333</van-swipe-item>
-      </van-swipe>
-    </div>
     <v-footer :current="current"></v-footer>
   </div>
 </template>
@@ -201,8 +190,7 @@ export default {
         { text: '已选课程', value: 0 },
         { text: '最新添加', value: '最新添加' },
         { text: '免费课程', value: '免费课程' }
-      ],
-      tabs: ['详情', '目录', '相关课程']
+      ]
     }
   },
   methods: {
@@ -222,22 +210,6 @@ export default {
 </script>
 
 <style scoped>
-.courseInfo {
-  width: 100%;
-  text-align: center;
-}
-.courseInfo .courseCont .courseitem {
-  display: block;
-  width: 100%;
-  overflow: auto;
-}
-.custom-indicator {
-  width: 100%;
-}
-.text {
-  float: left;
-  width: 33.3333%;
-}
 .nav__panel-sort .nav__menu__item {
   overflow: hidden;
   position: relative;

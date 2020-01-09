@@ -60,6 +60,12 @@ export default {
     this.getTeacherInfo()
     console.log(this.$route.query.courseId)
   },
+  computed: {
+    courseId () {
+      let _id = this.$route.query.courseId
+      return _id
+    }
+  },
   methods: {
     getValue (e) {
       // if (e === '') {
