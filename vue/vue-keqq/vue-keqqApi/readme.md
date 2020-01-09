@@ -48,6 +48,14 @@ stuCount int(12),
 eduOrgIntro varchar(255) NOT NULL
 );
 ALTER TABLE courseinfo CHANGE price courPrice varchar(20); // 修改字段名
+CREATE TABLE Teachers
+(
+tid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+avatar varchar(255),
+tNickname varchar(20),
+tIntro varchar(21800),
+courseId varchar(255) NOT NULL
+);
 
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入

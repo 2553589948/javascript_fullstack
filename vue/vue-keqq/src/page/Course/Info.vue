@@ -136,7 +136,7 @@ export default {
       courseInfo: []
     }
   },
-  created () {
+  mounted () {
     this.getCourseInfo()
   },
   computed: {

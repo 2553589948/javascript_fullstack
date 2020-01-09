@@ -207,7 +207,7 @@ ul li{
 .text{
   color:gray;
 }
-.router-link-active{
+.router-link-active .text{
   color:#188fee;
 }
 .router-link-active:before {
