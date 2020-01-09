@@ -134,7 +134,7 @@ export default {
   },
   methods: {
     allComments () {
-      this.$router.push({path: '/CourseDetail/comment'})
+      this.$router.push({path: '/CourseDetail/comment', query: {courseId: this.courseInfo.courseId}})
     },
     // 获取课程详情
     getCourseInfo () {

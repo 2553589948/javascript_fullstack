@@ -9,17 +9,17 @@
     <div class="course-info">
       <ul class="info-list">
         <li class="info">
-          <router-link to="/CourseDetail/info" replace class="tabbar__item">
+          <router-link :to="{path: '/CourseDetail/info', query: {courseId: courseId}}" replace class="tabbar__item">
             <span class="text">详情</span>
           </router-link>
         </li>
         <li class="directory">
-          <router-link to="/CourseDetail/entries" replace class="tabbar__item">
+          <router-link :to="{path: '/CourseDetail/entries', query: {courseId: courseId}}" replace class="tabbar__item">
             <span class="text">目录</span>
           </router-link>
         </li>
         <li class="related">
-          <router-link to="/CourseDetail/relateClass" replace class="tabbar__item">
+          <router-link :to="{path: '/CourseDetail/relateClass', query: {courseId: courseId}}" replace class="tabbar__item">
             <span class="text">相关课程</span>
           </router-link>
         </li>
@@ -52,19 +52,15 @@ export default {
       message: '',
       comments: [],
       inputHeight: {},
-      teachersInfo: []
+      teachersInfo: [],
+      courseId: ''
     }
   },
   created () {
+    this.courseId = this.$route.query.courseId
     this.getComments()
     this.getTeacherInfo()
     console.log(this.$route.query.courseId)
-  },
-  computed: {
-    courseId () {
-      let _id = this.$route.query.courseId
-      return _id
-    }
   },
   methods: {
     getValue (e) {
@@ -82,7 +78,7 @@ export default {
     },
     // 获取评论数据
     getComments () {
-      let _id = this.$route.query.courseId
+      let _id = this.courseId
       this.$http({
         method: 'post',
         url: 'http://localhost:3000/users/findComments',
@@ -107,7 +103,7 @@ export default {
     },
     // 发表评论
     publish () {
-      let courseId = this.$route.query.courseId
+      let courseId = this.courseId
       let comment = this.message
       let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
       let nickname = JSON.parse(sessionStorage.getItem('userInfo')).nickname
@@ -134,7 +130,7 @@ export default {
     },
     // 获取老师信息
     getTeacherInfo () {
-      let _id = this.$route.query.courseId
+      let _id = this.courseId
       this.$http({
         method: 'post',
         url: 'http://localhost:3000/users/findTeacherInfo',
