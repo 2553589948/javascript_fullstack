@@ -1,8 +1,8 @@
 <template>
   <div class="course-wrapper">
-    <div class="video">
+    <div class="video-box">
       <div class="video-task__player">
-        <video width="100%" height="200" controls src=""></video>
+        <video width="100%" controls src="http://117.41.241.27/vedu.tc.qq.com/AVtfWhdDBs9tMiSWaXFugKvppsIb1xImcCVTRfclRTTk/s1432yr5krm.mp4?sdtfrom=v3010&guid=c6970ff722611d4d2d12d6c567ec9f66&vkey=8A5CD3C639C7A949656DDE99BF366665787C674279281F0D321798AB5D3D868C6C90847E3473C37A3224CEEB34EDEDEC033E3AB75ED076CC565CDC99CAC70D4A3B3AB4D38EBF8DB50644F8A6BE5C46C2EDADF257619190DF71B7CAD028C8FECAA9D0BB56AF13F3B6904E36F17B06840B87BD0EA32CC4219199B807FAA5C02EFB&platform=2"></video>
         <!-- <i class="icon-font i-play video-task__player-icon"></i> -->
       </div>
     </div>
@@ -168,11 +168,12 @@ export default {
   margin-right: 10px;
   margin-top: 10px;
 }
-.video{
+.video-box{
   width: 100%;
-  height: 13.1875rem;
+  height: 210px;
   background-size: 100%;
   position: fixed;
+  top: 0;
   right: 0;
   left: 0;
   z-index: 60;
@@ -180,20 +181,16 @@ export default {
 }
 .video-task__player{
   width: 100%;
-  height: 13.1875rem;
+  height: 210px;
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
   margin: auto;
 }
-video{
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+video {
+  width: 100%;
+  height: 210px;
 }
 .video-task__player-icon.i-play {
   border: 4px solid #fff;
@@ -216,7 +213,7 @@ video{
   width: 100%;
   background-color: #fff;
   position: fixed;
-  top: 200px;
+  top: 210px;
   right: 0;
   left: 0;
   z-index: 60;
