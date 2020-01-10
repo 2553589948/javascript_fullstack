@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Foo() {
+      // 不加声明关键词(var let)相当于全局
+      getName = function() {
+        console.log(1)
+      }
+      return this
+    }
+    Foo.getName = function() {
+      console.log(2)
+    }
+    Foo.prototype.getName = function() {
+      console.log(3)
+    }
+    var getName = function() {
+      console.log(4)
+    }
+    function getName() { // function声明提升到最前面 var声明在其后 Foo()被调用后其没有被关键词声明的方法将会被提升到全局
+      console.log(5)
+    }
+    Foo.getName(); // 2
+    getName(); // 4
+    Foo().getName(); // 1
+    getName(); // 4  x  1
+    // .操作优先级19 new操作无参数列表优先级18
+    new Foo.getName(); // 1  x  2
+    // 有参数列表19 .也是19 从左往右执行
+    new Foo().getName(); // 3
+    new new Foo().getName(); // undefind  x  3
+  </script>
+</body>
+</html>

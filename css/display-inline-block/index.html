@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      font-size: 0;
+    }
+    ul > li {
+      display: inline-block;
+      background-color: green;
+      font-size: initial; /* 浏览器初始化的字体大小 */
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>A</li>
+    <li>B</li>
+    <li>C</li>
+    <!-- 123 -->
+  </ul>
+  <script>
+  const ul = document.querySelector('ul')
+  console.log(ul.childNodes)
+  ul.childNodes.forEach(node => {
+    console.log(node, node.nodeType) // 以数字标识节点类型
+  })
+  </script>
+</body>
+</html>
