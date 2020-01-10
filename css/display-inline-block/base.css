@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.left {
+  background-color: rgb(117, 163, 135);
+}
+.middle {
+  background-color: orange;
+}
+.right {
+  background-color: orangered;
+}

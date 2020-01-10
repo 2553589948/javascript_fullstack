@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>圣杯布局</title>
+  <link rel="stylesheet" href="./base.css">
+  <style>
+  .left, .middle, .right {
+    float: left;
+  }
+  .middle {
+    width: 100%;
+  }
+  .left, .right {
+    width: 100px;
+  }
+  .left {
+    margin-left: -100%; /* 相对于相邻元素的值 */
+  }
+  .right {
+    margin-left: -100px;
+  }
+  /* 把middle内容挤到中间：圣杯布局 双飞翼 */
+  .middle {
+    box-sizing: border-box;
+    padding-right: 100px;
+    padding-left: 100px;
+  }
+  /* 双飞翼: 在middle里加个盒子inner */
+  .inner {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  /* grid布局 */
+  </style>
+</head>
+<body>
+  <div class="middle">middle</div>
+  <div class="left">left</div>
+  <div class="right">right</div>
+</body>
+</html>
