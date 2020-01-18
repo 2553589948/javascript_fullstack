@@ -182,7 +182,6 @@ export default class Nav extends Vue {
     }
   }
 }
-
 .enter-slideUp,
 .leave-slideDown {
   position: absolute;
@@ -192,7 +191,6 @@ export default class Nav extends Vue {
   left: 0;
   z-index: 1010;
 }
-
 .enter-slideUp {
   overflow: auto;
   visibility: visible;
