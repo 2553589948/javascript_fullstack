@@ -1,8 +1,9 @@
 <template>
   <div class="course-wrapper">
+    <div class="course-header">
     <div class="video-box">
       <div class="video-task__player">
-        <video width="100%" controls src="http://117.41.241.27/vedu.tc.qq.com/AVtfWhdDBs9tMiSWaXFugKvppsIb1xImcCVTRfclRTTk/s1432yr5krm.mp4?sdtfrom=v3010&guid=c6970ff722611d4d2d12d6c567ec9f66&vkey=8A5CD3C639C7A949656DDE99BF366665787C674279281F0D321798AB5D3D868C6C90847E3473C37A3224CEEB34EDEDEC033E3AB75ED076CC565CDC99CAC70D4A3B3AB4D38EBF8DB50644F8A6BE5C46C2EDADF257619190DF71B7CAD028C8FECAA9D0BB56AF13F3B6904E36F17B06840B87BD0EA32CC4219199B807FAA5C02EFB&platform=2"></video>
+        <video controls src="http://117.169.76.48/vedu.tc.qq.com/AbKnTM14Ola1Z4URO4oVAD8ntir0a9Kp0hhkljrzGPN4/s1432yr5krm.mp4?sdtfrom=v3010&guid=c6970ff722611d4d2d12d6c567ec9f66&vkey=D18AAA4315358C6E9C95D8EAB2971873D7BCB6469279CA600FD9041908D6F2928DE450B6B6053EAA747F5AB68EFA60B8F14CA4D158AA1E0709FAC03E0CDA3FE7AACCD3A01D383B659CC87FBBEB9334CB69104FF44351B79D675FF9AEF8B62224B7115AEDE451295B14E9173291C1B91C2ACA6EA6F98F9DD57891E6017108383C&platform=2"></video>
         <!-- <i class="icon-font i-play video-task__player-icon"></i> -->
       </div>
     </div>
@@ -24,6 +25,7 @@
           </router-link>
         </li>
       </ul>
+    </div>
     </div>
     <router-view :comments="comments" :teachersInfo="teachersInfo" />
     <div class="comment-box">
@@ -168,29 +170,20 @@ export default {
   margin-right: 10px;
   margin-top: 10px;
 }
-.video-box{
-  width: 100%;
-  height: 210px;
-  background-size: 100%;
+.course-header {
+  background:#eee;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 60;
-  text-align: center;
 }
-.video-task__player{
+.video-box{
   width: 100%;
-  height: 210px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
 }
-video {
+.video-box video {
   width: 100%;
-  height: 210px;
+  height: 100%;
 }
 .video-task__player-icon.i-play {
   border: 4px solid #fff;
@@ -211,12 +204,8 @@ video {
 }
 .course-info{
   width: 100%;
+  height: 3rem;
   background-color: #fff;
-  position: fixed;
-  top: 210px;
-  right: 0;
-  left: 0;
-  z-index: 60;
   text-align: center;
 }
 ul li{

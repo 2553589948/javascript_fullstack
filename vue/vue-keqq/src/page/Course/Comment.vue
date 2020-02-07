@@ -38,7 +38,7 @@ export default {
 
 <style scoped>
 .comment-wrapper {
-  padding-top: 245px;
+  padding-top: 69.2%;
   padding-bottom: 60px;
 }
 .basic-info-list__item {

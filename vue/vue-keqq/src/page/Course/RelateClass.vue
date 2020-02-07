@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 .relateClass-wrapper {
-  padding-top: 239px;
+  padding-top: 67.2%;
 }
 .teacher-recom{
   background: #fff;

@@ -162,7 +162,7 @@ export default {
 <style lang="css" scoped>
 @import '../../common/css/icon.css';
 .basic-info-list{
-  padding-top: 239px;
+  padding-top: 67.2%;
   background: #eee;
 }
 .basic-info-list__item {

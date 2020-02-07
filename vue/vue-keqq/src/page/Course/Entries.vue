@@ -43,7 +43,7 @@ export default {
 <style scoped>
 @import '../../common/css/icon.css';
 .entries-wrapper {
-  padding-top: 239px;
+  padding-top: 67.2%;
 }
 .sub-course-static {
     display: block;
