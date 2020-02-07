@@ -221,4 +221,33 @@ router.post('/findTeacherInfo', async(ctx, next) => {
   })
 })
 
+// 获取课程目录
+router.post('/findCourseEntries', async(ctx, next) => {
+  let courseId = ctx.request.body.id
+  await userServies.getCourseEntries(courseId)
+  .then(async (res) => {
+    let r = ''
+    if (res.length) {
+      r = 'ok',
+      ctx.body = {
+        code: '200',
+        data: res,
+        mess: '查找成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '404',
+        // data: r,
+        mess: '查询失败'
+      }
+    }
+  }).catch((error) => {
+    ctx.body = {
+      code: '80008',
+      data: error
+    }
+  })
+})
+
 module.exports = router

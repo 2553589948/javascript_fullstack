@@ -1,33 +1,33 @@
 <template>
   <div class="course-wrapper">
     <div class="course-header">
-    <div class="video-box">
-      <div class="video-task__player">
-        <video controls src="http://117.169.76.48/vedu.tc.qq.com/AbKnTM14Ola1Z4URO4oVAD8ntir0a9Kp0hhkljrzGPN4/s1432yr5krm.mp4?sdtfrom=v3010&guid=c6970ff722611d4d2d12d6c567ec9f66&vkey=D18AAA4315358C6E9C95D8EAB2971873D7BCB6469279CA600FD9041908D6F2928DE450B6B6053EAA747F5AB68EFA60B8F14CA4D158AA1E0709FAC03E0CDA3FE7AACCD3A01D383B659CC87FBBEB9334CB69104FF44351B79D675FF9AEF8B62224B7115AEDE451295B14E9173291C1B91C2ACA6EA6F98F9DD57891E6017108383C&platform=2"></video>
-        <!-- <i class="icon-font i-play video-task__player-icon"></i> -->
+      <div class="video-box">
+        <div class="video-task__player" v-if="courseList.length">
+          <video controls :src="courseList[0].videoSrc"></video>
+          <!-- <i class="icon-font i-play video-task__player-icon"></i> -->
+        </div>
+      </div>
+      <div class="course-info">
+        <ul class="info-list">
+          <li class="info">
+            <router-link :to="{path: '/CourseDetail/info', query: {courseId: courseId}}" replace class="tabbar__item">
+              <span class="text">详情</span>
+            </router-link>
+          </li>
+          <li class="directory">
+            <router-link :to="{path: '/CourseDetail/entries', query: {courseId: courseId}}" replace class="tabbar__item">
+              <span class="text">目录</span>
+            </router-link>
+          </li>
+          <li class="related">
+            <router-link :to="{path: '/CourseDetail/relateClass', query: {courseId: courseId}}" replace class="tabbar__item">
+              <span class="text">相关课程</span>
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="course-info">
-      <ul class="info-list">
-        <li class="info">
-          <router-link :to="{path: '/CourseDetail/info', query: {courseId: courseId}}" replace class="tabbar__item">
-            <span class="text">详情</span>
-          </router-link>
-        </li>
-        <li class="directory">
-          <router-link :to="{path: '/CourseDetail/entries', query: {courseId: courseId}}" replace class="tabbar__item">
-            <span class="text">目录</span>
-          </router-link>
-        </li>
-        <li class="related">
-          <router-link :to="{path: '/CourseDetail/relateClass', query: {courseId: courseId}}" replace class="tabbar__item">
-            <span class="text">相关课程</span>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-    </div>
-    <router-view :comments="comments" :teachersInfo="teachersInfo" />
+    <router-view :comments="comments" :teachersInfo="teachersInfo" @changeVideo="selectEntry" :courseList="courseList" />
     <div class="comment-box">
       <van-cell-group>
         <van-field
@@ -55,14 +55,16 @@ export default {
       comments: [],
       inputHeight: {},
       teachersInfo: [],
-      courseId: ''
+      courseId: '',
+      courseList: []
     }
   },
-  created () {
+  mounted () {
     this.courseId = this.$route.query.courseId
     this.getComments()
     this.getTeacherInfo()
     console.log(this.$route.query.courseId)
+    this.getCourseEntries()
   },
   methods: {
     getValue (e) {
@@ -148,6 +150,30 @@ export default {
             this.$toast(res.data.mess)
           }
         })
+    },
+    // 获取课程目录
+    getCourseEntries () {
+      let _id = this.$route.query.courseId
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/findCourseEntries',
+        data: {
+          id: _id
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.data.code === '200') {
+            this.courseList = res.data.data
+          } else {
+            this.$toast(res.data.mess)
+          }
+        })
+    },
+    // 更换课程章节
+    selectEntry (videoSrc) {
+      const videoEle = document.querySelector('.video-box video')
+      videoEle.src = videoSrc
     }
   }
 }

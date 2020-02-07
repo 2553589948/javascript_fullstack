@@ -70,5 +70,14 @@ ALTER TABLE Tea_Cour ADD FOREIGN KEY(courseId) REFERENCES Courseinfo(courseId);
 
 ALTER TABLE Tea_Cour MODIFY COLUMN tid INT UNSIGNED; // 修改字段类型
 
+CREATE TABLE Entries
+(
+EntryId INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+entryTitle varchar(255) NOT NULL,
+entryOrder varchar(12) NOT NULL,
+videoSrc varchar(1600) NOT NULL,
+courseId varchar(255) NOT NULL
+);
+
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入

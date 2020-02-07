@@ -72,6 +72,12 @@ let getTeacherInfo = function (courseId) {
   return allServices.query(_sql)
 }
 
+// 根据课程id查找课程目录
+let getCourseEntries = function (courseId) {
+  let _sql = `select * from entries where courseId="${courseId}";`
+  return allServices.query(_sql)
+}
+
 //根据分类名称查找对应的笔记列表
 let findNoteListByType = function(note_type) {
   let _sql = `select * from note where note_type="${note_type}";`
@@ -98,5 +104,6 @@ module.exports = {
   insertNote,
   getAllcomments,
   getCourseInfo,
-  getTeacherInfo
+  getTeacherInfo,
+  getCourseEntries
 }

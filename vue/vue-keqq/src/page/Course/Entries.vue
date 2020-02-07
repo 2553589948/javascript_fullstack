@@ -3,24 +3,24 @@
     <div class="sub-course-static">
       <div class="sub-course-static__title">授课方式：</div>
       <div class="sub-course-static__cate sub-course-static__record">
-        <i class="i-course-record"></i>视频（63）
+        <i class="i-course-record"></i>视频（0）
       </div>
       <div class="sub-course-static__cate sub-course-static__data">
-        <i class="i-course-data"></i>资料（1）
+        <i class="i-course-data"></i>资料（0）
       </div>
       <div class="sub-course-static__cate sub-course-static__test">
-        <i class="i-course-test"></i>习题（1）
+        <i class="i-course-test"></i>习题（0）
       </div>
     </div>
     <div class="sub-course-list-wrapper">
       <ul class="course-cnt__lesson-list" >
         <li class="course-cnt__lesson-item" v-for="(item, index) in courseList" :key="index">
           <div class="course-cnt__lesson-title">
-            <a href="javascript:;" class="course-cnt__lesson-link">
-              <span class="course-cnt__lesson-no">{{item.num}}</span>
-              <span class="course-cnt__lesson-title-word">{{item.title}}</span>
+            <div class="course-cnt__lesson-link" :class="{'selected': videoOrder === index}" @click="selectVideo(index)">
+              <span class="course-cnt__lesson-no">{{item.entryOrder}}</span>
+              <span class="course-cnt__lesson-title-word">{{item.entryTitle}}</span>
               <i class="icon-down-arrow i-v-bottom"></i>
-            </a>
+            </div>
           </div>
         </li>
       </ul>
@@ -30,11 +30,23 @@
 
 <script>
 export default {
-  mounted () {
+  props: {
+    courseList: {
+      type: Array
+    }
   },
   data () {
     return {
-      courseList: []
+      // courseList: [],
+      videoOrder: 0
+    }
+  },
+  mounted () {
+  },
+  methods: {
+    selectVideo (idx) {
+      this.videoOrder = idx
+      this.$emit('changeVideo', this.courseList[idx].videoSrc)
     }
   }
 }
@@ -94,7 +106,7 @@ export default {
 .sub-course-list-wrapper{
   display: block;
   position: relative;
-  top:130px;
+  top:100px;
   width: 100%;
   height: 200px;
 }
@@ -109,46 +121,49 @@ export default {
   line-height: 50px;
 }
 .course-cnt__lesson-no {
-    display: block;
-    float: left;
-    position: relative;
-    margin-right: 12px;
-    margin-left: 12px;
-    font-size: 16px;
-    line-height: 52px;
-    color: #bbb;
+  display: block;
+  float: left;
+  position: relative;
+  margin-right: 12px;
+  margin-left: 12px;
+  font-size: 16px;
+  line-height: 52px;
+  color: #bbb;
 }
 .course-cnt__lesson-title-word {
-    float: left;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    max-width: 70%;
-    max-height: 52px;
-    font-size: 16px;
-    line-height: 52px;
-    text-overflow: ellipsis;
-    word-break: break-word;
-    -webkit-line-clamp: 2;
-    display: block;
-    white-space: nowrap;
-    color:black;
+  float: left;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  max-width: 70%;
+  max-height: 52px;
+  font-size: 16px;
+  line-height: 52px;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  -webkit-line-clamp: 2;
+  display: block;
+  white-space: nowrap;
+  color:black;
+}
+.course-cnt__lesson-link.selected .course-cnt__lesson-title-word {
+  color: #188fee;
 }
 .course-cnt__lesson-link{
   width: 100%;
   float:left;
 }
 .icon-down-arrow {
-    position: relative;
-    top: 50%;
-    float:right;
-    padding: 13px 16px 0 0;
-    width: 24px;
-    height: 24px;
-    font-family: mfont;
-    font-size: 16px;
-    line-height: 24px;
-    text-indent: 0;
-    color: #a7a7a7;
-    -webkit-font-smoothing: antialiased;
+  position: relative;
+  top: 50%;
+  float:right;
+  padding: 13px 16px 0 0;
+  width: 24px;
+  height: 24px;
+  font-family: mfont;
+  font-size: 16px;
+  line-height: 24px;
+  text-indent: 0;
+  color: #a7a7a7;
+  -webkit-font-smoothing: antialiased;
 }
 </style>
