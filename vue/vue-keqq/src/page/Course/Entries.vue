@@ -37,7 +37,6 @@ export default {
   },
   data () {
     return {
-      // courseList: [],
       videoOrder: 0
     }
   },
@@ -58,50 +57,50 @@ export default {
   padding-top: 67.2%;
 }
 .sub-course-static {
-    display: block;
-    text-align: left;
-    width: 100%;
-    float:left;
-    overflow: hidden;
-    padding: 10px 0;
-    max-height: 72px;
-    font-size: 14px;
-    line-height: 36px;
-    color: #777;
+  display: block;
+  text-align: left;
+  width: 100%;
+  float:left;
+  overflow: hidden;
+  padding: 10px 0;
+  max-height: 72px;
+  font-size: 14px;
+  line-height: 36px;
+  color: #777;
 }
 .sub-course-static__title {
-    display: inline-block;
-    position: relative;
-    left: 16px;
+  display: inline-block;
+  position: relative;
+  left: 16px;
 }
 .sub-course-static__cate {
-    padding: 0 15px;
-    display: inline-block;
+  padding: 0 15px;
+  display: inline-block;
 }
 .i-course-record,.i-course-test, .i-course-data {
-    display: inline-block;
-    position: relative;
-    top: 15px;
-    left: 0;
-    width: 32px;
-    height: 28px;
-    font-size: 18px;
-    line-height: 28px;
-    background-repeat: no-repeat;
-    background-size: 26px auto;
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  left: 0;
+  width: 32px;
+  height: 28px;
+  font-size: 18px;
+  line-height: 28px;
+  background-repeat: no-repeat;
+  background-size: 26px auto;
 }
 .sub-course-static__test{
   position: relative;
   left: 75px;
 }
 .i-course-record {
-    background-image: url(http://9.url.cn/edu/mobilev2/pages/courseDetail/img/task-video@2x.ea9e65a.png);
+  background-image: url(http://9.url.cn/edu/mobilev2/pages/courseDetail/img/task-video@2x.ea9e65a.png);
 }
 .i-course-data {
-    background-image: url(http://9.url.cn/edu/mobilev2/pages/courseDetail/img/task-file@2x.f74b35b.png);
+  background-image: url(http://9.url.cn/edu/mobilev2/pages/courseDetail/img/task-file@2x.f74b35b.png);
 }
 .i-course-test {
-    background-image: url(http://9.url.cn/edu/mobilev2/pages/courseDetail/img/task-test@2x.f5e78fd.png);
+  background-image: url(http://9.url.cn/edu/mobilev2/pages/courseDetail/img/task-test@2x.f5e78fd.png);
 }
 .sub-course-list-wrapper{
   display: block;
