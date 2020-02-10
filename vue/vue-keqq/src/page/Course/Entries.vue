@@ -33,11 +33,14 @@ export default {
   props: {
     courseList: {
       type: Array
+    },
+    selectOrder: {
+      type: Number
     }
   },
   data () {
     return {
-      videoOrder: 0
+      videoOrder: this.selectOrder
     }
   },
   mounted () {
@@ -45,7 +48,7 @@ export default {
   methods: {
     selectVideo (idx) {
       this.videoOrder = idx
-      this.$emit('changeVideo', this.courseList[idx].videoSrc)
+      this.$emit('changeVideo', idx)
     }
   }
 }

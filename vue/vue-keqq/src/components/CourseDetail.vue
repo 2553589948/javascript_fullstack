@@ -3,7 +3,7 @@
     <div class="course-header">
       <div class="video-box">
         <div class="video-task__player" v-if="courseList.length">
-          <video controls :src="courseList[0].videoSrc"></video>
+          <video controls :src="courseList[selectOrder].videoSrc"></video>
           <!-- <i class="icon-font i-play video-task__player-icon"></i> -->
         </div>
       </div>
@@ -27,7 +27,7 @@
         </ul>
       </div>
     </div>
-    <router-view :comments="comments" :teachersInfo="teachersInfo" @changeVideo="selectEntry" :courseList="courseList" />
+    <router-view :comments="comments" :teachersInfo="teachersInfo" @changeVideo="selectEntry" :courseList="courseList" :selectOrder="selectOrder" />
     <div class="comment-box">
       <van-cell-group>
         <van-field
@@ -56,7 +56,8 @@ export default {
       inputHeight: {},
       teachersInfo: [],
       courseId: '',
-      courseList: []
+      courseList: [],
+      selectOrder: 0
     }
   },
   mounted () {
@@ -171,9 +172,10 @@ export default {
         })
     },
     // 更换课程章节
-    selectEntry (videoSrc) {
-      const videoEle = document.querySelector('.video-box video')
-      videoEle.src = videoSrc
+    selectEntry (idx) {
+      // const videoEle = document.querySelector('.video-box video')
+      // videoEle.src = this.courseList[idx].videoSrc
+      this.selectOrder = idx
     }
   }
 }
