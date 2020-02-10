@@ -48,6 +48,7 @@
 
 <script>
 import { getDateDiff } from '@/common/js/utils'
+import { Dialog } from 'vant'
 export default {
   data () {
     return {
@@ -76,6 +77,18 @@ export default {
       // }
     },
     onFocus () {
+      // 判断是否登录
+      if (sessionStorage.getItem('userInfo') === null) {
+        // this.$toast('登录后才可以评论哦！')
+        Dialog.confirm({
+          title: '提示',
+          message: '登录后才可以评论哦！是否去登录？'
+        }).then(() => {
+          this.$router.push({path: '/login'})
+        }).catch(() => {
+          // on cancel
+        })
+      }
     },
     onBlur () {
       // this.inputHeight.minHeight = 10
