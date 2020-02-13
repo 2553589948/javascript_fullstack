@@ -79,7 +79,6 @@ export default {
     onFocus () {
       // 判断是否登录
       if (sessionStorage.getItem('userInfo') === null) {
-        // this.$toast('登录后才可以评论哦！')
         Dialog.confirm({
           title: '提示',
           message: '登录后才可以评论哦！是否去登录？'

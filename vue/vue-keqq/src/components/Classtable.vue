@@ -260,11 +260,6 @@ export default {
   padding-bottom: 50px;
   height: 68vh;
 }
-/* .nav__panel-filter__wrapper .confirmBtn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-} */
 .nav .nav__panel-filter__content {
   overflow-y: scroll;
   height: 100%;
