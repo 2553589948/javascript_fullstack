@@ -3,6 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import App from './App'
 import Lifecycle from './components/Lifecycle'
+import CommentVs from './components/CommentVs'
+import PureComponentTest from './components/PureComponent'
 
 // class App extends React.Component {
 //   render () {
@@ -154,4 +156,4 @@ class FeatureReturnFraments extends React.Component {
   }
 }
 
-ReactDOM.render(<Lifecycle/>, document.querySelector('#root'))
+ReactDOM.render(<PureComponentTest/>, document.querySelector('#root'))
