@@ -2,6 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // import App from './App'
+import Lifecycle from './components/Lifecycle'
 
 // class App extends React.Component {
 //   render () {
@@ -153,4 +154,4 @@ class FeatureReturnFraments extends React.Component {
   }
 }
 
-ReactDOM.render(<React16/>, document.querySelector('#root'))
+ReactDOM.render(<Lifecycle/>, document.querySelector('#root'))
