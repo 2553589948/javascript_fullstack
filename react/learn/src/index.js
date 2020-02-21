@@ -8,7 +8,7 @@ import PureComponentTest from './components/PureComponent'
 import ButtonTest from './components/Buttontest'
 import Hoc from './components/Hoc'
 import ContextSample from './components/ContextSample'
-
+import KFormCreate from './components/KFormCreate'
 
 // class App extends React.Component {
 //   render () {
@@ -163,4 +163,5 @@ class FeatureReturnFraments extends React.Component {
 // ReactDOM.render(<PureComponentTest/>, document.querySelector('#root'))
 // ReactDOM.render(<ButtonTest/>, document.querySelector('#root'))
 // ReactDOM.render(<Hoc state="react"/>, document.querySelector('#root'))
-ReactDOM.render(<ContextSample />, document.querySelector('#root'))
+// ReactDOM.render(<ContextSample />, document.querySelector('#root'))
+ReactDOM.render(<KFormCreate />, document.querySelector('#root'))
