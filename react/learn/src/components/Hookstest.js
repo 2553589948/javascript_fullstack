@@ -10,7 +10,7 @@ export default function Hookstest () {
 
   // 做数据获取、设置订阅、以及手动更改react组件中的DOM -- 副作用
   useEffect(() => {
-    document.title = `You clicked ${count} times`;
+    document.title = `You clicked ${count} times`
   });
 
   return (
