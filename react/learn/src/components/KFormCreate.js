@@ -55,7 +55,6 @@ class FormItem extends Component {
   render() {
     return (
       <div className="formItem">
-        {/* {this.props.children} */}
         {this.props.validateStatus === 'error' && (
           <p style={{color: 'red'}}>{this.props.help}</p>
         )}
