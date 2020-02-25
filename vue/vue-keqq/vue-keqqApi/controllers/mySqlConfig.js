@@ -72,21 +72,15 @@ let getTeacherInfo = function (courseId) {
   return allServices.query(_sql)
 }
 
+// 搜索提示
+let searchTips = function (keyword) {
+  let _sql = `select name,courseId from courses where name like '%${keyword}%' limit(5);`
+  return allServices.query(_sql)
+}
+
 // 根据课程id查找课程目录
 let getCourseEntries = function (courseId) {
   let _sql = `select * from entries where courseId="${courseId}";`
-  return allServices.query(_sql)
-}
-
-//根据分类名称查找对应的笔记列表
-let findNoteListByType = function(note_type) {
-  let _sql = `select * from note where note_type="${note_type}";`
-  return allServices.query(_sql)
-}
-
-// 根据id查找对应的笔记详情
-let findNoteDetailById = function (id) {
-  let _sql = `select * from note where id="${id}";`
   return allServices.query(_sql)
 }
 

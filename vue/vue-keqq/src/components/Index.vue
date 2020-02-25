@@ -5,7 +5,7 @@
         <img src="../assets/images/keqqLogo.png" alt="">
       </div>
       <div class="search-cancel" style="display: none">取消</div>
-      <form action="" class="header-search">
+      <form action="" class="header-search" @click="toSearch">
         <div class="search-tips">
           <i class="icon-font i-search2 search-icon"></i>
         </div>
@@ -118,6 +118,9 @@ export default {
     },
     selectedIndex (curIdx) {
       this.activeIndex = curIdx
+    },
+    toSearch () {
+      this.$router.push({path: '/search'})
     }
   },
   components: {

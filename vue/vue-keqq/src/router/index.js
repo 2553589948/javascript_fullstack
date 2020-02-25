@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
+import Search from '@/components/Search'
 import CateDetail from '@/components/CateDetail'
 import Category from '@/components/Category'
 import Detail from '@/components/Detail'
@@ -28,6 +29,11 @@ export default new Router({
           component: CateDetail
         }
       ]
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search
     },
     {
       path: '/category',
