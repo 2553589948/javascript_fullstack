@@ -118,6 +118,37 @@ router.post('/userLogin', async(ctx, next) => {
   })
 })
 
+// 搜素
+router.post('/search', async(ctx, next) => {
+  let keyword = ctx.request.body.keyword
+  console.log(keyword)
+  await userServies.searchTips(keyword)
+  .then(res => {
+    console.log(res)
+    let r = ''
+    if (res.length) {
+      r = 'ok',
+      ctx.body = {
+        code: 200,
+        keywords: res,
+        mess: '查找成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '404',
+        // data: r,
+        mess: '查找失败'
+      }
+    }
+  }).catch((error) => {
+    ctx.body = {
+      code: '80008',
+      data: error
+    }
+  })
+})
+
 // 发表评论
 router.post('/insertNote', async(ctx, next) => {
   let c_time = utils.getNowFormatDate()

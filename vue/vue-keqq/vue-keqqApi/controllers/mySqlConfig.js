@@ -74,7 +74,7 @@ let getTeacherInfo = function (courseId) {
 
 // 搜索提示
 let searchTips = function (keyword) {
-  let _sql = `select name,courseId from courses where name like '%${keyword}%' limit(5);`
+  let _sql = `select courseTitle,courseId from courseinfo where courseTitle like '%${keyword}%' limit 5;`
   return allServices.query(_sql)
 }
 
@@ -99,5 +99,6 @@ module.exports = {
   getAllcomments,
   getCourseInfo,
   getTeacherInfo,
-  getCourseEntries
+  getCourseEntries,
+  searchTips
 }

@@ -3,7 +3,7 @@
     <div class="head">
       <div>
         <img src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png" alt="">
-        <input type="text" confirm-type="search" focus="true" v-model="words" @focus="inputFocus" @input="tipsearch" @confirm="searchWords" placeholder="搜索老师、机构、课程">
+        <input type="text" confirm-type="search" focus="true" v-model="words" @focus="inputFocus" @input="searchTips" @change="searchWords" placeholder="搜索老师、机构、课程">
         <img @click="clearInput" class="del" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png" alt="">
       </div>
       <div @click="cancel">取消</div>
@@ -31,11 +31,11 @@
     </div>
     <div class="searchtips" v-if="words">
       <div v-if="tipsData.length != 0">
-        <div v-for="(item, index) in tipsData" :key="index" @click="searchWords" :data-value="item.name">
-          {{item.name}}
+        <div v-for="(item, index) in tipsData" :key="index" @click="toCourseDetail(item.courseId)" :data-value="item.courseTitle">
+          {{item.courseTitle}}
         </div>
       </div>
-      <div class="nogoods" v-else>数据库暂无此类商品...</div>
+      <div class="nogoods" v-else>数据库暂无你搜索的数据...</div>
     </div>
   </div>
 </template>
@@ -53,19 +53,42 @@ export default {
       hotData: [
         {keyword: '你好'},
         {keyword: 'vue'},
+        {keyword: '哈哈哈'},
+        {keyword: '你好'},
+        {keyword: 'vue'},
         {keyword: '哈哈哈'}
       ],
-      tipsData: [
-        {name: '你好'},
-        {name: 'vue'},
-        {name: '哈哈哈'}
-      ]
+      tipsData: []
     }
   },
   methods: {
-    tipsearch () {},
-    inputFocus () {},
-    searchWords () {},
+    searchWords (e) {
+      // console.log(e)
+      // console.log(e.target.value)
+    },
+    searchTips (e) {
+      this.tipsData = []
+      this.words = e.target.value.trim()
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/search',
+        data: {
+          keyword: this.words
+        }
+      }).then(res => {
+        console.log(res)
+        if (res.data.code === 200) {
+          this.tipsData = res.data.keywords
+        }
+      })
+    },
+    toCourseDetail (id) {
+      console.log(id)
+      this.$router.push({path: '/courseDetail', query: {courseId: id}})
+    },
+    inputFocus () {
+      // this.searchTips()
+    },
     cancel () {
       this.$router.go(-1)
     },
