@@ -3,7 +3,7 @@
     <div class="head">
       <div>
         <img src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png" alt="">
-        <input type="text" confirm-type="search" focus="true" v-model="words" @focus="inputFocus" @input="searchTips" @change="searchWords" placeholder="搜索老师、机构、课程">
+        <input type="text" confirm-type="search" focus="true" v-model="words" @focus="inputFocus" @input="searchTips" placeholder="搜索老师、机构、课程">
         <img @click="clearInput" class="del" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png" alt="">
       </div>
       <div @click="cancel">取消</div>
@@ -14,7 +14,7 @@
         <div @click="clearHistory"></div>
       </div>
       <div class="cont">
-        <div v-for="(item, index) in historyData" :key="index" @click="searchWords" :data-value="item.keyword">
+        <div v-for="(item, index) in historyData" :key="index" @click="searchWords(item.keyword)" :data-value="item.keyword">
           {{item.keyword}}
         </div>
       </div>
@@ -24,15 +24,15 @@
         <div>热门搜索</div>
       </div>
       <div class="cont">
-        <div v-for="(item, index) in hotData" :key="index" @click="searchWords" :data-value="item.keyword">
+        <div v-for="(item, index) in hotData" :key="index" @click="searchWords(item.keyword)" :data-value="item.keyword">
           {{item.keyword}}
         </div>
       </div>
     </div>
     <div class="searchtips" v-if="words">
       <div v-if="tipsData.length != 0">
-        <div v-for="(item, index) in tipsData" :key="index" @click="toCourseDetail(item.courseId)" :data-value="item.courseTitle">
-          {{item.courseTitle}}
+        <div v-for="(item, index) in tipsData" :key="index" @click="toCourseDetail(item.courseId)" :data-value="item.keyword">
+          {{item.keyword}}
         </div>
       </div>
       <div class="nogoods" v-else>数据库暂无你搜索的数据...</div>
@@ -48,27 +48,28 @@ export default {
       historyData: [
         {keyword: '你好'},
         {keyword: 'vue'},
-        {keyword: '哈哈哈'}
+        {keyword: '产品'}
       ],
       hotData: [
-        {keyword: '你好'},
-        {keyword: 'vue'},
-        {keyword: '哈哈哈'},
-        {keyword: '你好'},
-        {keyword: 'vue'},
-        {keyword: '哈哈哈'}
+        {keyword: '产品经理', id: '01'},
+        {keyword: '实战班', id: '02'},
+        {keyword: '运营', id: '03'},
+        {keyword: '产品设计', id: '04'},
+        {keyword: '短视频', id: '05'},
+        {keyword: '编程语言', id: '06'},
+        {keyword: '营销', id: '07'}
       ],
       tipsData: []
     }
   },
   methods: {
-    searchWords (e) {
-      // console.log(e)
-      // console.log(e.target.value)
+    searchWords (keyword) {
+      this.words = keyword
+      this.searchTips()
     },
     searchTips (e) {
       this.tipsData = []
-      this.words = e.target.value.trim()
+      this.words = this.words || e.target.value.trim()
       this.$http({
         method: 'post',
         url: 'http://localhost:3000/users/search',
