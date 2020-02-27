@@ -5,7 +5,7 @@
         <div class="avatar">
         </div>
         <div class="search-cancel" style="display: none">取消</div>
-        <form action="" class="header-search">
+        <form action="" class="header-search" @click="toSearch">
           <div class="search-tips">
             <i class="icon-font i-search2 search-icon"></i>
             <span class="search-input-text">搜索老师、机构、课程</span>
@@ -79,6 +79,9 @@ export default {
     gotoDetail (idx, cateId) {
       this.activeIdx = idx
       this.cateId = cateId
+    },
+    toSearch () {
+      this.$router.push({path: '/search'})
     }
   },
   components: {
