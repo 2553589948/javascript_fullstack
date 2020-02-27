@@ -80,5 +80,11 @@ courseId varchar(255) NOT NULL
 );
 alter table courseinfo add column keyword varchar(255) NOT NULL; // 往表中添加一列
 
+CREATE TABLE search_history
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+keyword varchar(255) NOT NULL
+);
+
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入

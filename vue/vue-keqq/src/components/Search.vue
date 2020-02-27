@@ -14,7 +14,7 @@
         <div @click="clearHistory"></div>
       </div>
       <div class="cont">
-        <div v-for="(item, index) in historyData" :key="index" @click="searchWords(item.keyword)" :data-value="item.keyword">
+        <div v-for="(item, index) in historyData" :key="index" @click="searchWords(item.keyword)">
           {{item.keyword}}
         </div>
       </div>
@@ -24,14 +24,14 @@
         <div>热门搜索</div>
       </div>
       <div class="cont">
-        <div v-for="(item, index) in hotData" :key="index" @click="searchWords(item.keyword)" :data-value="item.keyword">
+        <div v-for="(item, index) in hotData" :key="index" @click="searchWords(item.keyword)">
           {{item.keyword}}
         </div>
       </div>
     </div>
     <div class="searchtips" v-if="words">
       <div v-if="tipsData.length != 0">
-        <div v-for="(item, index) in tipsData" :key="index" @click="toCourseDetail(item.courseId)" :data-value="item.keyword">
+        <div v-for="(item, index) in tipsData" :key="index" @click="toCourseDetail(item.courseId, item.keyword)">
           {{item.keyword}}
         </div>
       </div>
@@ -41,15 +41,12 @@
 </template>
 
 <script>
+import { Dialog } from 'vant'
 export default {
   data () {
     return {
       words: '',
-      historyData: [
-        {keyword: '你好'},
-        {keyword: 'vue'},
-        {keyword: '产品'}
-      ],
+      historyData: [],
       hotData: [
         {keyword: '产品经理', id: '01'},
         {keyword: '实战班', id: '02'},
@@ -62,10 +59,34 @@ export default {
       tipsData: []
     }
   },
+  mounted () {
+    this.getHistory()
+  },
   methods: {
+    getHistory () {
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/gethistory'
+      }).then(res => {
+        this.historyData = res.data.historyData
+      })
+    },
+    addHistory () {
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/addhistory',
+        data: {
+          keyword: this.words
+        }
+      }).then(res => {
+        // console.log(res)
+        this.getHistory()
+      })
+    },
     searchWords (keyword) {
       this.words = keyword
       this.searchTips()
+      this.addHistory()
     },
     searchTips (e) {
       this.tipsData = []
@@ -83,20 +104,38 @@ export default {
         }
       })
     },
-    toCourseDetail (id) {
-      console.log(id)
+    clearHistory () {
+      Dialog.confirm({
+        title: '提示',
+        message: '确定要删除所有记录吗？'
+      }).then(() => {
+        this.$http({
+          method: 'post',
+          url: 'http://localhost:3000/users/clearhistory'
+        }).then((res) => {
+          // console.log(res)
+          if (res) {
+            this.historyData = []
+          }
+        })
+      }).catch(() => {
+        // on cancel
+      })
+    },
+    toCourseDetail (id, keyword) {
+      // console.log(id)
+      this.words = keyword
+      this.addHistory()
       this.$router.push({path: '/courseDetail', query: {courseId: id}})
     },
     inputFocus () {
-      // this.searchTips()
     },
     cancel () {
       this.$router.go(-1)
     },
     clearInput () {
       this.words = ''
-    },
-    clearHistory () {}
+    }
   }
 }
 </script>
@@ -196,6 +235,7 @@ export default {
   }
   .hotsearch{
     margin-top: 10px;
+    color: #df0c13;
   }
 }
 </style>

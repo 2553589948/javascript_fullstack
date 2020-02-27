@@ -78,6 +78,30 @@ let searchTips = function (keyword) {
   return allServices.query(_sql)
 }
 
+// 获取历史记录
+let getHistory = function () {
+  let _sql = `select * from search_history;`
+  return allServices.query(_sql)
+}
+
+// 查找历史记录(去重)
+let findHistory = function (keyword) {
+  let _sql = `select * from search_history where keyword="${keyword}";`
+  return allServices.query(_sql)
+}
+
+// 添加历史记录
+let addHistory = function (keyword) {
+  let _sql = `insert into search_history set keyword=?;`
+  return allServices.query(_sql, keyword)
+}
+
+// 删除全部历史记录
+let clearHistory = function () {
+  let _sql = `delete from search_history;`
+  return allServices.query(_sql)
+}
+
 // 根据课程id查找课程目录
 let getCourseEntries = function (courseId) {
   let _sql = `select * from entries where courseId="${courseId}";`
@@ -100,5 +124,9 @@ module.exports = {
   getCourseInfo,
   getTeacherInfo,
   getCourseEntries,
-  searchTips
+  searchTips,
+  getHistory,
+  findHistory,
+  addHistory,
+  clearHistory
 }

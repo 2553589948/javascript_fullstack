@@ -149,6 +149,61 @@ router.post('/search', async(ctx, next) => {
   })
 })
 
+// 获取历史记录
+router.post('/gethistory', async(ctx, next) => {
+  await userServies.getHistory()
+  .then(res => {
+    // console.log(res)
+    ctx.body = {
+      historyData: res
+    }
+  })
+})
+
+// 添加历史记录
+router.post('/addhistory', async(ctx, next) => {
+  let keyword = ctx.request.body.keyword
+  await userServies.findHistory(keyword)
+  .then(async(res) => {
+    console.log(res)
+    if (res.length == 0) {
+      await userServies.addHistory(keyword)
+      .then(res => {
+        if (res) {
+          ctx.body = {
+            data: 'success'
+          }
+        } else {
+          ctx.body = {
+            data: 'fail'
+          }
+        }
+      })
+    } else {
+      ctx.body = {
+        data: '已经有记录了'
+      }
+    }
+  })
+})
+
+// 删除全部历史记录
+router.post('/clearhistory', async(ctx, next) => {
+  await userServies.clearHistory()
+  .then(res => {
+    console.log(res)
+    if (res) {
+      ctx.body = {
+        'data': '删除成功'
+      }
+    } else {
+      ctx.body = {
+        'data': null
+      }
+    }
+  })
+})
+
 // 发表评论
 router.post('/insertNote', async(ctx, next) => {
   let c_time = utils.getNowFormatDate()
