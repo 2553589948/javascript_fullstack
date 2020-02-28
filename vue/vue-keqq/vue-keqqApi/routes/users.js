@@ -180,8 +180,39 @@ router.post('/addhistory', async(ctx, next) => {
         }
       })
     } else {
+      // await userServies.addedFirst(keyword)
+      // .then(res => {
+      //   console.log(res)
+      //   if (res) {
+      //     ctx.body = {
+      //       data: '已经有记录了'
+      //     }
+      //   } else {
+      //     ctx.body = {
+      //       data: 'fail'
+      //     }
+      //   }
+      // })
       ctx.body = {
         data: '已经有记录了'
+      }
+    }
+  })
+})
+
+// 删除单条历史记录
+router.post('/delhistory', async(ctx, next) => {
+  let keyword = ctx.request.body.keyword
+  await userServies.delHistory(keyword)
+  .then(res => {
+    console.log(res)
+    if (res) {
+      ctx.body = {
+        'data': '删除成功'
+      }
+    } else {
+      ctx.body = {
+        'data': null
       }
     }
   })

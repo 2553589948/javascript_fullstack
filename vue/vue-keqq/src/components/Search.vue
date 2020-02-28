@@ -16,6 +16,7 @@
       <div class="cont">
         <div v-for="(item, index) in historyData" :key="index" @click="searchWords(item.keyword)">
           {{item.keyword}}
+          <i class="icon-font i-close" @click.stop="delHistory(item.keyword)"></i>
         </div>
       </div>
     </div>
@@ -102,6 +103,18 @@ export default {
         if (res.data.code === 200) {
           this.tipsData = res.data.keywords
         }
+      })
+    },
+    delHistory (keyword) {
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/delhistory',
+        data: {
+          keyword: keyword
+        }
+      }).then((res) => {
+        // console.log(res)
+        this.getHistory()
       })
     },
     clearHistory () {
@@ -230,6 +243,14 @@ export default {
         border: 1px solid #999;
         margin: 0 15px 10px 0;
         border-radius: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        i{
+          margin-left: 10px;
+          margin-right: 0px;
+          font-size: 12px;
+        }
       }
     }
   }

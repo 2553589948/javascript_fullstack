@@ -96,6 +96,18 @@ let addHistory = function (keyword) {
   return allServices.query(_sql, keyword)
 }
 
+// 添加历史记录到最前
+let addedFirst = function (keyword) {
+  let _sql = `update search_history set keyword="${keyword}" where id=1;`
+  return allServices.query(_sql, keyword)
+}
+
+// 删除单条历史记录
+let delHistory = function (keyword) {
+  let _sql = `delete from search_history where keyword="${keyword}";`
+  return allServices.query(_sql)
+}
+
 // 删除全部历史记录
 let clearHistory = function () {
   let _sql = `delete from search_history;`
@@ -128,5 +140,7 @@ module.exports = {
   getHistory,
   findHistory,
   addHistory,
+  addedFirst,
+  delHistory,
   clearHistory
 }
