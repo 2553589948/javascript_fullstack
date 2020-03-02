@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Input, Button, Card, Message} from 'antd'
-import Particles from 'react-particles-js'
+import Particles from 'reactparticles.js'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './style.less'
@@ -19,13 +19,13 @@ class Login extends React.Component {
     console.log('登录成功')
     sessionStorage.setItem('blogUser', 'kyle')
     sessionStorage.setItem('menuItemKey', '0')
-    this.props.history.push('/admin/page')
+    this.props.history.push('/web/index')
   }
 
   render() {
     return (
       <div className="login">
-        {/* <Particles id="particles1" config="particles1.json" height="90%" /> */}
+        <Particles id="particles1" config="./particles1.json" height="90%" />
         <Card className="login-form" style={{width: 300, borderRadius: 4}}>
           <Form onFinish={this.onSubmit}>
             <Form.Item
