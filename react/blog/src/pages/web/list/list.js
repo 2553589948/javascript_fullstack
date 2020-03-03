@@ -3,10 +3,13 @@ import {List, Tag} from 'antd'
 import {color} from '../../../utils/color'
 import './style.less'
 import {
-  StarOutlined,
-  LikeOutlined,
-  MessageOutlined
+  TagsOutlined,
+  FolderAddOutlined,
+  CalendarOutlined,
+  EyeOutlined
 } from '@ant-design/icons';
+
+import api from '../../../api'
 
 class BlogList extends Component {
   constructor(props) {
@@ -102,6 +105,22 @@ class BlogList extends Component {
       ]
     }
   }
+
+  async getList () {
+    this.setState({loading: true})
+    const params = {
+      pageNo: this.state.pageNo,
+      pageSize: this.state.pageSize
+    }
+    const {data, code, total} = await api.get('/article/list', params)
+    if (code === 1000) {
+      // console.log(data) 跨域了
+      this.setState({data, total})
+    }
+  }
+  componentDidMount () {
+    // this.getList()
+  }
   
   render() {
     const IconText = ({ icon, text }) => (
@@ -112,18 +131,37 @@ class BlogList extends Component {
     );
     return (
       <div className="list-wrapper">
-        <List dataSource={this.state.data} renderItem={(item,index) => (
+        <List 
+          pagination={{
+            onChange: page => {
+              console.log(page);
+            },
+            pageSize: this.state.pageSize,
+          }} 
+          dataSource={this.state.data} renderItem={(item,index) => (
           <List.Item 
             key={index}
             actions={[
-              <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-              <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-              <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+              <IconText icon={TagsOutlined} text={
+                item.tag.map((v, i) => (
+                  <Tag color={color[Math.floor(Math.random() * color.length)]} key={i}>{v}</Tag>
+                ))
+              } key="list-vertical-star-o" />,
+                
+              <IconText icon={FolderAddOutlined} text={
+                item.category.map((v, i) => (
+                  <Tag color={color[Math.floor(Math.random() * color.length)]} key={i}>{v}</Tag>
+                ))
+              } key="list-vertical-like-o" />,
+
+              <IconText icon={CalendarOutlined} text={item.createdAt} />,
+
+              <IconText icon={EyeOutlined} text={`${item.readedCount} 次预览`} />,
             ]}
           >
             <List.Item.Meta
-              title="标题"
-              description="描述"
+              title={item.title}
+              description={item.summary}
             />
           </List.Item>
         )}>

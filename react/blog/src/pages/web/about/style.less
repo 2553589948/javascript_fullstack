@@ -1,0 +1,28 @@
+.about-container{
+  .code{
+    width: 70px;
+    position: relative;
+    animation: me 3s ease-in-out infinite alternate;
+  }
+  .link {
+    position: relative;
+    text-decoration: none;
+    color: #121314;
+    &:after{
+      content: "";
+      position: absolute;
+      top: 60%;
+      bottom: 0;
+      left: -.1em;
+      right: -.1em;
+      transition: top .2s cubic-bezier(0,.8,.13,1);
+      background-color: rgba(79,192,141,.5);
+    }
+  }
+  .about-list{
+    li{
+      padding-left: 0;
+      list-style-type: circle;
+    }
+  }
+}
