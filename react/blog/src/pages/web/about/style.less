@@ -4,6 +4,14 @@
     position: relative;
     animation: me 3s ease-in-out infinite alternate;
   }
+  @keyframes me {
+    0% {
+      background: yellow;
+    }
+    100% {
+      background: pink;
+    }
+  }
   .link {
     position: relative;
     text-decoration: none;
@@ -18,6 +26,9 @@
       transition: top .2s cubic-bezier(0,.8,.13,1);
       background-color: rgba(79,192,141,.5);
     }
+    &:hover:after {
+      top: 0%;
+    } 
   }
   .about-list{
     li{

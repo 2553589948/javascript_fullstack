@@ -40,15 +40,15 @@ class About extends Component{
                 <li>
                   <GithubOutlined style={{fontSize: 16}} />
                   ：
-                  <Link to="" className="link">github</Link>
+                  <a href="https://github.com/2553589948" target="_blank" className="link">github</a>
                 </li>
                 <li>
                   联系方式：
-                  <span>18174352598</span>
+                  <span>18790216889</span>
                   <Divider type="vertical"></Divider>
                   <QqOutlined style={{fontSize: 16}} />
                   ：
-                  <Link to="22156@qq.com">22156@qq.com</Link>
+                  <a href="mailto:2553589948@qq.com">2553589948@qq.com</a>
                 </li>
                 <li>坐标：南昌市</li>
                 <li>

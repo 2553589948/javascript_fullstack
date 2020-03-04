@@ -19,17 +19,14 @@ class HeaderCustom extends Component {
     }
   }
 
-  handleNav = (index) => {
-  }
-
   render() {
     const key = sessionStorage.getItem('webKey') || '0'
     const list = menus.filter(v => v.menu)
     const menuList = list.map((item, i) => {
-      return <Menu.Item key={i} onClick={this.handleNav(i)}>
+      return <Menu.Item key={i} onClick={() => {sessionStorage.setItem('webKey', String(i))}}>
         <Link to={item.path}>
-          {/* {item.icon} */}
-          <HomeOutlined />
+          <item.icon/>
+          {/* <HomeOutlined /> */}
           <span className="nav-text">{item.title}</span>
         </Link>
       </Menu.Item>
