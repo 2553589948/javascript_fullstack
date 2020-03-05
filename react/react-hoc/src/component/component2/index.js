@@ -11,9 +11,11 @@ function HOC(WrapComponent) {
     }
     
     onChange = (event) => {
+      // this.setState在这里是异步的
       this.setState({
         name: event.target.value
       })
+      console.log(this.state.name)
     }
 
     render() {
