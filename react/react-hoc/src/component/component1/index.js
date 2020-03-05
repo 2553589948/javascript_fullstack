@@ -3,10 +3,19 @@ import React from 'react'
 const withMouse = (Component) => {
   return class extends React.Component{
     state = {x: 0, y: 0}
+
+    handleMouse = (event) => {
+      // console.log(event)
+      this.setState({
+        x: event.clientX,
+        y: event.clientY
+      })
+    }
+
     render() {
       return (
-        <div>
-          <Component />
+        <div style={{height: '100vh'}} onMouseMove={this.handleMouse}>
+          <Component mouse={this.state} />
         </div>
       );
     }
