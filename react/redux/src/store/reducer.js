@@ -2,6 +2,7 @@ const defaultState = {
   inputValue: 'kyle',
   list: []
 }
+// 纯函数指的是，给定固定的输入，就一定会有固定的输出，而且不会有任何副作用
 export default (state = defaultState, action) => {
   if (action.type === 'change_value') {
     const newState = JSON.parse(JSON.stringify(state))
