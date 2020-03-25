@@ -72,6 +72,10 @@ export default {
     },
     edit () {
       this.editCancel = !this.editCancel
+      if (this.editCancel) { // bug1
+        this.selected = false
+        this.Listids = []
+      }
     },
     selectAll () {
       // 先清空选择
@@ -88,21 +92,21 @@ export default {
       }
     },
     del () {
-      if (this.Listids.length === 0 || !this.Listids) {
+      // 去除数组中空的false
+      let coursesid = []
+      for (let i = 0; i < this.Listids.length; i++) {
+        const element = this.Listids[i]
+        if (element) {
+          coursesid.push(element)
+        }
+      }
+      if (coursesid.length === 0) { // bug3 因为Listids中含有false,用此长度作为判断条件有bug
         this.$toast('请选择要删除的课程')
       } else {
         Dialog.confirm({
           title: '温馨提示',
           message: '确定要删除课程吗？'
         }).then(() => {
-          // 去除数组中空的false
-          let coursesid = []
-          for (let i = 0; i < this.Listids.length; i++) {
-            const element = this.Listids[i]
-            if (element) {
-              coursesid.push(element)
-            }
-          }
           let courseId = coursesid.join("','")
           console.log(`'${courseId}'`) // '1001-1001','1001-1002'格式这样mysql才能识别, 要不然就是(520,521,522)
           let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
@@ -118,6 +122,7 @@ export default {
             this.getCourseList()
             this.$toast(res.data.data)
             this.editCancel = true
+            this.Listids = [] // bug2
           })
         }).catch(() => {
           // on cancel
