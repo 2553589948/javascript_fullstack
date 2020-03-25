@@ -126,6 +126,18 @@ let insertCourse = function (options) {
   return allServices.query(_sql, options)
 }
 
+// 根据userid查找课程表
+let getCourseList = function (userid) {
+  let _sql = `select * from course_table where userid="${userid}";`
+  return allServices.query(_sql)
+}
+
+// 删除选中课程
+let deleteCourse = function (userid, courseId) {
+  let _sql = `delete from course_table where userid="${userid}" and courseId in (${courseId});`
+  return allServices.query(_sql)
+}
+
 // 根据课程id查找课程目录
 let getCourseEntries = function (courseId) {
   let _sql = `select * from entries where courseId="${courseId}";`
@@ -156,5 +168,7 @@ module.exports = {
   delHistory,
   clearHistory,
   findCourse,
-  insertCourse
+  insertCourse,
+  getCourseList,
+  deleteCourse
 }

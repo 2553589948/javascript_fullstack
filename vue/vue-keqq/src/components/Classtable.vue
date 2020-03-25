@@ -1,20 +1,20 @@
 <template>
-  <div class="wrapper" style="padding-bottom: 60px; background-color: #532f2f;">
+  <div class="wrapper">
     <div class="header">
       <div class="left">课程表</div>
       <div class="allSelect" v-show="!editCancel" @click="selectAll">{{selectedHtml}}({{isCheckedNumber}})</div>
       <div class="del" @click="del" v-show="!editCancel" style="background: red; padding: 0 20px;">删除({{isCheckedNumber}})</div>
-      <div class="right" @click="edit">{{editHtml}}</div>
-    </div>
-    <ul class="course-list">
-      <li class="course list-view__item" v-for="(item, index) in listData" :key="index">
+      <div class="right" v-if="listData.length" @click="edit">{{editHtml}}</div>
+    </div>v-if=
+    <ul class="course-list" v-if="listData.length > 0">
+      <li class="course list-view__item" v-for="(item, index) in listData" :key="index" @click="toCourseDetail(item.courseId)">
         <div class="course__cover">
           <div class="course__cover-img" style="background-image:url(http://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCYR0ZhPtQkEc4Kw276ibriba9ZibzTtYkZycCUuia5ktiaiaw9zz9RfGK1VHGOxPrAS0kIA/90?tp=webp90&amp;tp=webp);"></div>
           <div class="course__cover-mask"></div>
         </div>
         <div class="course__name-box">
-          <div v-show="!editCancel" @click="changeColor(index, item.id)" class="icon" :class="[Listids[index] ? 'active' : '']"></div>
-          <h3 class="course__name">{{item.title}}</h3>
+          <div v-show="!editCancel" @click.stop="changeColor(index, item.courseId)" class="icon" :class="[Listids[index] ? 'active' : '']"></div>
+          <h3 class="course__name">{{item.courseTitle}}</h3>
         </div>
         <p class="course__msg">
           <i class="icon-font i-course-record"></i>
@@ -22,6 +22,7 @@
         </p>
       </li>
     </ul>
+    <div class="noListData" v-else>空空如也~快去添加吧</div>
     <v-footer :current="current"></v-footer>
   </div>
 </template>
@@ -33,39 +34,40 @@ export default {
   data () {
     return {
       current: 'classtable',
-      listData: [
-        {
-          id: 1,
-          title: 'PHP开发入门基础/web前端/MySQL/模板引擎/框架'
-        },
-        {
-          id: 2,
-          title: 'PHP开发入门基础/web前端/MySQL'
-        },
-        {
-          id: 3,
-          title: 'web前端/MySQL/模板引擎'
-        },
-        {
-          id: 4,
-          title: 'PHP开发入门基础'
-        },
-        {
-          id: 5,
-          title: 'web前端'
-        }
-      ],
+      listData: [],
       Listids: [],
       editCancel: true,
       selected: false
     }
   },
+  mounted () {
+    this.getCourseList()
+  },
   methods: {
-    changeColor (index, id) {
+    getCourseList () {
+      let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/getCourseList',
+        data: {
+          useId: userId
+        }
+      }).then((res) => {
+        console.log(res)
+        this.listData = res.data.listData
+      })
+    },
+    // 去往课程详情页
+    toCourseDetail (courseId) {
+      if (this.editCancel) {
+        this.$router.push({path: '/courseDetail', query: {courseId: courseId}})
+      }
+    },
+    changeColor (index, courseId) {
       if (this.Listids[index]) {
         this.$set(this.Listids, index, false)
       } else {
-        this.$set(this.Listids, index, id)
+        this.$set(this.Listids, index, courseId)
       }
     },
     edit () {
@@ -81,12 +83,12 @@ export default {
         // 全部选择
         for (let i = 0; i < this.listData.length; i++) {
           const element = this.listData[i]
-          this.Listids.push(element.id)
+          this.Listids.push(element.courseId)
         }
       }
     },
-    async del () {
-      if (this.Listids.length === 0) {
+    del () {
+      if (this.Listids.length === 0 || !this.Listids) {
         this.$toast('请选择要删除的课程')
       } else {
         Dialog.confirm({
@@ -101,24 +103,21 @@ export default {
               coursesid.push(element)
             }
           }
-          let courseId = coursesid.join(',')
+          let courseId = coursesid.join("','")
+          console.log(`'${courseId}'`) // '1001-1001','1001-1002'格式这样mysql才能识别, 要不然就是(520,521,522)
           let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
-          // const data = await post('/order/submitAction', {
-          //   goodsId: goodsId,
-          //   openId: this.openId,
-          //   allPrice: this.allPrice
-          // })
           this.$http({
             method: 'post',
             url: 'http://localhost:3000/users/delCourse',
             data: {
               useId: userId,
-              courseId: courseId
+              courseId: `'${courseId}'`
             }
           }).then((res) => {
             // console.log(res)
-            if (res) {
-            }
+            this.getCourseList()
+            this.$toast(res.data.data)
+            this.editCancel = true
           })
         }).catch(() => {
           // on cancel
@@ -155,6 +154,20 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  padding-bottom: 60px;
+  min-height: 83vh;
+  background-color: #532f2f;
+  position: relative;
+}
+.noListData {
+  position: absolute;
+  color: #e9e9e9;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
 .icon {
   height: 34px;
   width: 34px;

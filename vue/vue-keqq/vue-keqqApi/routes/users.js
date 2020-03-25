@@ -268,6 +268,38 @@ router.post('/addCourse', async(ctx, next) => {
   
 })
 
+// 获取课程表
+router.post('/getCourseList', async(ctx, next) => {
+  let userid = ctx.request.body.useId
+  await userServies.getCourseList(userid)
+  .then(res => {
+    console.log(res)
+    ctx.body = {
+      listData: res
+    }
+  })
+})
+
+// 删除选中课程
+router.post('/delCourse', async(ctx, next) => {
+  let userid = ctx.request.body.useId
+  let courseId = ctx.request.body.courseId
+  // console.log(courseId)
+  await userServies.deleteCourse(userid, courseId)
+  .then(res => {
+    console.log(res)
+    if (res.affectedRows > 0) {
+      ctx.body = {
+        data: '删除成功'
+      }
+    } else {
+      ctx.body = {
+        data: '删除失败'
+      }
+    }
+  })
+})
+
 // 发表评论
 router.post('/insertNote', async(ctx, next) => {
   let c_time = utils.getNowFormatDate()
