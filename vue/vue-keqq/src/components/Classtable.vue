@@ -2,79 +2,23 @@
   <div class="wrapper" style="padding-bottom: 60px; background-color: #532f2f;">
     <div class="header">
       <div class="left">课程表</div>
-      <div class="allSelect" v-show="!editCancel">全选(0)</div>
+      <div class="allSelect" v-show="!editCancel" @click="selectAll">{{selectedHtml}}({{Listids.length}})</div>
       <div class="del" v-show="!editCancel" style="background: red; padding: 0 20px;">删除</div>
       <div class="right" @click="edit">{{editHtml}}</div>
     </div>
     <ul class="course-list">
-      <li class="course list-view__item">
+      <li class="course list-view__item" v-for="(item, index) in listData" :key="index">
         <div class="course__cover">
           <div class="course__cover-img" style="background-image:url(http://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCYR0ZhPtQkEc4Kw276ibriba9ZibzTtYkZycCUuia5ktiaiaw9zz9RfGK1VHGOxPrAS0kIA/90?tp=webp90&amp;tp=webp);"></div>
           <div class="course__cover-mask"></div>
         </div>
         <div class="course__name-box">
-          <div v-show="!editCancel" class="icon" :class="[Listids.length ? 'active' : '']"></div>
-          <h3 class="course__name">PHP开发入门基础/web前端/MySQL/模板引擎/框架</h3>
+          <div v-show="!editCancel" @click="changeColor(index, item.id)" class="icon" :class="[Listids[index] ? 'active' : '']"></div>
+          <h3 class="course__name">{{item.title}}</h3>
         </div>
         <p class="course__msg">
           <i class="icon-font i-course-record"></i>
-          <span class="course__sub-name">继续学习：第2节 自定义函数（上）</span>
-        </p>
-      </li>
-      <li class="course list-view__item">
-        <div class="course__cover">
-          <div class="course__cover-img" style="background-image:url(http://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCYR0ZhPtQkEc4Kw276ibriba9ZibzTtYkZycCUuia5ktiaiaw9zz9RfGK1VHGOxPrAS0kIA/90?tp=webp90&amp;tp=webp);"></div>
-          <div class="course__cover-mask"></div>
-        </div>
-        <div class="course__name-box">
-          <div v-show="!editCancel" class="icon" :class="[Listids.length ? 'active' : '']"></div>
-          <h3 class="course__name">PHP开发入门基础/web前端/MySQL/模板引擎/框架</h3>
-        </div>
-        <p class="course__msg">
-          <i class="icon-font i-course-record"></i>
-          <span class="course__sub-name">继续学习：第2节 自定义函数（上）</span>
-        </p>
-      </li>
-      <li class="course list-view__item">
-        <div class="course__cover">
-          <div class="course__cover-img" style="background-image:url(http://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCYR0ZhPtQkEc4Kw276ibriba9ZibzTtYkZycCUuia5ktiaiaw9zz9RfGK1VHGOxPrAS0kIA/90?tp=webp90&amp;tp=webp);"></div>
-          <div class="course__cover-mask"></div>
-        </div>
-        <div class="course__name-box">
-          <div v-show="!editCancel" class="icon" :class="[Listids.length ? 'active' : '']"></div>
-          <h3 class="course__name">PHP开发入门基础/web前端/MySQL/模板引擎/框架</h3>
-        </div>
-        <p class="course__msg">
-          <i class="icon-font i-course-record"></i>
-          <span class="course__sub-name">继续学习：第2节 自定义函数（上）</span>
-        </p>
-      </li>
-      <li class="course list-view__item">
-        <div class="course__cover">
-          <div class="course__cover-img" style="background-image:url(http://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCYR0ZhPtQkEc4Kw276ibriba9ZibzTtYkZycCUuia5ktiaiaw9zz9RfGK1VHGOxPrAS0kIA/90?tp=webp90&amp;tp=webp);"></div>
-          <div class="course__cover-mask"></div>
-        </div>
-        <div class="course__name-box">
-          <div v-show="!editCancel" class="icon" :class="[Listids.length ? 'active' : '']"></div>
-          <h3 class="course__name">PHP开发入门基础/web前端/MySQL/模板引擎/框架</h3>
-        </div>
-        <p class="course__msg">
-          <i class="icon-font i-course-record"></i>
-          <span class="course__sub-name">继续学习：第2节 自定义函数（上）</span>
-        </p>
-      </li>
-      <li class="course list-view__item">
-        <div class="course__cover">
-          <div class="course__cover-img" style="background-image:url(http://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCYR0ZhPtQkEc4Kw276ibriba9ZibzTtYkZycCUuia5ktiaiaw9zz9RfGK1VHGOxPrAS0kIA/90?tp=webp90&amp;tp=webp);"></div>
-          <div class="course__cover-mask"></div>
-        </div>
-        <div class="course__name-box">
-          <div v-show="!editCancel" class="icon" :class="[Listids.length ? 'active' : '']"></div>
-          <h3 class="course__name">PHP开发入门基础/web前端/MySQL/模板引擎/框架</h3>
-        </div>
-        <p class="course__msg">
-          <i class="icon-font i-course-record"></i>
-          <span class="course__sub-name">继续学习：第2节 自定义函数（上）</span>
+          <span class="course__sub-name">继续学习</span>
         </p>
       </li>
     </ul>
@@ -88,18 +32,68 @@ export default {
   data () {
     return {
       current: 'classtable',
+      listData: [
+        {
+          id: 1,
+          title: 'PHP开发入门基础/web前端/MySQL/模板引擎/框架'
+        },
+        {
+          id: 2,
+          title: 'PHP开发入门基础/web前端/MySQL'
+        },
+        {
+          id: 3,
+          title: 'web前端/MySQL/模板引擎'
+        },
+        {
+          id: 4,
+          title: 'PHP开发入门基础'
+        },
+        {
+          id: 5,
+          title: 'web前端'
+        }
+      ],
       Listids: [],
-      editCancel: true
+      editCancel: true,
+      selected: false
     }
   },
   methods: {
+    changeColor (index, id) {
+      if (this.Listids[index]) {
+        this.$set(this.Listids, index, false)
+      } else {
+        this.$set(this.Listids, index, id)
+      }
+      // if (this.listData.length === this.Listids.length) {
+      //   this.selected = true
+      // }
+    },
     edit () {
       this.editCancel = !this.editCancel
+    },
+    selectAll () {
+      // 先清空选择
+      this.Listids = []
+      if (this.selected) {
+        this.selected = false
+      } else {
+        this.selected = true
+        // 全部选择
+        for (let i = 0; i < this.listData.length; i++) {
+          const element = this.listData[i]
+          this.Listids.push(element.id)
+        }
+      }
     }
   },
   computed: {
     editHtml () {
       return this.editCancel ? '编辑' : '取消'
+    },
+    selectedHtml () {
+      return this.selected ? '取消全选' : '全选'
     }
   },
   components: {
