@@ -2,8 +2,8 @@
   <div class="wrapper" style="padding-bottom: 60px; background-color: #532f2f;">
     <div class="header">
       <div class="left">课程表</div>
-      <div class="allSelect" v-show="!editCancel" @click="selectAll">{{selectedHtml}}({{Listids.length}})</div>
-      <div class="del" v-show="!editCancel" style="background: red; padding: 0 20px;">删除</div>
+      <div class="allSelect" v-show="!editCancel" @click="selectAll">{{selectedHtml}}({{isCheckedNumber}})</div>
+      <div class="del" @click="del" v-show="!editCancel" style="background: red; padding: 0 20px;">删除({{isCheckedNumber}})</div>
       <div class="right" @click="edit">{{editHtml}}</div>
     </div>
     <ul class="course-list">
@@ -28,6 +28,7 @@
 
 <script>
 import vFooter from './vFooter.vue'
+import { Dialog } from 'vant'
 export default {
   data () {
     return {
@@ -66,9 +67,6 @@ export default {
       } else {
         this.$set(this.Listids, index, id)
       }
-      // if (this.listData.length === this.Listids.length) {
-      //   this.selected = true
-      // }
     },
     edit () {
       this.editCancel = !this.editCancel
@@ -86,6 +84,46 @@ export default {
           this.Listids.push(element.id)
         }
       }
+    },
+    async del () {
+      if (this.Listids.length === 0) {
+        this.$toast('请选择要删除的课程')
+      } else {
+        Dialog.confirm({
+          title: '温馨提示',
+          message: '确定要删除课程吗？'
+        }).then(() => {
+          // 去除数组中空的false
+          let coursesid = []
+          for (let i = 0; i < this.Listids.length; i++) {
+            const element = this.Listids[i]
+            if (element) {
+              coursesid.push(element)
+            }
+          }
+          let courseId = coursesid.join(',')
+          let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
+          // const data = await post('/order/submitAction', {
+          //   goodsId: goodsId,
+          //   openId: this.openId,
+          //   allPrice: this.allPrice
+          // })
+          this.$http({
+            method: 'post',
+            url: 'http://localhost:3000/users/delCourse',
+            data: {
+              useId: userId,
+              courseId: courseId
+            }
+          }).then((res) => {
+            // console.log(res)
+            if (res) {
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        })
+      }
     }
   },
   computed: {
@@ -94,6 +132,20 @@ export default {
     },
     selectedHtml () {
       return this.selected ? '取消全选' : '全选'
+    },
+    isCheckedNumber () {
+      let number = 0
+      for (let i = 0; i < this.Listids.length; i++) {
+        if (this.Listids[i]) {
+          number++
+        }
+      }
+      if (number === this.listData.length && number !== 0) {
+        this.selected = true
+      } else {
+        this.selected = false
+      }
+      return number
     }
   },
   components: {

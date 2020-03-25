@@ -86,5 +86,13 @@ id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 keyword varchar(255) NOT NULL
 );
 
+CREATE TABLE course_table
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+userid INT UNSIGNED NOT NULL,
+courseId varchar(255) NOT NULL,
+courseTitle varchar(255) NOT NULL
+);
+
 source E:\javascript_fullstack\vue\vue-nootbook\test.sql // 外部引入数据库
 set names utf8; // 引入数据库文件只有部分引入

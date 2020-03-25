@@ -8,9 +8,10 @@
           <!-- <span class="title-bar__info-item u-comment">好评率<em>99%</em></span> -->
           <span class="title-bar__info-item u-message"><em>{{comments.length}}</em>评论</span>
         </p>
-        <p class="title-bar__info-price">
+        <div class="title-bar__info-price">
           <span class="title-bar__info-item u-price">{{courseInfo.courPrice}}</span>
-        </p>
+          <div class="addCourse" @click="addCourse">加入课程表</div>
+        </div>
       </div>
       <div class="basic-info-list__item basic-info-list__item--teachers">
         <p class="basic-info-list__item-title">
@@ -110,6 +111,7 @@
 </template>
 
 <script>
+import { Dialog } from 'vant'
 export default {
   props: {
     comments: {
@@ -154,6 +156,42 @@ export default {
             this.$toast(res.data.mess)
           }
         })
+    },
+    // 添加到课程表
+    addCourse () {
+      // 判断是否登录
+      if (sessionStorage.getItem('userInfo') === null) {
+        Dialog.confirm({
+          title: '提示',
+          message: '你尚未登录！是否去登录？'
+        }).then(() => {
+          this.$router.push({path: '/login'})
+        }).catch(() => {
+          // on cancel
+        })
+      } else {
+        let _id = this.$route.query.courseId
+        let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
+        let courseTitle = this.courseInfo.courseTitle
+        this.$http({
+          method: 'post',
+          url: 'http://localhost:3000/users/addCourse',
+          data: {
+            useId: userId,
+            courseId: _id,
+            courseTitle: courseTitle
+          }
+        }).then((res) => {
+          console.log(res)
+          if (res.data.code === 200) {
+            this.$toast('添加成功')
+            this.$router.push({path: '/classtable'})
+          }
+          if (res.data.code === 80088) {
+            this.$toast('已经添加此课程，请勿重复添加')
+          }
+        })
+      }
     }
   }
 }
@@ -214,9 +252,22 @@ h1, h2, h3, h4, h5, h6 {
     font-style: normal;
 }
 .title-bar__info-price {
-    padding: 10px 0;
-    line-height: 24px;
-    text-align: left;
+  padding: 10px 0;
+  line-height: 24px;
+  text-align: left;
+  position: relative;
+}
+.addCourse {
+  /* position: absolute;
+  right: 0;
+  top: 10px;
+  color: #65cdff; */
+  float: right;
+  padding: 5px;
+  box-sizing: border-box;
+  background: #188eee;
+  border-radius: 20px;
+  color: #fff;
 }
 .title-bar__info-price .u-price {
     color: #9bef37;

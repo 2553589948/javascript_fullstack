@@ -114,6 +114,18 @@ let clearHistory = function () {
   return allServices.query(_sql)
 }
 
+// 查找课程是否被用户已添加
+let findCourse = function (courseId, userId) {
+  let _sql = `select * from course_table where courseId="${courseId}" and userid="${userId}";`
+  return allServices.query(_sql)
+}
+
+// 添加课程
+let insertCourse = function (options) {
+  let _sql = `insert into course_table set userid=?,courseId=?,courseTitle=?;`
+  return allServices.query(_sql, options)
+}
+
 // 根据课程id查找课程目录
 let getCourseEntries = function (courseId) {
   let _sql = `select * from entries where courseId="${courseId}";`
@@ -142,5 +154,7 @@ module.exports = {
   addHistory,
   addedFirst,
   delHistory,
-  clearHistory
+  clearHistory,
+  findCourse,
+  insertCourse
 }

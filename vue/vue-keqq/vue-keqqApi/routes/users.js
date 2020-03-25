@@ -235,6 +235,39 @@ router.post('/clearhistory', async(ctx, next) => {
   })
 })
 
+// 添加到课程表
+router.post('/addCourse', async(ctx, next) => {
+  let courseId = ctx.request.body.courseId
+  let userId = ctx.request.body.useId
+  let courseTitle = ctx.request.body.courseTitle
+  await userServies.findCourse(courseId, userId)
+  .then(async (res) => {
+    console.log(res)
+    if (res.length == 0) {
+      await userServies.insertCourse([userId, courseId, courseTitle])
+      .then(res => {
+        if (res) {
+          ctx.body = {
+            code: 200,
+            data: 'success'
+          }
+        } else {
+          ctx.body = {
+            code: 404,
+            data: 'fail'
+          }
+        }
+      })
+    } else {
+      ctx.body = {
+        code: 80088,
+        data: '已经添加了'
+      }
+    }
+  })
+  
+})
+
 // 发表评论
 router.post('/insertNote', async(ctx, next) => {
   let c_time = utils.getNowFormatDate()
