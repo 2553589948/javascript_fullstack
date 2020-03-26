@@ -35,6 +35,7 @@
         </div>
       </van-dropdown-item>
     </van-dropdown-menu>
+    <div class="logout" @click="logout">退出登录</div>
     <v-footer :current="current"></v-footer>
   </div>
 </template>
@@ -201,10 +202,17 @@ export default {
       console.log(val)
     },
     onChange (index) {
+    },
+    logout () {
+      sessionStorage.removeItem('userInfo')
+      this.$toast('已退出登录')
+      this.$router.replace({path: '/login'})
     }
   },
   mounted () {
-    // this.$router.replace({path: '/login'})
+    if (sessionStorage.getItem('userInfo') === null) {
+      this.$router.replace({path: '/login'})
+    }
   },
   components: {
     'v-footer': vFooter
@@ -213,6 +221,17 @@ export default {
 </script>
 
 <style scoped>
+.logout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: #188fee;
+  color: #f8f8f8;
+  border-radius: 20px;
+}
 .nav__panel-sort .nav__menu__item {
   overflow: hidden;
   position: relative;
