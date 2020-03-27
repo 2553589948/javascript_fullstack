@@ -1,0 +1,90 @@
+/* pages/follow/index.wxss */
+.hy-unlogin-header{
+    width: 100%;
+    margin: 50rpx 0 40rpx;
+    text-align: center;
+}
+.hy-unlogin-header image{
+    width: 150rpx;
+    height: 160rpx;
+}
+.hy-unlogin-header .header-descText{
+    margin: 20rpx auto;
+    font-size: 22rpx;
+    color: #333;
+}
+.hy-unlogin-header .login-btn{
+    width: 260rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 28rpx;
+    background-color: #fa0;
+    color: #fff;
+    border-radius: 50rpx;
+}
+.hy-unlogin-navbar {
+    z-index: 99;
+    position: sticky;
+    top: 0;
+    margin-bottom: 15rpx;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: 80rpx;
+    display: flex;
+    background-color: #fff;
+    border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+.navbar-item.active {
+    color: orangered;
+}
+.navbar-item {
+    font-size: 26rpx;
+    padding: 20rpx;
+}
+::-webkit-scrollbar {
+    /* 取消横向滚动条 */
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.hy-unlogin-content .content-title{
+    margin: 60rpx auto 40rpx;
+    font-size: 28rpx;
+    width: 220rpx;
+    border-top: 1px solid #e2e2e2;
+    position: relative;
+}
+.hy-unlogin-content .content-title text{
+    position: absolute;
+    width: 160rpx;
+    top: -24rpx;
+    left: 30rpx;
+    text-align: center;
+    background-color: #fff;
+}
+.hy-allLives-content-small{
+    width: 355rpx;
+    height: 220rpx;
+    padding: 0 10rpx;
+    float: left;
+    font-size: 26rpx;
+    margin-bottom: 70rpx;
+}
+.hy-allLives-content-small image, .hy-allLives-content-small navigator{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 16rpx;
+    box-shadow: 0 0 0 rgba(0,0,0,.5);
+}
+.hy-allLives-content{
+    width: 100%;
+    height: 275rpx;
+}
+.hy-allLives-content-small .hy-allLives-content-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 6px;
+}

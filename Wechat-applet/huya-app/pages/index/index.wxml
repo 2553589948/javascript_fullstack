@@ -1,0 +1,86 @@
+<!--index.wxml-->
+<view class="wrapper">
+    <view class="hy-searchBar">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <navigator url="../search/search">
+                    <view class="weui-search-bar__box">
+                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                            <icon type="clear" size="14"></icon>
+                        </view>
+                    </view>
+                    <label class="weui-search-bar__label" 
+                    hidden="{{inputShowed}}">
+                        <icon class="weui-icon-search" type="search" size="14"></icon>
+                        <view class="weui-search-bar__text">输入游戏名、主播、房间号搜索</view>
+                    </label>
+                </navigator>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">
+                取消
+            </view>
+        </view>
+    </view>
+    <swiper indicator-dots="{{true}}" autoplay="true" circular="true" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{ homeslides }}">
+            <swiper-item bindtap="gotoDetail" data-id="{{item.id}}">
+                <image src="{{ item.image }}" mode="aspectFill" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="hy-category">
+        <view class="hy-category-list" wx:for="{{category}}" 
+        data-id="{{item.id}}" bindtap="gotoMainCategory">
+            <image class="" src="{{item.thumb}}" />
+            <view class="hy-category-listname">
+                <text>{{item.name}}</text>
+            </view>  
+        </view>
+    </view>
+    <view class="hy-hotMatch">
+        <navigator url="#" class="hy-hotMatch-list">
+            <text>NEST穿越火线项目</text>
+        </navigator>
+        <navigator url="#" class="hy-hotMatch-list">
+            <text>第十五届世界武术锦标赛</text>
+        </navigator>
+    </view>
+    <view class="hy-guessLikes">
+        <view class="hy-allLives-title">
+            <text>猜你喜欢</text>
+        </view>
+        <view class="hy-allLives-content">
+            <view class="hy-allLives-content-small">
+                <navigator url="#">
+                    <image src="https://resources.ninghao.net/landrover/welcome-winter-in-colorado-480.jpg"></image>
+                    <view class="hy-allLives-content-text">
+                        <text>LOL全球总决赛S9</text>
+                    </view>
+                </navigator>         
+            </view>
+            <view class="hy-allLives-content-small">
+                <navigator url="#">
+                    <image src="https://resources.ninghao.net/landrover/the-sound-of-los-angeles-480.jpg"></image>
+                    <view class="hy-allLives-content-text">
+                        <text>国服无限火力</text>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="hy-allLives">
+        <view class="hy-allLives-title">
+            <text>全部LIVE</text>
+        </view>
+        <view class="hy-allLives-content">
+            <view class="hy-allLives-content-small" wx:for="{{allLives}}" data-id="{{item.id}}" bindtap="gotoDetail">
+                <image src="{{item.image}}"></image>
+                <view class="hy-allLives-content-text">
+                    <text>{{item.descText}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

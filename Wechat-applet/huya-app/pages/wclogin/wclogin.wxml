@@ -1,0 +1,16 @@
+<!--pages/wclogin/wclogin.wxml-->
+<view class="wrapper">
+    <view class="header">
+        <image class="" src="../../assets/icons/onekeyLogin.png" />
+        <button class="quickLogin" type="primary">微信快速登录</button>
+    </view>
+    <view class="footer">
+        <view class="protocol">
+            <view>使用即为同意<navigator class="protocolInfo" target="" url="#">《用户服务协议》
+            </navigator>和
+            <navigator class="protocolInfo" target="" url="#">《隐私政策》
+            </navigator>
+            </view>  
+        </view>
+    </view>
+</view>

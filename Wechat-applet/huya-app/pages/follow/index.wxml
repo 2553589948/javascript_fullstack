@@ -1,0 +1,55 @@
+<!-- pages/follow/index.wxml -->
+<view class="wrapper">
+    <view class="hy-unlogin-header">
+        <view class="header-img">
+            <image src="../../assets/icons/unlogin.png"></image>
+        </view>
+        <view class="header-descText">
+            <text>登录后可查看订阅你喜欢的主播,追踪主播状态</text>
+        </view>
+        <button class="login-btn" bindtap="login">登录</button>
+    </view>
+    <view class="hy-unlogin-content">
+        <view class="content-title">
+            <text>大家都在看</text>
+        </view>
+        <view class="hy-allLives-content">
+            <view class="hy-allLives-content-small" 
+            wx:for="{{allLives}}" wx:key="index"
+            data-id="{{item.id}}" bindtap="gotoDetail">
+                <image src="{{item.image}}"></image>
+                <view class="hy-allLives-content-text">
+                    <text>{{item.descText}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+      
+    <scroll-view class="hy-unlogin-navbar" enable-flex="true" scroll-x="true" scroll-left="{{navScrollLeft}}" scroll-with-animation="true" scroll-anchoring="true">
+        <block wx:for="{{navtabs}}"
+        wx:for-index="id"
+        wx:key="index">
+            <view class="navbar-item {{currentTab == id ?'active':''}}" 
+            data-current="{{id}}"
+            bindtap="switchNav"
+            >{{item.nameText}}</view>
+        </block>
+    </scroll-view>
+    <view>
+        <swiper class="tab-box" style="height: {{conHeight}}rpx;" 
+        current="{{currentTab}}"
+        bindchange="switchTab" skip-hidden-item-layout="true">
+            <swiper-item class="tab-express" wx:for="{{navCont}}" wx:key="index">
+                <view class="hy-allLives-content">
+                    <view class="hy-allLives-content-small" wx:for="{{navCont[index]}}" wx:key="index" data-id="{{item.id}}" bindtap="gotoDetail">
+                        <image src="{{item.image}}"></image>
+                        <view class="hy-allLives-content-text">
+                            <text>{{item.descText}}</text>
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+
+</view>

@@ -1,0 +1,17 @@
+/* pages/detail/index.wxss */
+.hy-liveVideo video {
+  width: 100%;
+}
+.content {
+  margin: 0 50rpx 20rpx;
+}
+.content .liveTitle {
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  padding-bottom: 25rpx;
+  font-weight: bold;
+  border-bottom: 3px solid #e3e3e3;
+}
+.content .description {
+  font-size: 35rpx;
+}

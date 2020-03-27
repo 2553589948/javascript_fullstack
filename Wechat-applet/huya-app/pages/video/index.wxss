@@ -1,0 +1,73 @@
+/* pages/video/index.wxss */
+.card image {
+  position: relative;
+  width: 100%;
+  font-size: 28rpx;
+}
+.card .duration-label {
+  position: absolute;
+  bottom: 8rpx;
+  right: 8rpx;
+}
+.card .clicks-label{
+  position: absolute;
+  bottom: 8rpx;
+  left: 8rpx;
+}
+.card .clicks-label image, .card .comments-label image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 5rpx;
+}
+.card .comments-label{
+  position: absolute;
+  bottom: 8rpx;
+  left: 130rpx;
+}
+.card video {
+  width: 100%;
+}
+.card .content {
+  margin: 0 50rpx 20rpx;
+}
+.content .header {
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  padding-bottom: 25rpx;
+  font-weight: bold;
+  border-bottom: 3px solid #e3e3e3;
+}
+.content .description {
+  font-size: 35rpx;
+}
+page{
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.hy-navbar {
+  width: 100%;
+  white-space: nowrap;
+  display: flex;
+  overflow-x: auto;  /* 兼容安卓 水平滑动 */
+  height: 100rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+.hy-navbar__item {
+  margin: 20rpx;
+  padding: 0 15rpx;
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 26rpx;
+}
+.hy-navbar__item.on{
+  border: 1px solid orange;
+  color: orange;
+  border-radius: 40rpx;
+}
+::-webkit-scrollbar {     /* 取消横向滚动条 */
+  width: 0;
+  height: 0;
+  color: transparent;
+}

@@ -1,0 +1,63 @@
+/* pages/mine/index.wxss */
+page {
+  background: #eee;
+}
+.hy-userInfo-header {
+  position: relative;
+  height: 160rpx;
+  line-height: 100rpx;
+  padding: 30rpx 30rpx 30rpx 150rpx;
+  box-sizing: border-box;
+  background: #fff;
+  font-size: 28rpx;
+}
+.hy-userInfo-header .thumb {
+  position: absolute;
+  left: 30rpx;
+  top: 30rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+}
+.hy-userInfo-header .login-btn {
+  background-color: #fa0;
+  font-size: 24rpx;
+  color: #fff;
+  border-radius: 40rpx;
+  position: absolute;
+  top: 45rpx;
+  right: 30rpx;
+}
+.hy-userInfo-content {
+  height: 300rpx;
+  background-color: #fff;
+  margin-top: 15rpx;
+  padding: 0 20rpx;
+}
+.hy-userInfo-content .content-list {
+  display: block;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  position: relative;
+}
+.hy-userInfo-content .content-list::after {
+  position: absolute;
+  top: 40rpx;
+  right: 10rpx;
+  content: "";
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 4rpx solid #7f7f7f;
+  border-right: 4rpx solid #7f7f7f;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.content-list image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}

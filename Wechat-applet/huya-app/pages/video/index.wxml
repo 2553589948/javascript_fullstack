@@ -1,0 +1,34 @@
+<!--pages/video/index.wxml-->
+<view class="tabCards">
+    <scroll-view class="hy-navbar" scroll-x="true" scroll-with-animation="true" enable-flex="true">
+        <block wx:for="{{navtabs}}" wx:key="index">
+            <view id="{{item.id}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchTab" 
+            class="hy-navbar__item {{curId == item.id ? 'on' : ''}}">
+                <view class="hy-navbar__tilte">{{item.nameText}}</view>
+            </view>
+        </block>
+    </scroll-view>
+    <view class="cardContent">
+        <view class="card" wx:for="{{entities}}" 
+        hidden="{{curId == 'all' ? '' : (curId != item.categoryId)}}">
+            <video src="{{item.video}}" id="{{item.id}}" 
+            hidden="{{currentVid !== item.id}}" />
+            <image src="{{item.image}}" bind:tap="play" 
+            data-vid="{{item.id}}" hidden="{{currentVid == item.id}}">
+                <view class="duration-label">{{item.duration}}</view>
+                <view class="clicks-label">
+                    <image class="" src="{{clicksIcon}}" />
+                    <text>{{clicks}}</text>
+                </view>
+                <view class="comments-label">
+                    <image class="" src="{{commentsIcon}}" />
+                    <text>{{comments}}</text>
+                </view>
+            </image>
+            <view class="content">
+                <view class="header">{{item.header}}</view>
+                <view class="description">{{item.description}}</view>
+            </view>
+        </view>
+    </view>
+</view>

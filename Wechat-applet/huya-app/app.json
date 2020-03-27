@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/follow/index",
+    "pages/index/index",
+    "pages/live/index",
+    "pages/hylogin/hylogin",
+    "pages/category/mainCategory/index",
+    "pages/category/infoCategory/index",
+    "pages/mine/index",
+    "pages/video/index",
+    "pages/logs/logs",
+    "pages/wclogin/wclogin",
+    "pages/search/search",
+    "pages/detail/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "LIVE",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#fc3",
+    "borderStyle": "white",
+    "backgroundColor": "#ededed",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "text": "Live",
+        "iconPath": "assets/icons/live.png",
+        "selectedIconPath": "assets/icons/live-active.png",
+        "pagePath": "pages/live/index"
+      },
+      {
+        "text": "订阅",
+        "iconPath": "assets/icons/follow.png",
+        "selectedIconPath": "assets/icons/follow-active.png",
+        "pagePath": "pages/follow/index"
+      },
+      {
+        "text": "视频",
+        "iconPath": "assets/icons/video.png",
+        "selectedIconPath": "assets/icons/video-active.png",
+        "pagePath": "pages/video/index"
+      },
+      {
+        "text": "我的",
+        "iconPath": "assets/icons/mine.png",
+        "selectedIconPath": "assets/icons/mine-active.png",
+        "pagePath": "pages/mine/index"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,35 @@
+<!--pages/hylogin/hylogin.wxml-->
+<view class="wrapper">
+    <view class="hy-login-header">
+        <view class="login tabItem {{curId == 'login' ? 'on' : ''}}" 
+        bindtap="switchTab" data-id="login">
+            <text>登录</text>
+        </view>
+        <view class="register tabItem {{curId != 'login' ? 'on' : ''}}" 
+        bindtap="switchTab" data-id="register">
+            <text>注册</text>
+        </view>
+    </view>
+    <view class="hy-hylogin-main">
+        <view class="form-box-login" hidden="{{curId != 'login'}}">
+            <form>
+                <input placeholder="请输入手机号码" />
+                <input placeholder="请输入密码" password />
+                <button form-type="submit">登录</button>
+            </form>
+        </view>
+        <view class="form-box-register" hidden="{{curId == 'login'}}">
+            <form bindsubmit="formSubmit">
+                <input placeholder="请输入号码" bindinput="bindPhone" />
+                <input placeholder="请输入你要设置的密码" password bindinput="bindPassword" />
+                <view class="yzm">
+                    <input class="yzm-input" placeholder="请输入验证码" bindinput="bindYzm" />
+                    <view class="yzm-content">
+                        <text>获取验证码</text>
+                    </view>
+                </view>
+                <button form-type="submit">注册</button>
+            </form>
+        </view>
+    </view>
+</view>

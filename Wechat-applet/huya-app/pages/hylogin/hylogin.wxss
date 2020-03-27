@@ -1,0 +1,69 @@
+/* pages/hylogin/hylogin.wxss */
+.hy-login-header {
+    display: flex;
+    margin: 30rpx auto;
+    text-align: center;
+}
+.hy-login-header .tabItem {
+    flex: 1;
+    border-right: 2px solid #eee;
+}
+.hy-login-header .tabItem:nth-child(2n) {
+    border-right: none;
+}
+.hy-login-header .tabItem.on {
+    color: orangered;
+}
+.form-box-login{
+    padding: 0 30rpx;
+}
+.form-box-login input{
+    height: 90rpx;
+    border-bottom: 1rpx solid #ededed;
+    font-size: 28rpx;
+    color: #000;
+}
+.form-box-login .input-placeholder{
+    color: #aaa;
+}
+.form-box-login button{
+    margin:100rpx 30rpx 0 0;
+    background-color: orange;
+    color: #fff;
+}
+.form-box-register{
+    padding: 0 30rpx;
+}
+.form-box-register input{
+    height: 90rpx;
+    border-bottom: 1rpx solid #ededed;
+    font-size: 28rpx;
+    color: #000;
+}
+.form-box-register .input-placeholder{
+    color: #aaa;
+}
+.form-box-register .yzm {
+    display: flex;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.form-box-register .yzm-input {
+    flex: 1;
+}
+.form-box-register .yzm-content {
+    flex: 1;
+    font-size: 24rpx;
+    text-align: center;
+}
+.form-box-register .yzm-content text {
+    padding: 15rpx 30rpx;
+    border: 1px solid #fff;
+    background-color: #eee;
+    border-radius: 50rpx;
+}
+.form-box-register button{
+    margin:100rpx 30rpx 0 0;
+    background-color: orange;
+    color: #fff;
+}

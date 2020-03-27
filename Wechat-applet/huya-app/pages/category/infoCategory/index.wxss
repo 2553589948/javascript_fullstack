@@ -1,0 +1,56 @@
+/* pages/category/infoCategory/index.wxss */
+.wrapper {
+    height: 100vh;
+}
+.hy-navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    white-space: nowrap;
+    font-size: 30rpx;
+    height: 100rpx;
+    background-color: #fff;
+    border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+.hy-navbar__item {
+    padding: 0 20rpx;
+    margin: 25rpx 25rpx 0;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+.hy-navbar__item.on {
+    border: 1px solid orange;
+    color: orange;
+    border-radius: 40rpx;
+}
+::-webkit-scrollbar {
+    /* 取消横向滚动条 */
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.hy-categoryLives-content {
+    margin-top: 15rpx;
+}
+.hy-categoryLives-content-small{
+    width: 355rpx;
+    height: 220rpx;
+    padding: 0 10rpx;
+    float: left;
+    font-size: 26rpx;
+    margin-bottom: 70rpx;
+}
+.hy-categoryLives-content-small image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 16rpx;
+    box-shadow: 0 0 0 rgba(0,0,0,.5);
+}
+.hy-categoryLives-content-small .hy-categoryLives-content-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 6px;
+}

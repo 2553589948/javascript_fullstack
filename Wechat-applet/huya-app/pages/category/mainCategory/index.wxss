@@ -1,0 +1,30 @@
+/* pages/category/mainCategory/index.wxss */
+.hy-mainCategory-navBar {
+    display: flex;
+}
+.mainCategory-navBar-list {
+    flex: 1;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-bottom: 1px solid #e3e3e3;
+}
+.mainCategory-navBar-list.on {
+    color: orange;
+    border-bottom: 2px solid orange;
+}
+.hy-mainCategory-info {
+    margin: 40rpx 15rpx;
+    font-size: 24rpx;
+}
+.hy-category-list {
+    display: inline-block;
+    width: 180rpx;
+    height: 150rpx;
+    text-align: center;
+}
+.hy-category-list image {
+    width: 45rpx;
+    height: 45rpx;
+    margin-bottom: 10rpx;
+}

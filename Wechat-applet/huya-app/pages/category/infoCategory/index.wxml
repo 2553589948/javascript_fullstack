@@ -1,0 +1,47 @@
+<!--pages/category/infoCategory/index.wxml-->
+<view class="wrapper">
+    <view class="hy-searchBar">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <navigator url="../../search/search">
+                    <view class="weui-search-bar__box">
+                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                            <icon type="clear" size="14"></icon>
+                        </view>
+                    </view>
+                    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                        <icon class="weui-icon-search" type="search" size="14"></icon>
+                        <view class="weui-search-bar__text">输入游戏名、主播、房间号搜索</view>
+                    </label>
+                </navigator>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">
+                取消
+            </view>
+        </view>
+    </view>
+    <scroll-view class="hy-navbar" scroll-x="true" scroll-with-animation="true" enable-flex="true">
+        <block wx:for="{{infoCategory}}">
+            <view bindtap="switchTab" data-id="{{item.id}}" 
+            class="hy-navbar__item {{activeId == item.id ? 'on' : ''}}">
+                <view class="hy-navbar__tilte">{{item.descText}}</view>
+            </view>
+        </block>
+    </scroll-view>
+    <view class="hy-categoryLives-content">
+        <block wx:for="{{infoCategory}}">
+            <view class="hy-categoryLives-content-small" 
+            wx:for="{{item.smallCategory}}" 
+            wx:for-item="list" 
+            hidden="{{activeId == 'all' ? '' : (activeId != item.id)}}" 
+            bindtap="gotoDetail" data-id="{{list.smallId}}">
+                <image src="{{list.image}}"></image>
+                <view class="hy-categoryLives-content-text">
+                    <text>{{list.liveTitle}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

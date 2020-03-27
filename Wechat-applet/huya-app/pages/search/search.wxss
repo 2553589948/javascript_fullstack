@@ -1,0 +1,7 @@
+/* pages/search/search.wxss */
+.weui-search-bar .weui-search-bar__form{
+    border-radius: 50rpx;
+}
+.weui-cells.searchbar-result{
+    margin-top: 0;
+}

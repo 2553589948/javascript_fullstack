@@ -1,0 +1,10 @@
+<!--pages/detail/index.wxml-->
+<view class="wrapper">
+    <view class="hy-liveVideo">
+        <video src="{{liveVideo.video}}"></video>
+        <view class="content">
+            <view class="liveTitle">{{liveVideo.liveTitle}}</view>
+            <view class="description">{{liveVideo.description}}</view>
+        </view>
+    </view>
+</view>

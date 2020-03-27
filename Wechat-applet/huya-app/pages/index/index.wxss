@@ -1,0 +1,67 @@
+swiper {
+  height: 275rpx;
+}
+swiper-item image{
+  width: 100%;
+  height: 100%;
+}
+.hy-category{
+  width: 100%;
+  margin-top: 30rpx;
+}
+.hy-category-list{
+  display: inline-block;
+  width: 150rpx;
+  height: 150rpx;
+  text-align: center;
+  font-size: 20rpx;
+}
+.hy-category-list image{
+  width: 45rpx;
+  height: 45rpx;
+  margin-bottom: 20rpx;
+}
+.hy-hotMatch{
+  width: 100%;
+  display: flex;
+}
+.hy-hotMatch-list{
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+  border-right: 2px solid #eee;
+}
+.hy-hotMatch-list:nth-child(2n){
+  border-right: 0;
+}
+.hy-allLives-title{
+    width: 100%;
+    padding: 30rpx 0 30rpx 20rpx;
+    height: 40rpx;
+    color: #ab956d;
+}
+.hy-allLives-content-small{
+    width: 355rpx;
+    height: 220rpx;
+    padding: 0 10rpx;
+    float: left;
+    font-size: 26rpx;
+    margin-bottom: 70rpx;
+}
+.hy-allLives-content-small image, .hy-allLives-content-small navigator{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 16rpx;
+    box-shadow: 0 1px 5px rgba(0,0,0,.1)
+}
+.hy-allLives-content{
+    width: 100%;
+    height: 275rpx;
+}
+.hy-allLives-content-small .hy-allLives-content-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 6px;
+}
