@@ -118,7 +118,51 @@ router.post('/userLogin', async(ctx, next) => {
   })
 })
 
-// 搜素
+// 获取推荐课程
+router.post('/getAboutCourse', async(ctx, next) => {
+  let courseId = ctx.request.body.id
+  let page = ctx.request.body.page
+  let size = 2
+  await userServies.getCourseInfo(courseId)
+  .then(async (res) => {
+    console.log(res[0].categoryId)
+    if (res.length != 0) {
+      let categoryId = res[0].categoryId
+      await userServies.getTotal(categoryId)
+      .then(async (res) => {
+        const total = Math.ceil(res.length / 2)
+        await userServies.refreshCourse(size, page, categoryId)
+        .then(res => {
+          console.log(res)
+          if (res.length) {
+            ctx.body = {
+              data: res,
+              total: total,
+              code: 200
+            }
+          } else {
+            ctx.body = {
+              data: false,
+              code: 404
+            }
+          }
+        })
+      })
+    } else {
+      ctx.body = {
+        data: '查询失败',
+        code: 404
+      }
+    }
+  }).catch((error) => {
+    ctx.body = {
+      code: '80008',
+      data: 'Not Found 404'
+    }
+  })
+})
+
+// 搜索
 router.post('/search', async(ctx, next) => {
   let keyword = ctx.request.body.keyword
   console.log(keyword)

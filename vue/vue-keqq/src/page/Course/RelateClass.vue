@@ -1,31 +1,66 @@
 <template>
   <div class="relateClass-wrapper">
-    <div class="teacher-recom" style="display:block">
-      <div class="rel-class__title">老师推荐课程</div>
+    <div class="teacher-recom">
+      <div class="rel-class__title" style="display: flex; justify-content: space-between;">推荐课程
+        <div class="refresh" style="color: #188fee;" @click="refreshCourse">换一批</div>
+      </div>
       <ul class="teacher-recom__list">
         <li class="course list-view__item" v-for="(item, index) in recomList" :key="index">
           <div class="course__cover">
-            <img :src="item.img" alt="">
+            <img :src="item.coursePic" alt="">
             <span class="course__cover-tips course__cover-tips--status">{{item.status}}</span>
           </div>
-          <h3 class="course__name">{{item.name}}</h3>
+          <h3 class="course__name">{{item.courseTitle}}</h3>
           <p class="course__info">
             <span class="course__info-item u-message">{{item.info}}</span>
           </p>
-          <p class="course__info-item u-price z-free">{{item.price}}</p>
+          <p class="course__info-item u-price z-free">{{item.courPrice}}</p>
         </li>
       </ul>
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  mounted () {
-  },
   data () {
     return {
+      courseId: '',
+      page: 1,
+      total: '',
       recomList: []
+    }
+  },
+  mounted () {
+    this.courseId = this.$route.query.courseId
+    this.getAboutCourse()
+  },
+  methods: {
+    getAboutCourse () {
+      this.$http({
+        method: 'post',
+        url: 'http://localhost:3000/users/getAboutCourse',
+        data: {
+          id: this.courseId,
+          page: this.page
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.data.code === 200) {
+            this.recomList = res.data.data
+            this.total = res.data.total
+          } else {
+            this.$toast(res.data.data)
+          }
+        })
+    },
+    refreshCourse () {
+      this.page++
+      if (this.page > this.total) {
+        this.page = 1
+      }
+      this.getAboutCourse()
     }
   }
 }
@@ -36,23 +71,23 @@ export default {
   padding-top: 67.2%;
 }
 .teacher-recom{
+  display: block;
   background: #fff;
   width: 100%;
 }
 .rel-class__title {
   padding: 10px 15px 0;
-  position: absolute;
   margin: 10px 0;
   font-size: 18px;
   line-height: 25px;
   color: #000;
   text-align: left;
 }
-.teacher-recom__list{
+/* .teacher-recom__list{
   position: absolute;
   top:40px;
   text-align: left;
-}
+} */
 .course {
   position: relative;
   padding: 15px 15px 15px 166px;

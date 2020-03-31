@@ -72,6 +72,18 @@ let getTeacherInfo = function (courseId) {
   return allServices.query(_sql)
 }
 
+// 计算相关课程的数量
+let getTotal = function (categoryId) {
+  let _sql = `select courseId,courseTitle from courseinfo where categoryId="${categoryId}";`
+  return allServices.query(_sql)
+}
+
+// 换一批
+let refreshCourse = function (size, page, categoryId) {
+  let _sql = `select courseId,courseTitle,courPrice,coursePic from courseinfo where categoryId="${categoryId}" limit ${size} offset ${(page - 1) * size};`
+  return allServices.query(_sql)
+}
+
 // 搜索提示
 let searchTips = function (keyword) {
   let _sql = `select keyword,courseId from courseinfo where keyword like '%${keyword}%' limit 5;`
@@ -170,5 +182,7 @@ module.exports = {
   findCourse,
   insertCourse,
   getCourseList,
-  deleteCourse
+  deleteCourse,
+  getTotal,
+  refreshCourse
 }

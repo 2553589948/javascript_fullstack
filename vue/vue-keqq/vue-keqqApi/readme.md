@@ -79,6 +79,8 @@ videoSrc varchar(1600) NOT NULL,
 courseId varchar(255) NOT NULL
 );
 alter table courseinfo add column keyword varchar(255) NOT NULL; // 往表中添加一列
+alter table courseinfo add column categoryId varchar(12) NOT NULL;
+alter table courseinfo add column coursePic varchar(255) NOT NULL;
 
 CREATE TABLE search_history
 (
