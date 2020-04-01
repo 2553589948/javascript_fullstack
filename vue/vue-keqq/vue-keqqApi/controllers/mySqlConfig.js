@@ -162,6 +162,42 @@ let insertNote = function (options) {
   return allServices.query(_sql, options)
 }
 
+// 获取点赞相关信息
+let getSupportInfo = function (useId) {
+  let _sql = `select * from support where useId="${useId}";`
+  return allServices.query(_sql)
+}
+
+// 获取单条评论
+let getOneComment = function (cmeid) {
+  let _sql = `select * from comments where cmeid="${cmeid}";`
+  return allServices.query(_sql)
+}
+
+// 此评论是否被该用户点赞过
+let findIsSupport = function (useId, cmeid) {
+  let _sql = `select * from support where useId="${useId}" and cmeid="${cmeid}";`
+  return allServices.query(_sql)
+}
+
+// 点赞
+let insertSupport = function (options) {
+  let _sql = `insert into support set useId=?,cmeid=?,courseId=?;`
+  return allServices.query(_sql, options)
+}
+
+// 取消点赞
+let deleteSupport = function (useId, cmeid) {
+  let _sql = `delete from support where useId="${useId}" and cmeid="${cmeid}";`
+  return allServices.query(_sql)
+}
+
+// 点赞数量
+let updateSupportCount = function (supportCount, cmeid) {
+  let _sql = `update comments set supportCount=${supportCount} where cmeid="${cmeid}";`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   getAllusers,
   userLogin,
@@ -184,5 +220,11 @@ module.exports = {
   getCourseList,
   deleteCourse,
   getTotal,
-  refreshCourse
+  refreshCourse,
+  findIsSupport,
+  insertSupport,
+  deleteSupport,
+  updateSupportCount,
+  getSupportInfo,
+  getOneComment
 }

@@ -162,6 +162,92 @@ router.post('/getAboutCourse', async(ctx, next) => {
   })
 })
 
+// 获取点赞相关信息
+router.post('/getSupportInfo', async (ctx, next) => {
+  let useId = ctx.request.body.useId
+  let courseId = ctx.request.body.courseId
+  let supportComments = []
+  await userServies.getSupportInfo(useId)
+  .then(async (res) => {
+    console.log(res)
+    // let isSupport = false
+    if (res.length > 0) {
+      for (let i = 0; i < res.length; i++) {
+        let cmeid = res[i].cmeid
+        await userServies.getOneComment(cmeid)
+        .then(res => {
+          if (res.length > 0) {
+            let addComments = Object.assign(res[0], {isSupport: true})
+            supportComments.push(addComments)
+          }
+        })
+      }
+      // [
+      //   RowDataPacket { id: 3, useId: 1, cmeid: 15, courseId: '1001-1001' },
+      //   RowDataPacket { id: 4, useId: 1, cmeid: 14, courseId: '1001-1001' }
+      // ]
+    }
+  })
+  await userServies.getAllcomments(courseId)
+  .then(res => {
+    if (res.length > 0) {
+      let newComments = res.concat(supportComments)
+      ctx.body = {
+        data: newComments
+      }
+    }  
+  })
+})
+
+// 点赞
+router.post('/supportAction', async (ctx, next) => {
+  const {courseId, useId, cmeid, supportCount} = ctx.request.body
+  console.log(useId, cmeid, supportCount, courseId)
+  await userServies.findIsSupport(useId, cmeid)
+  .then(async (res) => {
+    if (res.length == 0) {
+      await userServies.insertSupport([useId, cmeid, courseId])
+      .then(res => {
+        if (res.affectedRows !== 0) {
+          ctx.body = {
+            code: 200,
+            data: 'supported'
+          }
+        } else {
+          ctx.body = {
+            code: 404,
+            data: 'unsupport'
+          }
+        }
+      }).catch((err) => {
+          ctx.body = {
+            code: 500,
+            data: err
+          }
+      })
+      // 点赞数量+1
+      await userServies.updateSupportCount(supportCount, cmeid)
+      .then(res => {
+        console.log(res)
+      })
+    } else {
+      await userServies.deleteSupport(useId, cmeid)
+      .then(res => {
+        if (res.affectedRows > 0) {
+          ctx.body = {
+            data: 'cancel support'
+          }
+        }
+      })
+      // 点赞数量-1
+      await userServies.updateSupportCount(supportCount, cmeid)
+      .then(res => {
+        console.log(res)
+      })
+    }
+  })
+})
+
 // 搜索
 router.post('/search', async(ctx, next) => {
   let keyword = ctx.request.body.keyword

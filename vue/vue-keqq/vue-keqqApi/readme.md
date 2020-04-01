@@ -32,6 +32,17 @@ useId INT UNSIGNED NOT NULL
 );
 alter table Comments add foreign key(useId) references Users(userid); //链接2表
 alter table comments add column courseId varchar(255) NOT NULL; // 往表中添加一列
+alter table comments add column supportCount int(12) NOT NULL default 0;
+
+// 点赞相关
+CREATE TABLE Support
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+useId INT UNSIGNED NOT NULL,
+cmeid INT UNSIGNED NOT NULL,
+courseId varchar(255) NOT NULL
+);
+
 desc users; // 查看表结构
 CREATE TABLE Courseinfo
 (
