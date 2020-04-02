@@ -5,8 +5,8 @@
         <span class="basic-info-list__item-title-word comment-word">学员评论</span>
         <span class="basic-info-list__item-title-static">({{comments.length}})</span>
         <em class="basic-info-list__sort">
-          <span class="timeSort" @click="sort(0)">按时间排</span>
-          <span class="supportSort" @click="sort(1)">按热度排</span>
+          <span class="timeSort" @click="sort(0)" :class="[tabIndex === 0 ? 'active' : '']">按时间排</span>
+          <span class="supportSort" @click="sort(1)" :class="[tabIndex === 1 ? 'active' : '']">按热度排</span>
         </em>
       </p>
       <ul class="mod-comments-list__list">
@@ -42,7 +42,8 @@ export default {
   data () {
     return {
       isSupport: false,
-      commentsByHot: []
+      commentsByHot: [],
+      tabIndex: 0
     }
   },
   mounted () {
@@ -51,6 +52,7 @@ export default {
   methods: {
     // 评论排序
     sort (idx) {
+      this.tabIndex = idx
       if (idx === 0) {
         this.commentsByHot = [] // 先置空
         this.$parent.getComments() // 调用父组件方法
@@ -129,6 +131,9 @@ export default {
   font-size: 16px;
   font-style: normal;
   color: #999;
+}
+.basic-info-list__sort .active {
+  color: orangered;
 }
 .timeSort {
   border-right: 1px solid #999;

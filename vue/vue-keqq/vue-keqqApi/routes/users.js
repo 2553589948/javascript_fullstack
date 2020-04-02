@@ -11,7 +11,7 @@ router.get('/bar', function (ctx, next) {
   ctx.body = 'this is a users/bar response'
 })
 
-// 定义一个路由
+// 定义一个路由获取用户所有信息
 router.get('/all', async function(ctx, next) {
   await userServies.getAllusers().then((res) => {
     // console.log('打印结果:', + JSON.stringify(res))
