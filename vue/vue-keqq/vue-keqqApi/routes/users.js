@@ -170,7 +170,6 @@ router.post('/getSupportInfo', async (ctx, next) => {
   await userServies.getSupportInfo(useId)
   .then(async (res) => {
     console.log(res)
-    // let isSupport = false
     if (res.length > 0) {
       for (let i = 0; i < res.length; i++) {
         let cmeid = res[i].cmeid
@@ -182,6 +181,7 @@ router.post('/getSupportInfo', async (ctx, next) => {
           }
         })
       }
+      // console.log(res)
       // [
       //   RowDataPacket { id: 3, useId: 1, cmeid: 15, courseId: '1001-1001' },
       //   RowDataPacket { id: 4, useId: 1, cmeid: 14, courseId: '1001-1001' }
@@ -244,6 +244,25 @@ router.post('/supportAction', async (ctx, next) => {
       .then(res => {
         console.log(res)
       })
+    }
+  })
+})
+
+// 评论按热度排
+router.post('/getByHotComment', async (ctx, next) => {
+  let courseId = ctx.request.body.courseId
+  await userServies.getByHotComment(courseId)
+  .then(res => {
+    if (res.length) {
+      ctx.body = {
+        code: 200,
+        data: res
+      }
+    } else {
+      ctx.body = {
+        code: 404,
+        data: '未找到'
+      }
     }
   })
 })

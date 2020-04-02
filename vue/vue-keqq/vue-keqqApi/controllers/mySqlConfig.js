@@ -198,6 +198,12 @@ let updateSupportCount = function (supportCount, cmeid) {
   return allServices.query(_sql)
 }
 
+// 评论按热度排
+let getByHotComment = function (courseId) {
+  let _sql = `select * from comments where courseId="${courseId}" order by supportCount desc;`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   getAllusers,
   userLogin,
@@ -226,5 +232,6 @@ module.exports = {
   deleteSupport,
   updateSupportCount,
   getSupportInfo,
-  getOneComment
+  getOneComment,
+  getByHotComment
 }

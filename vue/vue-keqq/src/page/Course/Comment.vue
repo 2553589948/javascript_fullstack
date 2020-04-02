@@ -5,12 +5,12 @@
         <span class="basic-info-list__item-title-word comment-word">学员评论</span>
         <span class="basic-info-list__item-title-static">({{comments.length}})</span>
         <em class="basic-info-list__sort">
-          <span class="timeSort">按时间排</span>
-          <span class="supportSort">按热度排</span>
+          <span class="timeSort" @click="sort(0)">按时间排</span>
+          <span class="supportSort" @click="sort(1)">按热度排</span>
         </em>
       </p>
       <ul class="mod-comments-list__list">
-          <li class="comments-list__item" v-for="(item, index) in comments" :key="index">
+          <li class="comments-list__item" v-for="(item, index) in (commentsByHot.length ? commentsByHot : comments)" :key="index">
             <div class="comments-list-item__info">
               <div class="comments-list-item__cover">
                 <img class="comments-list-item__img" src="http://thirdwx.qlogo.cn/mmopen/vi_32/z6icVEE3NvYHfuJTcA3XibibrWNhRdWgWE231vE2RYXVMayvWibpsiaYcHFRGaSJRkB4MELxeXmuibvAj1TSu01OLIhw/132">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { Dialog } from 'vant'
+// import { Dialog } from 'vant'
 export default {
   props: {
     comments: {
@@ -41,13 +41,34 @@ export default {
   },
   data () {
     return {
-      isSupport: false
+      isSupport: false,
+      commentsByHot: []
     }
   },
   mounted () {
-    this.getSupportInfo()
+    // this.getSupportInfo()
   },
   methods: {
+    // 评论排序
+    sort (idx) {
+      if (idx === 0) {
+        this.commentsByHot = [] // 先置空
+        this.$parent.getComments() // 调用父组件方法
+      } else {
+        let courseId = this.$route.query.courseId
+        this.$http({
+          method: 'post',
+          url: 'http://localhost:3000/users/getByHotComment',
+          data: {
+            courseId: courseId
+          }
+        }).then(res => {
+          console.log(res)
+          this.commentsByHot = res.data.data
+        })
+      }
+    },
+    // 点赞相关
     getSupportInfo () {
       let courseId = this.$route.query.courseId
       let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
@@ -64,37 +85,38 @@ export default {
       })
     },
     support (cmeid, supportCount) {
-      if (sessionStorage.getItem('userInfo') === null) {
-        Dialog.confirm({
-          title: '提示',
-          message: '你尚未登录！是否去登录？'
-        }).then(() => {
-          this.$router.push({path: '/login'})
-        }).catch(() => {
-          // on cancel
-        })
-      } else {
-        this.isSupport = !this.isSupport
-        let courseId = this.$route.query.courseId
-        let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
-        if (this.isSupport) {
-          supportCount++
-        } else {
-          supportCount--
-        }
-        this.$http({
-          method: 'post',
-          url: 'http://localhost:3000/users/supportAction',
-          data: {
-            useId: userId,
-            courseId: courseId,
-            cmeid: cmeid,
-            supportCount: supportCount
-          }
-        }).then(res => {
-          console.log(res)
-        })
-      }
+      this.$toast('待开发')
+      // if (sessionStorage.getItem('userInfo') === null) {
+      //   Dialog.confirm({
+      //     title: '提示',
+      //     message: '你尚未登录！是否去登录？'
+      //   }).then(() => {
+      //     this.$router.push({path: '/login'})
+      //   }).catch(() => {
+      //     // on cancel
+      //   })
+      // } else {
+      //   this.isSupport = !this.isSupport
+      //   let courseId = this.$route.query.courseId
+      //   let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
+      //   if (this.isSupport) {
+      //     supportCount++
+      //   } else {
+      //     supportCount--
+      //   }
+      //   this.$http({
+      //     method: 'post',
+      //     url: 'http://localhost:3000/users/supportAction',
+      //     data: {
+      //       useId: userId,
+      //       courseId: courseId,
+      //       cmeid: cmeid,
+      //       supportCount: supportCount
+      //     }
+      //   }).then(res => {
+      //     console.log(res)
+      //   })
+      // }
     }
   }
 }
