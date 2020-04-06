@@ -17,9 +17,12 @@ const addHomeList = (list, nextPage) => ({
 
 export const getHomeInfo = () => {
   return (dispatch) => {
-    axios.get('/api/home.json').then((res) => {
-      const result = res.data.data
-      dispatch(changeHomeData(result))
+    axios.get('http://localhost:3000/home/getHomeData').then((res) => {
+      console.log(res)
+      if (res.data.code === 200) {
+        const result = res.data.data
+        dispatch(changeHomeData(result))
+      }
     })
   }
 }

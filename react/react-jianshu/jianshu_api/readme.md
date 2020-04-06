@@ -1,0 +1,19 @@
+// 创建表 
+CREATE TABLE Articles
+(
+artid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+title varchar(255) NOT NULL,
+artDesc varchar(255) NOT NULL,
+imgUrl longtext NOT NULL
+);
+CREATE TABLE Topic
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+title varchar(255) NOT NULL,
+imgUrl longtext NOT NULL
+);
+CREATE TABLE Recommend
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+imgUrl longtext NOT NULL
+);
