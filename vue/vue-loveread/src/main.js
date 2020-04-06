@@ -21,6 +21,7 @@ router.beforeEach((to, from, next) =>{ // 路由重定向路由守卫(解决登�
   document.title = to.meta.title
   // console.log(from)
   // console.log(to)
+  window.scrollTo(0, 0)
   next()
 })
 
