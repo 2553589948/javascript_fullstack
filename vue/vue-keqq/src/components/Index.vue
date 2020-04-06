@@ -249,6 +249,10 @@ export default {
   height: 64px;
 }
 .course-category {
+  position: sticky;
+  top: 52px;
+  z-index: 99;
+  background: #fff;
   width: 100%;
   margin-bottom: 13px;
   white-space: nowrap;
