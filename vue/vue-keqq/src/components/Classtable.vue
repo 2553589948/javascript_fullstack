@@ -5,7 +5,8 @@
       <div class="allSelect" v-show="!editCancel" @click="selectAll">{{selectedHtml}}({{isCheckedNumber}})</div>
       <div class="del" @click="del" v-show="!editCancel" style="background: red; padding: 0 20px;">删除({{isCheckedNumber}})</div>
       <div class="right" v-if="listData.length" @click="edit">{{editHtml}}</div>
-    </div>v-if=
+      <div class="right" v-else @click="toAdd">去添加</div>
+    </div>
     <ul class="course-list" v-if="listData.length > 0">
       <li class="course list-view__item" v-for="(item, index) in listData" :key="index" @click="toCourseDetail(item.courseId)">
         <div class="course__cover">
@@ -41,9 +42,16 @@ export default {
     }
   },
   mounted () {
-    this.getCourseList()
+    if (sessionStorage.getItem('userInfo') === null) {
+      this.$router.replace({path: '/login'})
+    } else {
+      this.getCourseList()
+    }
   },
   methods: {
+    toAdd () {
+      this.$router.push({path: '/category'})
+    },
     getCourseList () {
       let userId = JSON.parse(sessionStorage.getItem('userInfo')).id
       this.$http({
