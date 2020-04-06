@@ -45,6 +45,7 @@ export default {
           if (res.data.code === '200') {
             sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
             this.$toast('登录成功')
+            // console.log(this.$router.options.routes) 获取全部路由信息
             this.$router.push({path: '/'})
           } else {
             this.$toast(res.data.mess)

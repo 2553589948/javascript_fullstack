@@ -17,6 +17,25 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => { // 路由重定向路由守卫(解决登录过期问题)
+  // document.title = to.meta.title
+  // if (to.path === '/login' && sessionStorage.getItem('userInfo') !== null) {
+  //   next({
+  //     path: '/'
+  //   })
+  // } else if (to.path !== '/login' && sessionStorage.getItem('userInfo') === null) {
+  //   next({
+  //     path: '/login'
+  //   })
+  // } else {
+  //   next()
+  // }
+  next()
+  window.scrollTo(0, 0)
+  // console.log(from)
+  // console.log(to)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
