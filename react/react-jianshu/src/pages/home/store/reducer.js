@@ -9,6 +9,7 @@ const defaultState = fromJS({
   articleList: [],
   recommendList: [],
   articlePage: 1,
+  total: '',
   showScroll: false
 })
 
@@ -16,7 +17,9 @@ const changeHomeData = (state, action) => {
   return state.merge({ // 把多个对象合并成一个对象
     topicList: fromJS(action.topicList),
     articleList: fromJS(action.articleList),
-    recommendList: fromJS(action.recommendList)
+    recommendList: fromJS(action.recommendList),
+    total: action.total,
+    articlePage: action.nextPage
   });
 }
 

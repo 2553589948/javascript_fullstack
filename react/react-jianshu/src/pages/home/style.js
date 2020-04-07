@@ -107,6 +107,14 @@ export const LoadMore = styled.div`
   color: #fff;
   cursor: pointer;
 `;
+export const NoMore = styled.div`
+  width: 100%;
+  height: 40px;
+  margin: 20px 0;
+  line-height: 40px;
+  text-align: center;
+  color: #999;
+`;
 export const BackTop = styled.div`
   position: fixed;
   right: 30px;

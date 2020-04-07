@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { ListItem, ListInfo, LoadMore } from '../style'
+import { ListItem, ListInfo, LoadMore, NoMore } from '../style'
 import { connect } from 'react-redux'
 import { actionCreators } from '../store'
 import { Link } from 'react-router-dom'
 
 class List extends Component {
   render() {
-    const { list, getMoreList, page } = this.props
+    const { list, getMoreList, page, total } = this.props
     return (
       <div>
         {
@@ -24,7 +24,7 @@ class List extends Component {
             )
           })
         }
-        <LoadMore onClick={() => getMoreList(page)}>阅读更多</LoadMore>
+        {page > total ? <NoMore>人家也是有底线的~~</NoMore> : <LoadMore onClick={() => getMoreList(page)}>阅读更多</LoadMore>}
       </div>
     )
   }
@@ -32,7 +32,8 @@ class List extends Component {
 
 const mapState = (state) => ({
   list: state.home.get('articleList'),
-  page: state.home.get('articlePage')
+  page: state.home.get('articlePage'),
+  total: state.home.get('total')
 })
 
 const mapDispatch = (dispatch) => ({

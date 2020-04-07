@@ -45,8 +45,15 @@ let getRecommendData = function () {
   return allServices.query(_sql)
 }
 
+// 加载更多
+let loadMore = function (size, page) {
+  let _sql = `select * from articles limit ${size} offset ${(page - 1) * size};`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   getArticleData,
   getTopicData,
-  getRecommendData
+  getRecommendData,
+  loadMore
 }

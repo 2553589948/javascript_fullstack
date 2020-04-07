@@ -14,7 +14,7 @@ import {
 
 class Home extends Component {
   componentDidMount() {
-    this.props.changeHomeData()
+    this.props.changeHomeData(this.props.page)
     this.bindEvents()
   }
 
@@ -53,12 +53,13 @@ class Home extends Component {
 }
 
 const mapState = (state) => ({
-  showScroll: state.home.get('showScroll')
+  showScroll: state.home.get('showScroll'),
+  page: state.home.get('articlePage')
 })
 
 const mapDispatch = (dispatch) => ({
-  changeHomeData() {
-    const action = actionCreators.getHomeInfo()
+  changeHomeData(page) {
+    const action = actionCreators.getHomeInfo(page)
     // dispatch(action)
     action(dispatch)
   },
