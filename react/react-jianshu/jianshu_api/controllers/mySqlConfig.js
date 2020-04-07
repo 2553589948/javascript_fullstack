@@ -51,9 +51,16 @@ let loadMore = function (size, page) {
   return allServices.query(_sql)
 }
 
+// 获取文章详情
+let getDetailData = function (id) {
+  let _sql = `select * from article_detail where artid=${id};`
+  return allServices.query(_sql)
+}
+
 module.exports = {
   getArticleData,
   getTopicData,
   getRecommendData,
-  loadMore
+  loadMore,
+  getDetailData
 }

@@ -6,6 +6,12 @@ title varchar(255) NOT NULL,
 artDesc varchar(255) NOT NULL,
 imgUrl longtext NOT NULL
 );
+CREATE TABLE Article_detail
+(
+artid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+title varchar(255) NOT NULL,
+content longtext NOT NULL
+);
 CREATE TABLE Topic
 (
 id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,

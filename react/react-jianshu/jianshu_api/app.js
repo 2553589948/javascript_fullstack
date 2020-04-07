@@ -10,6 +10,7 @@ const cors = require('koa2-cors') // 处理跨域
 const index = require('./routes/index')
 const users = require('./routes/users')
 const home = require('./routes/home')
+const detail = require('./routes/detail')
 
 // error handler
 onerror(app)
@@ -50,6 +51,7 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(home.routes(), home.allowedMethods())
+app.use(detail.routes(), detail.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

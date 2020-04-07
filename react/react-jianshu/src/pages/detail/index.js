@@ -9,7 +9,7 @@ import {
 
 class Detail extends Component {
   componentDidMount() {
-    this.props.getDetail(this.props.match.params.id)
+    this.props.getDetail(this.props.match.params.artid)
   }
   render() {
     return (

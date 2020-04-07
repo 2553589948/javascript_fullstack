@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Home}></Route>
-          <Route exact path="/detail/:id" component={Detail}></Route>
+          <Route exact path="/detail/:artid" component={Detail}></Route>
         </div>
       </BrowserRouter>
     </Provider>
