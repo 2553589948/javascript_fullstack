@@ -89,11 +89,57 @@ export const RecommendItem = styled.div`
 
 export const WriterWrapper = styled.div`
   width: 278px;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  height: 300px;
-  line-height: 300px;
-  text-align: center;
+  /* border: 1px solid #dcdcdc; */
+  /* border-radius: 3px; */
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: #969696;
+  font-size: 14px;
+  .change {
+    cursor: pointer;
+  }
+`;
+
+export const WriterList = styled.div`
+  margin: 0 0 20px;
+`;
+export const WriterItem = styled.div`
+  margin-top: 15px;
+  line-height: 20px;
+  img {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    display: block;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  .follow {
+    float: right;
+    margin-top: 5px;
+    padding: 0;
+    font-size: 13px;
+    color: #42c02e;
+  }
+`;
+export const WriterInfo = styled.div`
+  display: inline-block;
+  .name {
+    padding-top: 5px;
+    margin-right: 60px;
+    font-size: 14px;
+    display: block;
+  }
+  .info {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #969696;
+  }
 `;
 
 export const LoadMore = styled.div`

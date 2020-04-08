@@ -15,6 +15,7 @@ import {
 class Home extends Component {
   componentDidMount() {
     this.props.changeHomeData(this.props.page)
+    this.props.writerData(this.props.writerPage)
     this.bindEvents()
   }
 
@@ -54,13 +55,18 @@ class Home extends Component {
 
 const mapState = (state) => ({
   showScroll: state.home.get('showScroll'),
-  page: state.home.get('articlePage')
+  page: state.home.get('articlePage'),
+  writerPage: state.home.get('writerPage')
 })
 
 const mapDispatch = (dispatch) => ({
   changeHomeData(page) {
     const action = actionCreators.getHomeInfo(page)
     // dispatch(action)
+    action(dispatch)
+  },
+  writerData(page) {
+    const action = actionCreators.getWriterList(page)
     action(dispatch)
   },
   changeScrollTopShow(e) {

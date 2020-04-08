@@ -17,6 +17,13 @@ const addHomeList = (list, nextPage) => ({
   nextPage
 })
 
+const refreshWriterList = (result, nextPage) => ({
+  type: constants.REFRESH_WRITER_LIST,
+  writerList: result.writerList,
+  nextPage,
+  totalPage: result.totalPage
+})
+
 export const getHomeInfo = (page) => {
   return (dispatch) => {
     axios.get('http://localhost:3000/home/getHomeData?page=' + page)
@@ -36,6 +43,17 @@ export const getMoreList = (page) => {
     .then((res) => {
       const result = res.data.data.articleList
       dispatch(addHomeList(result, page + 1))
+    })
+  }
+}
+
+export const getWriterList = (page) => {
+  return (dispatch) => {
+    axios.get('http://localhost:3000/home/getWriterList?page=' + page)
+    .then(res => {
+      console.log(res)
+      const result = res.data.data
+      dispatch(refreshWriterList(result, page + 1))
     })
   }
 }

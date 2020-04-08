@@ -8,8 +8,11 @@ const defaultState = fromJS({
   topicList: [],
   articleList: [],
   recommendList: [],
+  writerList: [],
   articlePage: 1,
   total: '',
+  writerPage: 1,
+  writerTotal: '',
   showScroll: false
 })
 
@@ -30,6 +33,14 @@ const addArticleList = (state, action) => {
   });
 }
 
+const changeWriterList = (state, action) => {
+  return state.merge({
+    writerList: fromJS(action.writerList),
+    writerPage: action.nextPage,
+    writerTotal: action.writerTotal
+  })
+}
+
 export default (state = defaultState, action) => {
   switch (action.type) {
     case constants.CHANGE_HOME_DATA:
@@ -39,6 +50,8 @@ export default (state = defaultState, action) => {
     // return state.set('articleList', state.get('articleList').concat(action.list))
     case constants.TOGGLE_SCROLL_TOP:
       return state.set('showScroll', action.show)
+    case constants.REFRESH_WRITER_LIST:
+      return changeWriterList(state, action)
     default:
       return state
   }

@@ -51,6 +51,16 @@ let loadMore = function (size, page) {
   return allServices.query(_sql)
 }
 
+let getAllWriter = function () {
+  let _sql = `select * from writer;`
+  return allServices.query(_sql)
+}
+
+let getWriterList = function (page, size) {
+  let _sql = `select * from writer limit ${size} offset ${(page - 1) * size};`
+  return allServices.query(_sql)
+}
+
 // 获取文章详情
 let getDetailData = function (id) {
   let _sql = `select * from article_detail where artid=${id};`
@@ -62,5 +72,7 @@ module.exports = {
   getTopicData,
   getRecommendData,
   loadMore,
-  getDetailData
+  getDetailData,
+  getAllWriter,
+  getWriterList
 }

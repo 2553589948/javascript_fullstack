@@ -41,4 +41,30 @@ router.get('/getHomeData', async (ctx, next) => {
   })
 })
 
+router.get('/getWriterList', async (ctx, next) => {
+  const page = ctx.query.page
+  const size = 5
+  await userServies.getAllWriter()
+  .then(async res => {
+    const total = Math.ceil(res.length / size)
+    await userServies.getWriterList(page, size)
+    .then(res => {
+      if (res.length) {
+        ctx.body = {
+          code: 200,
+          data: {
+            writerList: res,
+            totalPage: total
+          }
+        }
+      } else {
+        ctx.body = {
+          code: 404,
+          data: '获取失败'
+        }
+      }
+    })
+  })
+})
+
 module.exports = router
