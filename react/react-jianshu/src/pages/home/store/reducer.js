@@ -37,7 +37,7 @@ const changeWriterList = (state, action) => {
   return state.merge({
     writerList: fromJS(action.writerList),
     writerPage: action.nextPage,
-    writerTotal: action.writerTotal
+    writerTotal: action.totalPage // 总页数
   })
 }
 

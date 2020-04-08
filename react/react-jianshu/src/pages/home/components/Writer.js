@@ -5,15 +5,16 @@ import { WriterWrapper, Header, WriterList, WriterItem, WriterInfo } from '../st
 
 class Writer extends Component {
   render () {
+    const {list, writerPage, writerTotal} = this.props
     return (
       <WriterWrapper>
         <Header>
           <div className="title">推荐作者</div>
-          <div className="change" onClick={() => this.props.change(this.props.writerPage, this.props.total)}>换一批</div>
+          <div className="change" onClick={() => this.props.change(writerPage, writerTotal)}>换一批</div>
         </Header>
         <WriterList>
           {
-            this.props.list.map(item => (
+            list.map(item => (
               <WriterItem key={item.get('writerId')}>
                 <img className="writer-pic" src={item.get('imgUrl')} alt="" />
                 <WriterInfo>
@@ -33,12 +34,13 @@ class Writer extends Component {
 const mapState = state => ({
   writerPage: state.home.get('writerPage'),
   list: state.home.get('writerList'),
-  total: state.home.get('writerTotal')
+  writerTotal: state.home.get('writerTotal')
 })
 const mapDispatch = dispatch => ({
   change(page, total) {
+    page++
     if (page > total) {
-      dispatch(actionCreators.getWriterList(1))
+      page = 1
     }
     let action = actionCreators.getWriterList(page)
     action(dispatch)

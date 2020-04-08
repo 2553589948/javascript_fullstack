@@ -19,9 +19,9 @@ const addHomeList = (list, nextPage) => ({
 
 const refreshWriterList = (result, nextPage) => ({
   type: constants.REFRESH_WRITER_LIST,
+  totalPage: result.totalPage,
   writerList: result.writerList,
-  nextPage,
-  totalPage: result.totalPage
+  nextPage
 })
 
 export const getHomeInfo = (page) => {
@@ -53,7 +53,7 @@ export const getWriterList = (page) => {
     .then(res => {
       console.log(res)
       const result = res.data.data
-      dispatch(refreshWriterList(result, page + 1))
+      dispatch(refreshWriterList(result, page))
     })
   }
 }
