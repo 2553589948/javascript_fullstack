@@ -88,9 +88,7 @@ export const RecommendItem = styled.div`
 `;
 
 export const WriterWrapper = styled.div`
-  width: 278px;
-  /* border: 1px solid #dcdcdc; */
-  /* border-radius: 3px; */
+  width: 280px;
 `;
 
 export const Header = styled.div`
@@ -141,6 +139,18 @@ export const WriterInfo = styled.div`
     color: #969696;
   }
 `;
+export const AllWriter = styled.div`
+  width: 100%;
+  font-size: 13px;
+  color: #787878;
+  background-color: #f7f7f7;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+`;
 
 export const LoadMore = styled.div`
   width: 100%;
@@ -171,5 +181,6 @@ export const BackTop = styled.div`
   text-align: center;
   border: 1px solid #ccc;
   font-size: 12px;
-`
+  cursor: pointer;
+`;
 

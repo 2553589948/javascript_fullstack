@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { actionCreators } from '../store'
-import { WriterWrapper, Header, WriterList, WriterItem, WriterInfo } from '../style'
+import { WriterWrapper, Header, WriterList, WriterItem, WriterInfo, AllWriter } from '../style'
 
 class Writer extends Component {
   render () {
@@ -26,6 +26,7 @@ class Writer extends Component {
             ))
           }
         </WriterList>
+        <AllWriter>查看全部</AllWriter>
       </WriterWrapper>
     )
   }
