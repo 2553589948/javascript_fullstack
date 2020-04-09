@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as constants from './constants'
 import { fromJS } from 'immutable'
-// import api from '../../../api'
+import api from '../../../api'
 
 const changeHomeData = (result, nextPage) => ({
   type: constants.CHANGE_HOME_DATA,
@@ -27,11 +27,11 @@ const refreshWriterList = (result, nextPage) => ({
 
 export const getHomeInfo = (page) => {
   return (dispatch) => {
-    axios.get('http://localhost:3000/home/getHomeData?page=' + page)
+    api.get('/api/home/getHomeData', {page: page})
     .then((res) => {
       console.log(res)
-      if (res.data.code === 200) {
-        const result = res.data.data
+      if (res.code === 200) {
+        const result = res.data
         dispatch(changeHomeData(result, page + 1))
       }
     })

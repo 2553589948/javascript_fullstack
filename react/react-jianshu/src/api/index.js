@@ -1,14 +1,15 @@
+/* 请求响应拦截 */
 import axios from 'axios'
 // import {message} from 'antd'
 
 axios.default.timeout = 5000
-axios.default.baseURL = 'http://localhost:3000'
+// axios.default.baseURL = '/api'
 
 // http request拦截器
 axios.interceptors.request.use(
   config => {
     config.headers = {
-      'Content-Type':'application/json;charset=UTF-8'
+      // 'Content-Type':'application/json;charset=UTF-8'
     }
     return config
   },
