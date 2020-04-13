@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>排序算法</title>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  .pt10 {
+    padding-top: 10px;
+  }
+  .tc{
+      text-align: center;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 pt10">
+      <form class="form-inline" id="number_form">
+        <div class="form-group">
+          <label for="numberInput">数字</label>
+          <input type="text" class="form-control"
+            placeholder="请输入要排序的数字"
+          id="numberInput">
+        </div>
+        <button class="btn btn-primary" type="submit">提交</button>
+      </form>
+      <div class="row pt10">
+        <div class="row col-xs-6 col-xs-offset-3" >
+          <table class="table table-striped ">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>数字</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="tc">目前没有数字...</td>
+                </tr>
+            </tbody>
+          </table>
+          <button type="button" id="sortBtn" class="btn btn-default">排序</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 pt10">
+  <p class="bg-primary">
+
+  </p>
+    </div>
+  </div>
+</div>
+<script>
+  const oForm = document.getElementById('number_form');
+  const oNumInput = document.getElementById('numberInput');
+  const sortBtn = document.getElementById('sortBtn');
+  const oMsg = document.querySelector('.bg-primary');
+  const numArr = [];
+  const arr = [];
+  const orderedArr = [];
+  for(let i = 0;i < 100;i++){
+      arr[i] = 0;
+  }
+  let gNum = 1;
+  oForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    // trim string类型的一个方法， 去除左右的空格
+    const num = oNumInput.value.trim();
+    // 安全性检测
+    // num 表单 string类型 parseInt 将字符串变数字
+    if(num.length > 0 && !isNaN(num)){
+        if(gNum == 1){
+        document.querySelector('tbody').innerHTML = getTrHtml(num);
+    }else{
+    document.querySelector('tbody').innerHTML += getTrHtml(num);
+    }
+    numArr.push(parseInt(num));
+    gNum++;
+    oNumInput.value = '';
+    }else{
+        alert('请输入数字');
+    }
+    
+  });
+  // 功能：提供新的一行。
+  // 1 序号  从1增
+  // 2 用户在表单中填的值
+  // 3 返回tr html
+  // 需要传参， 当前用户输入的数字
+  function getTrHtml(num) {
+    const str = `
+      <tr>
+        <td>${gNum}</td>
+        <td>${num}</td>
+      </tr>
+    `;
+    return str;
+  }
+
+//   考试完， 要将同学们的成绩进行排序。 
+//   5分 3分  5分  2分 8分  
+//   分数的从小到大提序。
+
+// 数组 桶排序 11 个数的数组 0-10分 下标就是顺序
+    
+    sortBtn.addEventListener('click',function(){
+        // 获取当前用户输入的数据
+        // console.log(numArr);
+        // console.log(numArr.sort(function(a,b){
+        //     return a < b;
+        // }));
+        for(let i = 0;i< numArr.length;i++){
+            arr[numArr[i]]++;
+        }
+        console.log(arr);
+        for(let i = 0;i < arr.length;i++){
+            for(let j = 0; j < arr[i]; j++){
+                console.log(i + ',');
+                orderedArr.push(i);
+            }
+        }
+        oMsg.innerHTML = `从小到大排序：${orderedArr.join(',')}`;
+    });
+
+</script>
+</body>
+</html>
