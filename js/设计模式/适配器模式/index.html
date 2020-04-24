@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  a.js => 画图的function
+  b.js
+  <!-- if () {
+    require('a.js')
+
+  } else {
+
+  } -->
+  c.js
+  a
+  b
+  c
+  d
+  <script>
+    // var aa = {
+    //   test: function() {
+
+    //   },
+    //   go: function() {
+
+    //   }
+    // }
+    // aa.test()
+
+    // 休假----
+
+    function pp() {
+      this.test = function() {
+        console.log('我是新的test')
+      }
+    }
+    pp.prototype.gogo = function() {
+      console.log('我是新gogo')
+    }
+
+    function shipeiqi() {
+      var s = new pp()
+      var aa = {
+        test: function() {
+          s.test()
+        },
+        go: function() {
+          s.gogo()
+        }
+      }
+      return aa
+    }
+    var aa = shipeiqi()
+    aa.test()
+    aa.go()
+  </script>
+</body>
+</html>
